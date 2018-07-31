@@ -1,0 +1,6 @@
+framework module Pods_DRNear {
+  umbrella header "Pods-DRNear-umbrella.h"
+
+  export *
+  module * { export * }
+}

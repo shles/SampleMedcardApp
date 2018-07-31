@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
 		FD395E892110DB8F00A0FBBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E882110DB8F00A0FBBF /* AppDelegate.swift */; };
 		FD395E8B2110DB8F00A0FBBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E8A2110DB8F00A0FBBF /* ViewController.swift */; };
 		FD395E8E2110DB8F00A0FBBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD395E8C2110DB8F00A0FBBF /* Main.storyboard */; };
@@ -26,6 +27,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F61520493534457F4BFE257 /* Pods_DRNear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.release.xcconfig"; sourceTree = "<group>"; };
+		E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.debug.xcconfig"; sourceTree = "<group>"; };
 		FD395E852110DB8F00A0FBBF /* DRNear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRNear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD395E882110DB8F00A0FBBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD395E8A2110DB8F00A0FBBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24D16B3553A11047E2E76A52 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */,
+				DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5BFB27D46C4DD786377BB999 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F61520493534457F4BFE257 /* Pods_DRNear.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FD395E7C2110DB8E00A0FBBF = {
 			isa = PBXGroup;
 			children = (
 				FD395E872110DB8F00A0FBBF /* DRNear */,
 				FD395E9C2110DB9200A0FBBF /* DRNearTests */,
 				FD395E862110DB8F00A0FBBF /* Products */,
+				24D16B3553A11047E2E76A52 /* Pods */,
+				5BFB27D46C4DD786377BB999 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +127,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD395EA22110DB9200A0FBBF /* Build configuration list for PBXNativeTarget "DRNear" */;
 			buildPhases = (
+				D2F0CC5019EE5C2FD3425D12 /* [CP] Check Pods Manifest.lock */,
 				FD395E812110DB8F00A0FBBF /* Sources */,
 				FD395E822110DB8F00A0FBBF /* Frameworks */,
 				FD395E832110DB8F00A0FBBF /* Resources */,
@@ -191,6 +216,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D2F0CC5019EE5C2FD3425D12 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DRNear-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FD395E812110DB8F00A0FBBF /* Sources */ = {
@@ -356,6 +402,7 @@
 		};
 		FD395EA32110DB9200A0FBBF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -365,7 +412,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shles.DRNear;
+				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -374,6 +421,7 @@
 		};
 		FD395EA42110DB9200A0FBBF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -383,7 +431,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shles.DRNear;
+				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
