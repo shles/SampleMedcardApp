@@ -10,3 +10,11 @@ pipelines:
     - step:
         script:
           - echo "Everything is awesome!"
+    - step:
+        script:
+          - sonar-scanner \
+            -Dsonar.projectKey=drnear \
+            -Dsonar.organization=shles-bitbucket \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=drnear
