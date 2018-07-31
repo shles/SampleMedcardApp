@@ -17,7 +17,7 @@ pipelines:
           - node-scanner
         script: 
           - npm install -g sonarqube-scanner
-          - sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=bellingard-bitbucket -Dsonar.login=$SONAR_TOKEN
+          - sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=shles-bitbucket -Dsonar.login=$SONAR_TOKEN
 
 definitions:
   caches:
