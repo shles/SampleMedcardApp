@@ -12,7 +12,7 @@ pipelines:
           - echo "Everything is awesome!"
     - step:
         script:
-          - sonar-scanner \
+          - .sonar-scanner \
             -Dsonar.projectKey=drnear \
             -Dsonar.organization=shles-bitbucket \
             -Dsonar.sources=. \
