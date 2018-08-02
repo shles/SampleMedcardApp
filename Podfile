@@ -10,6 +10,9 @@ target 'DRNear' do
     #UI
     pod 'SnapKit'
     
+    #Linter
+    pod 'SwiftLint'
+    
     target 'DRNearTests' do
         inherit! :search_paths
         

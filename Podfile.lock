@@ -14,6 +14,7 @@ PODS:
   - RxTest (4.2.0):
     - RxSwift (~> 4.0)
   - SnapKit (4.0.0)
+  - SwiftLint (0.26.0)
 
 DEPENDENCIES:
   - Nimble
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - RxSwift
   - RxTest
   - SnapKit
+  - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - RxSwift
     - RxTest
     - SnapKit
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
@@ -46,7 +49,8 @@ SPEC CHECKSUMS:
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   RxTest: 8da864c0ee47534f586ff18fb0c7e5b2f1fe5023
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
 
-PODFILE CHECKSUM: f00ac0bbef628f8a4153b2b069bf1d75722ad107
+PODFILE CHECKSUM: dabc15dfc62109c2cefddb59cf1a0b9236bfa0be
 
 COCOAPODS: 1.5.3

@@ -9,6 +9,20 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>DRNearTests.testPerformanceExample.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
+		<key>DRNearTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>
