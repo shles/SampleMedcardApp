@@ -2,6 +2,23 @@ target 'DRNear' do
     use_frameworks!
     inhibit_all_warnings!
     
+    
+    #Rx
+    pod 'RxSwift'
+    pod 'RxDataSources'
+    
+    #UI
+    pod 'SnapKit'
+    
+    target 'DRNearTests' do
+        inherit! :search_paths
+        
+        pod 'Quick'
+        pod 'Nimble'
+        pod 'RxBlocking'
+        pod 'RxTest'
+    end
+    
 end
 
 post_install do |installer|

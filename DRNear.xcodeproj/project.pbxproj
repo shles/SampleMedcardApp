@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29BA871AF238F7300ED0A149 /* Pods_DRNearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
 		FD395E892110DB8F00A0FBBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E882110DB8F00A0FBBF /* AppDelegate.swift */; };
 		FD395E8B2110DB8F00A0FBBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E8A2110DB8F00A0FBBF /* ViewController.swift */; };
@@ -27,7 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5791B611C4A7E0E4D26F24D0 /* Pods-DRNearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.release.xcconfig"; sourceTree = "<group>"; };
+		5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61520493534457F4BFE257 /* Pods_DRNear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.release.xcconfig"; sourceTree = "<group>"; };
 		E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.debug.xcconfig"; sourceTree = "<group>"; };
 		FD395E852110DB8F00A0FBBF /* DRNear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRNear.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29BA871AF238F7300ED0A149 /* Pods_DRNearTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,8 @@
 			children = (
 				E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */,
 				DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */,
+				BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */,
+				5791B611C4A7E0E4D26F24D0 /* Pods-DRNearTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -74,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				7F61520493534457F4BFE257 /* Pods_DRNear.framework */,
+				5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 				FD395E812110DB8F00A0FBBF /* Sources */,
 				FD395E822110DB8F00A0FBBF /* Frameworks */,
 				FD395E832110DB8F00A0FBBF /* Resources */,
+				EECD39C37078C979CDF124BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -145,9 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD395EA52110DB9200A0FBBF /* Build configuration list for PBXNativeTarget "DRNearTests" */;
 			buildPhases = (
+				4E078FA97AC871FADE6BCD58 /* [CP] Check Pods Manifest.lock */,
 				FD395E952110DB9200A0FBBF /* Sources */,
 				FD395E962110DB9200A0FBBF /* Frameworks */,
 				FD395E972110DB9200A0FBBF /* Resources */,
+				A0EC4F731CED7504C22C8E8A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -218,6 +229,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4E078FA97AC871FADE6BCD58 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DRNearTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0EC4F731CED7504C22C8E8A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D2F0CC5019EE5C2FD3425D12 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,6 +289,32 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EECD39C37078C979CDF124BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DRNear/Pods-DRNear-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRNear/Pods-DRNear-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -440,6 +521,7 @@
 		};
 		FD395EA62110DB9200A0FBBF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -461,6 +543,7 @@
 		};
 		FD395EA72110DB9200A0FBBF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5791B611C4A7E0E4D26F24D0 /* Pods-DRNearTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
