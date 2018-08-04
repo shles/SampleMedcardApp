@@ -27,6 +27,14 @@ class SimpleMedCardOption: MedCardOption {
         return Observable.never()
     }
 
+    func wantsToPop() -> Observable<Void> {
+        return Observable.never()
+    }
+
+    func wantsToBeDismissed() -> Observable<Void> {
+        return Observable.never()
+    }
+
     var image: ObservableImage {
        return SimpleObservableImage()
     }
@@ -34,5 +42,6 @@ class SimpleMedCardOption: MedCardOption {
     func interact() {
         pushingSubject.onNext(leadingToController)
     }
+
 }
 

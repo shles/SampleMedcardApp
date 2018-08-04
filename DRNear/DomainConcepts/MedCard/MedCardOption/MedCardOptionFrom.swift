@@ -34,4 +34,13 @@ class MedCardOptionFrom: MedCardOption {
     func interact() {
         pushingSubject.onNext(leadingToController)
     }
+
+    func wantsToPop() -> Observable<Void> {
+        return Observable.never()
+    }
+
+    func wantsToBeDismissed() -> Observable<Void> {
+        return Observable.never()
+    }
+
 }

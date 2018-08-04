@@ -39,4 +39,11 @@ class SimpleViewWthButtonPresentation: Presentation {
             ViewController(presentation: SimpleViewWthButtonPresentation())
         }
     }
+
+    func wantsToPop() -> Observable<Void> {
+        return Observable<Void>.never()
+    }
+
+    func wantsToBeDismissed() -> Observable<Void> {
+        return Observable<Void>.never()    }
 }

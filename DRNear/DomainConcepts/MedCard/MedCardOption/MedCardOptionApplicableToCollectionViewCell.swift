@@ -42,4 +42,12 @@ class MedCardOptionApplicableToCollectionViewCell: MedCardOption, Applicable {
     func interact() {
         origin.interact()
     }
+
+    func wantsToPop() -> Observable<Void> {
+        return origin.wantsToPop()
+    }
+
+    func wantsToBeDismissed() -> Observable<Void> {
+        return origin.wantsToBeDismissed()
+    }
 }

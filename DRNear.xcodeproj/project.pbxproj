@@ -26,6 +26,7 @@
 		4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */; };
 		4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875D5613F94AC1657CBD4 /* Interactive.swift */; };
 		4C287E2D873D612756944F42 /* ContainingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28768E71149F65D2E9D66D /* ContainingImage.swift */; };
+		4C287E6ABA27E130731A7CBF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28795432F42BB4C7528D5C /* NavigationBar.swift */; };
 		4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
 		FD3460BB2114C499007B0943 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BA2114C499007B0943 /* UIView.swift */; };
@@ -37,6 +38,7 @@
 		FD3460C92114F2CD007B0943 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460C72114F2CD007B0943 /* UIColor+Additions.swift */; };
 		FD3460CE2114F476007B0943 /* FiraSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD3460CC2114F475007B0943 /* FiraSans-Medium.ttf */; };
 		FD3460CF2114F476007B0943 /* FiraSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD3460CD2114F476007B0943 /* FiraSans-Regular.ttf */; };
+		FD3460D121152A26007B0943 /* FiraSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD3460D021152A25007B0943 /* FiraSans-Bold.ttf */; };
 		FD395E892110DB8F00A0FBBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E882110DB8F00A0FBBF /* AppDelegate.swift */; };
 		FD395E8E2110DB8F00A0FBBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD395E8C2110DB8F00A0FBBF /* Main.storyboard */; };
 		FD395E902110DB9200A0FBBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD395E8F2110DB9200A0FBBF /* Assets.xcassets */; };
@@ -68,6 +70,7 @@
 		4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardCollectionViewPresentation.swift; sourceTree = "<group>"; };
 		4C287634E3FD7E687FC345E6 /* MedCardOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOption.swift; sourceTree = "<group>"; };
 		4C28768E71149F65D2E9D66D /* ContainingImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainingImage.swift; sourceTree = "<group>"; };
+		4C28795432F42BB4C7528D5C /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		4C2879733193AD7FA725432E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		4C287BFD15BBEB8549AFEB97 /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		FD3460C72114F2CD007B0943 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		FD3460CC2114F475007B0943 /* FiraSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Medium.ttf"; sourceTree = "<group>"; };
 		FD3460CD2114F476007B0943 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Regular.ttf"; sourceTree = "<group>"; };
+		FD3460D021152A25007B0943 /* FiraSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Bold.ttf"; sourceTree = "<group>"; };
 		FD395E852110DB8F00A0FBBF /* DRNear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRNear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD395E882110DB8F00A0FBBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD395E8D2110DB8F00A0FBBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				4C2875DC9E058AC020FA62E2 /* GradientView.swift */,
 				4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */,
 				4C2875D5613F94AC1657CBD4 /* Interactive.swift */,
+				4C28795432F42BB4C7528D5C /* NavigationBar.swift */,
 			);
 			path = BaseConcepts;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 		FD3460CB2114F465007B0943 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FD3460D021152A25007B0943 /* FiraSans-Bold.ttf */,
 				FD3460CC2114F475007B0943 /* FiraSans-Medium.ttf */,
 				FD3460CD2114F476007B0943 /* FiraSans-Regular.ttf */,
 			);
@@ -351,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD3460D121152A26007B0943 /* FiraSans-Bold.ttf in Resources */,
 				FD3460CE2114F476007B0943 /* FiraSans-Medium.ttf in Resources */,
 				FD3460CF2114F476007B0943 /* FiraSans-Regular.ttf in Resources */,
 				FD395E932110DB9200A0FBBF /* LaunchScreen.storyboard in Resources */,
@@ -504,6 +511,7 @@
 				4C287AB142304A462D5C63CD /* Applicable.swift in Sources */,
 				4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */,
 				4C287B72845683EDB11CB9E9 /* MedCardOptionApplicableToCollectionViewCell.swift in Sources */,
+				4C287E6ABA27E130731A7CBF /* NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

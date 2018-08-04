@@ -4,16 +4,15 @@
 //
 
 import Foundation
+import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
-import RxCocoa
+import SnapKit
 
 class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionViewDelegateFlowLayout {
 
-    var view: UIView {
-        return collectionView
-    }
+    var view: UIView = UIView()
 
     private let collectionView: UICollectionView
     private let disposeBag = DisposeBag()
@@ -30,6 +29,18 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
         layout.minimumLineSpacing = 0
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+
+        let navBar = SimpleNavigationBar(title: "Медицинская карта")
+
+        view.addSubviews([navBar, collectionView])
+        navBar.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.equalTo(120)
+        }
+        collectionView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(navBar.snp.bottom)
+        }
 
         super.init()
 
@@ -52,7 +63,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
                 option.interact()
             })
             .disposed(by: disposeBag)
-        
+
         self.medCardOptions.asObservable()
             .flatMap {
                 Observable.merge($0.options.map { $0.wantsToPush().debug() })
@@ -74,8 +85,16 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
         return Observable<UIViewController>.never()
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2.0 - 16, height: 184)
     }
-    
+
+    func wantsToPop() -> Observable<Void> {
+        return Observable<Void>.never()    }
+
+    func wantsToBeDismissed() -> Observable<Void> {
+        return Observable<Void>.never()
+    }
 }

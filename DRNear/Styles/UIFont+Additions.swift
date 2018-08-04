@@ -14,4 +14,8 @@ extension UIFont {
     return UIFont(name: "FiraSans-Medium", size: 17.0)!
   }
 
+  class var navigatoinLarge: UIFont {
+    return UIFont(name: "FiraSans-Bold", size: 24.0)!
+  }
+
 }

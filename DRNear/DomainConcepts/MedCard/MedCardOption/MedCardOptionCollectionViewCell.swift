@@ -22,6 +22,7 @@ class MedCardOptionCollectionViewCell: UICollectionViewCell {
     private let innerView = UIView()
             .with(roundedEdges: 4)
             .with(borderWidth: 1, borderColor: .shadow)
+            .with(backgroundColor: .white)
 
     private var disposeBag = DisposeBag()
 
@@ -58,7 +59,7 @@ class MedCardOptionCollectionViewCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().inset(80)
         }
 
-        backgroundColor = .white
+        backgroundColor = .clear
 
         shadowView.alpha = 0
     }

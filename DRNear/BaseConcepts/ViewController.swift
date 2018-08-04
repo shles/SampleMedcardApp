@@ -33,14 +33,21 @@ class ViewController: UIViewController {
         }
 
         presentation.wantsToPresent().subscribe(onNext: { [unowned self] in
-
             self.present($0, animated: true)
-
         }).disposed(by: disposeBag)
 
         presentation.wantsToPush().subscribe(onNext: { [unowned self] in
             self.navigationController?.pushViewController($0, animated: true)
         }).disposed(by: disposeBag)
+
+        presentation.wantsToPop().subscribe(onNext: { [unowned self] in
+            self.navigationController?.popViewController(animated: true)
+        }).disposed(by: disposeBag)
+
+        presentation.wantsToBeDismissed().subscribe(onNext: {
+            self.dismiss(animated: true, completion: nil)
+        }).disposed(by: disposeBag)
+
     }
 
 }

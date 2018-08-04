@@ -12,6 +12,17 @@ protocol MedCardOptions {
 }
 
 class SimpleMedCardOptions: MedCardOptions {
-    var options: [MedCardOption] = [SimpleMedCardOption(), SimpleMedCardOption()]
+    var options: [MedCardOption] = [SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),
+                                    SimpleMedCardOption(),]
     
 }
