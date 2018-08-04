@@ -8,9 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		29BA871AF238F7300ED0A149 /* Pods_DRNearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */; };
+		4C28707B9D15494ECA238A5F /* MedCardOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287634E3FD7E687FC345E6 /* MedCardOption.swift */; };
+		4C2871760C0104098A04BDFA /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875DC9E058AC020FA62E2 /* GradientView.swift */; };
+		4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */; };
+		4C2873533239031790AD3B51 /* MedCardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2872D5A6262A16D8E07C6A /* MedCardOptions.swift */; };
+		4C287507116D991E0A095D48 /* TransitionSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28737122D5A6DB17D380A3 /* TransitionSource.swift */; };
+		4C2875193BC5215470ED3FE1 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287BFD15BBEB8549AFEB97 /* Named.swift */; };
+		4C28762B019C533E21C77830 /* ObservableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287E699877719914175B47 /* ObservableImage.swift */; };
+		4C287737CA37EE6D4060A5AE /* ObservableMedCardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F6DE8AEF4DCC86C7523 /* ObservableMedCardOptions.swift */; };
+		4C2879DC948AEE515F8B9DD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879733193AD7FA725432E /* ViewController.swift */; };
+		4C2879E05A8BFAFBBEAA4AE9 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F509B7CA418A115AA25 /* Presentation.swift */; };
+		4C287A0CEADD4CB6EF894F6B /* StandardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870561AEE2D09B03DBC5C /* StandardSectionModel.swift */; };
+		4C287A95C7D2B21B4D50CD69 /* MedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875B7FB7354D2681A4BD0 /* MedCard.swift */; };
+		4C287AB142304A462D5C63CD /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */; };
+		4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */; };
+		4C287B72845683EDB11CB9E9 /* MedCardOptionApplicableToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */; };
+		4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */; };
+		4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875D5613F94AC1657CBD4 /* Interactive.swift */; };
+		4C287E2D873D612756944F42 /* ContainingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28768E71149F65D2E9D66D /* ContainingImage.swift */; };
+		4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
+		FD3460BB2114C499007B0943 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BA2114C499007B0943 /* UIView.swift */; };
+		FD3460BD2114C4FE007B0943 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BC2114C4FD007B0943 /* UILabel.swift */; };
+		FD3460C02114C50A007B0943 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BE2114C50A007B0943 /* UIButton.swift */; };
+		FD3460C12114C50A007B0943 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BF2114C50A007B0943 /* UIImageView.swift */; };
+		FD3460C32114C533007B0943 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460C22114C533007B0943 /* UITextField.swift */; };
+		FD3460C82114F2CD007B0943 /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460C62114F2CD007B0943 /* UIFont+Additions.swift */; };
+		FD3460C92114F2CD007B0943 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460C72114F2CD007B0943 /* UIColor+Additions.swift */; };
+		FD3460CE2114F476007B0943 /* FiraSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD3460CC2114F475007B0943 /* FiraSans-Medium.ttf */; };
+		FD3460CF2114F476007B0943 /* FiraSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD3460CD2114F476007B0943 /* FiraSans-Regular.ttf */; };
 		FD395E892110DB8F00A0FBBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E882110DB8F00A0FBBF /* AppDelegate.swift */; };
-		FD395E8B2110DB8F00A0FBBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD395E8A2110DB8F00A0FBBF /* ViewController.swift */; };
 		FD395E8E2110DB8F00A0FBBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD395E8C2110DB8F00A0FBBF /* Main.storyboard */; };
 		FD395E902110DB9200A0FBBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD395E8F2110DB9200A0FBBF /* Assets.xcassets */; };
 		FD395E932110DB9200A0FBBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD395E912110DB9200A0FBBF /* LaunchScreen.storyboard */; };
@@ -28,15 +55,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C2870561AEE2D09B03DBC5C /* StandardSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardSectionModel.swift; sourceTree = "<group>"; };
+		4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
+		4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C2872D5A6262A16D8E07C6A /* MedCardOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptions.swift; sourceTree = "<group>"; };
+		4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionFrom.swift; sourceTree = "<group>"; };
+		4C28737122D5A6DB17D380A3 /* TransitionSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSource.swift; sourceTree = "<group>"; };
+		4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionApplicableToCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C2875B7FB7354D2681A4BD0 /* MedCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCard.swift; sourceTree = "<group>"; };
+		4C2875D5613F94AC1657CBD4 /* Interactive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
+		4C2875DC9E058AC020FA62E2 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardCollectionViewPresentation.swift; sourceTree = "<group>"; };
+		4C287634E3FD7E687FC345E6 /* MedCardOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOption.swift; sourceTree = "<group>"; };
+		4C28768E71149F65D2E9D66D /* ContainingImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainingImage.swift; sourceTree = "<group>"; };
+		4C2879733193AD7FA725432E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		4C287BFD15BBEB8549AFEB97 /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
+		4C287E699877719914175B47 /* ObservableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableImage.swift; sourceTree = "<group>"; };
+		4C287F509B7CA418A115AA25 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
+		4C287F6DE8AEF4DCC86C7523 /* ObservableMedCardOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableMedCardOptions.swift; sourceTree = "<group>"; };
 		5791B611C4A7E0E4D26F24D0 /* Pods-DRNearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61520493534457F4BFE257 /* Pods_DRNear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.release.xcconfig"; sourceTree = "<group>"; };
 		E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.debug.xcconfig"; sourceTree = "<group>"; };
+		FD3460BA2114C499007B0943 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		FD3460BC2114C4FD007B0943 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		FD3460BE2114C50A007B0943 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		FD3460BF2114C50A007B0943 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		FD3460C22114C533007B0943 /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		FD3460C62114F2CD007B0943 /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Additions.swift"; sourceTree = "<group>"; };
+		FD3460C72114F2CD007B0943 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		FD3460CC2114F475007B0943 /* FiraSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Medium.ttf"; sourceTree = "<group>"; };
+		FD3460CD2114F476007B0943 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Regular.ttf"; sourceTree = "<group>"; };
 		FD395E852110DB8F00A0FBBF /* DRNear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRNear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD395E882110DB8F00A0FBBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FD395E8A2110DB8F00A0FBBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FD395E8D2110DB8F00A0FBBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD395E8F2110DB9200A0FBBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD395E922110DB9200A0FBBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,6 +131,67 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4C28707BEECD644BB0E7771F /* BaseConcepts */ = {
+			isa = PBXGroup;
+			children = (
+				4C287E699877719914175B47 /* ObservableImage.swift */,
+				4C287F509B7CA418A115AA25 /* Presentation.swift */,
+				4C28737122D5A6DB17D380A3 /* TransitionSource.swift */,
+				4C287BFD15BBEB8549AFEB97 /* Named.swift */,
+				4C28768E71149F65D2E9D66D /* ContainingImage.swift */,
+				4C2879733193AD7FA725432E /* ViewController.swift */,
+				4C2870561AEE2D09B03DBC5C /* StandardSectionModel.swift */,
+				4C2875DC9E058AC020FA62E2 /* GradientView.swift */,
+				4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */,
+				4C2875D5613F94AC1657CBD4 /* Interactive.swift */,
+			);
+			path = BaseConcepts;
+			sourceTree = "<group>";
+		};
+		4C2870FA255F98075489E36E /* DomainConcepts */ = {
+			isa = PBXGroup;
+			children = (
+				4C287C6E0D0492EF868D5529 /* MedCard */,
+			);
+			path = DomainConcepts;
+			sourceTree = "<group>";
+		};
+		4C287A7CF8DE63A8C5DCA02F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FD3460C22114C533007B0943 /* UITextField.swift */,
+				FD3460BE2114C50A007B0943 /* UIButton.swift */,
+				FD3460BF2114C50A007B0943 /* UIImageView.swift */,
+				FD3460BC2114C4FD007B0943 /* UILabel.swift */,
+				FD3460BA2114C499007B0943 /* UIView.swift */,
+				4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C287C6E0D0492EF868D5529 /* MedCard */ = {
+			isa = PBXGroup;
+			children = (
+				4C2875B7FB7354D2681A4BD0 /* MedCard.swift */,
+				4C287F6EEEAB86EC7DD0DEF7 /* MedCardOption */,
+				4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */,
+			);
+			path = MedCard;
+			sourceTree = "<group>";
+		};
+		4C287F6EEEAB86EC7DD0DEF7 /* MedCardOption */ = {
+			isa = PBXGroup;
+			children = (
+				4C287634E3FD7E687FC345E6 /* MedCardOption.swift */,
+				4C2872D5A6262A16D8E07C6A /* MedCardOptions.swift */,
+				4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */,
+				4C287F6DE8AEF4DCC86C7523 /* ObservableMedCardOptions.swift */,
+				4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */,
+				4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */,
+			);
+			path = MedCardOption;
+			sourceTree = "<group>";
+		};
 		5BFB27D46C4DD786377BB999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +199,25 @@
 				5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD3460CA2114F459007B0943 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				FD3460CB2114F465007B0943 /* Fonts */,
+				FD3460C72114F2CD007B0943 /* UIColor+Additions.swift */,
+				FD3460C62114F2CD007B0943 /* UIFont+Additions.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		FD3460CB2114F465007B0943 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FD3460CC2114F475007B0943 /* FiraSans-Medium.ttf */,
+				FD3460CD2114F476007B0943 /* FiraSans-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		FD395E7C2110DB8E00A0FBBF = {
@@ -110,11 +244,14 @@
 			isa = PBXGroup;
 			children = (
 				FD395E882110DB8F00A0FBBF /* AppDelegate.swift */,
-				FD395E8A2110DB8F00A0FBBF /* ViewController.swift */,
 				FD395E8C2110DB8F00A0FBBF /* Main.storyboard */,
 				FD395E8F2110DB9200A0FBBF /* Assets.xcassets */,
 				FD395E912110DB9200A0FBBF /* LaunchScreen.storyboard */,
 				FD395E942110DB9200A0FBBF /* Info.plist */,
+				4C28707BEECD644BB0E7771F /* BaseConcepts */,
+				4C2870FA255F98075489E36E /* DomainConcepts */,
+				4C287A7CF8DE63A8C5DCA02F /* Extensions */,
+				FD3460CA2114F459007B0943 /* Styles */,
 			);
 			path = DRNear;
 			sourceTree = "<group>";
@@ -140,6 +277,7 @@
 				FD395E822110DB8F00A0FBBF /* Frameworks */,
 				FD395E832110DB8F00A0FBBF /* Resources */,
 				EECD39C37078C979CDF124BA /* [CP] Embed Pods Frameworks */,
+				FD3460B921136A7C007B0943 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -213,6 +351,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD3460CE2114F476007B0943 /* FiraSans-Medium.ttf in Resources */,
+				FD3460CF2114F476007B0943 /* FiraSans-Regular.ttf in Resources */,
 				FD395E932110DB9200A0FBBF /* LaunchScreen.storyboard in Resources */,
 				FD395E902110DB9200A0FBBF /* Assets.xcassets in Resources */,
 				FD395E8E2110DB8F00A0FBBF /* Main.storyboard in Resources */,
@@ -317,6 +457,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRNear/Pods-DRNear-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FD3460B921136A7C007B0943 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -324,8 +477,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD395E8B2110DB8F00A0FBBF /* ViewController.swift in Sources */,
+				FD3460BD2114C4FE007B0943 /* UILabel.swift in Sources */,
+				FD3460BB2114C499007B0943 /* UIView.swift in Sources */,
 				FD395E892110DB8F00A0FBBF /* AppDelegate.swift in Sources */,
+				4C28762B019C533E21C77830 /* ObservableImage.swift in Sources */,
+				4C2879E05A8BFAFBBEAA4AE9 /* Presentation.swift in Sources */,
+				4C287507116D991E0A095D48 /* TransitionSource.swift in Sources */,
+				4C2875193BC5215470ED3FE1 /* Named.swift in Sources */,
+				4C287E2D873D612756944F42 /* ContainingImage.swift in Sources */,
+				FD3460C82114F2CD007B0943 /* UIFont+Additions.swift in Sources */,
+				4C2879DC948AEE515F8B9DD9 /* ViewController.swift in Sources */,
+				4C287A95C7D2B21B4D50CD69 /* MedCard.swift in Sources */,
+				4C28707B9D15494ECA238A5F /* MedCardOption.swift in Sources */,
+				FD3460C32114C533007B0943 /* UITextField.swift in Sources */,
+				4C2873533239031790AD3B51 /* MedCardOptions.swift in Sources */,
+				FD3460C12114C50A007B0943 /* UIImageView.swift in Sources */,
+				4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */,
+				4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */,
+				FD3460C92114F2CD007B0943 /* UIColor+Additions.swift in Sources */,
+				4C287A0CEADD4CB6EF894F6B /* StandardSectionModel.swift in Sources */,
+				4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */,
+				4C2871760C0104098A04BDFA /* GradientView.swift in Sources */,
+				FD3460C02114C50A007B0943 /* UIButton.swift in Sources */,
+				4C287737CA37EE6D4060A5AE /* ObservableMedCardOptions.swift in Sources */,
+				4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */,
+				4C287AB142304A462D5C63CD /* Applicable.swift in Sources */,
+				4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */,
+				4C287B72845683EDB11CB9E9 /* MedCardOptionApplicableToCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
