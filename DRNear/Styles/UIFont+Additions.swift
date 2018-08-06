@@ -2,7 +2,7 @@
 //  UIFont+Additions.swift
 //  IOS DR
 //
-//  Generated on Zeplin. (8/3/2018).
+//  Generated on Zeplin. (8/6/2018).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -16,6 +16,10 @@ extension UIFont {
 
   class var navigatoinLarge: UIFont {
     return UIFont(name: "FiraSans-Bold", size: 24.0)!
+  }
+
+  class var regular: UIFont {
+    return UIFont(name: "FiraSans-Regular", size: 17.0)!
   }
 
 }

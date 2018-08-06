@@ -5,16 +5,21 @@
 
 import Foundation
 import RxSwift
-protocol ObservableMedCardOptions {
 
-    func asObservable() -> Observable<MedCardOptions>
+protocol MedCard {
+
+    func options() -> Observable<[MedCardOption]>
 }
 
-class SimpleObservableMedCardOptions: ObservableMedCardOptions {
-    
-    private let options = SimpleMedCardOptions()
-    func asObservable() -> Observable<MedCardOptions> {
-        return Observable.just(options)
+class MedCardFrom: MedCard {
+
+    private let items: [MedCardOption]
+
+    init(options: [MedCardOption]) {
+        self.items = options
+    }
+    func options() -> Observable<[MedCardOption]> {
+        return Observable.just(items)
     }
 
 }

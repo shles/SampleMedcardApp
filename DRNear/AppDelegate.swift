@@ -19,7 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navContgroller = UINavigationController(
                 rootViewController: ViewController(
                         presentation: MedCardCollectionViewPresentation(
-                                medCardOptions: SimpleObservableMedCardOptions()
+                                medCardOptions: MedCardFrom(
+                                        options: [
+                                            MedCardOptionFrom(name: "Вредные привычки",
+                                                image: SimpleObservableImage(),
+                                                gradientColors: [.wheatTwo, .rosa],
+                                                leadingTo: ViewController(
+                                                        presentation: BadHabitsTableViewPresentation(
+                                                                observableHabits: SimpleObservableBadHabits()
+                                                        )
+                                                )
+                                            )
+                                        ]
+                                )
                         )
                 )
         )

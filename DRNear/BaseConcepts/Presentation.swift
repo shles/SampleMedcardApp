@@ -45,5 +45,6 @@ class SimpleViewWthButtonPresentation: Presentation {
     }
 
     func wantsToBeDismissed() -> Observable<Void> {
-        return Observable<Void>.never()    }
+        return Observable<Void>.never()
+    }
 }

@@ -5,13 +5,7 @@
 
 import Foundation
 
-protocol MedCardOptions {
-
-    var options: [MedCardOption] { get }
-
-}
-
-class SimpleMedCardOptions: MedCardOptions {
+class SimpleMedCardOptions {
     var options: [MedCardOption] = [SimpleMedCardOption(),
                                     SimpleMedCardOption(),
                                     SimpleMedCardOption(),

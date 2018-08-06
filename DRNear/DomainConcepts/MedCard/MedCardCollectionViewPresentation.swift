@@ -17,9 +17,9 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
     private let collectionView: UICollectionView
     private let disposeBag = DisposeBag()
     private let wantsToPushSubject = PublishSubject<UIViewController>()
-    private let medCardOptions: ObservableMedCardOptions
+    private let medCardOptions: MedCard
 
-    init(medCardOptions: ObservableMedCardOptions) {
+    init(medCardOptions: MedCard) {
 
         self.medCardOptions = medCardOptions
 
@@ -51,9 +51,9 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
                     return cell
         })
 
-        self.medCardOptions.asObservable()
+        self.medCardOptions.options()
             .map {
-                [StandardSectionModel(items: $0.options)]
+                [StandardSectionModel(items: $0)]
             }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -64,9 +64,9 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
             })
             .disposed(by: disposeBag)
 
-        self.medCardOptions.asObservable()
+        self.medCardOptions.options()
             .flatMap {
-                Observable.merge($0.options.map { $0.wantsToPush().debug() })
+                Observable.merge($0.map { $0.wantsToPush().debug() })
             }
             .bind(to: wantsToPushSubject)
             .disposed(by: disposeBag)
