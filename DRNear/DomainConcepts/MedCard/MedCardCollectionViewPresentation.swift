@@ -19,6 +19,8 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
     private let wantsToPushSubject = PublishSubject<UIViewController>()
     private let medCardOptions: MedCard
 
+    let navBar = SimpleNavigationBar(title: "Медицинская карта")
+
     init(medCardOptions: MedCard) {
 
         self.medCardOptions = medCardOptions
@@ -30,7 +32,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
-        let navBar = SimpleNavigationBar(title: "Медицинская карта")
+        super.init()
 
         view.addSubviews([navBar, collectionView])
         navBar.snp.makeConstraints {
@@ -41,8 +43,6 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(navBar.snp.bottom)
         }
-
-        super.init()
 
         let dataSource = RxCollectionViewSectionedReloadDataSource<StandardSectionModel<MedCardOption>>(
                 configureCell: { ds, cv, ip, option in
@@ -96,5 +96,30 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
     func wantsToBeDismissed() -> Observable<Void> {
         return Observable<Void>.never()
+    }
+}
+
+extension MedCardCollectionViewPresentation {
+
+    func withTabBarStub() -> Self {
+
+        let tabBarImageView = UIImageView(image: #imageLiteral(resourceName: "tabBarStaub"))
+                                .with(contentMode: .scaleAspectFill)
+                                .with(backgroundColor: .white)
+
+        view.addSubview(tabBarImageView)
+
+        tabBarImageView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(108)
+        }
+
+        collectionView.snp.remakeConstraints { [unowned self] in
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(self.navBar.snp.bottom)
+            $0.bottom.equalTo(tabBarImageView.snp.top)
+        }
+
+        return self
     }
 }

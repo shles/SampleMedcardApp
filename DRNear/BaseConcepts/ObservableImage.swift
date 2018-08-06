@@ -12,9 +12,21 @@ protocol ObservableImage {
 
 }
 
-
 class SimpleObservableImage: ObservableImage {
     func asObservable() -> Observable<UIImage> {
         return Observable.just(#imageLiteral(resourceName: "rocketMed"))
+    }
+}
+
+class ObservableImageFrom: ObservableImage {
+
+    private var image: UIImage
+
+    init(image: UIImage) {
+        self.image = image
+    }
+
+    func asObservable() -> Observable<UIImage> {
+        return Observable.just(image)
     }
 }

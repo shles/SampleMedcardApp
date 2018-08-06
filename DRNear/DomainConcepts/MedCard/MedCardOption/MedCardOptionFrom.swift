@@ -44,3 +44,35 @@ class MedCardOptionFrom: MedCardOption {
     }
 
 }
+class InactiveMedCardOptionFrom: MedCardOption {
+
+    let gradientColors: [UIColor]
+    let name: String
+    let image: ObservableImage
+
+    init(name: String, image: ObservableImage, gradientColors: [UIColor]) {
+        self.name = name
+        self.image = image
+        self.gradientColors = gradientColors
+    }
+
+    func wantsToPush() -> Observable<UIViewController> {
+        return Observable.never()
+    }
+
+    func wantsToPresent() -> Observable<UIViewController> {
+        return Observable.never()
+    }
+
+    func interact() {
+
+    }
+
+    func wantsToPop() -> Observable<Void> {
+        return Observable.never()
+    }
+
+    func wantsToBeDismissed() -> Observable<Void> {
+        return Observable.never()
+    }
+}

@@ -10,6 +10,7 @@
 		29BA871AF238F7300ED0A149 /* Pods_DRNearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */; };
 		4C28707B9D15494ECA238A5F /* MedCardOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287634E3FD7E687FC345E6 /* MedCardOption.swift */; };
 		4C2871760C0104098A04BDFA /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875DC9E058AC020FA62E2 /* GradientView.swift */; };
+		4C2871C006782E5311F7F780 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */; };
 		4C28720396CCCDADD6C2F66C /* BadHabits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875E404BE49C90D8E11E7 /* BadHabits.swift */; };
 		4C28726D8D6010B64D446EF7 /* Identificated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875A00257F6125D0E7680 /* Identificated.swift */; };
 		4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */; };
@@ -34,6 +35,7 @@
 		4C287D453B54426DE1B75C57 /* SimleBadHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28785D2684530B7533ACA7 /* SimleBadHabit.swift */; };
 		4C287E2D873D612756944F42 /* ContainingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28768E71149F65D2E9D66D /* ContainingImage.swift */; };
 		4C287E6ABA27E130731A7CBF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28795432F42BB4C7528D5C /* NavigationBar.swift */; };
+		4C287F05F5C7454FA7A68331 /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287E52B85E45F48A353F3C /* Authority.swift */; };
 		4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
 		FD3460BB2114C499007B0943 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BA2114C499007B0943 /* UIView.swift */; };
@@ -75,6 +77,7 @@
 		4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionFrom.swift; sourceTree = "<group>"; };
 		4C28737122D5A6DB17D380A3 /* TransitionSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSource.swift; sourceTree = "<group>"; };
 		4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionApplicableToCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
 		4C2875A00257F6125D0E7680 /* Identificated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identificated.swift; sourceTree = "<group>"; };
 		4C2875D5613F94AC1657CBD4 /* Interactive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		4C2875DC9E058AC020FA62E2 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		4C287B837731B07089B235E7 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		4C287BFD15BBEB8549AFEB97 /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
+		4C287E52B85E45F48A353F3C /* Authority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
 		4C287E699877719914175B47 /* ObservableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableImage.swift; sourceTree = "<group>"; };
 		4C287F509B7CA418A115AA25 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		4C287F6DE8AEF4DCC86C7523 /* ObservableMedCardOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableMedCardOptions.swift; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				4C287C6E0D0492EF868D5529 /* MedCard */,
+				4C287E52B85E45F48A353F3C /* Authority.swift */,
 			);
 			path = DomainConcepts;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 			children = (
 				FD395E9D2110DB9200A0FBBF /* DRNearTests.swift */,
 				FD395E9F2110DB9200A0FBBF /* Info.plist */,
+				4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */,
 			);
 			path = DRNearTests;
 			sourceTree = "<group>";
@@ -556,6 +562,7 @@
 				4C28746F061D9C9C8578DB71 /* BadHabitApplicableToTableViewCell.swift in Sources */,
 				4C287CD2EA6A62A2DEDC8A5F /* Selectable.swift in Sources */,
 				4C287D453B54426DE1B75C57 /* SimleBadHabit.swift in Sources */,
+				4C287F05F5C7454FA7A68331 /* Authority.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD395E9E2110DB9200A0FBBF /* DRNearTests.swift in Sources */,
+				4C2871C006782E5311F7F780 /* AuthorizationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
