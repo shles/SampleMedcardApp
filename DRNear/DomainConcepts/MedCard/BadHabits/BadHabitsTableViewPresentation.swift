@@ -64,4 +64,9 @@ class BadHabitsTableViewPresentation: Presentation {
     func wantsToBeDismissed() -> Observable<Void> {
         return Observable<Void>.never()
     }
+
+    func willAppear() {
+
+    }
 }
+

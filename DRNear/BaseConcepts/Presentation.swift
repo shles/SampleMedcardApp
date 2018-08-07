@@ -4,13 +4,15 @@
 //
 
 import Foundation
+import RxSwift
 import SnapKit
 import UIKit
-import RxSwift
 
 protocol Presentation: TransitionSource {
 
     var view: UIView { get }
+
+    func willAppear()
 
 }
 
@@ -46,5 +48,9 @@ class SimpleViewWthButtonPresentation: Presentation {
 
     func wantsToBeDismissed() -> Observable<Void> {
         return Observable<Void>.never()
+    }
+
+    func willAppear() {
+
     }
 }

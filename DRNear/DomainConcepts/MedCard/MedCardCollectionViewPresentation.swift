@@ -19,7 +19,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
     private let wantsToPushSubject = PublishSubject<UIViewController>()
     private let medCardOptions: MedCard
 
-    let navBar = SimpleNavigationBar(title: "Медицинская карта")
+    private let navBar = SimpleNavigationBar(title: "Медицинская карта")
 
     init(medCardOptions: MedCard) {
 
@@ -74,6 +74,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
         collectionView.contentInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         collectionView.rx.delegate.setForwardToDelegate(self, retainDelegate: false)
         collectionView.backgroundColor = .white
+        collectionView.alwaysBounceVertical = true
 
     }
 
@@ -96,6 +97,10 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
     func wantsToBeDismissed() -> Observable<Void> {
         return Observable<Void>.never()
+    }
+
+    func willAppear() {
+
     }
 }
 

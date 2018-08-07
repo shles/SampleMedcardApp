@@ -9,11 +9,12 @@
 import RxSwift
 import SnapKit
 import UIKit
+import RxCocoa
 
 class ViewController: UIViewController {
 
     private let presentation: Presentation
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 
     init(presentation: Presentation) {
         self.presentation = presentation
@@ -24,8 +25,8 @@ class ViewController: UIViewController {
         fatalError("Storyboards are deprecated")
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         view.addSubview(presentation.view)
         presentation.view.snp.makeConstraints {
@@ -48,6 +49,12 @@ class ViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }).disposed(by: disposeBag)
 
+        presentation.willAppear()
+
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        disposeBag = DisposeBag()
+    }
 }

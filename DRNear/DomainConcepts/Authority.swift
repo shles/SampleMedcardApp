@@ -4,8 +4,15 @@
 //
 
 import Foundation
+import RxSwift
 
-class Authority {
+protocol Authority {
 
-    init() { }
+    func wantsTFAuth() -> Observable<Authority>
+    func authenticated() -> Observable<Token>
+
+    func authWith(credentials: Credentials)
+
+    func confirm(code: String)
+
 }

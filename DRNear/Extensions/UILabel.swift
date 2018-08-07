@@ -27,7 +27,6 @@ extension UILabel {
         return self
     }
 
-    
     func with(numberOfLines: Int) -> Self {
         self.numberOfLines = numberOfLines
         return self

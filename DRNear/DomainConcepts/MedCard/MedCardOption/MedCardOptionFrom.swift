@@ -24,7 +24,7 @@ class MedCardOptionFrom: MedCardOption {
     }
 
     func wantsToPush() -> Observable<UIViewController> {
-        return pushingSubject.asObservable()
+        return pushingSubject.asObservable().debug()
     }
 
     func wantsToPresent() -> Observable<UIViewController> {
