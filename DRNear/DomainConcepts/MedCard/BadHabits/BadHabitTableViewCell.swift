@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
-import SnapKit
 import RxSwift
+import SnapKit
+import UIKit
 
 class SimpleTickedCell: UITableViewCell {
 
@@ -37,7 +37,6 @@ class SimpleTickedCell: UITableViewCell {
             $0.top.equalToSuperview().offset(18)
             $0.bottom.equalToSuperview().inset(18)
         }
-
 
     }
 

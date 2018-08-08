@@ -16,13 +16,13 @@ class SimpleAuthority: Authority {
     }
 
     func authenticated() -> Observable<Token> {
-        return authSubject.asObservable().map { EmptyToken()}
+        return authSubject.asObservable().map { EmptyToken() }
     }
 
     func authWith(credentials: Credentials) {
         if credentials.login == "admin" {
             authSubject.onNext(())
-        } else  {
+        } else {
             codeSubject.onNext(())
         }
     }
@@ -31,4 +31,3 @@ class SimpleAuthority: Authority {
         authSubject.onNext(())
     }
 }
-

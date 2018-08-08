@@ -17,6 +17,6 @@ class SimpleMedCardOptions {
                                     SimpleMedCardOption(),
                                     SimpleMedCardOption(),
                                     SimpleMedCardOption(),
-                                    SimpleMedCardOption(),]
-    
+                                    SimpleMedCardOption() ]
+
 }

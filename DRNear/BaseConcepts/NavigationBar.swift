@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import RxSwift
 import SnapKit
+import UIKit
 
 class SimpleNavigationBar: UIView {
 
@@ -27,7 +27,7 @@ class SimpleNavigationBar: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("Storyboards are deprecated!")
     }
-    
+
     func with(rightInactiveButton button: UIButton ) -> Self {
         addSubview(button)
         button.snp.makeConstraints {
@@ -68,7 +68,6 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
         fatalError("Storyboards are deprecated!")
     }
 
-
     func wantsToPush() -> RxSwift.Observable<UIViewController> {
         return Observable.never()//just(ViewController(presentation: SimpleViewWthButtonPresentation()))
     }
@@ -78,7 +77,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
     }
 
     func wantsToPop() -> Observable<Void> {
-        return backButton.rx.tap.map {_ in }
+        return backButton.rx.tap.map { _ in }
     }
 
     func wantsToBeDismissed() -> Observable<Void> {

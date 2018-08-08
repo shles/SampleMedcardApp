@@ -4,18 +4,18 @@
 //
 
 import Foundation
-import XCTest
-import Quick
 import Nimble
+import Quick
 import RxBlocking
 import RxSwift
+import XCTest
 
 @testable import DRNear
 //swiftlint:disable all
 class MedCardTests: QuickSpec {
 
     override func spec() {
-        
+
         var viewController: UIViewController!
         var option: MedCardOption!
         var medCard: MedCard!
@@ -40,12 +40,12 @@ class MedCardTests: QuickSpec {
         describe("MedCard presentation") {
             context("when one of it's options interacted") {
                 it("should want push view") {
-                    
+
                     var vc: UIViewController!
-                    
+
                     medCardPresentation.wantsToPush().subscribe(onNext: {
                         vc = $0
-                        
+
                         UIApplication.shared.keyWindow!.rootViewController = vc
                         vc.preloadView()
 
@@ -54,7 +54,7 @@ class MedCardTests: QuickSpec {
 
                     medCArdViewcontroller.preloadView()
                     option.interact()
-                    expect(vc.view).to(equal(viewController.view))
+                    expect(vc.view) == viewController.view
                 }
             }
         }

@@ -4,8 +4,8 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
 class SimpleMedCardOption: MedCardOption {
     private(set) var gradientColors: [UIColor] = [.red, .yellow]

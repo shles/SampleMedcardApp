@@ -6,18 +6,17 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
-import Foundation
-import Quick
-import Nimble
-import RxSwift
 @testable import DRNear
+import Foundation
+import Nimble
+import Quick
+import RxSwift
 
 //swiftlint:disable all
 class BadHabitsTests: QuickSpec {
     override func spec() {
         var habits: ObservableBadHabits!
         var badHabitsPresentation: Presentation!
-        var disposeBag: DisposeBag!
 
         beforeEach {
             habits = SimpleObservableBadHabits()
@@ -31,18 +30,17 @@ class BadHabitsTests: QuickSpec {
                     var vc = UIViewController()
                     var navVC = UINavigationController(rootViewController: vc)
                     navVC.pushViewController(ViewController(presentation: badHabitsPresentation), animated: false)
-
+                    
                     UIApplication.shared.keyWindow!.rootViewController = navVC
                     navVC.preloadView()
                     vc.preloadView()
 
                     (badHabitsPresentation as! BadHabitsTableViewPresentation).simulateBackTap()
 
-                    expect(vc).to(equal(navVC.viewControllers.first!))
+                    expect(vc) == navVC.viewControllers.first!
                 }
             }
         }
     }
 }
 //swiftlint:enable all
-

@@ -7,8 +7,8 @@ import Foundation
 import RxCocoa
 import RxDataSources
 import RxSwift
-import UIKit
 import SnapKit
+import UIKit
 
 class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionViewDelegateFlowLayout {
 

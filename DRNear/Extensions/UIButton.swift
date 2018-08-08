@@ -16,5 +16,5 @@ extension UIButton {
         self.setTitle(title, for: state)
         return self
     }
-    
+
 }

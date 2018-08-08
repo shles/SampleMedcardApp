@@ -32,6 +32,6 @@ extension SimpleViewWthButtonPresentation {
 
 extension UIViewController {
     func preloadView() {
-        let _ = self.view
+        _ = self.view
     }
 }

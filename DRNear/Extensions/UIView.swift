@@ -6,7 +6,7 @@
 import UIKit
 
 extension UIView {
-    
+
     func addSubviews(_ views: [UIView] ) {
         for view in views {
             addSubview(view)
@@ -22,7 +22,7 @@ extension UIView {
         self.clipsToBounds = clipsToBounds
         return self
     }
-    
+
     func with(roundedEdges radius: CGFloat) -> Self {
         self.layer.cornerRadius = radius
         return self.with(clipsToBounds: true)
@@ -32,7 +32,7 @@ extension UIView {
         self.backgroundColor = backgroundColor
         return self
     }
-    
+
     @discardableResult
     func withShadow(
         xOffset: CGFloat = 0,
@@ -57,4 +57,3 @@ extension UIView {
     }
 
 }
-

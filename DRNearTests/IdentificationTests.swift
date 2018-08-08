@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import Foundation
-import Quick
-import Nimble
 @testable import DRNear
+import Foundation
+import Nimble
+import Quick
 
 class IdentificationTests: QuickSpec {
     override func spec() {

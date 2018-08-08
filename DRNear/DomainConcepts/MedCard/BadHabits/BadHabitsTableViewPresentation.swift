@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
+import RxDataSources
 import RxSwift
 import SnapKit
-import RxDataSources
+import UIKit
 
 class BadHabitsTableViewPresentation: Presentation {
 
@@ -70,4 +70,3 @@ class BadHabitsTableViewPresentation: Presentation {
 
     }
 }
-

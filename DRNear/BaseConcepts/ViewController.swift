@@ -6,10 +6,10 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
+import RxCocoa
 import RxSwift
 import SnapKit
 import UIKit
-import RxCocoa
 
 class ViewController: UIViewController {
 

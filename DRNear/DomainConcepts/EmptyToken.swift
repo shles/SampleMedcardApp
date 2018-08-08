@@ -5,6 +5,6 @@
 
 import Foundation
 
-class EmptyToken:Token {
+class EmptyToken: Token {
     private(set) var string: String = ""
 }

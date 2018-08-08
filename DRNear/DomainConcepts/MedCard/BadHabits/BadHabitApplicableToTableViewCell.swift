@@ -20,7 +20,6 @@ class BadHabitApplicableToTableViewCell: Applicable, BadHabit {
         target.configure(item: self)
     }
 
-
     var name: String {
         return origin.name
     }

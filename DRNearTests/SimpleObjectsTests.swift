@@ -3,11 +3,11 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
-import Quick
-import Nimble
-import RxSwift
 @testable import DRNear
+import Nimble
+import Quick
+import RxSwift
+import UIKit
 //swiftlint:disable all
 class SimpleObjectsTests: QuickSpec {
     override func spec() {

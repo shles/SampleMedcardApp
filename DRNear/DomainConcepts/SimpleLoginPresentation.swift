@@ -4,9 +4,9 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
 import SnapKit
+import UIKit
 
 class SimpleLoginPresentation: Presentation {
 
@@ -21,9 +21,9 @@ class SimpleLoginPresentation: Presentation {
 
     private let authority: Authority
     private let disposeBag = DisposeBag()
-    private let leadingTo: (Token)->(UIViewController)
+    private let leadingTo: (Token) -> (UIViewController)
 
-    init(authority: Authority, leadingTo: @escaping (Token)->(UIViewController)) {
+    init(authority: Authority, leadingTo: @escaping (Token) -> (UIViewController)) {
         self.authority = authority
         self.leadingTo = leadingTo
 
@@ -43,7 +43,6 @@ class SimpleLoginPresentation: Presentation {
 
         view.backgroundColor = .white
         view.addSubview(stack)
-
 
         stack.snp.makeConstraints {
             $0.top.equalToSuperview().offset(200)

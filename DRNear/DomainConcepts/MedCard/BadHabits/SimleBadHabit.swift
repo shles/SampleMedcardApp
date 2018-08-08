@@ -11,7 +11,7 @@ class SimpleBadHabit: BadHabit {
     var name: String = "Курение"
     var identification: String = "123"
     private var selectableVariable = Variable<Bool>(true)
-    
+
     var isSelected: Observable<Bool> {
         return selectableVariable.asObservable()
     }
@@ -21,4 +21,3 @@ class SimpleBadHabit: BadHabit {
     }
 
 }
-
