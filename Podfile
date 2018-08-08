@@ -2,7 +2,6 @@ target 'DRNear' do
     use_frameworks!
     inhibit_all_warnings!
     
-    
     #Rx
     pod 'RxSwift'
     pod 'RxDataSources'
@@ -12,6 +11,8 @@ target 'DRNear' do
     
     #Linter
     pod 'SwiftLint'
+    
+    pod 'JWTDecode', '~> 2.1'
     
     target 'DRNearTests' do
         inherit! :search_paths

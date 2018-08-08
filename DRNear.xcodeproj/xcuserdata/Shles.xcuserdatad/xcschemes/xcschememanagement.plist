@@ -9,35 +9,35 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
-		<key>DRNearTests.xcscheme</key>
+		<key>AuthorizationTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
-		<key>AuthorizationTests.xcscheme</key>
+		<key>MedCardTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
-		<key>MedCardTests.xcscheme</key>
+		<key>BadHabitsTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
-		<key>BadHabitsTests.xcscheme</key>
+		<key>SimpleObjectsTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>SimpleObjectsTests.xcscheme</key>
+		<key>ApplicationTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />

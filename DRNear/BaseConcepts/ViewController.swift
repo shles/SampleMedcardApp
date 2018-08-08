@@ -13,7 +13,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private let presentation: Presentation
+    let presentation: Presentation
     private var disposeBag = DisposeBag()
 
     init(presentation: Presentation) {
@@ -37,7 +37,9 @@ class ViewController: UIViewController {
             self.present($0, animated: true)
         }).disposed(by: disposeBag)
 
-        presentation.wantsToPush().subscribe(onNext: { [unowned self] in
+        presentation.wantsToPush()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [unowned self] in
             self.navigationController?.pushViewController($0, animated: true)
         }).disposed(by: disposeBag)
 

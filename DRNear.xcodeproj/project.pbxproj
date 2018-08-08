@@ -31,10 +31,12 @@
 		4C28770423B6DC3A32B87FF6 /* BadHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28708164D19C6484F6778A /* BadHabit.swift */; };
 		4C287737CA37EE6D4060A5AE /* ObservableMedCardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F6DE8AEF4DCC86C7523 /* ObservableMedCardOptions.swift */; };
 		4C28787EBB9E4F86631EA0B9 /* SimpleLoginPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879984397062B701A567F /* SimpleLoginPresentation.swift */; };
+		4C28792FCEF04FBBAE261330 /* TokenFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287A3E4DFC5B130F138827 /* TokenFromString.swift */; };
 		4C2879DC948AEE515F8B9DD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879733193AD7FA725432E /* ViewController.swift */; };
 		4C2879E05A8BFAFBBEAA4AE9 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F509B7CA418A115AA25 /* Presentation.swift */; };
 		4C287A0CEADD4CB6EF894F6B /* StandardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870561AEE2D09B03DBC5C /* StandardSectionModel.swift */; };
 		4C287AB142304A462D5C63CD /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */; };
+		4C287AC41A84A24BAEB0A4D3 /* AuthorityFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2872F1F204BEE3C6FA51EB /* AuthorityFromAPI.swift */; };
 		4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */; };
 		4C287B1C1803BEA891C7F6C8 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28718B6BD4A50B4C73816A /* Credentials.swift */; };
 		4C287B5806EB12133B0235AB /* BadHabitsTableViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871B627B8F784AE50AADB /* BadHabitsTableViewPresentation.swift */; };
@@ -42,6 +44,7 @@
 		4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */; };
 		4C287C51F69D83D3DBF1996D /* SimpleMedCardOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287A5209A2005098B8E1A3 /* SimpleMedCardOption.swift */; };
 		4C287CD2EA6A62A2DEDC8A5F /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287B837731B07089B235E7 /* Selectable.swift */; };
+		4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879CBC781343E41611DD3 /* AppicationTests.swift */; };
 		4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875D5613F94AC1657CBD4 /* Interactive.swift */; };
 		4C287D453B54426DE1B75C57 /* SimleBadHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28785D2684530B7533ACA7 /* SimleBadHabit.swift */; };
 		4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */; };
@@ -89,6 +92,7 @@
 		4C2871B627B8F784AE50AADB /* BadHabitsTableViewPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitsTableViewPresentation.swift; sourceTree = "<group>"; };
 		4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C2872D5A6262A16D8E07C6A /* MedCardOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptions.swift; sourceTree = "<group>"; };
+		4C2872F1F204BEE3C6FA51EB /* AuthorityFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityFromAPI.swift; sourceTree = "<group>"; };
 		4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionFrom.swift; sourceTree = "<group>"; };
 		4C28737122D5A6DB17D380A3 /* TransitionSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSource.swift; sourceTree = "<group>"; };
 		4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionApplicableToCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -108,7 +112,9 @@
 		4C2879733193AD7FA725432E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationTests.swift; sourceTree = "<group>"; };
 		4C2879984397062B701A567F /* SimpleLoginPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleLoginPresentation.swift; sourceTree = "<group>"; };
+		4C2879CBC781343E41611DD3 /* AppicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppicationTests.swift; sourceTree = "<group>"; };
 		4C287A15A07A292181CB033E /* BadHabitApplicableToTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitApplicableToTableViewCell.swift; sourceTree = "<group>"; };
+		4C287A3E4DFC5B130F138827 /* TokenFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenFromString.swift; sourceTree = "<group>"; };
 		4C287A5209A2005098B8E1A3 /* SimpleMedCardOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMedCardOption.swift; sourceTree = "<group>"; };
 		4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		4C287B837731B07089B235E7 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
@@ -216,6 +222,8 @@
 				4C287E1BC768B524294D7C42 /* SimpleCodeConfirmationPresentation.swift */,
 				4C287C8D033CBDA225A7D98F /* SimpleAuthority.swift */,
 				4C287D34DF418020E12D3E60 /* EmptyToken.swift */,
+				4C2872F1F204BEE3C6FA51EB /* AuthorityFromAPI.swift */,
+				4C287A3E4DFC5B130F138827 /* TokenFromString.swift */,
 			);
 			path = DomainConcepts;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 				4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */,
 				4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */,
 				4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */,
+				4C2879CBC781343E41611DD3 /* AppicationTests.swift */,
 			);
 			path = DRNearTests;
 			sourceTree = "<group>";
@@ -612,6 +621,8 @@
 				4C28765411D4406E3EB869B8 /* SimpleCodeConfirmationPresentation.swift in Sources */,
 				4C2876CD9E69B7C53F9A8511 /* SimpleAuthority.swift in Sources */,
 				4C2873285F2259314C652EB5 /* EmptyToken.swift in Sources */,
+				4C287AC41A84A24BAEB0A4D3 /* AuthorityFromAPI.swift in Sources */,
+				4C28792FCEF04FBBAE261330 /* TokenFromString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +635,7 @@
 				4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */,
 				4C28754E684C658153CD4A90 /* IdentificationTests.swift in Sources */,
 				4C287234773E4E2458246776 /* SimpleObjectsTests.swift in Sources */,
+				4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

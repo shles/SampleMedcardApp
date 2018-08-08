@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navContgroller = UINavigationController(
                 rootViewController:
-                ViewController(presentation: SimpleLoginPresentation(authority: SimpleAuthority(), leadingTo: { _ in ViewController(
+                ViewController(presentation: SimpleLoginPresentation(authority: AuthorityFromAPI(), leadingTo: { _ in
+                    ViewController(
                 presentation: MedCardCollectionViewPresentation(
                         medCardOptions: MedCardFrom(
                                 options: [
