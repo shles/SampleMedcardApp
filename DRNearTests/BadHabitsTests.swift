@@ -32,6 +32,10 @@ class BadHabitsTests: QuickSpec {
                     var navVC = UINavigationController(rootViewController: vc)
                     navVC.pushViewController(ViewController(presentation: badHabitsPresentation), animated: false)
 
+                    UIApplication.shared.keyWindow!.rootViewController = navVC
+                    navVC.preloadView()
+                    vc.preloadView()
+
                     (badHabitsPresentation as! BadHabitsTableViewPresentation).simulateBackTap()
 
                     expect(vc).to(equal(navVC.viewControllers.first!))

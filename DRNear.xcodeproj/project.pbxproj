@@ -776,7 +776,8 @@
 			baseConfigurationReference = E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W9HXCUL7KS;
 				INFOPLIST_FILE = DRNear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -785,6 +786,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "966ea0ff-316f-4da0-9c42-d042464146ee";
+				PROVISIONING_PROFILE_SPECIFIER = DoctorNEarDevelopment;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -795,7 +798,8 @@
 			baseConfigurationReference = DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W9HXCUL7KS;
 				INFOPLIST_FILE = DRNear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -804,6 +808,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "966ea0ff-316f-4da0-9c42-d042464146ee";
+				PROVISIONING_PROFILE_SPECIFIER = DoctorNEarDevelopment;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

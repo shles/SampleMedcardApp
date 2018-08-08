@@ -21,6 +21,7 @@ class MedCardTests: QuickSpec {
         var medCard: MedCard!
         var medCardPresentation: Presentation!
         var disposeBag: DisposeBag!
+        var medCArdViewcontroller: UIViewController!
 
         beforeEach {
             viewController = UIViewController()
@@ -33,19 +34,27 @@ class MedCardTests: QuickSpec {
             medCard = MedCardFrom(options: [option])
             medCardPresentation = MedCardCollectionViewPresentation(medCardOptions: medCard)
             disposeBag = DisposeBag()
+            medCArdViewcontroller = ViewController(presentation: medCardPresentation)
         }
 
         describe("MedCard presentation") {
             context("when one of it's options interacted") {
                 it("should want push view") {
-
+                    
                     var vc: UIViewController!
                     
                     medCardPresentation.wantsToPush().subscribe(onNext: {
                         vc = $0
-                    })
+                        
+                        UIApplication.shared.keyWindow!.rootViewController = vc
+                        vc.preloadView()
+
+                    }).disposed(by: disposeBag)
+                    UIApplication.shared.keyWindow!.rootViewController = medCArdViewcontroller
+
+                    medCArdViewcontroller.preloadView()
                     option.interact()
-                    expect(vc).to(equal(viewController))
+                    expect(vc.view).to(equal(viewController.view))
                 }
             }
         }

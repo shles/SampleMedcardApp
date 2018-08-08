@@ -20,6 +20,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
     private let medCardOptions: MedCard
 
     private let navBar = SimpleNavigationBar(title: "Медицинская карта")
+    .with(rightInactiveButton: UIButton().with(image: #imageLiteral(resourceName: "chatIcon")))
 
     init(medCardOptions: MedCard) {
 
@@ -44,14 +45,17 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
             $0.top.equalTo(navBar.snp.bottom)
         }
 
-        let dataSource = RxCollectionViewSectionedReloadDataSource<StandardSectionModel<MedCardOption>>(
+        let dataSource = RxCollectionViewSectionedReloadDataSource<StandardSectionModel<MedCardOptionApplicableToCollectionViewCell>>(
                 configureCell: { ds, cv, ip, option in
                     let cell = cv.dequeueReusableCellOfType(MedCardOptionCollectionViewCell.self, for: ip)
-                    MedCardOptionApplicableToCollectionViewCell(origin: option).apply(target: cell)
+                    option.apply(target: cell)
                     return cell
         })
 
         self.medCardOptions.options()
+            .map {
+                $0.map { MedCardOptionApplicableToCollectionViewCell(origin: $0) }
+            }
             .map {
                 [StandardSectionModel(items: $0)]
             }

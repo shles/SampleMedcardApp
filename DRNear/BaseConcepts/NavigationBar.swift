@@ -27,6 +27,15 @@ class SimpleNavigationBar: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("Storyboards are deprecated!")
     }
+    
+    func with(rightInactiveButton button: UIButton ) -> Self {
+        addSubview(button)
+        button.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.centerY.equalTo(titleLabel)
+        }
+        return self
+    }
 }
 
 class NavigationBarWithBackButton: UIView, TransitionSource {
@@ -85,6 +94,15 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
             $0.edges.equalToSuperview()
         }
         titleLabel.textColor = .white
+        return self
+    }
+
+    func with(rightInactiveButton button: UIButton ) -> Self {
+        addSubview(button)
+        button.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.centerY.equalTo(titleLabel)
+        }
         return self
     }
 

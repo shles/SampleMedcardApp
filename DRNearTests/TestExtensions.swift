@@ -29,3 +29,9 @@ extension SimpleViewWthButtonPresentation {
                 .sendActions(for: .touchUpInside)
     }
 }
+
+extension UIViewController {
+    func preloadView() {
+        let _ = self.view
+    }
+}

@@ -18,6 +18,7 @@ class BadHabitsTableViewPresentation: Presentation {
     private let habits: ObservableBadHabits
     private let navBar = NavigationBarWithBackButton(title: "Вредные привычки")
         .with(gradient: [.wheatTwo, .rosa])
+        .with(rightInactiveButton: UIButton().with(image: #imageLiteral(resourceName: "addIcon")))
 
     init(observableHabits: ObservableBadHabits) {
 
