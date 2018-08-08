@@ -32,7 +32,9 @@ class SimpleCodeConfirmationPresentation: Presentation {
         stack.spacing = 16
         stack.alignment = .fill
         stack.axis = .vertical
-
+        
+        passwordField.keyboardType = .numberPad
+        passwordField.autocorrectionType = .no
         passwordField.borderStyle = .roundedRect
 
         view.backgroundColor = .white

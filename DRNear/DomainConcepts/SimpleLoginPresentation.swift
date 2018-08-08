@@ -40,7 +40,10 @@ class SimpleLoginPresentation: Presentation {
 
         loginField.borderStyle = .roundedRect
         passwordField.borderStyle = .roundedRect
-
+        passwordField.autocorrectionType = .no
+        loginField.autocorrectionType = .no
+        loginField.autocapitalizationType = .none
+        passwordField.autocapitalizationType = .none
         view.backgroundColor = .white
         view.addSubview(stack)
 
