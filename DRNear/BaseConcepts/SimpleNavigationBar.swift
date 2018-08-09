@@ -46,6 +46,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
 
     private var backButton = UIButton()
             .with(image: #imageLiteral(resourceName: "backIcon"))
+            .with(contentMode: .center)
 
     init(title: String) {
         titleLabel.text = title
@@ -56,10 +57,10 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
             $0.top.equalToSuperview().offset(48)
         }
         backButton.snp.makeConstraints {
-            $0.lastBaseline.equalTo(titleLabel)
+            $0.centerY.equalTo(titleLabel)
             $0.leading.equalToSuperview().offset(16)
-            $0.height.equalTo(18)
-            $0.width.equalTo(12)
+            $0.height.equalTo(27)
+            $0.width.equalTo(18)
         }
         backgroundColor = .white
     }
