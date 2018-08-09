@@ -38,7 +38,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
         view.addSubviews([navBar, collectionView])
         navBar.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.height.equalTo(120)
+            $0.height.equalTo(100)
         }
         collectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
@@ -119,7 +119,7 @@ extension MedCardCollectionViewPresentation {
         view.addSubview(tabBarImageView)
         tabBarImageView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(81)
+            $0.height.equalTo(67)
         }
 
         collectionView.snp.remakeConstraints { [unowned self] in
