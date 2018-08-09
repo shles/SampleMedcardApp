@@ -119,7 +119,7 @@ extension MedCardCollectionViewPresentation {
         view.addSubview(tabBarImageView)
         tabBarImageView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(67)
+            $0.height.equalTo(49)
         }
 
         collectionView.snp.remakeConstraints { [unowned self] in
