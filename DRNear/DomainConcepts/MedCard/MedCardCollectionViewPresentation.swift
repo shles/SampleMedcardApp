@@ -46,11 +46,11 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
         }
 
         let dataSource = RxCollectionViewSectionedReloadDataSource<StandardSectionModel<MedCardOptionApplicableToCollectionViewCell>>(
-                configureCell: { ds, cv, ip, option in
+                configureCell: { _, cv, ip, option in
                     let cell = cv.dequeueReusableCellOfType(MedCardOptionCollectionViewCell.self, for: ip)
                     option.apply(target: cell)
                     return cell
-        })
+                })
 
         self.medCardOptions.options()
             .map {
@@ -117,10 +117,9 @@ extension MedCardCollectionViewPresentation {
                                 .with(backgroundColor: .white)
 
         view.addSubview(tabBarImageView)
-
         tabBarImageView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(108)
+            $0.height.equalTo(81)
         }
 
         collectionView.snp.remakeConstraints { [unowned self] in

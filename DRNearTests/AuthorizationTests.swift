@@ -7,10 +7,11 @@
 import Foundation
 import Nimble
 import Quick
-import XCTest
 import RxSwift
+import XCTest
 
-class AuthorizationTests: QuickSpec {
+//swiftlint:disable all
+class SimpleAuthorizationTests: QuickSpec {
 
     override func spec() {
         describe("Authority") {
@@ -28,7 +29,7 @@ class AuthorizationTests: QuickSpec {
                 cred = CredentialsFrom(login: "admin", password: "1234")
                 var token: Token?
 
-                authority.authenticated().subscribe(onNext: {
+                authority.authenticate().subscribe(onNext: {
                     token = $0
                 }).disposed(by: disposeBag)
                 authority.authWith(credentials: cred)
@@ -48,7 +49,7 @@ class AuthorizationTests: QuickSpec {
                 it("auth's after confirmation") {
                     var token: Token?
 
-                    authority.authenticated().subscribe(onNext: {
+                    authority.authenticate().subscribe(onNext: {
                         token = $0
                     }).disposed(by: disposeBag)
                     authority.confirm(code: "1234")
@@ -58,3 +59,42 @@ class AuthorizationTests: QuickSpec {
         }
     }
 }
+
+class APIAuthorizationTests: QuickSpec {
+
+    override func spec() {
+        describe("Authority") {
+            var authority: Authority!
+            var disposeBag: DisposeBag!
+            var cred: Credentials!
+            beforeEach {
+                authority = AuthorityFromAPI()
+                disposeBag = DisposeBag()
+                cred = CredentialsFrom(login: "user", password: "SinlionBest!")
+
+            }
+            it("returns token with 'admin' login") {
+
+                cred = CredentialsFrom(login: "admin", password: "38Gjgeuftd!")
+
+                authority.authWith(credentials: cred)
+
+                 XCTAssertNil(try? authority.authenticate().toBlocking(timeout: 5).first())
+            }
+            context("with other login") {
+                it("asks to confirm code") {
+                    
+                    authority.authWith(credentials: cred)
+                    XCTAssertNil(try? authority.wantsTFAuth().toBlocking(timeout: 5).first())
+                }
+                it("auth's after confirmation") {
+                    
+                    authority.confirm(code: "0114")
+                    XCTAssertNil(try? authority.authenticate().toBlocking(timeout: 5).first())
+
+                }
+            }
+        }
+    }
+}
+//swiftlint:enable all

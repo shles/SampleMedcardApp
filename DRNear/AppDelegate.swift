@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navContgroller = UINavigationController(
                 rootViewController:
-                ViewController(presentation: SimpleLoginPresentation(authority: AuthorityFromAPI(), leadingTo: { _ in
+                ViewController(presentation: SimpleLoginPresentation(authority: AuthorityFromAPI(), leadingTo: { token in
                     ViewController(
                 presentation: MedCardCollectionViewPresentation(
                         medCardOptions: MedCardFrom(
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.rosa, .wheatTwo],
                                             leadingTo: ViewController(
                                                     presentation: BadHabitsTableViewPresentation(
-                                                            observableHabits: SimpleObservableBadHabits()
+                                                            observableHabits: ObservableBadHabitsFromAPI(token: token)
                                                     )
                                             )
                                     ),

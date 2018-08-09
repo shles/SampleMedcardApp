@@ -30,7 +30,7 @@ class BadHabitsTests: QuickSpec {
                     var vc = UIViewController()
                     var navVC = UINavigationController(rootViewController: vc)
                     navVC.pushViewController(ViewController(presentation: badHabitsPresentation), animated: false)
-                    
+
                     UIApplication.shared.keyWindow!.rootViewController = navVC
                     navVC.preloadView()
                     vc.preloadView()

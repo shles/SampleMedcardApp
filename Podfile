@@ -14,6 +14,8 @@ target 'DRNear' do
     
     pod 'JWTDecode', '~> 2.1'
     
+    pod 'Alamofire'
+    
     target 'DRNearTests' do
         inherit! :search_paths
         

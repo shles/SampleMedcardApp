@@ -70,7 +70,7 @@ class MedCardOptionCollectionViewCell: UICollectionViewCell {
         }
         set {
             super.isHighlighted = newValue
-            UIView.animate(withDuration: 0.2) { [weak self] in
+            UIView.animate(withDuration: 0.1) { [weak self] in
                 self?.shadowView.alpha = newValue ? 1 : 0
                 self?.innerView.layer.borderWidth = newValue ? 0 : 1
             }

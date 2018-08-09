@@ -36,13 +36,14 @@ class BadHabitsTableViewPresentation: Presentation {
         }
 
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<BadHabitApplicableToTableViewCell>>(
-                configureCell: { ds, tv, ip, habit in
+                configureCell: { _, tv, ip, habit in
                     let cell = tv.dequeueReusableCellOfType(SimpleTickedCell.self, for: ip)
                     habit.apply(target: cell)
                     return cell
                 })
 
         habits.asObservable()
+            .catchErrorJustReturn([])
             .map { $0.map { BadHabitApplicableToTableViewCell(origin: $0) } }
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))

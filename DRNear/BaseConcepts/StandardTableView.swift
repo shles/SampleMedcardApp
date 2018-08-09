@@ -20,8 +20,8 @@ class StandardTableView: UITableView {
         separatorInset = .init(top: 0, left: 16, bottom: 0, right: 0)
         separatorColor = .shadow
 
-        rx.itemSelected.subscribe(onNext: { [unowned self] ip in
-            self.deselectRow(at: ip, animated: true)
+        rx.itemSelected.subscribe(onNext: { [unowned self] index in
+            self.deselectRow(at: index, animated: true)
         }).disposed(by: disposeBag)
 
         tableFooterView = footerView

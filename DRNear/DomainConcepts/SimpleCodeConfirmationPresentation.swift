@@ -26,13 +26,13 @@ class SimpleCodeConfirmationPresentation: Presentation {
 
         let label = UILabel()
                 .with(numberOfLines: 0)
-                .with(text: "Use any code")
+                .with(text: "Use code '0114'")
                 .with(textColor: .lightGray)
         let stack = UIStackView(arrangedSubviews: [passwordField, button, label])
         stack.spacing = 16
         stack.alignment = .fill
         stack.axis = .vertical
-        
+
         passwordField.keyboardType = .numberPad
         passwordField.autocorrectionType = .no
         passwordField.borderStyle = .roundedRect
@@ -46,6 +46,16 @@ class SimpleCodeConfirmationPresentation: Presentation {
 
         }
 
+        button.rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in
+            self.button.backgroundColor = self.button.backgroundColor?.withAlphaComponent(0.5)
+            self.button.titleLabel?.alpha = 0.8
+        }).disposed(by: disposeBag)
+
+        button.rx.controlEvent([.touchCancel, .touchUpOutside, .touchUpInside]).subscribe(onNext: { [unowned self] in
+            self.button.backgroundColor = self.button.backgroundColor?.withAlphaComponent(1)
+            self.button.titleLabel?.alpha = 1
+        }).disposed(by: disposeBag)
+
         button.rx.tap
                 .subscribe(onNext: { [unowned self] in
                     self.authority.confirm(code: self.passwordField.text ?? "")
@@ -54,7 +64,7 @@ class SimpleCodeConfirmationPresentation: Presentation {
     }
 
     func wantsToPush() -> Observable<UIKit.UIViewController> {
-        return authority.authenticated().map { [unowned self] in self.leadingTo($0) }
+        return authority.authenticate().map { [unowned self] in self.leadingTo($0) }
     }
 
     func wantsToPresent() -> Observable<UIKit.UIViewController> {

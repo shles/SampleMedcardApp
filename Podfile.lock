@@ -1,5 +1,7 @@
 PODS:
+  - Alamofire (4.7.3)
   - Differentiator (3.0.2)
+  - JWTDecode (2.1.1)
   - Nimble (7.1.3)
   - Quick (1.3.1)
   - RxBlocking (4.2.0):
@@ -17,6 +19,8 @@ PODS:
   - SwiftLint (0.26.0)
 
 DEPENDENCIES:
+  - Alamofire
+  - JWTDecode (~> 2.1)
   - Nimble
   - Quick
   - RxBlocking
@@ -28,7 +32,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - Differentiator
+    - JWTDecode
     - Nimble
     - Quick
     - RxBlocking
@@ -40,7 +46,9 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
   RxBlocking: e339d8a6e752e25ade95ff858466c55436668f59
@@ -51,6 +59,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
 
-PODFILE CHECKSUM: dabc15dfc62109c2cefddb59cf1a0b9236bfa0be
+PODFILE CHECKSUM: b127959220f8cbe62681cc5cfd427813182d44ce
 
 COCOAPODS: 1.5.3

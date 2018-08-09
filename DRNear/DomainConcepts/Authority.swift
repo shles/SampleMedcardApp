@@ -9,7 +9,7 @@ import RxSwift
 protocol Authority {
 
     func wantsTFAuth() -> Observable<Authority>
-    func authenticated() -> Observable<Token>
+    func authenticate() -> Observable<Token>
 
     func authWith(credentials: Credentials)
 

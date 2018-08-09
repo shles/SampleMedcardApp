@@ -15,7 +15,7 @@ class SimpleAuthority: Authority {
         return codeSubject.asObservable().map { self }
     }
 
-    func authenticated() -> Observable<Token> {
+    func authenticate() -> Observable<Token> {
         return authSubject.asObservable().map { EmptyToken() }
     }
 

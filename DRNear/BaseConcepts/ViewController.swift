@@ -30,8 +30,10 @@ class ViewController: UIViewController {
 
         view.addSubview(presentation.view)
         presentation.view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
+        view.backgroundColor = .white
 
         presentation.wantsToPresent().subscribe(onNext: { [unowned self] in
             self.present($0, animated: true)
@@ -52,6 +54,8 @@ class ViewController: UIViewController {
         }).disposed(by: disposeBag)
 
         presentation.willAppear()
+
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
     }
 

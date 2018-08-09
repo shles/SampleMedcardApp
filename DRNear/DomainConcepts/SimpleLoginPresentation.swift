@@ -14,8 +14,7 @@ class SimpleLoginPresentation: Presentation {
     private var button = UIButton()
         .with(title: "Войти")
         .with(backgroundColor: .black)
-    private var loginField = UITextField()
-        .with(placeholder: "Login")
+    private var loginField: UITextField
     private var passwordField = UITextField()
             .with(placeholder: "Password")
 
@@ -27,9 +26,14 @@ class SimpleLoginPresentation: Presentation {
         self.authority = authority
         self.leadingTo = leadingTo
 
+        loginField = UITextField()
+            .with(placeholder: "Login")
+            .with(next: passwordField, disposeBag: disposeBag)
+        .with(resignOn: [.editingDidEnd, .editingDidEndOnExit], disposeBag: disposeBag)
+
         let label = UILabel()
             .with(numberOfLines: 0)
-            .with(text: "To login as admin, use 'admin' and any password. To login as user, use any credentials")
+            .with(text: "To login as admin, use 'admin' and password '38Gjgeuftd!'. To login as user, use login 'user' and password 'SiblionBest!'")
             .with(textColor: .lightGray)
 
         let stack = UIStackView(arrangedSubviews: [loginField, passwordField, button, label])
@@ -62,6 +66,16 @@ class SimpleLoginPresentation: Presentation {
             self.authority.authWith(credentials: $0)
         })
         .disposed(by: disposeBag)
+
+        button.rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in
+            self.button.backgroundColor = self.button.backgroundColor?.withAlphaComponent(0.5)
+            self.button.titleLabel?.alpha = 0.8
+        }).disposed(by: disposeBag)
+
+        button.rx.controlEvent([.touchCancel, .touchUpOutside, .touchUpInside]).subscribe(onNext: { [unowned self] in
+            self.button.backgroundColor = self.button.backgroundColor?.withAlphaComponent(1)
+            self.button.titleLabel?.alpha = 1
+        }).disposed(by: disposeBag)
     }
 
     func wantsToPush() -> Observable<UIViewController> {
@@ -69,7 +83,7 @@ class SimpleLoginPresentation: Presentation {
                 authority.wantsTFAuth().map {
                     ViewController(presentation: SimpleCodeConfirmationPresentation(authority: $0, leadingTo: self.leadingTo))
                 },
-                authority.authenticated().map { [unowned self] in
+                authority.authenticate().map { [unowned self] in
                     self.leadingTo($0)
                 }
             ]

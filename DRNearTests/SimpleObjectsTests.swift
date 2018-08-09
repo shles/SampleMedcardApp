@@ -34,6 +34,20 @@ class SimpleObjectsTests: QuickSpec {
                 }
             }
         }
+        describe("simple presentation") {
+            it("should present") {
+                let presentation = SimpleViewWthButtonPresentation()
+                let vc = ViewController(presentation: presentation)
+                vc.preloadView()
+                var newVC: UIViewController!
+                presentation.wantsToPresent().subscribe(onNext: {
+                    newVC = $0
+                })
+                vc.view.subviews.first(where: { $0 is UIButton }).flatMap { $0 as? UIButton }?.sendActions(for: .touchUpInside)
+
+                XCTAssertNil(newVC)
+            }
+        }
     }
     //swiftlint:enable all
 }
