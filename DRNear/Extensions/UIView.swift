@@ -56,4 +56,15 @@ extension UIView {
         return self
     }
 
+    func with(gradient colors: [UIColor]) -> Self {
+        let gradientView = GradientView()
+        addSubview(gradientView)
+        sendSubview(toBack: gradientView)
+        gradientView.setColors(colors)
+        gradientView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        return self
+    }
+
 }

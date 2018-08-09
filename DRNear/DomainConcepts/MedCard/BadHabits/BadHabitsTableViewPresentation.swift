@@ -15,24 +15,19 @@ class BadHabitsTableViewPresentation: Presentation {
     private var tableView = StandardTableView()
     private let disposeBag = DisposeBag()
 
-    private let habits: ObservableBadHabits
-    private let navBar = NavigationBarWithBackButton(title: "Вредные привычки")
-        .with(gradient: [.wheatTwo, .rosa])
-        .with(rightInactiveButton: UIButton().with(image: #imageLiteral(resourceName: "addIcon")))
+    let habits: ObservableBadHabits
+
+    private let refreshSubject = PublishSubject<Void>()
 
     init(observableHabits: ObservableBadHabits) {
 
-        self.habits = observableHabits
+        self.habits = RefreshableBadHabits(origin: observableHabits, refreshOn: refreshSubject)
 
-        view.addSubviews([navBar, tableView])
+        view.addSubviews([tableView])
 
-        navBar.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-            $0.height.equalTo(120)
-        }
         tableView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(navBar.snp.bottom)
+            $0.edges.equalToSuperview()
+
         }
 
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<BadHabitApplicableToTableViewCell>>(
@@ -42,12 +37,16 @@ class BadHabitsTableViewPresentation: Presentation {
                     return cell
                 })
 
-        habits.asObservable()
+        self.habits.asObservable().debug()
             .catchErrorJustReturn([])
             .map { $0.map { BadHabitApplicableToTableViewCell(origin: $0) } }
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+
+        tableView.rx.modelSelected(BadHabit.self).subscribe(onNext: { habit in
+            habit.select()
+        }).disposed(by: disposeBag)
 
     }
 
@@ -56,11 +55,11 @@ class BadHabitsTableViewPresentation: Presentation {
     }
 
     func wantsToPresent() -> Observable<UIViewController> {
-        return Observable<UIViewController>.never()
+        return Observable.never()
     }
 
     func wantsToPop() -> Observable<Void> {
-        return navBar.wantsToPop()
+        return Observable.never()
     }
 
     func wantsToBeDismissed() -> Observable<Void> {
@@ -68,6 +67,6 @@ class BadHabitsTableViewPresentation: Presentation {
     }
 
     func willAppear() {
-
+        refreshSubject.onNext(())
     }
 }

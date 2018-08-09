@@ -42,7 +42,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
 
     private var titleLabel = UILabel()
             .with(font: .navigatoinLarge)
-            .with(textColor: .mainText)
+            .with(textColor: .white)
 
     private var backButton = UIButton()
             .with(image: #imageLiteral(resourceName: "backIcon"))
@@ -85,19 +85,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
         return Observable<Void>.never()
     }
 
-    func with(gradient colors: [UIColor]) -> Self {
-        let gradientView = GradientView()
-        addSubview(gradientView)
-        sendSubview(toBack: gradientView)
-        gradientView.setColors(colors)
-        gradientView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        titleLabel.textColor = .white
-        return self
-    }
-
-    func with(rightInactiveButton button: UIButton ) -> Self {
+    func with(rightInactiveButton button: UIButton) -> Self {
         addSubview(button)
         button.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)

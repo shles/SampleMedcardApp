@@ -68,8 +68,11 @@ class ApplicationTests: QuickSpec {
                         .flatMap { $0 as? UIButton }?
                         .sendActions(for: .touchUpInside)
                     }
-                    
-                    XCTAssertNil(try? (loginVC as? ViewController)?.presentation.wantsToPush().toBlocking(timeout:5).first())
+                
+                    let vc = try? (loginVC as? ViewController)?.presentation.wantsToPush().toBlocking(timeout:5).first()
+                    vc??.preloadView()
+                
+                    XCTAssertNil(vc)
                 
             }
 

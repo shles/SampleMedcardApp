@@ -51,7 +51,7 @@ class SimpleTickedCell: UITableViewCell {
 
     func configure(item: Named & Selectable) {
         title.text = item.name
-        item.isSelected.subscribe(onNext: { [unowned self] in
+        item.isSelected.asObservable().subscribe(onNext: { [unowned self] in
             self.tick.isHidden = !$0
         }).disposed(by: disposeBag)
     }

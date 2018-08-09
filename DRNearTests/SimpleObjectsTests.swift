@@ -30,7 +30,7 @@ class SimpleObjectsTests: QuickSpec {
                 it("should become deselected") {
                     badHabit.select()
 
-                    expect(try! badHabit.isSelected.toBlocking().first()!).to(be(false))
+                    expect(try! badHabit.isSelected.asObservable().toBlocking().first()!).to(be(false))
                 }
             }
         }

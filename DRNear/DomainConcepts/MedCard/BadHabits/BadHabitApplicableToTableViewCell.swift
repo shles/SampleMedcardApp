@@ -26,11 +26,11 @@ class BadHabitApplicableToTableViewCell: Applicable, BadHabit {
     var identification: String {
         return origin.identification
     }
-    var isSelected: Observable<Bool> {
+    var isSelected: Variable<Bool> {
         return origin.isSelected
     }
 
     func select() {
-
+        origin.select()
     }
 }

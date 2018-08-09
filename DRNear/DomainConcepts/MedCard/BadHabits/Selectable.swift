@@ -7,7 +7,7 @@ import Foundation
 import RxSwift
 
 protocol Selectable {
-    var isSelected: Observable<Bool> { get }
+    var isSelected: Variable<Bool> { get }
 
     func select()
 }

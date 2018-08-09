@@ -10,14 +10,11 @@ class SimpleBadHabit: BadHabit {
 
     var name: String = "Курение"
     var identification: String = "123"
-    private var selectableVariable = Variable<Bool>(true)
 
-    var isSelected: Observable<Bool> {
-        return selectableVariable.asObservable()
-    }
+    var isSelected = Variable<Bool>(true)
 
     func select() {
-        selectableVariable.value = !selectableVariable.value
+        isSelected.value = !isSelected.value
     }
 
 }

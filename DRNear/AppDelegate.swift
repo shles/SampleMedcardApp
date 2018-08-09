@@ -30,8 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             ),
                                             gradientColors: [.rosa, .wheatTwo],
                                             leadingTo: ViewController(
-                                                    presentation: BadHabitsTableViewPresentation(
-                                                            observableHabits: ObservableBadHabitsFromAPI(token: token)
+                                                    presentation: MyBadHabitsPresentation(
+                                                            badHabits: ObservableMyBadHabitsFromAPI(token: token),
+                                                            leadingTo: { return ViewController(
+                                                                    presentation: AllBadHabitsPresentation(
+                                                                            badHabits: ObservableBadHabitsFromAPI(token: token)
+                                                                    )
+                                                            )}
                                                     )
                                             )
                                     ),
