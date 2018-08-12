@@ -78,31 +78,20 @@ class SimpleLoginPresentation: Presentation {
         }).disposed(by: disposeBag)
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return Observable<UIViewController>.merge([
-                authority.wantsTFAuth().map {
-                    ViewController(presentation: SimpleCodeConfirmationPresentation(authority: $0, leadingTo: self.leadingTo))
-                },
-                authority.authenticate().map { [unowned self] in
-                    self.leadingTo($0)
-                }
-            ]
-        )
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable.never()
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return Observable.never()
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable.never()
-    }
-
     func willAppear() {
         loginField.becomeFirstResponder()
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return Observable<Transition>.merge([
+            authority.wantsTFAuth().map { [unowned self] authority in
+                PushTransition(leadingTo: {
+                    ViewController(presentation: SimpleCodeConfirmationPresentation(authority: authority, leadingTo: self.leadingTo))
+                })
+            },
+            authority.authenticate().map { [unowned self]  token in
+                NewWindowRootControllerTransition(leadingTo: { self.leadingTo(token) })
+            }
+        ])
     }
 }

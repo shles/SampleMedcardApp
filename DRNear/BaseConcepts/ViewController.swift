@@ -35,23 +35,9 @@ class ViewController: UIViewController {
         }
         view.backgroundColor = .white
 
-        presentation.wantsToPresent().subscribe(onNext: { [unowned self] in
-            self.present($0, animated: true)
-        }).disposed(by: disposeBag)
-
-        presentation.wantsToPush()
-                .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { [unowned self] in
-            self.navigationController?.pushViewController($0, animated: true)
-        }).disposed(by: disposeBag)
-
-        presentation.wantsToPop().subscribe(onNext: { [unowned self] in
-            self.navigationController?.popViewController(animated: true)
-        }).disposed(by: disposeBag)
-
-        presentation.wantsToBeDismissed().subscribe(onNext: {
-            self.dismiss(animated: true, completion: nil)
-        }).disposed(by: disposeBag)
+        presentation.wantsToPerform().subscribe(onNext: {
+            $0.perform(on: self)
+        })
 
         presentation.willAppear()
 

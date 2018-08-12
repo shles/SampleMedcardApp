@@ -16,7 +16,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
     private let collectionView: UICollectionView
     private let disposeBag = DisposeBag()
-    private let wantsToPushSubject = PublishSubject<UIViewController>()
+    private let wantsToPushSubject = PublishSubject<Transition>()
     private let medCardOptions: MedCard
 
     private let navBar = SimpleNavigationBar(title: "Медицинская карта")
@@ -70,7 +70,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
         self.medCardOptions.options()
             .flatMap {
-                Observable.merge($0.map { $0.wantsToPush().debug() })
+                Observable.merge($0.map { $0.wantsToPerform() })
             }
             .bind(to: wantsToPushSubject)
             .disposed(by: disposeBag)
@@ -82,29 +82,18 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return wantsToPushSubject.asObservable()
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable<UIViewController>.never()
-    }
-
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2.0 - 16, height: 184)
     }
 
-    func wantsToPop() -> Observable<Void> {
-        return Observable<Void>.never()    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable<Void>.never()
-    }
-
     func willAppear() {
 
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return wantsToPushSubject.asObservable()
     }
 }
 

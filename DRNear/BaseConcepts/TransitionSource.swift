@@ -7,11 +7,10 @@ import Foundation
 import RxSwift
 import UIKit
 
+
+
 protocol TransitionSource {
 
-    func wantsToPush() -> Observable<UIViewController>
-    func wantsToPresent() -> Observable<UIViewController>
-    func wantsToPop() -> Observable<Void>
-    func wantsToBeDismissed() -> Observable<Void>
+    func wantsToPerform() -> Observable<Transition>
 
 }

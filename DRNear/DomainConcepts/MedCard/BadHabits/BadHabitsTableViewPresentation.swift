@@ -50,23 +50,11 @@ class BadHabitsTableViewPresentation: Presentation {
 
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return Observable<UIViewController>.never()
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable.never()
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return Observable.never()
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable<Void>.never()
-    }
-
     func willAppear() {
         refreshSubject.onNext(())
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return Observable.never()
     }
 }

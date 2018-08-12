@@ -69,19 +69,10 @@ class AllBadHabitsPresentation: Presentation {
 
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return Observable.merge([navBar.wantsToPush(),badHabtsPresentation.wantsToPush()])
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable.merge([navBar.wantsToPresent(),badHabtsPresentation.wantsToPresent()])
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return Observable.merge([navBar.wantsToPop(), badHabtsPresentation.wantsToPop(), addButton.rx.tap.asObservable()])
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable.merge([navBar.wantsToBeDismissed(),badHabtsPresentation.wantsToBeDismissed()])
+    func wantsToPerform() -> Observable<Transition> {
+        return Observable.merge([navBar.wantsToPerform(),
+                                 badHabtsPresentation.wantsToPerform(),
+                                 addButton.rx.tap.asObservable().map { PopTransition() }
+        ])
     }
 }

@@ -32,25 +32,13 @@ class SimpleViewWthButtonPresentation: Presentation {
         }
     }
 
-    func wantsToPush() -> RxSwift.Observable<UIViewController> {
-        return Observable.never()//just(ViewController(presentation: SimpleViewWthButtonPresentation()))
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return button.rx.tap.asObservable().map {
-            ViewController(presentation: SimpleViewWthButtonPresentation())
-        }
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return Observable<Void>.never()
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable<Void>.never()
-    }
-
     func willAppear() {
 
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return button.rx.tap.asObservable().map {
+            PresentTransition(leadingTo: { ViewController(presentation: SimpleViewWthButtonPresentation()) })
+        }
     }
 }

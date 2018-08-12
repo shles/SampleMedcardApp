@@ -63,23 +63,13 @@ class SimpleCodeConfirmationPresentation: Presentation {
                 .disposed(by: disposeBag)
     }
 
-    func wantsToPush() -> Observable<UIKit.UIViewController> {
-        return authority.authenticate().map { [unowned self] in self.leadingTo($0) }
-    }
-
-    func wantsToPresent() -> Observable<UIKit.UIViewController> {
-        return Observable.never()
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return Observable.never()
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable.never()
-    }
-
     func willAppear() {
         passwordField.becomeFirstResponder()
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return authority.authenticate().map { [unowned self] token in
+            NewWindowRootControllerTransition(leadingTo: { self.leadingTo(token) })
+        }
     }
 }

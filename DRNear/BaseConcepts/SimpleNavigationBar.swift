@@ -69,22 +69,6 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
         fatalError("Storyboards are deprecated!")
     }
 
-    func wantsToPush() -> RxSwift.Observable<UIViewController> {
-        return Observable.never()//just(ViewController(presentation: SimpleViewWthButtonPresentation()))
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable.never()
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return backButton.rx.tap.map { _ in }
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable<Void>.never()
-    }
-
     func with(rightInactiveButton button: UIButton) -> Self {
         addSubview(button)
         button.snp.makeConstraints {
@@ -94,4 +78,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
         return self
     }
 
+    func wantsToPerform() -> Observable<Transition> {
+        return backButton.rx.tap.map { _ in PopTransition() }
+    }
 }

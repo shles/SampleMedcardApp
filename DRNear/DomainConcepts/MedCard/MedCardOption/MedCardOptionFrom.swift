@@ -23,26 +23,13 @@ class MedCardOptionFrom: MedCardOption {
         self.leadingToController = leadingTo
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return pushingSubject.asObservable().debug()
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable.never()
-    }
-
     func interact() {
         pushingSubject.onNext(leadingToController)
     }
 
-    func wantsToPop() -> Observable<Void> {
-        return Observable.never()
+    func wantsToPerform() -> Observable<Transition> {
+        return pushingSubject.asObservable().map { vc in PushTransition(leadingTo: { vc })}
     }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable.never()
-    }
-
 }
 class InactiveMedCardOptionFrom: MedCardOption {
 
@@ -56,23 +43,11 @@ class InactiveMedCardOptionFrom: MedCardOption {
         self.gradientColors = gradientColors
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return Observable.never()
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-        return Observable.never()
-    }
-
     func interact() {
 
     }
 
-    func wantsToPop() -> Observable<Void> {
-        return Observable.never()
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
+    func wantsToPerform() -> Observable<Transition> {
         return Observable.never()
     }
 }

@@ -27,14 +27,6 @@ class MedCardOptionApplicableToCollectionViewCell: MedCardOption, Applicable {
         return origin.name
     }
 
-    func wantsToPush() -> RxSwift.Observable<UIViewController> {
-        return origin.wantsToPush()
-    }
-
-    func wantsToPresent() -> RxSwift.Observable<UIViewController> {
-        return origin.wantsToPresent()
-    }
-
     var image: ObservableImage {
         return origin.image
     }
@@ -43,11 +35,7 @@ class MedCardOptionApplicableToCollectionViewCell: MedCardOption, Applicable {
         origin.interact()
     }
 
-    func wantsToPop() -> Observable<Void> {
-        return origin.wantsToPop()
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return origin.wantsToBeDismissed()
+    func wantsToPerform() -> Observable<Transition> {
+        return origin.wantsToPerform()
     }
 }

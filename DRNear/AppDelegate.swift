@@ -19,75 +19,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navContgroller = UINavigationController(
                 rootViewController:
                 ViewController(presentation: SimpleLoginPresentation(authority: AuthorityFromAPI(), leadingTo: { token in
-                    ViewController(
-                presentation: MedCardCollectionViewPresentation(
-                        medCardOptions: MedCardFrom(
-                                options: [
-                                    MedCardOptionFrom(
-                                            name: "Вредные привычки",
-                                            image: ObservableImageFrom(
-                                                    image: #imageLiteral(resourceName: "rocketMed")
-                                            ),
-                                            gradientColors: [.rosa, .wheatTwo],
-                                            leadingTo: ViewController(
-                                                    presentation: MyBadHabitsPresentation(
-                                                            badHabits: ObservableMyBadHabitsFromAPI(token: token),
-                                                            leadingTo: { return ViewController(
-                                                                    presentation: AllBadHabitsPresentation(
-                                                                            badHabits: ObservableBadHabitsFromAPI(token: token)
-                                                                    )
-                                                            )}
-                                                    )
+                    UINavigationController(
+                            rootViewController: ViewController(
+                                    presentation: MedCardCollectionViewPresentation(
+                                            medCardOptions: MedCardFrom(
+                                                    options: [
+                                                        MedCardOptionFrom(
+                                                                name: "Вредные привычки",
+                                                                image: ObservableImageFrom(
+                                                                        image: #imageLiteral(resourceName: "rocketMed")
+                                                                ),
+                                                                gradientColors: [.rosa, .wheatTwo],
+                                                                leadingTo: ViewController(
+                                                                        presentation: MyBadHabitsPresentation(
+                                                                                badHabits: ObservableMyBadHabitsFromAPI(token: token),
+                                                                                leadingTo: { return ViewController(
+                                                                                        presentation: AllBadHabitsPresentation(
+                                                                                                badHabits: ObservableBadHabitsFromAPI(token: token)
+                                                                                        )
+                                                                                )}
+                                                                        )
+                                                                )
+                                                        ),
+                                                        InactiveMedCardOptionFrom(
+                                                                name: "Аллергии",
+                                                                image: ObservableImageFrom(
+                                                                        image: #imageLiteral(resourceName: "rocketMedYellow")
+                                                                ),
+                                                                gradientColors: [.peach, .wheat]
+
+                                                        ),
+                                                        InactiveMedCardOptionFrom(
+                                                                name: "Прививки",
+                                                                image: ObservableImageFrom(
+                                                                        image: #imageLiteral(resourceName: "rocketMedGreen")
+                                                                ),
+                                                                gradientColors: [.paleOliveGreen, .beige]
+
+                                                        ),
+                                                        InactiveMedCardOptionFrom(
+                                                                name: "Исследования и анализы",
+                                                                image: ObservableImageFrom(
+                                                                        image: #imageLiteral(resourceName: "rocketMedBlue")
+                                                                ),
+                                                                gradientColors: [.darkSkyBlue, .tiffanyBlue]
+
+                                                        ),
+                                                        InactiveMedCardOptionFrom(
+                                                                name: "Хронические заболевания",
+                                                                image: ObservableImageFrom(
+                                                                        image: #imageLiteral(resourceName: "rocketMedDarkBlue")
+                                                                ),
+                                                                gradientColors: [.pastelBlue, .powderBlue]
+
+                                                        ),
+                                                        InactiveMedCardOptionFrom(
+                                                                name: "Консультации",
+                                                                image: ObservableImageFrom(
+                                                                        image: #imageLiteral(resourceName: "rocketMedViolet")
+                                                                ),
+                                                                gradientColors: [.lightPeriwinkle, .softPink]
+
+                                                        )
+                                                    ]
                                             )
-                                    ),
-                                    InactiveMedCardOptionFrom(
-                                            name: "Аллергии",
-                                            image: ObservableImageFrom(
-                                                    image: #imageLiteral(resourceName: "rocketMedYellow")
-                                            ),
-                                            gradientColors: [.peach, .wheat]
-
-                                    ),
-                                    InactiveMedCardOptionFrom(
-                                            name: "Прививки",
-                                            image: ObservableImageFrom(
-                                                    image: #imageLiteral(resourceName: "rocketMedGreen")
-                                            ),
-                                            gradientColors: [.paleOliveGreen, .beige]
-
-                                    ),
-                                    InactiveMedCardOptionFrom(
-                                            name: "Исследования и анализы",
-                                            image: ObservableImageFrom(
-                                                    image: #imageLiteral(resourceName: "rocketMedBlue")
-                                            ),
-                                            gradientColors: [.darkSkyBlue, .tiffanyBlue]
-
-                                    ),
-                                    InactiveMedCardOptionFrom(
-                                            name: "Хронические заболевания",
-                                            image: ObservableImageFrom(
-                                                    image: #imageLiteral(resourceName: "rocketMedDarkBlue")
-                                            ),
-                                            gradientColors: [.pastelBlue, .powderBlue]
-
-                                    ),
-                                    InactiveMedCardOptionFrom(
-                                            name: "Консультации",
-                                            image: ObservableImageFrom(
-                                                    image: #imageLiteral(resourceName: "rocketMedViolet")
-                                            ),
-                                            gradientColors: [.lightPeriwinkle, .softPink]
-
                                     )
-                                ]
-                        )
-                )
-                        .withTabBarStub())})
+                                            .withTabBarStub())
+                    ).withoutNavigationBar()
+                })
 
                 )
+
         )
-        navContgroller.setNavigationBarHidden(true, animated: false)
+//        navContgroller.setNavigationBarHidden(true, animated: false)
         window?.rootViewController = navContgroller
         window?.makeKeyAndVisible()
         return true

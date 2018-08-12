@@ -45,19 +45,7 @@ class MyBadHabitsPresentation: Presentation {
         badHabtsPresentation.willAppear()
     }
 
-    func wantsToPush() -> Observable<UIViewController> {
-        return pushSubject.asObservable()
-    }
-
-    func wantsToPresent() -> Observable<UIViewController> {
-       return Observable.merge([navBar.wantsToPresent(),badHabtsPresentation.wantsToPresent()])
-    }
-
-    func wantsToPop() -> Observable<Void> {
-        return Observable.merge([navBar.wantsToPop(),badHabtsPresentation.wantsToPop()])
-    }
-
-    func wantsToBeDismissed() -> Observable<Void> {
-        return Observable.merge([navBar.wantsToBeDismissed(),badHabtsPresentation.wantsToBeDismissed()])
+    func wantsToPerform() -> Observable<Transition> {
+        return pushSubject.map { vc in PushTransition(leadingTo: { vc }) }
     }
 }
