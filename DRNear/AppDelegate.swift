@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                         image: #imageLiteral(resourceName: "rocketMed")
                                                                 ),
                                                                 gradientColors: [.rosa, .wheatTwo],
-                                                                leadingTo: ViewController(
+                                                                leadingTo: { ViewController(
                                                                         presentation: MyBadHabitsPresentation(
                                                                                 badHabits: ObservableMyBadHabitsFromAPI(token: token),
                                                                                 leadingTo: { return ViewController(
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                                         )
                                                                                 )}
                                                                         )
-                                                                )
+                                                                    )}
                                                         ),
                                                         InactiveMedCardOptionFrom(
                                                                 name: "Аллергии",

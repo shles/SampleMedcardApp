@@ -46,6 +46,6 @@ class MyBadHabitsPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return pushSubject.map { vc in PushTransition(leadingTo: { vc }) }
+        return button.rx.tap.map {  leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) }
     }
 }

@@ -12,7 +12,7 @@ class AllBadHabitsPresentation: Presentation {
     var view: UIView = UIView()
 
     private var badHabtsPresentation: BadHabitsTableViewPresentation
-    private let navBar = NavigationBarWithBackButton(title: "Вредные привычки")
+    private let navBar = NavigationBarWithBackButtonAndSearch(title: "Вредные привычки")
             .with(gradient: [.wheatTwo, .rosa])
     private let addButton = UIButton()
             .with(title: "Добавить")

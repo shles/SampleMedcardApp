@@ -45,4 +45,8 @@ extension UITextField {
         }).disposed(by: disposeBag)
         return self
     }
+    func with(texColor: UIColor) -> Self {
+        self.textColor = texColor
+        return self
+    }
 }

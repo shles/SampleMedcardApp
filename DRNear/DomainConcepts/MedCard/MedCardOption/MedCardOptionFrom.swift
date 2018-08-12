@@ -13,10 +13,10 @@ class MedCardOptionFrom: MedCardOption {
     let name: String
     let image: ObservableImage
 
-    private let leadingToController: UIViewController
+    private let leadingToController: () -> (UIViewController)
     private let pushingSubject = ReplaySubject<UIViewController>.create(bufferSize: 1)
 
-    init(name: String, image: ObservableImage, gradientColors: [UIColor], leadingTo: UIViewController) {
+    init(name: String, image: ObservableImage, gradientColors: [UIColor], leadingTo: @escaping () -> (UIViewController)) {
         self.name = name
         self.image = image
         self.gradientColors = gradientColors
@@ -24,7 +24,7 @@ class MedCardOptionFrom: MedCardOption {
     }
 
     func interact() {
-        pushingSubject.onNext(leadingToController)
+        pushingSubject.onNext(leadingToController())
     }
 
     func wantsToPerform() -> Observable<Transition> {
