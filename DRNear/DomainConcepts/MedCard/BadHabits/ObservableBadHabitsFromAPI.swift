@@ -23,20 +23,6 @@ class Refreshable<T> {
     }
 }
 
-class RefreshableBadHabits: ObservableBadHabits {
-
-    private var origin: ObservableBadHabits
-    private var refreshOn: Observable<Void>
-
-    init(origin: ObservableBadHabits, refreshOn: Observable<Void>) {
-        self.origin = origin
-        self.refreshOn = refreshOn
-    }
-    func asObservable() -> Observable<[BadHabit]> {
-        return refreshOn.startWith(()).flatMapLatest { [unowned self] in self.origin.asObservable() }
-    }
-}
-
 class ObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType {
 
     typealias E = [BadHabit]
