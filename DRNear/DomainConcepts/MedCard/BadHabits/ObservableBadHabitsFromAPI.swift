@@ -8,21 +8,6 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
-class Refreshable<T> {
-
-    private var origin: Observable<T>
-    private var refreshOn: Observable<Void>
-
-    init<O: Observable<T>>(origin: O, refreshOn: Observable<Void>) where O.E == T {
-        self.origin = origin
-        self.refreshOn = refreshOn
-    }
-
-    func asObservable() -> Observable<T> {
-        return refreshOn.startWith(()).flatMapLatest { [unowned self] _ in self.origin.asObservable() }
-    }
-}
-
 class ObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType {
 
     typealias E = [BadHabit]

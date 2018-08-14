@@ -17,6 +17,7 @@
 		4C287234773E4E2458246776 /* SimpleObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */; };
 		4C28726D8D6010B64D446EF7 /* Identificated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875A00257F6125D0E7680 /* Identificated.swift */; };
 		4C287272D1EDD3867CC994AF /* EmtyObservableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287E45DF9DFC7E68EEDD48 /* EmtyObservableImage.swift */; };
+		4C2872B100CCAD489A8D78C4 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870B29FB3BB9F08D020EC /* Refreshable.swift */; };
 		4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */; };
 		4C2873285F2259314C652EB5 /* EmptyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287D34DF418020E12D3E60 /* EmptyToken.swift */; };
 		4C28741C98B966BDDD78F4D4 /* BadHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878061A01A7E7455A0A85 /* BadHabitTableViewCell.swift */; };
@@ -93,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		4C28708164D19C6484F6778A /* BadHabit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabit.swift; sourceTree = "<group>"; };
+		4C2870B29FB3BB9F08D020EC /* Refreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
 		4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
 		4C28718B6BD4A50B4C73816A /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				4C287314A4DE33C218B17346 /* Transition.swift */,
 				4C287796B6F7673B58DC30E5 /* Request.swift */,
 				4C28778997C0C948A49CCA24 /* Views */,
+				4C2870B29FB3BB9F08D020EC /* Refreshable.swift */,
 			);
 			path = BaseConcepts;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				4C2870B378BE4DE919BC1D26 /* StandardSectionModel.swift in Sources */,
 				4C287623DD90E2C086D95E22 /* StandardTableView.swift in Sources */,
 				4C287A28AFDB308D244F42D5 /* GradientView.swift in Sources */,
+				4C2872B100CCAD489A8D78C4 /* Refreshable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
