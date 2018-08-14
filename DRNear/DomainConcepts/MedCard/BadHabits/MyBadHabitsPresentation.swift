@@ -15,12 +15,11 @@ class MyBadHabitsPresentation: Presentation {
 
     private let pushSubject = PublishSubject<UIViewController>()
     private let leadingTo: () -> (UIViewController)
+    private let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
 
     init(badHabits: ObservableBadHabits, leadingTo: @escaping () -> (UIViewController) ) {
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits)
         self.leadingTo = leadingTo
-
-        let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
 
         navBar = NavigationBarWithBackButton(title: "Вредные привычки")
                 .with(gradient: [.wheatTwo, .rosa])
@@ -46,6 +45,6 @@ class MyBadHabitsPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return button.rx.tap.map {  leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) }
+        return button.rx.tap.map { self.leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) }
     }
 }

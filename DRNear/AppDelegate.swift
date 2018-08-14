@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                                 badHabits: ObservableMyBadHabitsFromAPI(token: token),
                                                                                 leadingTo: { return ViewController(
                                                                                         presentation: AllBadHabitsPresentation(
-                                                                                                badHabits: ObservableBadHabitsFromAPI(token: token)
+                                                                                                badHabits: (try? ObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits()
                                                                                         )
                                                                                 )}
                                                                         )

@@ -6,6 +6,7 @@
 import Foundation
 import RxSwift
 import Alamofire
+import SwiftyJSON
 
 class BadHabitFrom: BadHabit {
 

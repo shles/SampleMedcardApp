@@ -25,8 +25,8 @@ class ViewController: UIViewController {
         fatalError("Storyboards are deprecated")
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         view.addSubview(presentation.view)
         presentation.view.snp.makeConstraints {
@@ -34,10 +34,13 @@ class ViewController: UIViewController {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         view.backgroundColor = .white
-
         presentation.wantsToPerform().subscribe(onNext: {
             $0.perform(on: self)
         })
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         presentation.willAppear()
 

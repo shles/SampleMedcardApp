@@ -93,7 +93,7 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return wantsToPushSubject.asObservable()
+        return wantsToPushSubject.asObservable().debug()
     }
 }
 
