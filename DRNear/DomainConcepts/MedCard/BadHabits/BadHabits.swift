@@ -10,7 +10,9 @@ protocol ObservableBadHabits {
     func asObservable() -> Observable<[BadHabit]>
 }
 
-class SimpleObservableBadHabits: ObservableBadHabits {
+class SimpleObservableBadHabits: ObservableBadHabits, ObservableType {
+
+    typealias E = [BadHabit]
 
     private let habits = [
         SimpleBadHabit(),
@@ -21,7 +23,8 @@ class SimpleObservableBadHabits: ObservableBadHabits {
         SimpleBadHabit()
     ]
 
-    func asObservable() -> Observable<[BadHabit]> {
-        return Observable.just(habits)
+    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [BadHabit] {
+        return Observable.just(habits).subscribe(observer)
     }
+
 }

@@ -16,12 +16,16 @@ class AuthorizedRequest: Request {
 
     private var request: URLRequest
 
-    init(url: URL,
+    init(path: String,
          method: HTTPMethod = .get,
          token: Token,
          parameters: Parameters = [:],
          encoding: ParameterEncoding = URLEncoding.default,
          headers: [String: String] = [:]) throws {
+
+        guard let url = URL(string: "http://eco-dev.siblion.ru:8080\(path)") else {
+            throw RequestError()
+        }
 
         var authHeaders = ["Content-Type": "application/json;charset=UTF-8",
                        "Authorization": "Bearer \(token.string)"]
@@ -83,4 +87,40 @@ class AuthorizedRequest: Request {
             return Disposables.create()
         }
     }
+}
+
+class ResponseError: LocalizedError {
+
+    var message: String = "Ошибка сервера"
+    var description: [String]?
+    var errorDescription: String? {
+        return description?.joined(separator: " ") ?? message
+    }
+
+    init() {
+
+    }
+
+    init(message: String) {
+        self.message = message
+    }
+
+}
+
+class RequestError: LocalizedError {
+
+    var message: String = "Ошибка запроса"
+    var description: [String]?
+    var errorDescription: String? {
+        return description?.joined(separator: " ") ?? message
+    }
+
+    init() {
+
+    }
+
+    init(message: String) {
+        self.message = message
+    }
+
 }

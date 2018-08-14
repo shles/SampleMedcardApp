@@ -15,13 +15,13 @@ class BadHabitsTableViewPresentation: Presentation {
     private var tableView = StandardTableView()
     private let disposeBag = DisposeBag()
 
-    let habits: ObservableBadHabits
+    let habits: Observable<[BadHabit]>
 
     private let refreshSubject = PublishSubject<Void>()
 
     init(observableHabits: ObservableBadHabits) {
 
-        self.habits = RefreshableBadHabits(origin: observableHabits, refreshOn: refreshSubject)
+        self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject).asObservable()
 
         view.addSubviews([tableView])
 
