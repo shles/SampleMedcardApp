@@ -13,10 +13,11 @@ class MyBadHabitsPresentation: Presentation {
     private var badHabtsPresentation: BadHabitsTableViewPresentation
     private let navBar: NavigationBarWithBackButton
 
-    private let pushSubject = PublishSubject<UIViewController>()
+    private let transitionSubject = PublishSubject<Transition>()
     private let leadingTo: () -> (UIViewController)
     private let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
-
+    private let disposeBag = DisposeBag()
+    
     init(badHabits: ObservableBadHabits, leadingTo: @escaping () -> (UIViewController) ) {
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits)
         self.leadingTo = leadingTo
@@ -24,8 +25,6 @@ class MyBadHabitsPresentation: Presentation {
         navBar = NavigationBarWithBackButton(title: "Вредные привычки")
                 .with(gradient: [.wheatTwo, .rosa])
                 .with(rightInactiveButton: button)
-
-        button.rx.tap.map {  leadingTo() }.bind(to: pushSubject)
 
         view.addSubviews([badHabtsPresentation.view, navBar])
 
@@ -39,9 +38,9 @@ class MyBadHabitsPresentation: Presentation {
             $0.top.equalTo(navBar.snp.bottom)
         }
 
-        badHabtsPresentation.selection.subscribe(onNext: {
-            ($0 as? Deletable)?.delete()
-        })
+        badHabtsPresentation.selection.do(onNext: { ($0 as? Deletable)?.delete() })
+            .flatMap { ($0 as? Deletable)?.wantsToPerform() ?? Observable.just(ErrorAlertTransition(error: RequestError()))}
+            .bind(to: transitionSubject).disposed(by: disposeBag)
     }
 
     func willAppear() {

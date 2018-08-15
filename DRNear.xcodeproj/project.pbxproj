@@ -12,6 +12,7 @@
 		4C28707B9D15494ECA238A5F /* MedCardOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287634E3FD7E687FC345E6 /* MedCardOption.swift */; };
 		4C2870B378BE4DE919BC1D26 /* StandardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287DDDE00069CC8B49EA06 /* StandardSectionModel.swift */; };
 		4C2871C006782E5311F7F780 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */; };
+		4C2871E76E5A23386DA13F12 /* TransitionSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871DE8B517B3C7011C5BB /* TransitionSource.swift */; };
 		4C2871ECCAC65FE91AE04E99 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287E25CBF4A9D6FF9F2EE2 /* Selectable.swift */; };
 		4C28720069E57E87C0278D00 /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F6334F252CB4A2B390E /* Deletable.swift */; };
 		4C28720396CCCDADD6C2F66C /* BadHabits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875E404BE49C90D8E11E7 /* BadHabits.swift */; };
@@ -23,7 +24,6 @@
 		4C2873285F2259314C652EB5 /* EmptyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287D34DF418020E12D3E60 /* EmptyToken.swift */; };
 		4C28741C98B966BDDD78F4D4 /* BadHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878061A01A7E7455A0A85 /* BadHabitTableViewCell.swift */; };
 		4C28746F061D9C9C8578DB71 /* BadHabitApplicableToTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287A15A07A292181CB033E /* BadHabitApplicableToTableViewCell.swift */; };
-		4C287507116D991E0A095D48 /* TransitionSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28737122D5A6DB17D380A3 /* TransitionSource.swift */; };
 		4C287515190CC81005A3E0E4 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287796B6F7673B58DC30E5 /* Request.swift */; };
 		4C2875193BC5215470ED3FE1 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287BFD15BBEB8549AFEB97 /* Named.swift */; };
 		4C287537F876404304236173 /* ObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2877E2A6511F3668D68881 /* ObservableBadHabitsFromAPI.swift */; };
@@ -36,10 +36,10 @@
 		4C2876CD9E69B7C53F9A8511 /* SimpleAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287C8D033CBDA225A7D98F /* SimpleAuthority.swift */; };
 		4C28770423B6DC3A32B87FF6 /* BadHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28708164D19C6484F6778A /* BadHabit.swift */; };
 		4C287737CA37EE6D4060A5AE /* ObservableMedCardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F6DE8AEF4DCC86C7523 /* ObservableMedCardOptions.swift */; };
-		4C28779D48846DF7CEE86F3C /* ErrorAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875A60F69A103C9F5C0CB /* ErrorAlertTransition.swift */; };
+		4C28777E833BED4876D1FE92 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28730FEC7B751380BCE7AA /* Transition.swift */; };
+		4C2877DA3C65D04425627B2F /* ErrorAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2874B918FEEF2D6DBE8CDE /* ErrorAlertTransition.swift */; };
 		4C287838622D5D8D93068FA2 /* BadHabitFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871A82528B0822981AA36 /* BadHabitFrom.swift */; };
 		4C28787EBB9E4F86631EA0B9 /* SimpleLoginPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879984397062B701A567F /* SimpleLoginPresentation.swift */; };
-		4C2878A65AA631688E4CE849 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287314A4DE33C218B17346 /* Transition.swift */; };
 		4C2878E55C44A97E05C481BD /* ObservableMyBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28776EFF4811C4A745CAC5 /* ObservableMyBadHabitsFromAPI.swift */; };
 		4C28792FCEF04FBBAE261330 /* TokenFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287A3E4DFC5B130F138827 /* TokenFromString.swift */; };
 		4C28797ADDE4307761129320 /* SimpleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F03C62A561688E3FD1F /* SimpleNavigationBar.swift */; };
@@ -102,15 +102,15 @@
 		4C28718B6BD4A50B4C73816A /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		4C2871A82528B0822981AA36 /* BadHabitFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitFrom.swift; sourceTree = "<group>"; };
 		4C2871B627B8F784AE50AADB /* BadHabitsTableViewPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitsTableViewPresentation.swift; sourceTree = "<group>"; };
+		4C2871DE8B517B3C7011C5BB /* TransitionSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSource.swift; sourceTree = "<group>"; };
 		4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C2872F1F204BEE3C6FA51EB /* AuthorityFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityFromAPI.swift; sourceTree = "<group>"; };
-		4C287314A4DE33C218B17346 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		4C28730FEC7B751380BCE7AA /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionFrom.swift; sourceTree = "<group>"; };
-		4C28737122D5A6DB17D380A3 /* TransitionSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSource.swift; sourceTree = "<group>"; };
 		4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardOptionApplicableToCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
+		4C2874B918FEEF2D6DBE8CDE /* ErrorAlertTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlertTransition.swift; sourceTree = "<group>"; };
 		4C2875A00257F6125D0E7680 /* Identificated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identificated.swift; sourceTree = "<group>"; };
-		4C2875A60F69A103C9F5C0CB /* ErrorAlertTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlertTransition.swift; sourceTree = "<group>"; };
 		4C2875D5613F94AC1657CBD4 /* Interactive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		4C2875E404BE49C90D8E11E7 /* BadHabits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabits.swift; sourceTree = "<group>"; };
 		4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardCollectionViewPresentation.swift; sourceTree = "<group>"; };
@@ -216,7 +216,6 @@
 			children = (
 				4C287E699877719914175B47 /* ObservableImage.swift */,
 				4C287F509B7CA418A115AA25 /* Presentation.swift */,
-				4C28737122D5A6DB17D380A3 /* TransitionSource.swift */,
 				4C287BFD15BBEB8549AFEB97 /* Named.swift */,
 				4C28768E71149F65D2E9D66D /* ContainingImage.swift */,
 				4C2879733193AD7FA725432E /* ViewController.swift */,
@@ -225,13 +224,12 @@
 				4C2875A00257F6125D0E7680 /* Identificated.swift */,
 				4C287E45DF9DFC7E68EEDD48 /* EmtyObservableImage.swift */,
 				4C287E25CBF4A9D6FF9F2EE2 /* Selectable.swift */,
-				4C287314A4DE33C218B17346 /* Transition.swift */,
 				4C287796B6F7673B58DC30E5 /* Request.swift */,
 				4C28778997C0C948A49CCA24 /* Views */,
 				4C2870B29FB3BB9F08D020EC /* Refreshable.swift */,
 				4C287F6334F252CB4A2B390E /* Deletable.swift */,
 				4C287D415579A924A810A4E2 /* Update.swift */,
-				4C2875A60F69A103C9F5C0CB /* ErrorAlertTransition.swift */,
+				4C287F74B81A21FC12803EC9 /* Transitions */,
 			);
 			path = BaseConcepts;
 			sourceTree = "<group>";
@@ -319,6 +317,16 @@
 				4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */,
 			);
 			path = MedCardOption;
+			sourceTree = "<group>";
+		};
+		4C287F74B81A21FC12803EC9 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				4C28730FEC7B751380BCE7AA /* Transition.swift */,
+				4C2871DE8B517B3C7011C5BB /* TransitionSource.swift */,
+				4C2874B918FEEF2D6DBE8CDE /* ErrorAlertTransition.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		5BFB27D46C4DD786377BB999 /* Frameworks */ = {
@@ -626,7 +634,6 @@
 				4C28762B019C533E21C77830 /* ObservableImage.swift in Sources */,
 				4C2879E05A8BFAFBBEAA4AE9 /* Presentation.swift in Sources */,
 				FDA48DD72120BC8000AFDC65 /* File.swift in Sources */,
-				4C287507116D991E0A095D48 /* TransitionSource.swift in Sources */,
 				4C2875193BC5215470ED3FE1 /* Named.swift in Sources */,
 				4C287E2D873D612756944F42 /* ContainingImage.swift in Sources */,
 				FD3460C82114F2CD007B0943 /* UIFont+Additions.swift in Sources */,
@@ -671,7 +678,6 @@
 				4C287068C098A6125B74277C /* AllBadHabitsPresentation.swift in Sources */,
 				4C2879F72D99260125A48ACA /* Alamofire.swift in Sources */,
 				4C2871ECCAC65FE91AE04E99 /* Selectable.swift in Sources */,
-				4C2878A65AA631688E4CE849 /* Transition.swift in Sources */,
 				4C287515190CC81005A3E0E4 /* Request.swift in Sources */,
 				4C28797ADDE4307761129320 /* SimpleNavigationBar.swift in Sources */,
 				4C2870B378BE4DE919BC1D26 /* StandardSectionModel.swift in Sources */,
@@ -680,7 +686,9 @@
 				4C2872B100CCAD489A8D78C4 /* Refreshable.swift in Sources */,
 				4C28720069E57E87C0278D00 /* Deletable.swift in Sources */,
 				4C287FBD612D3439E9DCCFC2 /* Update.swift in Sources */,
-				4C28779D48846DF7CEE86F3C /* ErrorAlertTransition.swift in Sources */,
+				4C28777E833BED4876D1FE92 /* Transition.swift in Sources */,
+				4C2871E76E5A23386DA13F12 /* TransitionSource.swift in Sources */,
+				4C2877DA3C65D04425627B2F /* ErrorAlertTransition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

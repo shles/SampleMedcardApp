@@ -34,10 +34,11 @@ class ObservableMyBadHabitsFromAPI: ObservableBadHabits, ObservableType {
                         BadHabitFrom(
                                 name: json["name"].string  ?? "",
                                 id: json["code"].string ?? "",
+                                selected: true,
                                 token: self.token
                         )
                     }
-                }.subscribe(observer)
+                }.share(replay: 1).subscribe(observer)
     }
 }
 

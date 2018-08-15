@@ -19,13 +19,19 @@ class BadHabitsTableViewPresentation: Presentation {
 
     private let refreshSubject = PublishSubject<Void>()
     private let wantsToPushSubject = PublishSubject<Transition>()
+    private let habitsSubject = ReplaySubject<[BadHabit]>.create(bufferSize: 1)
 
     var selection = PublishSubject<BadHabit>()
 
 
     init(observableHabits: ObservableBadHabits) {
 
-        self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject)
+        self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject.skip(1))
+
+        habits.asObservable()
+                .catchErrorJustReturn([])
+                .bind(to: habitsSubject)
+                .disposed(by: disposeBag)
 
         view.addSubviews([tableView])
 
@@ -41,19 +47,19 @@ class BadHabitsTableViewPresentation: Presentation {
                     return cell
                 })
 
-        self.habits.asObservable()
-            .catchErrorJustReturn([])
-//            .map { $0.map { BadHabitApplicableToTableViewCell(origin: $0) } }
+        habitsSubject.asObservable()
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
         tableView.rx.modelSelected(BadHabit.self).bind(to: selection).disposed(by: disposeBag)
-        
-        self.habits.asObservable()
+
+        habitsSubject.asObservable()
                 .catchErrorJustReturn([])
             .flatMap {
-                Observable.merge($0.map { ($0 as? MyBadHabitFrom)?.wantsToPerform() ?? Observable.never() })
+                Observable.merge($0.map {
+                    ($0 as? Deletable)?.wantsToPerform() ?? Observable.never()
+                })
             }
             .bind(to: wantsToPushSubject)
             .disposed(by: disposeBag)
