@@ -10,7 +10,7 @@ class MyBadHabitsPresentation: Presentation {
 
      var view: UIView = UIView()
 
-    private var badHabtsPresentation: Presentation
+    private var badHabtsPresentation: BadHabitsTableViewPresentation
     private let navBar: NavigationBarWithBackButton
 
     private let pushSubject = PublishSubject<UIViewController>()
@@ -38,6 +38,10 @@ class MyBadHabitsPresentation: Presentation {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(navBar.snp.bottom)
         }
+
+        badHabtsPresentation.selection.subscribe(onNext: {
+            ($0 as? Deletable)?.delete()
+        })
     }
 
     func willAppear() {
@@ -48,6 +52,8 @@ class MyBadHabitsPresentation: Presentation {
         return Observable.merge([
             button.rx.tap.map { self.leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) },
             badHabtsPresentation.wantsToPerform()
-        ])
+        ]).catchError { error in
+            Observable.just(ErrorAlertTransition(error: error))
+          }
     }
 }

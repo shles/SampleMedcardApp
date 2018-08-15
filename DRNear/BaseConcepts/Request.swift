@@ -23,7 +23,7 @@ class AuthorizedRequest: Request {
          encoding: ParameterEncoding = URLEncoding.default,
          headers: [String: String] = [:]) throws {
 
-        guard let url = URL(string: "http://eco-dev.siblion.ru:8080\(path)") else {
+        guard let url = URL(string: "http://eco-dev.siblion.ru:81\(path)") else {
             throw RequestError()
         }
 

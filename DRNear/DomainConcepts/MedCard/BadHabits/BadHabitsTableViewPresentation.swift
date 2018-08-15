@@ -18,8 +18,9 @@ class BadHabitsTableViewPresentation: Presentation {
     let habits: Refreshable<[BadHabit]>
 
     private let refreshSubject = PublishSubject<Void>()
-    
     private let wantsToPushSubject = PublishSubject<Transition>()
+
+    var selection = PublishSubject<BadHabit>()
 
 
     init(observableHabits: ObservableBadHabits) {
@@ -47,11 +48,10 @@ class BadHabitsTableViewPresentation: Presentation {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        tableView.rx.modelSelected(BadHabit.self).subscribe(onNext: { habit in
-            (habit as? MyBadHabitFrom)?.delete()
-        }).disposed(by: disposeBag)
+        tableView.rx.modelSelected(BadHabit.self).bind(to: selection).disposed(by: disposeBag)
         
         self.habits.asObservable()
+                .catchErrorJustReturn([])
             .flatMap {
                 Observable.merge($0.map { ($0 as? MyBadHabitFrom)?.wantsToPerform() ?? Observable.never() })
             }

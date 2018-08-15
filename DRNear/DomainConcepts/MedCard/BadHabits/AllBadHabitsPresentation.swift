@@ -22,7 +22,7 @@ class AllBadHabitsPresentation: Presentation {
 
     private let disposeBag = DisposeBag()
 
-    init(badHabits: ObservableBadHabits) {
+    init(badHabits: ObservableBadHabits, update: Update)  {
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits)
 
         view.addSubviews([badHabtsPresentation.view, navBar, addButton])
@@ -44,15 +44,18 @@ class AllBadHabitsPresentation: Presentation {
             $0.trailing.equalToSuperview().inset(24)
         }
 
-//        Observable.combineLatest(
-//                        badHabtsPresentation.habits.asObservable(),
-//                        addButton.rx.tap.asObservable(),
-//                        resultSelector: { habits, _ in
-//            return habits
-//        }).debug()
-//        .subscribe(onNext: {
-//            print($0.filter { $0.isSelected.value })
+//        Observable<BadHabit>.merge(badHabits.asObservable().flatMap { habits in
+//            habits.map { habit -> Observable<BadHabit> in
+//                return habit.isSelected.asObservable().map { _ in habit}
+//            }
+//        }).subscribe(onNext: {
+//            update.addItem(item: $0)
 //        }).disposed(by: disposeBag)
+
+        badHabtsPresentation.selection.subscribe(onNext: {
+            $0.select()
+            update.addItem(item: $0)
+        }).disposed(by: disposeBag)
 
         addButton.rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in
             self.addButton.backgroundColor = self.addButton.backgroundColor?.withAlphaComponent(0.5)
@@ -63,6 +66,10 @@ class AllBadHabitsPresentation: Presentation {
             self.addButton.backgroundColor = self.addButton.backgroundColor?.withAlphaComponent(1)
             self.addButton.titleLabel?.alpha = 1
         }).disposed(by: disposeBag)
+
+        addButton.rx.tap.subscribe(onNext: {
+            update.apply()
+        })
     }
 
     func willAppear() {

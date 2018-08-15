@@ -18,7 +18,7 @@ class ObservableMyBadHabitsFromAPI: ObservableBadHabits, ObservableType {
     init(token: Token) throws {
 
         request = try AuthorizedRequest(
-                path: "/eco-emc/api/medical-records/952/bad-habits",
+                path: "/eco-emc/api/my/bad-habits",
                 method: .get,
                 token: token,
                 encoding: URLEncoding.default
@@ -171,5 +171,5 @@ class ObservableSimpleMyBadHabits: ObservableBadHabits {
     func asObservable() -> Observable<[BadHabit]> {
         return Observable.just(array)
     }
-    
+
 }
