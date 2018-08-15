@@ -15,13 +15,16 @@ class BadHabitsTableViewPresentation: Presentation {
     private var tableView = StandardTableView()
     private let disposeBag = DisposeBag()
 
-    let habits: Observable<[BadHabit]>
+    let habits: Refreshable<[BadHabit]>
 
     private let refreshSubject = PublishSubject<Void>()
+    
+    private let wantsToPushSubject = PublishSubject<Transition>()
+
 
     init(observableHabits: ObservableBadHabits) {
 
-        self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject).asObservable()
+        self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject)
 
         view.addSubviews([tableView])
 
@@ -30,23 +33,30 @@ class BadHabitsTableViewPresentation: Presentation {
 
         }
 
-        let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<BadHabitApplicableToTableViewCell>>(
+        let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<BadHabit>>(
                 configureCell: { _, tv, ip, habit in
                     let cell = tv.dequeueReusableCellOfType(SimpleTickedCell.self, for: ip)
-                    habit.apply(target: cell)
+                    BadHabitApplicableToTableViewCell(origin: habit).apply(target: cell)
                     return cell
                 })
 
-        self.habits.asObservable().debug()
+        self.habits.asObservable()
             .catchErrorJustReturn([])
-            .map { $0.map { BadHabitApplicableToTableViewCell(origin: $0) } }
+//            .map { $0.map { BadHabitApplicableToTableViewCell(origin: $0) } }
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
         tableView.rx.modelSelected(BadHabit.self).subscribe(onNext: { habit in
-            habit.select()
+            (habit as? MyBadHabitFrom)?.delete()
         }).disposed(by: disposeBag)
+        
+        self.habits.asObservable()
+            .flatMap {
+                Observable.merge($0.map { ($0 as? MyBadHabitFrom)?.wantsToPerform() ?? Observable.never() })
+            }
+            .bind(to: wantsToPushSubject)
+            .disposed(by: disposeBag)
 
     }
 
@@ -55,6 +65,6 @@ class BadHabitsTableViewPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return Observable.never()
+        return wantsToPushSubject.asObservable().debug()
     }
 }

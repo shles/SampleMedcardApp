@@ -45,6 +45,9 @@ class MyBadHabitsPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return button.rx.tap.map { self.leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) }
+        return Observable.merge([
+            button.rx.tap.map { self.leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) },
+            badHabtsPresentation.wantsToPerform()
+        ])
     }
 }

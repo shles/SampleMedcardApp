@@ -47,6 +47,15 @@ class PopTransition: Transition {
 
 }
 
+class DismissTransition: Transition {
+
+    func perform(on viewController: UIViewController) {
+        viewController.dismiss(animated: true)
+    }
+
+}
+
+
 class NewWindowRootControllerTransition: Transition {
     private let leadingTo: () -> (UIViewController)
 

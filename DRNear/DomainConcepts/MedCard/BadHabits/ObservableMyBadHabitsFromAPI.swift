@@ -6,82 +6,170 @@
 import Alamofire
 import Foundation
 import RxSwift
+import SwiftyJSON
+import SnapKit
 
-class ObservableMyBadHabitsFromAPI: ObservableBadHabits {
+class ObservableMyBadHabitsFromAPI: ObservableBadHabits, ObservableType {
 
+    typealias E = [BadHabit]
     private let token: Token
+    private let request: Request
 
-    init(token: Token) {
+    init(token: Token) throws {
+
+        request = try AuthorizedRequest(
+                path: "/eco-emc/api/medical-records/952/bad-habits",
+                method: .get,
+                token: token,
+                encoding: URLEncoding.default
+        )
         self.token = token
     }
 
-    func asObservable() -> Observable<[BadHabit]> {
+    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [BadHabit] {
+        return request.make()
+                .map { json in
 
-        return Observable.create { [unowned self] observer in
-
-            guard let url = URL(string: "http://eco-dev.siblion.ru:8080/eco-emc/api/medical-records/953/bad-habits") else {
-                observer.onError(ResponseError())
-                return Disposables.create()
-            }
-
-            var headers = ["Content-Type": "application/json;charset=UTF-8",
-                           "Authorization": "Bearer \(self.token.string)"]
-
-            if let xsrf = UserDefaults.standard.string(forKey: "X-XSRF-TOKEN") {
-                headers["X-XSRF-TOKEN"] = xsrf
-            }
-
-            Alamofire.request(
-                            url,
-                            method: .get,
-                            parameters: [:],
-                            encoding: URLEncoding.default,
-                            headers: headers)
-
-                    .responseData(completionHandler: { response in
-
-                        guard let data = response.data, response.error == nil else {
-                            observer.onError(response.error ?? ResponseError())
-                            return
-                        }
-
-                        if let response = response.response, let fields = response.allHeaderFields as? [String: String] {
-                            let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response.url!)
-
-                            HTTPCookieStorage.shared.setCookies(cookies, for: response.url, mainDocumentURL: nil)
-
-                            for cookie in cookies {
-                                var cookieProperties = [HTTPCookiePropertyKey: Any]()
-                                cookieProperties[HTTPCookiePropertyKey.name] = cookie.name
-                                cookieProperties[HTTPCookiePropertyKey.value] = cookie.value
-                                cookieProperties[HTTPCookiePropertyKey.domain] = cookie.domain
-                                cookieProperties[HTTPCookiePropertyKey.path] = cookie.path
-                                cookieProperties[HTTPCookiePropertyKey.version] = NSNumber(value: cookie.version)
-                                cookieProperties[HTTPCookiePropertyKey.expires] = NSDate().addingTimeInterval(31_536_000)
-
-                                let newCookie = HTTPCookie(properties: cookieProperties)
-                                HTTPCookieStorage.shared.setCookie(newCookie!)
-
-                                if cookie.name == "XSRF-TOKEN" {
-                                    UserDefaults.standard.set(cookie.value, forKey: "X-XSRF-TOKEN")
-                                }
-                                print("name: \(cookie.name) value: \(cookie.value)")
-                            }
-                        }
-
-                        if let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []),
-                           let array = responseJSON as? [[String: Any]] {
-                            observer.onNext(array
-                                .map { BadHabitFrom(name: $0["name"] as? String ?? "", id: $0["code"] as? String ?? "", selected: true, token: self.token) }
-                            )
-                            observer.onCompleted()
-                        } else {
-                            observer.onError(ResponseError())
-                            return
-                        }
-                    })
-            return Disposables.create()
-        }
+                    json.arrayValue.map { (json: JSON) in
+                        BadHabitFrom(
+                                name: json["name"].string  ?? "",
+                                id: json["code"].string ?? "",
+                                token: self.token
+                        )
+                    }
+                }.subscribe(observer)
     }
 }
 
+class MyBadHabitFrom: BadHabit, Deletable {
+
+    private(set) var name: String = ""
+    private(set) var identification: String = ""
+    private(set) var isSelected: Variable<Bool> = Variable(true)
+
+    private let deletionSubject = PublishSubject<Transition>()
+
+    init(name: String, id: String) {
+        self.name = name
+        self.identification = id
+    }
+
+    func select() {
+
+    }
+
+    func delete() {
+        deletionSubject.onNext(PresentTransition {
+            ViewController(
+                    presentation: DeletionPresentation(
+                            title: "Вы точно хотите удалить привычку \"\(self.name)\"?",
+                            onAccept: { }
+                    )
+            )
+        })
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return deletionSubject.asObservable().debug()
+    }
+}
+
+class DeletionPresentation: Presentation {
+
+    private(set) var view: UIView = UIView()
+            .with(backgroundColor: .black)
+    private var deleteButton = UIButton()
+            .with(title: "Удалить")
+            .with(backgroundColor: .mainText)
+            .with(roundedEdges: 24)
+    private var cancelButton = UIButton()
+            .with(title: "Не сейчас")
+            .with(roundedEdges: 24)
+            .with(titleColor: .blueyGrey)
+            .with(borderWidth: 1, borderColor: .blueyGrey)
+
+    private var transitionsSubject = PublishSubject<Transition>()
+    private var disposeBag = DisposeBag()
+
+    init(title: String, onAccept: @escaping () -> ()) {
+
+        let titleLabel = UILabel()
+        .with(font: .regular)
+        .with(textColor: .mainText)
+        .with(numberOfLines: 2)
+        .with(text: title)
+        .aligned(by: .center)
+
+        let containerView = UIView()
+        .with(backgroundColor: .white)
+        .with(roundedEdges: 4)
+
+        let horStack = UIStackView(arrangedSubviews: [cancelButton, deleteButton])
+
+        horStack.axis = .horizontal
+        horStack.spacing = 24
+        horStack.distribution = .fillEqually
+
+        view.addSubview(containerView)
+        containerView.addSubviews([titleLabel, horStack])
+
+        containerView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.height.equalTo(236)
+            $0.width.equalToSuperview().inset(8)
+        }
+
+        horStack.snp.makeConstraints {
+            $0.height.equalTo(48)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(24)
+        }
+
+        cancelButton.snp.makeConstraints {
+            $0.height.equalTo(48)
+        }
+
+        titleLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(96)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().inset(24)
+        }
+
+        deleteButton.snp.makeConstraints {
+            $0.height.equalTo(48)
+        }
+
+        cancelButton.rx.tap
+                .map { DismissTransition() }
+                .bind(to: transitionsSubject)
+                .disposed(by: disposeBag)
+        deleteButton.rx.tap
+                .do(onNext: { _ in  onAccept() })
+                .map { DismissTransition() }
+                .bind(to: transitionsSubject)
+                .disposed(by: disposeBag)
+    }
+
+    func willAppear() {
+
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return transitionsSubject.asObservable()
+    }
+}
+
+class ObservableSimpleMyBadHabits: ObservableBadHabits {
+
+    private let array = [
+        MyBadHabitFrom(name: "aaa", id: "a"),
+        MyBadHabitFrom(name: "bbb", id: "b"),
+        MyBadHabitFrom(name: "ccc", id: "c"),
+    ]
+
+    func asObservable() -> Observable<[BadHabit]> {
+        return Observable.just(array)
+    }
+    
+}

@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  IOS DR
 //
-//  Generated on Zeplin. (8/6/2018).
+//  Generated on Zeplin. (8/14/2018).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -64,6 +64,10 @@ extension UIColor {
 
   @nonobjc class var rosa: UIColor {
     return UIColor(red: 254.0 / 255.0, green: 144.0 / 255.0, blue: 170.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var blueyGrey: UIColor {
+    return UIColor(red: 157.0 / 255.0, green: 164.0 / 255.0, blue: 185.0 / 255.0, alpha: 1.0)
   }
 
 }

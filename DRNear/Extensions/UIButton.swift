@@ -17,4 +17,9 @@ extension UIButton {
         return self
     }
 
+    func with(titleColor: UIColor?, for state: UIControlState = .normal) -> Self {
+        self.setTitleColor(titleColor, for: state)
+        return self
+    }
+
 }
