@@ -5,7 +5,7 @@
 
 import Foundation
 import RxSwift
-
+//TODO: get rid
 class MedCardOptionApplicableToCollectionViewCell: MedCardOption, Applicable {
 
     private let origin: MedCardOption

@@ -21,6 +21,7 @@ extension ObservableBadHabits {
         return asObservable().map { $0.map { $0 as ListApplicable } }
     }
 }
+
 class SimpleObservableBadHabits: ObservableBadHabits, ObservableType, Searchable {
 
     typealias E = [BadHabit]
