@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                             gradient: [.wheatTwo, .rosa],
                                                             leadingTo: { return ViewController(
                                                                     presentation: AllBadHabitsPresentation(
-                                                                            badHabits: (try? ObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
+                                                                            badHabits: (try? AllObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
                                                                             update: MyBadHabitsUpdate(token: token),
                                                                             title: "Вредные привычки",
                                                                             gradient: [.wheatTwo, .rosa]
