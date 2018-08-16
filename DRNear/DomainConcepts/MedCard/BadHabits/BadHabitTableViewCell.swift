@@ -49,10 +49,12 @@ class SimpleTickedCell: UITableViewCell {
         fatalError("Storyboards are deprecated!")
     }
 
-    func configure(item: Named & Selectable) {
+    func configured(item: Named & Selectable) -> Self {
         title.text = item.name
         item.isSelected.asObservable().subscribe(onNext: { [unowned self] in
             self.tick.isHidden = !$0
         }).disposed(by: disposeBag)
+
+        return self
     }
 }

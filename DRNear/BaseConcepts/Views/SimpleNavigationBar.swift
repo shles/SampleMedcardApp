@@ -6,6 +6,7 @@
 import RxSwift
 import SnapKit
 import UIKit
+import RxCocoa
 
 class SimpleNavigationBar: UIView {
 
@@ -142,13 +143,11 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         fatalError("Storyboards are deprecated!")
     }
 
-
     func wantsToPerform() -> Observable<Transition> {
         return backButton.rx.tap.map { _ in PopTransition() }
     }
 
     func searchString() -> Observable<String> {
-        return Observable.never()
+        return searchField.rx.text.map{ $0 ?? "" }.asObservable()
     }
 }
-

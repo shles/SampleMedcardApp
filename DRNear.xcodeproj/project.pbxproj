@@ -23,7 +23,6 @@
 		4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */; };
 		4C2873285F2259314C652EB5 /* EmptyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287D34DF418020E12D3E60 /* EmptyToken.swift */; };
 		4C28741C98B966BDDD78F4D4 /* BadHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878061A01A7E7455A0A85 /* BadHabitTableViewCell.swift */; };
-		4C28746F061D9C9C8578DB71 /* BadHabitApplicableToTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287A15A07A292181CB033E /* BadHabitApplicableToTableViewCell.swift */; };
 		4C287515190CC81005A3E0E4 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287796B6F7673B58DC30E5 /* Request.swift */; };
 		4C2875193BC5215470ED3FE1 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287BFD15BBEB8549AFEB97 /* Named.swift */; };
 		4C287537F876404304236173 /* ObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2877E2A6511F3668D68881 /* ObservableBadHabitsFromAPI.swift */; };
@@ -128,7 +127,6 @@
 		4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationTests.swift; sourceTree = "<group>"; };
 		4C2879984397062B701A567F /* SimpleLoginPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleLoginPresentation.swift; sourceTree = "<group>"; };
 		4C2879CBC781343E41611DD3 /* AppicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppicationTests.swift; sourceTree = "<group>"; };
-		4C287A15A07A292181CB033E /* BadHabitApplicableToTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitApplicableToTableViewCell.swift; sourceTree = "<group>"; };
 		4C287A3E4DFC5B130F138827 /* TokenFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenFromString.swift; sourceTree = "<group>"; };
 		4C287ACABF51F6EF366EA62B /* AllBadHabitsPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBadHabitsPresentation.swift; sourceTree = "<group>"; };
 		4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
@@ -259,7 +257,6 @@
 				4C2875E404BE49C90D8E11E7 /* BadHabits.swift */,
 				4C2871B627B8F784AE50AADB /* BadHabitsTableViewPresentation.swift */,
 				4C2878061A01A7E7455A0A85 /* BadHabitTableViewCell.swift */,
-				4C287A15A07A292181CB033E /* BadHabitApplicableToTableViewCell.swift */,
 				4C28785D2684530B7533ACA7 /* SimleBadHabit.swift */,
 				4C2871A82528B0822981AA36 /* BadHabitFrom.swift */,
 				4C287BF1B6CB5AD870366AEB /* MyBadHabitsPresentation.swift */,
@@ -657,7 +654,6 @@
 				4C28720396CCCDADD6C2F66C /* BadHabits.swift in Sources */,
 				4C287B5806EB12133B0235AB /* BadHabitsTableViewPresentation.swift in Sources */,
 				4C28741C98B966BDDD78F4D4 /* BadHabitTableViewCell.swift in Sources */,
-				4C28746F061D9C9C8578DB71 /* BadHabitApplicableToTableViewCell.swift in Sources */,
 				4C287D453B54426DE1B75C57 /* SimleBadHabit.swift in Sources */,
 				4C287F05F5C7454FA7A68331 /* Authority.swift in Sources */,
 				4C287272D1EDD3867CC994AF /* EmtyObservableImage.swift in Sources */,

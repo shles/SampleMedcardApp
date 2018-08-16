@@ -15,16 +15,16 @@ class BadHabitsTableViewPresentation: Presentation {
     private var tableView = StandardTableView()
     private let disposeBag = DisposeBag()
 
-    let habits: Refreshable<[BadHabit]>
+    private let habits: Refreshable<[ListApplicable]>
 
     private let refreshSubject = PublishSubject<Void>()
     private let wantsToPushSubject = PublishSubject<Transition>()
-    private let habitsSubject = ReplaySubject<[BadHabit]>.create(bufferSize: 1)
+    private let habitsSubject = ReplaySubject<[ListApplicable]>.create(bufferSize: 1)
 
-    var selection = PublishSubject<BadHabit>()
+    var selection = PublishSubject<ListApplicable>()
 
 
-    init(observableHabits: ObservableBadHabits) {
+    init(observableHabits: Observable<[ListApplicable]>) {
 
         self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject.skip(1))
 
@@ -40,11 +40,9 @@ class BadHabitsTableViewPresentation: Presentation {
 
         }
 
-        let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<BadHabit>>(
+        let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<ListApplicable>>(
                 configureCell: { _, tv, ip, habit in
-                    let cell = tv.dequeueReusableCellOfType(SimpleTickedCell.self, for: ip)
-                    BadHabitApplicableToTableViewCell(origin: habit).apply(target: cell)
-                    return cell
+                    return tv.dequeueReusableCellOfType(SimpleTickedCell.self, for: ip).configured(item: habit)
                 })
 
         habitsSubject.asObservable()
@@ -52,7 +50,7 @@ class BadHabitsTableViewPresentation: Presentation {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        tableView.rx.modelSelected(BadHabit.self).bind(to: selection).disposed(by: disposeBag)
+        tableView.rx.modelSelected(ListApplicable.self).bind(to: selection).disposed(by: disposeBag)
 
         habitsSubject.asObservable()
                 .catchErrorJustReturn([])

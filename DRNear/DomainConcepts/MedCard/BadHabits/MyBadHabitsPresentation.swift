@@ -18,12 +18,12 @@ class MyBadHabitsPresentation: Presentation {
     private let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
     private let disposeBag = DisposeBag()
     
-    init(badHabits: ObservableBadHabits, leadingTo: @escaping () -> (UIViewController) ) {
-        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits)
-        self.leadingTo = leadingTo
+    init(badHabits: ListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController) ) {
 
-        navBar = NavigationBarWithBackButton(title: "Вредные привычки")
-                .with(gradient: [.wheatTwo, .rosa])
+        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable())
+        self.leadingTo = leadingTo
+        navBar = NavigationBarWithBackButton(title: title)
+                .with(gradient: gradient)
                 .with(rightInactiveButton: button)
 
         view.addSubviews([badHabtsPresentation.view, navBar])
@@ -50,7 +50,8 @@ class MyBadHabitsPresentation: Presentation {
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([
             button.rx.tap.map { self.leadingTo() }.map { vc in PushTransition(leadingTo: { vc }) },
-            badHabtsPresentation.wantsToPerform()
+            badHabtsPresentation.wantsToPerform(),
+            navBar.wantsToPerform()
         ]).catchError { error in
             Observable.just(ErrorAlertTransition(error: error))
           }

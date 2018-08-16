@@ -33,10 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             leadingTo: { ViewController(
                                                     presentation: MyBadHabitsPresentation(
                                                             badHabits: ObservableSimpleMyBadHabits(),//(try? ObservableMyBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
+                                                            title: "Вредные привычки",
+                                                            gradient: [.wheatTwo, .rosa],
                                                             leadingTo: { return ViewController(
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: (try? ObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
-                                                                            update: MyBadHabitsUpdate(token: token)
+                                                                            update: MyBadHabitsUpdate(token: token),
+                                                                            title: "Вредные привычки",
+                                                                            gradient: [.wheatTwo, .rosa]
                                                                     )
                                                             )}
                                                     )

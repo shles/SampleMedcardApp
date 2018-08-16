@@ -8,35 +8,49 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
-class ObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType {
+class ObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType, Searchable {
 
     typealias E = [BadHabit]
     private let token: Token
-    private let request: Request
+//    private let request: Request
+    private let searchSubject = PublishSubject<String>()
 
     init(token: Token) throws {
-
-        request = try AuthorizedRequest(
-                path: "/eco-emc/api/my/bad-habits",
-                method: .get,
-                token: token,
-                parameters: ["type": "detached"],
-                encoding: URLEncoding.default
-        )
         self.token = token
     }
 
-    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [BadHabit] {
-        return request.make()
-                .map { json in
+//TODO: somewhere here is a cause of disposing when error occures. Needed to be recoverable or not emitting error
 
-                    json.arrayValue.map { (json: JSON) in
-                        BadHabitFrom(
-                                name: json["name"].string  ?? "",
-                                id: json["code"].string ?? "",
-                                token: self.token
-                        )
-                    }
-                }.subscribe(observer)
+    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [BadHabit] {
+
+        return searchSubject.startWith("").debug().map { [unowned self] name in
+
+            try AuthorizedRequest(
+                    path: "/eco-emc/api/my/bad-habits",
+                    method: .get,
+                    token: self.token,
+                    parameters: [
+                        "type": "detached",
+                        "name.like": name
+                    ],
+                    encoding: URLEncoding.default
+            )
+        }.flatMap {
+            $0.make()
+        }.map { json in
+
+            json.arrayValue.map { (json: JSON) in
+                BadHabitFrom(
+                        name: json["name"].string ?? "",
+                        id: json["code"].string ?? "",
+                        token: self.token
+                )
+            }
+        }.catchErrorJustReturn([])
+                .subscribe(observer)
+    }
+
+    func search(string: String) {
+        searchSubject.onNext(string)
     }
 }

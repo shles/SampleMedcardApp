@@ -7,13 +7,18 @@ import Foundation
 import RxSwift
 import SnapKit
 
+protocol Searchable {
+
+    func search(string: String)
+
+}
+
 class AllBadHabitsPresentation: Presentation {
 
     var view: UIView = UIView()
 
     private var badHabtsPresentation: BadHabitsTableViewPresentation
-    private let navBar = NavigationBarWithBackButtonAndSearch(title: "Вредные привычки")
-            .with(gradient: [.wheatTwo, .rosa])
+    private let navBar: NavigationBarWithBackButtonAndSearch
     private let addButton = UIButton()
             .with(title: "Добавить")
             .with(backgroundColor: .rosa)
@@ -22,8 +27,11 @@ class AllBadHabitsPresentation: Presentation {
 
     private let disposeBag = DisposeBag()
 
-    init(badHabits: ObservableBadHabits, update: Update)  {
-        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits)
+    init(badHabits: ListRepresentable & Searchable, update: Update, title: String, gradient: [UIColor]) {
+
+        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable())
+        navBar = NavigationBarWithBackButtonAndSearch(title: title)
+                .with(gradient: gradient)
 
         view.addSubviews([badHabtsPresentation.view, navBar, addButton])
 
@@ -44,14 +52,6 @@ class AllBadHabitsPresentation: Presentation {
             $0.trailing.equalToSuperview().inset(24)
         }
 
-//        Observable<BadHabit>.merge(badHabits.asObservable().flatMap { habits in
-//            habits.map { habit -> Observable<BadHabit> in
-//                return habit.isSelected.asObservable().map { _ in habit}
-//            }
-//        }).subscribe(onNext: {
-//            update.addItem(item: $0)
-//        }).disposed(by: disposeBag)
-
         badHabtsPresentation.selection.subscribe(onNext: {
             $0.select()
             update.addItem(item: $0)
@@ -69,7 +69,11 @@ class AllBadHabitsPresentation: Presentation {
 
         addButton.rx.tap.subscribe(onNext: {
             update.apply()
-        })
+        }).disposed(by: disposeBag)
+
+        navBar.searchString().subscribe(onNext: {
+            badHabits.search(string: $0)
+        }).disposed(by: disposeBag)
     }
 
     func willAppear() {
