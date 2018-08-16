@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.rosa, .wheatTwo],
                                             leadingTo: { ViewController(
                                                     presentation: MyBadHabitsPresentation(
-                                                            badHabits: ObservableSimpleMyBadHabits(),//(try? ObservableMyBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
+                                                            badHabits: (try? MyObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
                                                             title: "Вредные привычки",
                                                             gradient: [.wheatTwo, .rosa],
                                                             leadingTo: { return ViewController(

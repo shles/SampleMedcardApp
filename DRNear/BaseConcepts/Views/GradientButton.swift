@@ -1,11 +1,11 @@
 //
-// Created by Артмеий Шлесберг on 03/08/2018.
+// Created by Артмеий Шлесберг on 16/08/2018.
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
 import UIKit
 
-class GradientView: UIView {
+class GradientButton: UIButton {
 
     private let gradientLayer = CAGradientLayer()
 
@@ -18,26 +18,22 @@ class GradientView: UIView {
     init(colors: [UIColor] = []) {
         self.colors = colors.map { $0.cgColor }
         super.init(frame: .zero)
-        self.layer.addSublayer(gradientLayer)
+        self.layer.insertSublayer(gradientLayer, at: 0)
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        self.colors = colors.map { $0.cgColor }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        var frame = self.frame
-
+        var frame  = self.bounds
         frame.origin = .zero
-        gradientLayer.frame = frame
+//        gradientLayer.position = .zero
+        gradientLayer.frame = self.layer.bounds
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Storyboards are deprecated!")
+        fatalError("Storyboards are deprecated")
     }
-
-    func setColors(_ colors: [UIColor]) {
-        self.colors = colors.map { $0.cgColor }
-    }
-
 }
