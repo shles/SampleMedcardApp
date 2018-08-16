@@ -8,7 +8,7 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
-class ObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType, Searchable {
+class AllObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType, Searchable {
 
     typealias E = [BadHabit]
     private let token: Token

@@ -43,7 +43,7 @@ class BadHabitsTests: QuickSpec {
             context("with remote objects") {
                 it("should do the same") {
                     
-                    habits = ObservableMyBadHabitsFromAPI(token: TokenFromString(string: ""))
+                    habits = MyObservableBadHabitsFromAPI(token: TokenFromString(string: ""))
                     
                     var vc = UIViewController()
                     var navVC = UINavigationController(rootViewController: vc)

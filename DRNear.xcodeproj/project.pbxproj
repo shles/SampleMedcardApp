@@ -28,7 +28,7 @@
 		4C28746DABEC469CB1BE357B /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28767089E441C4DEDD7E54 /* Authority.swift */; };
 		4C287515190CC81005A3E0E4 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287796B6F7673B58DC30E5 /* Request.swift */; };
 		4C2875193BC5215470ED3FE1 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287BFD15BBEB8549AFEB97 /* Named.swift */; };
-		4C287537F876404304236173 /* ObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2877E2A6511F3668D68881 /* ObservableBadHabitsFromAPI.swift */; };
+		4C287537F876404304236173 /* AllObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2877E2A6511F3668D68881 /* AllObservableBadHabitsFromAPI.swift */; };
 		4C28754E684C658153CD4A90 /* IdentificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */; };
 		4C2875BAB3BBA43A88C4B99F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871B93580BA6BFB1A8C56 /* Credentials.swift */; };
 		4C287622D55CD1FBFF4894A5 /* AuthorityFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871120852DA9CADDECFA6 /* AuthorityFromAPI.swift */; };
@@ -41,7 +41,7 @@
 		4C2877DA3C65D04425627B2F /* ErrorAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2874B918FEEF2D6DBE8CDE /* ErrorAlertTransition.swift */; };
 		4C287826F2531E5059DCB7EB /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287C98D5542CA2BB80B343 /* Token.swift */; };
 		4C287838622D5D8D93068FA2 /* BadHabitFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871A82528B0822981AA36 /* BadHabitFrom.swift */; };
-		4C2878E55C44A97E05C481BD /* ObservableMyBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28776EFF4811C4A745CAC5 /* ObservableMyBadHabitsFromAPI.swift */; };
+		4C2878E55C44A97E05C481BD /* MyObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28776EFF4811C4A745CAC5 /* MyObservableBadHabitsFromAPI.swift */; };
 		4C28797ADDE4307761129320 /* SimpleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287F03C62A561688E3FD1F /* SimpleNavigationBar.swift */; };
 		4C287994386CF29073126E2E /* CredentialsFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2875A6A7EE319618D0E7CD /* CredentialsFrom.swift */; };
 		4C2879DC948AEE515F8B9DD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879733193AD7FA725432E /* ViewController.swift */; };
@@ -52,6 +52,7 @@
 		4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */; };
 		4C287B5806EB12133B0235AB /* BadHabitsTableViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871B627B8F784AE50AADB /* BadHabitsTableViewPresentation.swift */; };
 		4C287B72845683EDB11CB9E9 /* MedCardOptionApplicableToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */; };
+		4C287BCC787EE48301DCB471 /* Alergies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870BBC20594CD5111ADE4 /* Alergies.swift */; };
 		4C287BE4587CFA7665CE39BD /* MyBadHabitsPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287BF1B6CB5AD870366AEB /* MyBadHabitsPresentation.swift */; };
 		4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */; };
 		4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879CBC781343E41611DD3 /* AppicationTests.swift */; };
@@ -97,6 +98,7 @@
 /* Begin PBXFileReference section */
 		4C28708164D19C6484F6778A /* BadHabit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabit.swift; sourceTree = "<group>"; };
 		4C2870B29FB3BB9F08D020EC /* Refreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
+		4C2870BBC20594CD5111ADE4 /* Alergies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alergies.swift; sourceTree = "<group>"; };
 		4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		4C2871120852DA9CADDECFA6 /* AuthorityFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityFromAPI.swift; sourceTree = "<group>"; };
 		4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
@@ -121,11 +123,11 @@
 		4C28768E71149F65D2E9D66D /* ContainingImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainingImage.swift; sourceTree = "<group>"; };
 		4C2876A48DE94BA9A032BF01 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardTests.swift; sourceTree = "<group>"; };
-		4C28776EFF4811C4A745CAC5 /* ObservableMyBadHabitsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableMyBadHabitsFromAPI.swift; sourceTree = "<group>"; };
+		4C28776EFF4811C4A745CAC5 /* MyObservableBadHabitsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyObservableBadHabitsFromAPI.swift; sourceTree = "<group>"; };
 		4C287795F6B36AB1AEA81393 /* TokenFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenFromString.swift; sourceTree = "<group>"; };
 		4C287796B6F7673B58DC30E5 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		4C2877E043128053C64AE44F /* SimpleCodeConfirmationPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCodeConfirmationPresentation.swift; sourceTree = "<group>"; };
-		4C2877E2A6511F3668D68881 /* ObservableBadHabitsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableBadHabitsFromAPI.swift; sourceTree = "<group>"; };
+		4C2877E2A6511F3668D68881 /* AllObservableBadHabitsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllObservableBadHabitsFromAPI.swift; sourceTree = "<group>"; };
 		4C2878061A01A7E7455A0A85 /* BadHabitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitTableViewCell.swift; sourceTree = "<group>"; };
 		4C28785D2684530B7533ACA7 /* SimleBadHabit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimleBadHabit.swift; sourceTree = "<group>"; };
 		4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleObjectsTests.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				4C287C6E0D0492EF868D5529 /* MedCard */,
 				4C2876B049FC64A7C427A55A /* Authorization */,
+				4C2870BBC20594CD5111ADE4 /* Alergies.swift */,
 			);
 			path = DomainConcepts;
 			sourceTree = "<group>";
@@ -254,8 +257,8 @@
 				4C28785D2684530B7533ACA7 /* SimleBadHabit.swift */,
 				4C2871A82528B0822981AA36 /* BadHabitFrom.swift */,
 				4C287BF1B6CB5AD870366AEB /* MyBadHabitsPresentation.swift */,
-				4C2877E2A6511F3668D68881 /* ObservableBadHabitsFromAPI.swift */,
-				4C28776EFF4811C4A745CAC5 /* ObservableMyBadHabitsFromAPI.swift */,
+				4C2877E2A6511F3668D68881 /* AllObservableBadHabitsFromAPI.swift */,
+				4C28776EFF4811C4A745CAC5 /* MyObservableBadHabitsFromAPI.swift */,
 				4C287ACABF51F6EF366EA62B /* AllBadHabitsPresentation.swift */,
 			);
 			path = BadHabits;
@@ -694,8 +697,8 @@
 				4C287DEBCF054934DD89DFB8 /* TestExtensions.swift in Sources */,
 				4C287838622D5D8D93068FA2 /* BadHabitFrom.swift in Sources */,
 				4C287BE4587CFA7665CE39BD /* MyBadHabitsPresentation.swift in Sources */,
-				4C287537F876404304236173 /* ObservableBadHabitsFromAPI.swift in Sources */,
-				4C2878E55C44A97E05C481BD /* ObservableMyBadHabitsFromAPI.swift in Sources */,
+				4C287537F876404304236173 /* AllObservableBadHabitsFromAPI.swift in Sources */,
+				4C2878E55C44A97E05C481BD /* MyObservableBadHabitsFromAPI.swift in Sources */,
 				4C287068C098A6125B74277C /* AllBadHabitsPresentation.swift in Sources */,
 				4C2879F72D99260125A48ACA /* Alamofire.swift in Sources */,
 				4C2871ECCAC65FE91AE04E99 /* Selectable.swift in Sources */,
@@ -721,6 +724,7 @@
 				4C287182581699EB56C18473 /* EmptyToken.swift in Sources */,
 				4C2875BAB3BBA43A88C4B99F /* Credentials.swift in Sources */,
 				4C287994386CF29073126E2E /* CredentialsFrom.swift in Sources */,
+				4C287BCC787EE48301DCB471 /* Alergies.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

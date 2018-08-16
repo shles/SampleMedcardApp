@@ -9,7 +9,7 @@ import RxSwift
 import SwiftyJSON
 import SnapKit
 
-class ObservableMyBadHabitsFromAPI: ObservableBadHabits, ObservableType {
+class MyObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType {
 
     typealias E = [BadHabit]
 
@@ -32,10 +32,9 @@ class ObservableMyBadHabitsFromAPI: ObservableBadHabits, ObservableType {
                 .map { json in
 
                     json.arrayValue.map { (json: JSON) in
-                        BadHabitFrom(
+                        MyBadHabitFrom(
                                 name: json["name"].string  ?? "",
                                 id: json["code"].string ?? "",
-                                selected: true,
                                 token: self.token
                         )
                     }
@@ -51,9 +50,14 @@ class MyBadHabitFrom: BadHabit, Deletable {
 
     private let deletionSubject = PublishSubject<Transition>()
 
-    init(name: String, id: String) {
+    private let token: Token
+
+    private let disposeBag = DisposeBag()
+
+    init(name: String, id: String, token: Token) {
         self.name = name
         self.identification = id
+        self.token = token
     }
 
     func select() {
@@ -65,7 +69,20 @@ class MyBadHabitFrom: BadHabit, Deletable {
             ViewController(
                     presentation: DeletionPresentation(
                             title: "Вы точно хотите удалить привычку \"\(self.name)\"?",
-                            onAccept: { }
+                            onAccept: { [unowned self] in
+                                if let request = try? AuthorizedRequest(
+                                        path: "/eco-emc/api/my/bad-habits",
+                                        method: .delete,
+                                        token: self.token,
+                                        parameters: [self.identification].asParameters(),
+                                        encoding: ArrayEncoding()
+                                ) {
+
+                                    request.make().subscribe(onNext: {_ in
+
+                                    }).disposed(by: self.disposeBag)
+                                }
+                            }
                     )
             )
         })
@@ -79,9 +96,9 @@ class MyBadHabitFrom: BadHabit, Deletable {
 class ObservableSimpleMyBadHabits: ObservableBadHabits {
 
     private let array = [
-        MyBadHabitFrom(name: "aaa", id: "a"),
-        MyBadHabitFrom(name: "bbb", id: "b"),
-        MyBadHabitFrom(name: "ccc", id: "c")
+        MyBadHabitFrom(name: "aaa", id: "a", token: TokenFromString(string: "")),
+        MyBadHabitFrom(name: "bbb", id: "b", token: TokenFromString(string: "")),
+        MyBadHabitFrom(name: "ccc", id: "c", token: TokenFromString(string: ""))
     ]
 
     func asObservable() -> Observable<[BadHabit]> {
