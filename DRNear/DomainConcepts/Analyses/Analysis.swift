@@ -6,7 +6,7 @@
 import Foundation
 import RxSwift
 
-protocol MedicalTest: Named, Dated, Described, SystemRelated {
+protocol MedicalTest: Named, Dated, Described, SystemRelated, Editable, Deletable {
 
 }
 
@@ -22,7 +22,7 @@ extension ObservableMedicalTests {
     }
 }
 
-class SimpleMedicalTest: MedicalTest, Deletable {
+class SimpleMedicalTest: MedicalTest {
     private(set) var name: String = "Анализ крови"
     private(set) var date: Date = Date()
     var description: String = "Лаборатория NKL №122 Лабораторные исследования"
@@ -47,6 +47,10 @@ class SimpleMedicalTest: MedicalTest, Deletable {
     }
 
     private(set) var isRelatedToSystem: Bool = false
+
+    func edit() {
+        
+    }
 }
 
 class SimpleMyMedicalTests: ObservableMedicalTests {

@@ -10,7 +10,7 @@ import SnapKit
 import RxCocoa
 import RxDataSources
 
-typealias DatedListApplicable = Dated & Named & Described & SystemRelated
+typealias DatedListApplicable = Dated & Named & Described & SystemRelated & Deletable & Editable
 
 protocol DatedListRepresentable {
     func toListRepresentable() -> Observable<[DatedListApplicable]>
