@@ -46,12 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     )
                                                 )}
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Аллергии",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedYellow")
                                             ),
-                                            gradientColors: [.peach, .wheat]
+                                            gradientColors: [.peach, .wheat],
+                                            leadingTo: {
+                                                ViewController(presentation: DDNListPresentation(
+                                                        items: SimpleMyMedicalTests(),
+                                                        title: "Анализы и исследования",
+                                                        gradient: [.peach, .wheat],
+                                                        leadingTo: {
+                                                            ViewController(presentation: SimpleViewWthButtonPresentation())
+                                                        }))
+                                            }
 
                                     ),
                                     InactiveMedCardOptionFrom(
