@@ -52,7 +52,7 @@
 		4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */; };
 		4C287B5806EB12133B0235AB /* BadHabitsTableViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871B627B8F784AE50AADB /* BadHabitsTableViewPresentation.swift */; };
 		4C287B72845683EDB11CB9E9 /* MedCardOptionApplicableToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2874217818B5547164CA24 /* MedCardOptionApplicableToCollectionViewCell.swift */; };
-		4C287BCC787EE48301DCB471 /* Alergies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870BBC20594CD5111ADE4 /* Alergies.swift */; };
+		4C287BCC787EE48301DCB471 /* Allergies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870BBC20594CD5111ADE4 /* Allergies.swift */; };
 		4C287BE4587CFA7665CE39BD /* MyBadHabitsPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287BF1B6CB5AD870366AEB /* MyBadHabitsPresentation.swift */; };
 		4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28733DBA199F797355D770 /* MedCardOptionFrom.swift */; };
 		4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879CBC781343E41611DD3 /* AppicationTests.swift */; };
@@ -66,6 +66,23 @@
 		4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */; };
 		4C287FBD612D3439E9DCCFC2 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287D415579A924A810A4E2 /* Update.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
+		F8B447142126AA6400DC10E4 /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447132126AA6400DC10E4 /* Allergy.swift */; };
+		F8B447162126ACBA00DC10E4 /* SimpleAllergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447152126ACBA00DC10E4 /* SimpleAllergy.swift */; };
+		F8B447182126AD5700DC10E4 /* AllergyFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447172126AD5700DC10E4 /* AllergyFrom.swift */; };
+		F8B4471A2126ADC900DC10E4 /* AllObservableAllergiesFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447192126ADC900DC10E4 /* AllObservableAllergiesFromAPI.swift */; };
+		F8B4471C2126ADD900DC10E4 /* MyObservableAllergiesFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4471B2126ADD900DC10E4 /* MyObservableAllergiesFromAPI.swift */; };
+		F8B447202126AED000DC10E4 /* Disease.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4471F2126AED000DC10E4 /* Disease.swift */; };
+		F8B447222126AED800DC10E4 /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447212126AED800DC10E4 /* Diseases.swift */; };
+		F8B447242126AEE600DC10E4 /* SimpleDisease.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447232126AEE600DC10E4 /* SimpleDisease.swift */; };
+		F8B447262126AEF300DC10E4 /* DiseaseFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447252126AEF300DC10E4 /* DiseaseFrom.swift */; };
+		F8B447282126AF1200DC10E4 /* AllObservableDiseasesFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447272126AF1200DC10E4 /* AllObservableDiseasesFromAPI.swift */; };
+		F8B4472A2126AF2200DC10E4 /* MyObservableDiseasesFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447292126AF2200DC10E4 /* MyObservableDiseasesFromAPI.swift */; };
+		F8B4472C2126AF2F00DC10E4 /* Vaccination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4472B2126AF2F00DC10E4 /* Vaccination.swift */; };
+		F8B4472E2126AF3700DC10E4 /* Vaccinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4472D2126AF3700DC10E4 /* Vaccinations.swift */; };
+		F8B447302126AF4100DC10E4 /* SimpleVaccination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4472F2126AF4100DC10E4 /* SimpleVaccination.swift */; };
+		F8B447322126AF4A00DC10E4 /* VaccinationFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447312126AF4A00DC10E4 /* VaccinationFrom.swift */; };
+		F8B447342126AF6000DC10E4 /* AllObservableVaccinationsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447332126AF6000DC10E4 /* AllObservableVaccinationsFromAPI.swift */; };
+		F8B447362126AF8200DC10E4 /* MyObservableVaccinationsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B447352126AF8200DC10E4 /* MyObservableVaccinationsFromAPI.swift */; };
 		FD060C9E2119F2F400EF3C2B /* BadHabitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */; };
 		FD3460BB2114C499007B0943 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BA2114C499007B0943 /* UIView.swift */; };
 		FD3460BD2114C4FE007B0943 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BC2114C4FD007B0943 /* UILabel.swift */; };
@@ -98,7 +115,7 @@
 /* Begin PBXFileReference section */
 		4C28708164D19C6484F6778A /* BadHabit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabit.swift; sourceTree = "<group>"; };
 		4C2870B29FB3BB9F08D020EC /* Refreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
-		4C2870BBC20594CD5111ADE4 /* Alergies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alergies.swift; sourceTree = "<group>"; };
+		4C2870BBC20594CD5111ADE4 /* Allergies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergies.swift; sourceTree = "<group>"; };
 		4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		4C2871120852DA9CADDECFA6 /* AuthorityFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityFromAPI.swift; sourceTree = "<group>"; };
 		4C28711E3DD71E7FC4FDA3DA /* Applicable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
@@ -159,6 +176,23 @@
 		BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.release.xcconfig"; sourceTree = "<group>"; };
 		E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.debug.xcconfig"; sourceTree = "<group>"; };
+		F8B447132126AA6400DC10E4 /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
+		F8B447152126ACBA00DC10E4 /* SimpleAllergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAllergy.swift; sourceTree = "<group>"; };
+		F8B447172126AD5700DC10E4 /* AllergyFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergyFrom.swift; sourceTree = "<group>"; };
+		F8B447192126ADC900DC10E4 /* AllObservableAllergiesFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllObservableAllergiesFromAPI.swift; sourceTree = "<group>"; };
+		F8B4471B2126ADD900DC10E4 /* MyObservableAllergiesFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyObservableAllergiesFromAPI.swift; sourceTree = "<group>"; };
+		F8B4471F2126AED000DC10E4 /* Disease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disease.swift; sourceTree = "<group>"; };
+		F8B447212126AED800DC10E4 /* Diseases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diseases.swift; sourceTree = "<group>"; };
+		F8B447232126AEE600DC10E4 /* SimpleDisease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDisease.swift; sourceTree = "<group>"; };
+		F8B447252126AEF300DC10E4 /* DiseaseFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseFrom.swift; sourceTree = "<group>"; };
+		F8B447272126AF1200DC10E4 /* AllObservableDiseasesFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllObservableDiseasesFromAPI.swift; sourceTree = "<group>"; };
+		F8B447292126AF2200DC10E4 /* MyObservableDiseasesFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyObservableDiseasesFromAPI.swift; sourceTree = "<group>"; };
+		F8B4472B2126AF2F00DC10E4 /* Vaccination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccination.swift; sourceTree = "<group>"; };
+		F8B4472D2126AF3700DC10E4 /* Vaccinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccinations.swift; sourceTree = "<group>"; };
+		F8B4472F2126AF4100DC10E4 /* SimpleVaccination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleVaccination.swift; sourceTree = "<group>"; };
+		F8B447312126AF4A00DC10E4 /* VaccinationFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationFrom.swift; sourceTree = "<group>"; };
+		F8B447332126AF6000DC10E4 /* AllObservableVaccinationsFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllObservableVaccinationsFromAPI.swift; sourceTree = "<group>"; };
+		F8B447352126AF8200DC10E4 /* MyObservableVaccinationsFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyObservableVaccinationsFromAPI.swift; sourceTree = "<group>"; };
 		FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadHabitsTests.swift; sourceTree = "<group>"; };
 		FD3460BA2114C499007B0943 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FD3460BC2114C4FD007B0943 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -242,7 +276,6 @@
 			children = (
 				4C287C6E0D0492EF868D5529 /* MedCard */,
 				4C2876B049FC64A7C427A55A /* Authorization */,
-				4C2870BBC20594CD5111ADE4 /* Alergies.swift */,
 			);
 			path = DomainConcepts;
 			sourceTree = "<group>";
@@ -335,9 +368,12 @@
 		4C287C6E0D0492EF868D5529 /* MedCard */ = {
 			isa = PBXGroup;
 			children = (
-				4C287F6EEEAB86EC7DD0DEF7 /* MedCardOption */,
 				4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */,
+				4C287F6EEEAB86EC7DD0DEF7 /* MedCardOption */,
 				4C287105A3A247C98DED64A6 /* BadHabits */,
+				F8B447122126AA2700DC10E4 /* Allergies */,
+				F8B4471D2126ADFF00DC10E4 /* Diseases */,
+				F8B4471E2126AE3400DC10E4 /* Vaccination */,
 			);
 			path = MedCard;
 			sourceTree = "<group>";
@@ -371,6 +407,45 @@
 				5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8B447122126AA2700DC10E4 /* Allergies */ = {
+			isa = PBXGroup;
+			children = (
+				F8B447132126AA6400DC10E4 /* Allergy.swift */,
+				4C2870BBC20594CD5111ADE4 /* Allergies.swift */,
+				F8B447152126ACBA00DC10E4 /* SimpleAllergy.swift */,
+				F8B447172126AD5700DC10E4 /* AllergyFrom.swift */,
+				F8B447192126ADC900DC10E4 /* AllObservableAllergiesFromAPI.swift */,
+				F8B4471B2126ADD900DC10E4 /* MyObservableAllergiesFromAPI.swift */,
+			);
+			path = Allergies;
+			sourceTree = "<group>";
+		};
+		F8B4471D2126ADFF00DC10E4 /* Diseases */ = {
+			isa = PBXGroup;
+			children = (
+				F8B4471F2126AED000DC10E4 /* Disease.swift */,
+				F8B447212126AED800DC10E4 /* Diseases.swift */,
+				F8B447232126AEE600DC10E4 /* SimpleDisease.swift */,
+				F8B447252126AEF300DC10E4 /* DiseaseFrom.swift */,
+				F8B447272126AF1200DC10E4 /* AllObservableDiseasesFromAPI.swift */,
+				F8B447292126AF2200DC10E4 /* MyObservableDiseasesFromAPI.swift */,
+			);
+			path = Diseases;
+			sourceTree = "<group>";
+		};
+		F8B4471E2126AE3400DC10E4 /* Vaccination */ = {
+			isa = PBXGroup;
+			children = (
+				F8B4472B2126AF2F00DC10E4 /* Vaccination.swift */,
+				F8B4472D2126AF3700DC10E4 /* Vaccinations.swift */,
+				F8B4472F2126AF4100DC10E4 /* SimpleVaccination.swift */,
+				F8B447312126AF4A00DC10E4 /* VaccinationFrom.swift */,
+				F8B447332126AF6000DC10E4 /* AllObservableVaccinationsFromAPI.swift */,
+				F8B447352126AF8200DC10E4 /* MyObservableVaccinationsFromAPI.swift */,
+			);
+			path = Vaccination;
 			sourceTree = "<group>";
 		};
 		FD3460CA2114F459007B0943 /* Styles */ = {
@@ -669,22 +744,30 @@
 				4C28762B019C533E21C77830 /* ObservableImage.swift in Sources */,
 				4C2879E05A8BFAFBBEAA4AE9 /* Presentation.swift in Sources */,
 				FDA48DD72120BC8000AFDC65 /* File.swift in Sources */,
+				F8B447242126AEE600DC10E4 /* SimpleDisease.swift in Sources */,
+				F8B447302126AF4100DC10E4 /* SimpleVaccination.swift in Sources */,
 				4C2875193BC5215470ED3FE1 /* Named.swift in Sources */,
 				4C287E2D873D612756944F42 /* ContainingImage.swift in Sources */,
 				FD3460C82114F2CD007B0943 /* UIFont+Additions.swift in Sources */,
+				F8B447342126AF6000DC10E4 /* AllObservableVaccinationsFromAPI.swift in Sources */,
 				4C2879DC948AEE515F8B9DD9 /* ViewController.swift in Sources */,
 				4C28707B9D15494ECA238A5F /* MedCardOption.swift in Sources */,
 				FD3460C32114C533007B0943 /* UITextField.swift in Sources */,
+				F8B4472A2126AF2200DC10E4 /* MyObservableDiseasesFromAPI.swift in Sources */,
 				FD3460C12114C50A007B0943 /* UIImageView.swift in Sources */,
 				4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */,
 				4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */,
 				FD3460C92114F2CD007B0943 /* UIColor+Additions.swift in Sources */,
 				4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */,
+				F8B447282126AF1200DC10E4 /* AllObservableDiseasesFromAPI.swift in Sources */,
 				FD3460C02114C50A007B0943 /* UIButton.swift in Sources */,
+				F8B4472C2126AF2F00DC10E4 /* Vaccination.swift in Sources */,
 				4C287737CA37EE6D4060A5AE /* ObservableMedCardOptions.swift in Sources */,
 				4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */,
 				4C287AB142304A462D5C63CD /* Applicable.swift in Sources */,
 				4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */,
+				F8B447262126AEF300DC10E4 /* DiseaseFrom.swift in Sources */,
+				F8B447202126AED000DC10E4 /* Disease.swift in Sources */,
 				4C287B72845683EDB11CB9E9 /* MedCardOptionApplicableToCollectionViewCell.swift in Sources */,
 				4C28726D8D6010B64D446EF7 /* Identificated.swift in Sources */,
 				FDA2911B2118B66900FAA316 /* UITableView.swift in Sources */,
@@ -694,37 +777,46 @@
 				4C28741C98B966BDDD78F4D4 /* BadHabitTableViewCell.swift in Sources */,
 				4C287D453B54426DE1B75C57 /* SimleBadHabit.swift in Sources */,
 				4C287272D1EDD3867CC994AF /* EmtyObservableImage.swift in Sources */,
+				F8B447182126AD5700DC10E4 /* AllergyFrom.swift in Sources */,
 				4C287DEBCF054934DD89DFB8 /* TestExtensions.swift in Sources */,
 				4C287838622D5D8D93068FA2 /* BadHabitFrom.swift in Sources */,
 				4C287BE4587CFA7665CE39BD /* MyBadHabitsPresentation.swift in Sources */,
+				F8B447322126AF4A00DC10E4 /* VaccinationFrom.swift in Sources */,
 				4C287537F876404304236173 /* AllObservableBadHabitsFromAPI.swift in Sources */,
 				4C2878E55C44A97E05C481BD /* MyObservableBadHabitsFromAPI.swift in Sources */,
 				4C287068C098A6125B74277C /* AllBadHabitsPresentation.swift in Sources */,
 				4C2879F72D99260125A48ACA /* Alamofire.swift in Sources */,
 				4C2871ECCAC65FE91AE04E99 /* Selectable.swift in Sources */,
 				4C287515190CC81005A3E0E4 /* Request.swift in Sources */,
+				F8B447162126ACBA00DC10E4 /* SimpleAllergy.swift in Sources */,
 				4C28797ADDE4307761129320 /* SimpleNavigationBar.swift in Sources */,
 				4C2870B378BE4DE919BC1D26 /* StandardSectionModel.swift in Sources */,
 				4C287623DD90E2C086D95E22 /* StandardTableView.swift in Sources */,
 				4C287A28AFDB308D244F42D5 /* GradientView.swift in Sources */,
+				F8B4471C2126ADD900DC10E4 /* MyObservableAllergiesFromAPI.swift in Sources */,
 				4C2872B100CCAD489A8D78C4 /* Refreshable.swift in Sources */,
 				4C28720069E57E87C0278D00 /* Deletable.swift in Sources */,
+				F8B447142126AA6400DC10E4 /* Allergy.swift in Sources */,
 				4C287FBD612D3439E9DCCFC2 /* Update.swift in Sources */,
 				4C28777E833BED4876D1FE92 /* Transition.swift in Sources */,
 				4C2871E76E5A23386DA13F12 /* TransitionSource.swift in Sources */,
+				F8B4471A2126ADC900DC10E4 /* AllObservableAllergiesFromAPI.swift in Sources */,
 				4C2877DA3C65D04425627B2F /* ErrorAlertTransition.swift in Sources */,
 				4C287F147C62205E3F788B28 /* DeletionPresentation.swift in Sources */,
 				4C2873D4711236CA4F0211E0 /* SimpleCodeConfirmationPresentation.swift in Sources */,
 				4C2877547CEF84CC838910F8 /* SimpleLoginPresentation.swift in Sources */,
 				4C28746DABEC469CB1BE357B /* Authority.swift in Sources */,
 				4C287622D55CD1FBFF4894A5 /* AuthorityFromAPI.swift in Sources */,
+				F8B447362126AF8200DC10E4 /* MyObservableVaccinationsFromAPI.swift in Sources */,
 				4C287DF43E800537AEEEC9CD /* SimpleAuthority.swift in Sources */,
 				4C287826F2531E5059DCB7EB /* Token.swift in Sources */,
+				F8B447222126AED800DC10E4 /* Diseases.swift in Sources */,
 				4C287083FD50E0BA965F250D /* TokenFromString.swift in Sources */,
 				4C287182581699EB56C18473 /* EmptyToken.swift in Sources */,
+				F8B4472E2126AF3700DC10E4 /* Vaccinations.swift in Sources */,
 				4C2875BAB3BBA43A88C4B99F /* Credentials.swift in Sources */,
 				4C287994386CF29073126E2E /* CredentialsFrom.swift in Sources */,
-				4C287BCC787EE48301DCB471 /* Alergies.swift in Sources */,
+				4C287BCC787EE48301DCB471 /* Allergies.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,7 +983,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9HXCUL7KS;
 				INFOPLIST_FILE = DRNear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -900,8 +992,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "966ea0ff-316f-4da0-9c42-d042464146ee";
-				PROVISIONING_PROFILE_SPECIFIER = DoctorNEarDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -913,7 +1005,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9HXCUL7KS;
 				INFOPLIST_FILE = DRNear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -922,8 +1014,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "966ea0ff-316f-4da0-9c42-d042464146ee";
-				PROVISIONING_PROFILE_SPECIFIER = DoctorNEarDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
