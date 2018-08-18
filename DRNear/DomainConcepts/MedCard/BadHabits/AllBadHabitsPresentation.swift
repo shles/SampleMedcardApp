@@ -19,11 +19,7 @@ class AllBadHabitsPresentation: Presentation {
 
     private var badHabtsPresentation: BadHabitsTableViewPresentation
     private let navBar: NavigationBarWithBackButtonAndSearch
-    private let addButton = UIButton()
-            .with(title: "Добавить")
-            .with(backgroundColor: .rosa)
-//            .with(gradient: [.wheatTwo, .rosa])
-            .with(roundedEdges: 24)
+    private let addButton: GradientButton
 
     private let disposeBag = DisposeBag()
 
@@ -32,6 +28,11 @@ class AllBadHabitsPresentation: Presentation {
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable())
         navBar = NavigationBarWithBackButtonAndSearch(title: title)
                 .with(gradient: gradient)
+        addButton = GradientButton(colors: gradient)
+                .with(title: "Добавить")
+                .with(backgroundColor: .rosa)
+                //            .with(gradient: [.wheatTwo, .rosa])
+                .with(roundedEdges: 24)
 
         view.addSubviews([badHabtsPresentation.view, navBar, addButton])
 

@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  IOS DR
 //
-//  Generated on Zeplin. (8/14/2018).
+//  Generated on Zeplin. (8/16/2018).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -32,10 +32,6 @@ extension UIColor {
 
   @nonobjc class var peach: UIColor {
     return UIColor(red: 253.0 / 255.0, green: 185.0 / 255.0, blue: 119.0 / 255.0, alpha: 1.0)
-  }
-
-  @nonobjc class var tiffanyBlue: UIColor {
-    return UIColor(red: 143.0 / 255.0, green: 245.0 / 255.0, blue: 233.0 / 255.0, alpha: 1.0)
   }
 
   @nonobjc class var darkSkyBlue: UIColor {
@@ -68,6 +64,14 @@ extension UIColor {
 
   @nonobjc class var blueyGrey: UIColor {
     return UIColor(red: 157.0 / 255.0, green: 164.0 / 255.0, blue: 185.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var tiffanyBlue: UIColor {
+    return UIColor(red: 143.0 / 255.0, green: 245.0 / 255.0, blue: 233.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var lightTeal: UIColor {
+    return UIColor(red: 168.0 / 255.0, green: 237.0 / 255.0, blue: 239.0 / 255.0, alpha: 1.0)
   }
 
 }

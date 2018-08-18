@@ -23,7 +23,6 @@ class BadHabitsTableViewPresentation: Presentation {
 
     var selection = PublishSubject<ListApplicable>()
 
-
     init(observableHabits: Observable<[ListApplicable]>) {
 
         self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject.skip(1))

@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.rosa, .wheatTwo],
                                             leadingTo: { ViewController(
                                                     presentation: MyBadHabitsPresentation(
-                                                            badHabits: ObservableSimpleMyBadHabits(),//(try? ObservableMyBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
+                                                            badHabits: (try? MyObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
                                                             title: "Вредные привычки",
                                                             gradient: [.wheatTwo, .rosa],
                                                             leadingTo: { return ViewController(
@@ -46,12 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     )
                                                 )}
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Аллергии",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedYellow")
                                             ),
-                                            gradientColors: [.peach, .wheat]
+                                            gradientColors: [.peach, .wheat],
+                                            leadingTo: {
+                                                ViewController(presentation: DDNListPresentation(
+                                                        items: SimpleMyMedicalTests(),
+                                                        title: "Анализы и исследования",
+                                                        gradient: [.peach, .wheat],
+                                                        leadingTo: {
+                                                            ViewController(presentation: SimpleViewWthButtonPresentation())
+                                                        }))
+                                            }
 
                                     ),
                                     InactiveMedCardOptionFrom(

@@ -19,3 +19,22 @@ struct StandardSectionModel<T>: SectionModelType {
     }
 
 }
+
+struct SingleAnimatedSectionModel<ItemType: IdentifiableType & Equatable>: AnimatableSectionModelType {
+
+    typealias Item = ItemType
+
+    let items: [Item]
+
+    init(original: SingleAnimatedSectionModel, items: [Item]) {
+        self.identity = original.identity
+        self.items = items
+    }
+
+    init(items: [Item]) {
+        self.identity = 0
+        self.items = items
+    }
+
+    let identity: Int
+}

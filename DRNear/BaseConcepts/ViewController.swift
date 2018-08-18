@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         presentation.wantsToPerform().subscribe(onNext: {
             $0.perform(on: self)
-        })
+        }).disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +50,6 @@ class ViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        disposeBag = DisposeBag()
+//        disposeBag = DisposeBag()
     }
 }
