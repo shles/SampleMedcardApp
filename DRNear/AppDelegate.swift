@@ -46,22 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     )
                                                 )}
                                     ),
-                                    MedCardOptionFrom(
+                                    InactiveMedCardOptionFrom(
                                             name: "Аллергии",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedYellow")
                                             ),
-                                            gradientColors: [.peach, .wheat],
-                                            leadingTo: {
-                                                ViewController(presentation: DDNListPresentation(
-                                                        items: SimpleMyMedicalTests(),
-                                                        title: "Анализы и исследования",
-                                                        gradient: [.peach, .wheat],
-                                                        leadingTo: {
-                                                            ViewController(presentation: SimpleViewWthButtonPresentation())
-                                                        }))
-                                            }
-
+                                            gradientColors: [.peach, .wheat]
                                     ),
                                     InactiveMedCardOptionFrom(
                                             name: "Прививки",
@@ -71,13 +61,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.paleOliveGreen, .beige]
 
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Исследования и анализы",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedBlue")
                                             ),
-                                            gradientColors: [.darkSkyBlue, .tiffanyBlue]
-
+                                            gradientColors: [.darkSkyBlue, .tiffanyBlue],
+                                            leadingTo: {
+                                                ViewController(presentation: DDNListPresentation(
+                                                    items: SimpleMyMedicalTests(),
+                                                    title: "Анализы и исследования",
+                                                    gradient: [.peach, .wheat],
+                                                    leadingTo: {
+                                                        ViewController(presentation: SimpleViewWthButtonPresentation())
+                                                }))
+                                            }
                                     ),
                                     InactiveMedCardOptionFrom(
                                             name: "Хронические заболевания",
@@ -87,13 +85,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.pastelBlue, .powderBlue]
 
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Консультации",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedViolet")
                                             ),
-                                            gradientColors: [.lightPeriwinkle, .softPink]
-
+                                            gradientColors: [.lightPeriwinkle, .softPink],
+                                            leadingTo: {
+                                                ViewController(presentation: DDNListPresentation(
+                                                    items: SimpleMyConsultations(),
+                                                    title: "Консультации",
+                                                    gradient: [.peach, .wheat],
+                                                    leadingTo: {
+                                                        ViewController(presentation: SimpleViewWthButtonPresentation())
+                                                }))
+                                        }
                                     )
                                 ]
                             )
