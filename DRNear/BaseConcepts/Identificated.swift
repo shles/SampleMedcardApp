@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 protocol Identified {
 
@@ -14,7 +15,9 @@ protocol Identified {
 }
 
 extension Identified {
+
     func isEqual(to other: Identified) -> Bool {
         return self.identification == other.identification
     }
+
 }
