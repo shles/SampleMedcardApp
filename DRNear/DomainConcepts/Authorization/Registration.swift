@@ -54,6 +54,6 @@ protocol LoginMethodsApplication: TransitionSource {
 protocol Authorization: TransitionSource {
 
     func auth(code: String)
-    
+
     //TODO: check another methods process
 }
