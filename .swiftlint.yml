@@ -13,7 +13,7 @@ opt_in_rules:
   - explicit_init
   - extension_access_modifier
   - fatal_error_message
-  - file_name
+#  - file_name
   - first_where
   - joined_default_parameter
   - let_var_whitespace
@@ -24,7 +24,6 @@ opt_in_rules:
   - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
-  - private_action
   - private_outlet
   - prohibited_super_call
   - quick_discouraged_call
@@ -36,7 +35,6 @@ opt_in_rules:
   - sorted_imports
   - unneeded_parentheses_in_closure_argument
   - vertical_parameter_alignment_on_call
-  - yoda_condition
 
 
 line_length: 150
