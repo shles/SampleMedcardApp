@@ -24,13 +24,20 @@ protocol AccountInformation {
 
 }
 
-protocol Registration: TransitionSource {
-
+protocol NumberRegistration: TransitionSource {
     func register(number: String)
+}
 
+protocol NumberConfirmation: TransitionSource {
     func confirmNumber(code: String)
+}
 
+
+protocol AccountCommitment: TransitionSource {
     func commitAccountInformation(information: AccountInformation)
+}
+
+protocol LoginMethodsApplication: TransitionSource {
 
     func createPincode(code: String)
 
@@ -42,4 +49,11 @@ protocol Registration: TransitionSource {
 
     func proceedToAccount()
 
+}
+
+protocol Authorization: TransitionSource {
+
+    func auth(code: String)
+    
+    //TODO: check another methods process
 }
