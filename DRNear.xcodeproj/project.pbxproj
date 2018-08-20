@@ -76,6 +76,11 @@
 		4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2871E6C0C7E93672A171A0 /* MedCardOptionCollectionViewCell.swift */; };
 		4C287FBD612D3439E9DCCFC2 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287D415579A924A810A4E2 /* Update.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
+		F8F56AEA212ACB6200A33952 /* NumberRegistrationFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F56AE9212ACB6200A33952 /* NumberRegistrationFromAPI.swift */; };
+		F8F56AEC212ACB7300A33952 /* NumberConfirmationFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F56AEB212ACB7300A33952 /* NumberConfirmationFromAPI.swift */; };
+		F8F56AEE212ACB8100A33952 /* AccountCommitmentFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F56AED212ACB8100A33952 /* AccountCommitmentFromAPI.swift */; };
+		F8F56AF0212ACB9500A33952 /* InAppAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F56AEF212ACB9500A33952 /* InAppAuthorization.swift */; };
+		F8F56AF2212AD50500A33952 /* ApplicationSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F56AF1212AD50500A33952 /* ApplicationSetup.swift */; };
 		FD060C9E2119F2F400EF3C2B /* BadHabitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */; };
 		FD3460BB2114C499007B0943 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BA2114C499007B0943 /* UIView.swift */; };
 		FD3460BD2114C4FE007B0943 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3460BC2114C4FD007B0943 /* UILabel.swift */; };
@@ -179,6 +184,11 @@
 		BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.release.xcconfig"; sourceTree = "<group>"; };
 		E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.debug.xcconfig"; sourceTree = "<group>"; };
+		F8F56AE9212ACB6200A33952 /* NumberRegistrationFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberRegistrationFromAPI.swift; sourceTree = "<group>"; };
+		F8F56AEB212ACB7300A33952 /* NumberConfirmationFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberConfirmationFromAPI.swift; sourceTree = "<group>"; };
+		F8F56AED212ACB8100A33952 /* AccountCommitmentFromAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCommitmentFromAPI.swift; sourceTree = "<group>"; };
+		F8F56AEF212ACB9500A33952 /* InAppAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppAuthorization.swift; sourceTree = "<group>"; };
+		F8F56AF1212AD50500A33952 /* ApplicationSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSetup.swift; sourceTree = "<group>"; };
 		FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadHabitsTests.swift; sourceTree = "<group>"; };
 		FD3460BA2114C499007B0943 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FD3460BC2114C4FD007B0943 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -326,7 +336,7 @@
 				4C2877E043128053C64AE44F /* SimpleCodeConfirmationPresentation.swift */,
 				4C287EC237F27E1DC77C5CD4 /* SimpleLoginPresentation.swift */,
 				4C287677B989B93A0435B45D /* Authority */,
-				4C2875FCB7D51C98A291CE2E /* Registration.swift */,
+				F8F56AE8212ACB5100A33952 /* Registration */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -409,6 +419,19 @@
 				5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8F56AE8212ACB5100A33952 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				4C2875FCB7D51C98A291CE2E /* Registration.swift */,
+				F8F56AE9212ACB6200A33952 /* NumberRegistrationFromAPI.swift */,
+				F8F56AEB212ACB7300A33952 /* NumberConfirmationFromAPI.swift */,
+				F8F56AED212ACB8100A33952 /* AccountCommitmentFromAPI.swift */,
+				F8F56AF1212AD50500A33952 /* ApplicationSetup.swift */,
+				F8F56AEF212ACB9500A33952 /* InAppAuthorization.swift */,
+			);
+			path = Registration;
 			sourceTree = "<group>";
 		};
 		FD3460CA2114F459007B0943 /* Styles */ = {
@@ -717,9 +740,11 @@
 				4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */,
 				4C287B0F8C671580463C6ADF /* UICollectionView.swift in Sources */,
 				FD3460C92114F2CD007B0943 /* UIColor+Additions.swift in Sources */,
+				F8F56AF0212ACB9500A33952 /* InAppAuthorization.swift in Sources */,
 				4C287FBC5FEFD5E1450C3470 /* MedCardOptionCollectionViewCell.swift in Sources */,
 				FD3460C02114C50A007B0943 /* UIButton.swift in Sources */,
 				4C287737CA37EE6D4060A5AE /* ObservableMedCardOptions.swift in Sources */,
+				F8F56AEA212ACB6200A33952 /* NumberRegistrationFromAPI.swift in Sources */,
 				4C287C2B3299A02ABCEF5FBC /* MedCardOptionFrom.swift in Sources */,
 				4C287AB142304A462D5C63CD /* Applicable.swift in Sources */,
 				4C287D1C992A0023BBF5C762 /* Interactive.swift in Sources */,
@@ -739,6 +764,7 @@
 				4C2878E55C44A97E05C481BD /* MyObservableBadHabitsFromAPI.swift in Sources */,
 				4C287068C098A6125B74277C /* AllBadHabitsPresentation.swift in Sources */,
 				4C2879F72D99260125A48ACA /* Alamofire.swift in Sources */,
+				F8F56AEE212ACB8100A33952 /* AccountCommitmentFromAPI.swift in Sources */,
 				4C2871ECCAC65FE91AE04E99 /* Selectable.swift in Sources */,
 				4C287515190CC81005A3E0E4 /* Request.swift in Sources */,
 				4C28797ADDE4307761129320 /* SimpleNavigationBar.swift in Sources */,
@@ -746,8 +772,10 @@
 				4C287623DD90E2C086D95E22 /* StandardTableView.swift in Sources */,
 				4C287A28AFDB308D244F42D5 /* GradientView.swift in Sources */,
 				4C2872B100CCAD489A8D78C4 /* Refreshable.swift in Sources */,
+				F8F56AEC212ACB7300A33952 /* NumberConfirmationFromAPI.swift in Sources */,
 				4C28720069E57E87C0278D00 /* Deletable.swift in Sources */,
 				4C287FBD612D3439E9DCCFC2 /* Update.swift in Sources */,
+				F8F56AF2212AD50500A33952 /* ApplicationSetup.swift in Sources */,
 				4C28777E833BED4876D1FE92 /* Transition.swift in Sources */,
 				4C2871E76E5A23386DA13F12 /* TransitionSource.swift in Sources */,
 				4C2877DA3C65D04425627B2F /* ErrorAlertTransition.swift in Sources */,
@@ -939,7 +967,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9HXCUL7KS;
 				INFOPLIST_FILE = DRNear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -948,8 +976,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "966ea0ff-316f-4da0-9c42-d042464146ee";
-				PROVISIONING_PROFILE_SPECIFIER = DoctorNEarDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -961,7 +989,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9HXCUL7KS;
 				INFOPLIST_FILE = DRNear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -970,8 +998,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jufy.DRNear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "966ea0ff-316f-4da0-9c42-d042464146ee";
-				PROVISIONING_PROFILE_SPECIFIER = DoctorNEarDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
