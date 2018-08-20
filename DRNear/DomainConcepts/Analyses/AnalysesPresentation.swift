@@ -1,5 +1,5 @@
 //
-// Created by Артмеий Шлесберг on 16/08/2018.
+// ?Created by Артмеий Шлесберг on 16/08/2018.
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import SnapKit
 import RxCocoa
 import RxDataSources
 
-typealias DatedListApplicable = Identified & Dated & Named & Described & SystemRelated & Deletable & Editable
+typealias DatedListApplicable = Identified & Dated & Named & Described & SystemRelated & Deletable & Editable & Interactive
 
 protocol DatedListRepresentable {
     func toListRepresentable() -> Observable<[DatedListApplicable]>
@@ -30,10 +30,12 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     private let items: Refreshable<[DatedListApplicable]>
     private let leadingTo: () -> (UIViewController)
 
+    private var itemsTransitionsDisposeBag = DisposeBag()
+
     init(items: DatedListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController)) {
 
         self.leadingTo = leadingTo
-        self.items = Refreshable(origin: items.toListRepresentable(), refreshOn: refreshSubject)
+        self.items = Refreshable(origin: items.toListRepresentable(), refreshOn: refreshSubject.skip(1))
 
         navBar = NavigationBarWithBackButton(title: title)
                 .with(gradient: gradient)
@@ -67,16 +69,20 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
 
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
 
+        tableView.rx.modelSelected(DatedListApplicable.self).subscribe(onNext: {
+            $0.interact()
+        }).disposed(by: disposeBag)
+
+        //TODO: maybe develop new object6 that subscribes transitionsubject inside
         itemsSubject.asObservable()
                 .catchErrorJustReturn([])
-                .flatMap {
-                    Observable.merge($0.map {
-                        $0.wantsToPerform()
-                    })
-                }
-                .bind(to: transitionSubject)
-                .disposed(by: disposeBag)
-
+        .subscribe(onNext: { [unowned self] in
+            self.itemsTransitionsDisposeBag = DisposeBag()
+            Observable.merge($0.map { $0.wantsToPerform() }).subscribe(onNext: {
+                self.transitionSubject.onNext($0)
+            }).disposed(by: self.itemsTransitionsDisposeBag)
+        }).disposed(by: disposeBag)
+        
     }
 
     func willAppear() {
@@ -84,7 +90,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return Observable.merge([transitionSubject,
+        return Observable.merge([transitionSubject.debug(),
                                  navBar.wantsToPerform()])
     }
 
@@ -109,5 +115,109 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
 
         action.image = #imageLiteral(resourceName: "edit")
         return UISwipeActionsConfiguration(actions: [action])
+    }
+}
+
+
+protocol ContainFiles {
+    var files: [File] { get }
+}
+
+class DatedDescribedFileContainedPresentation: Presentation {
+
+    let view: UIView = UIView()
+    private let tableView = StandardTableView()
+    private let navBar: NavigationBarWithBackButton
+
+    init(item: Named & Dated & Described & ContainFiles) {
+
+        tableView.tableHeaderView = HeaderView(item: item)
+
+        navBar = NavigationBarWithBackButton(title: item.name)
+                .with(gradient: [.darkSkyBlue, .tiffanyBlue])
+
+        view.addSubviews([tableView, navBar])
+
+        navBar.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.equalTo(120)
+        }
+
+        tableView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(navBar.snp.bottom)
+        }
+
+        item.files
+    }
+
+    func willAppear() {
+        if let headerView = tableView.tableHeaderView {
+
+            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var headerFrame = headerView.frame
+
+            //Comparison necessary to avoid infinite loop
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                tableView.tableHeaderView = headerView
+            }
+        }
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return Observable.never()
+    }
+
+    class HeaderView: UIView {
+        init(item: Dated & Described ) {
+
+            super.init(frame: .zero)
+
+            let formatter = DateFormatter()
+
+            formatter.dateFormat = "dd MMMM YYYY"
+
+            let dateLabel = UILabel()
+            .with(font: .medCardCell)
+                    .with(textColor: .mainText)
+            .with(text: formatter.string(from: item.date))
+
+            let descriptionLabel = UILabel()
+            .with(font: .subtitleText13)
+            .with(textColor: .blueyGrey)
+            .with(text: item.description)
+            .with(numberOfLines: 0)
+
+            let filesLaabel = UILabel()
+            .with(font: .medium13)
+            .with(text: "Файлы")
+            .with(textColor: .mainText)
+
+            addSubviews([dateLabel, descriptionLabel, filesLaabel])
+
+            dateLabel.snp.makeConstraints {
+                $0.top.leading.equalToSuperview().offset(16)
+                $0.trailing.equalToSuperview().inset(16)
+            }
+
+            descriptionLabel.snp.makeConstraints {
+                $0.leading.equalToSuperview().offset(16)
+                $0.trailing.equalToSuperview().inset(16)
+                $0.top.equalTo(dateLabel.snp.bottom).offset(12)
+            }
+
+            filesLaabel.snp.makeConstraints {
+                $0.leading.equalToSuperview().offset(16)
+                $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
+                $0.bottom.equalToSuperview().inset(8)
+            }
+
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("Storyboards are deprecated!")
+        }
     }
 }

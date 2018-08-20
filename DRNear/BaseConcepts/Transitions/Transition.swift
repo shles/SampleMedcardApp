@@ -20,7 +20,9 @@ class PushTransition: Transition {
     }
 
     func perform(on viewController: UIViewController) {
-        viewController.navigationController?.pushViewController(leadingTo(), animated: true)
+        if viewController.viewIfLoaded?.window != nil {
+            viewController.navigationController?.pushViewController(leadingTo(), animated: true)
+        }
     }
 
 }
@@ -54,7 +56,6 @@ class DismissTransition: Transition {
     }
 
 }
-
 
 class NewWindowRootControllerTransition: Transition {
     private let leadingTo: () -> (UIViewController)

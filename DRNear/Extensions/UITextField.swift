@@ -49,4 +49,44 @@ extension UITextField {
         self.textColor = texColor
         return self
     }
+
+    /// Should be called after setting placeholder test
+    func with(placeholderColor: UIColor) -> Self {
+
+        if let attrPlaceholder = attributedPlaceholder {
+            var attributes = attrPlaceholder.attributes(at: 0, effectiveRange: nil)
+
+            attributes[.foregroundColor] = placeholderColor
+            self.attributedPlaceholder = NSAttributedString(
+                    string: attrPlaceholder.string,
+                    attributes: attributes
+            )
+        } else if let placeholder = self.placeholder {
+            self.attributedPlaceholder = NSAttributedString(
+                    string: placeholder,
+                    attributes: [.foregroundColor: placeholderColor])
+        }
+
+        return self
+    }
+
+    /// Should be called after setting placeholder test
+    func with(placeholderFont: UIFont) -> Self {
+
+        if let attrPlaceholder = attributedPlaceholder {
+            var attributes = attrPlaceholder.attributes(at: 0, effectiveRange: nil)
+
+            attributes[.font] = placeholderFont
+            self.attributedPlaceholder = NSAttributedString(
+                    string: attrPlaceholder.string,
+                    attributes: attributes
+            )
+        } else if let placeholder = self.placeholder {
+            self.attributedPlaceholder = NSAttributedString(
+                    string: placeholder,
+                    attributes: [.font: placeholderFont])
+        }
+
+        return self
+    }
 }
