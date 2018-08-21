@@ -20,11 +20,12 @@ class AllBadHabitsPresentation: Presentation {
     private var badHabtsPresentation: BadHabitsTableViewPresentation
     private let navBar: NavigationBarWithBackButtonAndSearch
     private let addButton: GradientButton
+    private let update: Update
 
     private let disposeBag = DisposeBag()
 
     init(badHabits: ListRepresentable & Searchable, update: Update, title: String, gradient: [UIColor]) {
-
+        self.update = update
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable())
         navBar = NavigationBarWithBackButtonAndSearch(title: title)
                 .with(gradient: gradient)
@@ -68,8 +69,8 @@ class AllBadHabitsPresentation: Presentation {
             self.addButton.titleLabel?.alpha = 1
         }).disposed(by: disposeBag)
 
-        addButton.rx.tap.subscribe(onNext: {
-            update.apply()
+        addButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.update.apply()
         }).disposed(by: disposeBag)
 
         navBar.searchString().subscribe(onNext: {
@@ -84,7 +85,8 @@ class AllBadHabitsPresentation: Presentation {
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([navBar.wantsToPerform(),
                                  badHabtsPresentation.wantsToPerform(),
-                                 addButton.rx.tap.asObservable().map { PopTransition() }
+                                 update.wantsToPerform()
+//                                 addButton.rx.tap.asObservable().map { PopTransition() }
         ])
     }
 }

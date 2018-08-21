@@ -127,6 +127,8 @@ class MedicalTestEditingPresentation: Presentation {
             .with(image: #imageLiteral(resourceName: "attachment"))
             .with(titleColor: .blueyGrey)
 
+    private let fileAttachment: FilePicking
+
     convenience init(medTest: MedicalTest) {
 
         self.init()
@@ -146,6 +148,7 @@ class MedicalTestEditingPresentation: Presentation {
 
     init() {
 
+        fileAttachment = ImageAttachmentFromLibrary()
         navBar = NavigationBarWithBackButton(title: "Добавить")
                 .with(gradient: [.darkSkyBlue, .tiffanyBlue])
 
@@ -176,6 +179,10 @@ class MedicalTestEditingPresentation: Presentation {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.equalTo(120)
         }
+
+        addFileButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.fileAttachment.pickFile()
+        })
     }
 
     func willAppear() {
@@ -183,7 +190,10 @@ class MedicalTestEditingPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return Observable.never()
+        return Observable.merge([
+            fileAttachment.wantsToPerform(),
+            navBar.wantsToPerform()
+        ])
     }
 }
 
@@ -227,22 +237,90 @@ class AddFilePresentation: Presentation {
     private(set) var view: UIView = UIView()
 
     private var nameField = UITextField()
+            .with(placeholder: "Название файла")
+            .with(placeholderColor: .blueyGrey)
+            .with(placeholderFont: .subtitleText13)
+            .with(font: .medium13)
+            .with(texColor: .mainText)
 
     private var rotateButton = UIButton()
+         .with(image: #imageLiteral(resourceName: "reload"))
     private var deleteButton = UIButton()
-    private var attachButton = UIButton()
+            .with(image: #imageLiteral(resourceName: "trash"))
     private var filePreview = UIImageView()
+        .with(contentMode: .scaleAspectFit)
 
-    init() {
+    private let addButton: GradientButton
+    private let upload: FileUpload
+    private let navBar: NavigationBarWithBackButton
+
+    init(image: UIImage) {
 
         /*
-        TODO:
-         - make constrains
-         - make transition to select image from library
-         - make injection of completion action
+        TODO: make injection of completion action
+        TODO: make image rotration
+        TODO: make image deletion
+        todo: inject token
         */
 
-        
+        upload = ImageUploadToAPI(token: TokenFromString(string: ""), image: image)
+        filePreview.image = image
+
+        addButton = GradientButton(colors: [.darkSkyBlue, .tiffanyBlue])
+                .with(title: "Прикрепить")
+                .with(roundedEdges: 24)
+                .with(backgroundColor: .darkSkyBlue)
+                .with(contentMode: .scaleAspectFit)
+
+        navBar = NavigationBarWithBackButton(title: "Добавить")
+            .with(gradient: [.darkSkyBlue, .tiffanyBlue])
+
+        let buttonsStack = UIStackView(arrangedSubviews: [rotateButton, deleteButton])
+
+        buttonsStack.axis = .horizontal
+        buttonsStack.distribution = .fillProportionally
+        buttonsStack.spacing = 50
+
+        let stack = UIStackView(arrangedSubviews: [FieldContainer(view: nameField), buttonsStack, filePreview])
+
+        stack.axis = .vertical
+        stack.spacing = 20
+        stack.alignment = .center
+
+        view.addSubviews([stack, navBar, addButton])
+
+        stack.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(navBar.snp.bottom)
+        }
+
+        navBar.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.equalTo(120)
+        }
+
+        filePreview.snp.makeConstraints {
+            $0.width.equalToSuperview().inset(16)
+            $0.height.equalTo(236)
+
+        }
+
+        nameField.snp.makeConstraints {
+            $0.width.equalTo(filePreview)
+        }
+
+        buttonsStack.snp.makeConstraints {
+            $0.height.equalTo(21)
+        }
+
+        addButton.snp.makeConstraints {
+            $0.height.equalTo(48)
+            $0.bottom.equalToSuperview().inset(8)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().inset(24)
+        }
+
+
     }
 
     func willAppear() {
@@ -250,6 +328,74 @@ class AddFilePresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        fatalError("wantsToPerform() has not been implemented")
+        return upload.wantsToPerform()
     }
 }
+
+protocol FilePicking: TransitionSource {
+
+    func pickFile()
+
+}
+
+protocol FileUpload: TransitionSource {
+    func upload()
+}
+
+class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    private var transitionsSubject = PublishSubject<Transition>()
+    private let imagePicker = UIImagePickerController()
+
+    func pickFile() {
+
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+
+        imagePicker.delegate = self
+
+        transitionsSubject.onNext(PresentTransition { [unowned self] in self.imagePicker })
+
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return transitionsSubject
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            picker.dismiss(animated: true, completion:  { [unowned self] in
+                self.transitionsSubject.onNext(PresentTransition {
+                    ViewController(presentation: AddFilePresentation(image: pickedImage))
+                })
+            })
+        } else {
+            picker.dismiss(animated: true)
+        }
+    }
+
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+}
+
+class ImageUploadToAPI: FileUpload {
+
+    private var transitionsSubject = PublishSubject<Transition>()
+    private let token: Token
+    private let image: UIImage
+
+    init(token: Token, image: UIImage) {
+        self.token = token
+        self.image = image
+    }
+
+    func wantsToPerform() -> Observable<Transition> {
+        return transitionsSubject
+    }
+
+    func upload() {
+        transitionsSubject.onNext(DismissTransition())
+    }
+}
+
