@@ -11,7 +11,9 @@ class MyBadHabitsUpdate: Update {
     private var itemsToCommit = [Identified]()
     private let token: Token
     private let disposeBag = DisposeBag()
-
+    
+    private let transitionSubject = PublishSubject<Transition>()
+    
     init(token: Token) {
         self.token = token
     }
@@ -28,14 +30,19 @@ class MyBadHabitsUpdate: Update {
                 parameters: itemsToCommit.map { $0.identification }.asParameters(),
                 encoding: ArrayEncoding()
         ) {
-            request.make().subscribe(onNext: { _ in
-
+            request.make().subscribe(onNext: { response in
+                
+                if let error = response.error {
+                    self.transitionSubject.onNext(ErrorAlertTransition(error: error))
+                } else {
+                    self.transitionSubject.onNext(PopTransition())
+                }
             }).disposed(by: disposeBag)
         }
 
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return Observable.never()
+        return transitionSubject
     }
 }

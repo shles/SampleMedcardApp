@@ -17,32 +17,34 @@ class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
     typealias E = [Disease]
     
     private let token: Token
-    private let request: Request
-    
-    init(token: Token) throws {
-        
-        request = try AuthorizedRequest(
-            path: "/eco-emc/api/my/diagnoses",
-            method: .get,
-            token: token,
-            encoding: URLEncoding.default
-        )
+
+    init(token: Token)  {
         self.token = token
     }
     
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Disease] {
-        return request.make()
-            .map { json in
-                
-                json.arrayValue.map { (json: JSON) in
-                    DiseaseFrom(
-                        name: json["name"]["name"].string ?? "",
-                        id: json["id"].string ?? "",
-                        code: json["name"]["code"].string ?? "",
-                        token: self.token
-                    )
-                }
-            }.share(replay: 1).subscribe(observer)
+
+        if let request = try? AuthorizedRequest(
+                   path: "/eco-emc/api/my/diagnoses",
+                   method: .get,
+                   token: token,
+                   encoding: URLEncoding.default
+           ) {
+            return request.make()
+                    .map { json in
+
+                        json.arrayValue.map { (json: JSON) in
+                            DiseaseFrom(
+                                    name: json["name"]["name"].string ?? "",
+                                    id: json["id"].string ?? "",
+                                    code: json["name"]["code"].string ?? "",
+                                    token: self.token
+                            )
+                        }
+                    }.share(replay: 1).subscribe(observer)
+        } else {
+            return  Observable.error(RequestError()).subscribe(observer)
+        }
     }
 }
 

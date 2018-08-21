@@ -17,32 +17,34 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
     typealias E = [MedicalTest]
     
     private let token: Token
-    private let request: Request
-    
-    init(token: Token) throws {
-        
-        request = try AuthorizedRequest(
-            path: "/eco-emc/api/my/analyzes",
-            method: .get,
-            token: token,
-            encoding: URLEncoding.default
-        )
+
+    init(token: Token)  {
         self.token = token
     }
     
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [MedicalTest] {
-        return request.make()
-            .map { json in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                return json.arrayValue.map { (json: JSON) in
-                    MyMedicalTestFrom(name: json["name"].string ?? "",
-                                      id: json["id"].string ?? "",
-                                      date: dateFormatter.date(from: json["executed"].string ?? "") ?? Date(),
-                                      description: json["report"].string ?? "",
-                                      token: self.token)
-                }
-            }.share(replay: 1).subscribe(observer)
+        if let request = try?AuthorizedRequest(
+                path: "/eco-emc/api/my/analyzes",
+                method: .get,
+                token: token,
+                encoding: URLEncoding.default
+        ) {
+            return request.make()
+                    .map { json in
+
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                        return json.arrayValue.map { (json: JSON) in
+                            MyMedicalTestFrom(name: json["name"].string ?? "",
+                                    id: json["id"].string ?? "",
+                                    date: dateFormatter.date(from: json["executed"].string ?? "") ?? Date(),
+                                    description: json["report"].string ?? "",
+                                    token: self.token)
+                        }
+                    }.share(replay: 1).subscribe(observer)
+        } else {
+            return Observable.error(RequestError()).subscribe(observer)
+        }
     }
 }
 
@@ -105,6 +107,10 @@ class MyMedicalTestFrom: MedicalTest {
     
     func edit() {
         
+    }
+
+    func interact() {
+
     }
 }
 

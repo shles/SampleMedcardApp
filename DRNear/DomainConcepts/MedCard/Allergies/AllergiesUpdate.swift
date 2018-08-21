@@ -14,16 +14,22 @@ class AllergiesUpdate: Update {
     private var itemsToCommit = [Identified]()
     private let token: Token
     private let disposeBag = DisposeBag()
-    
+
+    private let transitionSubject = PublishSubject<Transition>()
     init(token: Token) {
         self.token = token
     }
     
     func addItem(item: Identified) {
-        itemsToCommit += [item]
+        transitionSubject.onNext(PresentTransition(leadingTo: {
+            ViewController(presentation: CommentPresentation(title: "Комментарий", onAccept: { [unowned self] in
+                self.itemsToCommit += [item]
+            }))
+        }))
     }
     
     func apply() {
+
         if let request = try? AuthorizedRequest(
             path: "/eco-emc/api/my/allergies",
             method: .post,
@@ -39,6 +45,6 @@ class AllergiesUpdate: Update {
     }
     
     func wantsToPerform() -> Observable<Transition> {
-        return Observable.never()
+        return transitionSubject
     }
 }

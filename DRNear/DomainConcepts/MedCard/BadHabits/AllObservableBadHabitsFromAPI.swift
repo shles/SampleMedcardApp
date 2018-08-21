@@ -12,10 +12,9 @@ class AllObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType, Search
 
     typealias E = [BadHabit]
     private let token: Token
-//    private let request: Request
     private let searchSubject = PublishSubject<String>()
 
-    init(token: Token) throws {
+    init(token: Token)  {
         self.token = token
     }
 

@@ -17,34 +17,35 @@ class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
     typealias E = [Vaccination]
     
     private let token: Token
-    private let request: Request
-    
-    init(token: Token) throws {
-        
-        request = try AuthorizedRequest(
-            path: "/eco-emc/api/my/vaccinations",
-            method: .get,
-            token: token,
-            encoding: URLEncoding.default
-        )
+
+    init(token: Token)  {
         self.token = token
     }
     
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Vaccination] {
-        return request.make()
-            .map { json in
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                return json.arrayValue.map { (json: JSON) in
-                    MyVaccinationFrom(
-                        name: json["name"]["name"].string ?? "",
-                        id: json["id"].string ?? "",
-                        code: json["name"]["code"].string ?? "",
-                        date: formatter.date(from: json["date"].string ?? "") ?? Date(),
-                        token: self.token
-                    )
-                }
-            }.share(replay: 1).subscribe(observer)
+        if let request = try? AuthorizedRequest(
+                path: "/eco-emc/api/my/vaccinations",
+                method: .get,
+                token: token,
+                encoding: URLEncoding.default
+        ) {
+            return request.make()
+                    .map { json in
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                        return json.arrayValue.map { (json: JSON) in
+                            MyVaccinationFrom(
+                                    name: json["name"]["name"].string ?? "",
+                                    id: json["id"].string ?? "",
+                                    code: json["name"]["code"].string ?? "",
+                                    date: formatter.date(from: json["date"].string ?? "") ?? Date(),
+                                    token: self.token
+                            )
+                        }
+                    }.share(replay: 1).subscribe(observer)
+        } else {
+            return Observable.error(RequestError()).subscribe(observer)
+        }
     }
 }
 

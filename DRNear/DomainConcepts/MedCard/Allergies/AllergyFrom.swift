@@ -33,7 +33,7 @@ class AllergyFrom: Allergy {
          selected: Bool = false,
          token: Token) {
         
-        self.name = clarification
+        self.name = category?.name ?? ""
         self.identification = id
         self.digitalMedicalRecordId = digitalMedicalRecordId
         self.category = category

@@ -41,6 +41,10 @@ class SimpleConsultation: Consultation {
     }
     
     private(set) var identification: String = ""
+
+    func interact() {
+
+    }
 }
 
 class SimpleMyConsultations: ObservableConsultations {

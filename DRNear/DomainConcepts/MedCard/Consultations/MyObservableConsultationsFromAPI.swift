@@ -106,6 +106,10 @@ class MyConsultationFrom: Consultation {
     func edit() {
         
     }
+
+    func interact() {
+
+    }
 }
 
 class ObservableSimpleMyConsultations: ObservableConsultations {

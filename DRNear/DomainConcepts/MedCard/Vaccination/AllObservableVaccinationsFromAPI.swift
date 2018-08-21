@@ -17,7 +17,7 @@ class AllObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType, 
     private let token: Token
     private let searchSubject = PublishSubject<String>()
     
-    init(token: Token) throws {
+    init(token: Token)  {
         self.token = token
     }
     

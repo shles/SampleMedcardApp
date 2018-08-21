@@ -17,46 +17,49 @@ class MyObservableAllergiesFromAPI: ObservableAllergies, ObservableType {
     typealias E = [Allergy]
     
     private let token: Token
-    private let request: Request
-    
-    init(token: Token) throws {
-        
-        request = try AuthorizedRequest(
-            path: "/eco-emc/api/my/allergies",
-            method: .get,
-            token: token,
-            encoding: URLEncoding.default
-        )
+
+    init(token: Token)  {
+
         self.token = token
     }
     
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Allergy] {
-        return request.make()
-            .map { json in
-                
-                json.arrayValue.map { (json: JSON) in
-                    
-                    var category: AllergyCategory?
-                    var status: AllergyIntoleranceStatus?
-                    
-                    if json["category"].exists() {
-                        category = AllergyCategory(code: json["category"]["code"].string ?? "", name: json["category"]["name"].string ?? "")
-                    }
-                    
-                    if json["status"].exists() {
-                        status = AllergyIntoleranceStatus(code: json["status"]["code"].string ?? "", name: json["status"]["name"].string ?? "")
-                    }
-                    
-                    return MyAllergyFrom(
-                        clarification: json["clarification"].string ?? "",
-                        id: json["id"].string ?? "",
-                        digitalMedicalRecordId: json["digitalMedicalRecordId"].int ?? 0,
-                        category: category,
-                        status: status,
-                        token: self.token
-                    )
-                }
-            }.share(replay: 1).subscribe(observer)
+
+        if let request = try? AuthorizedRequest(
+                path: "/eco-emc/api/my/allergies",
+                method: .get,
+                token: token,
+                encoding: URLEncoding.default
+        ) {
+            return request.make()
+                    .map { json in
+
+                        json.arrayValue.map { (json: JSON) in
+
+                            var category: AllergyCategory?
+                            var status: AllergyIntoleranceStatus?
+
+                            if json["category"].exists() {
+                                category = AllergyCategory(code: json["category"]["code"].string ?? "", name: json["category"]["name"].string ?? "")
+                            }
+
+                            if json["status"].exists() {
+                                status = AllergyIntoleranceStatus(code: json["status"]["code"].string ?? "", name: json["status"]["name"].string ?? "")
+                            }
+
+                            return MyAllergyFrom(
+                                    clarification: json["clarification"].string ?? "",
+                                    id: json["id"].string ?? "",
+                                    digitalMedicalRecordId: json["digitalMedicalRecordId"].int ?? 0,
+                                    category: category,
+                                    status: status,
+                                    token: self.token
+                            )
+                        }
+                    }.share(replay: 1).subscribe(observer)
+        } else {
+            return Observable.error(RequestError()).subscribe(observer)
+        }
     }
 }
 

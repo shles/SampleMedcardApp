@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+//swiftlint:disable function_body_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -32,12 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.rosa, .wheatTwo],
                                             leadingTo: { ViewController(
                                                     presentation: MyBadHabitsPresentation(
-                                                            badHabits: (try? MyObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
+                                                            badHabits: MyObservableBadHabitsFromAPI(token: token),
                                                             title: "Вредные привычки",
                                                             gradient: [.wheatTwo, .rosa],
                                                             leadingTo: { return ViewController(
                                                                     presentation: AllBadHabitsPresentation(
-                                                                            badHabits: (try? AllObservableBadHabitsFromAPI(token: token)) ?? SimpleObservableBadHabits(),
+                                                                            badHabits: AllObservableBadHabitsFromAPI(token: token),
                                                                             update: MyBadHabitsUpdate(token: token),
                                                                             title: "Вредные привычки",
                                                                             gradient: [.wheatTwo, .rosa]
@@ -46,19 +46,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     )
                                                 )}
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Аллергии",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedYellow")
                                             ),
-                                            gradientColors: [.peach, .wheat]
+                                            gradientColors: [.peach, .wheat],
+                                            leadingTo: { ViewController(
+                                                    presentation: MyBadHabitsPresentation(
+                                                            badHabits: MyObservableAllergiesFromAPI(token: token),
+                                                            title: "Аллергии",
+                                                            gradient: [.peach, .wheat],
+                                                            leadingTo: { return ViewController(
+                                                                    presentation: AllBadHabitsPresentation(
+                                                                            badHabits: AllObservableAllergiesFromAPI(token: token),
+                                                                            update: MyBadHabitsUpdate(token: token),
+                                                                            title: "Аллергии",
+                                                                            gradient: [.peach, .wheat]
+                                                                    )
+                                                            )}
+                                                    )
+                                            )}
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Прививки",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedGreen")
                                             ),
-                                            gradientColors: [.paleOliveGreen, .beige]
+                                            gradientColors: [.paleOliveGreen, .beige],
+                                            leadingTo: { ViewController(
+                                                    presentation: MyBadHabitsPresentation(
+                                                            badHabits: MyObservableVaccinationsFromAPI(token: token),
+                                                            title: "Прививки",
+                                                            gradient: [.paleOliveGreen, .beige],
+                                                            leadingTo: { return ViewController(
+                                                                    presentation: AllBadHabitsPresentation(
+                                                                            badHabits: AllObservableVaccinationsFromAPI(token: token),
+                                                                            update: MyBadHabitsUpdate(token: token),
+                                                                            title: "Прививки",
+                                                                            gradient: [.paleOliveGreen, .beige]
+                                                                    )
+                                                            )}
+                                                    )
+                                            )}
 
                                     ),
                                     MedCardOptionFrom(
@@ -69,20 +99,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             gradientColors: [.darkSkyBlue, .tiffanyBlue],
                                             leadingTo: {
                                                 ViewController(presentation: DDNListPresentation(
-                                                    items: SimpleMyMedicalTests(),
+                                                    items: MyObservableMedicalTestsFromAPI(token: token),
                                                     title: "Анализы и исследования",
-                                                    gradient: [.peach, .wheat],
+                                                    gradient: [.darkSkyBlue, .tiffanyBlue],
                                                     leadingTo: {
-                                                        ViewController(presentation: SimpleViewWthButtonPresentation())
+                                                        ViewController(presentation: MedicalTestEditingPresentation())
                                                 }))
                                             }
                                     ),
-                                    InactiveMedCardOptionFrom(
+                                    MedCardOptionFrom(
                                             name: "Хронические заболевания",
                                             image: ObservableImageFrom(
                                                     image: #imageLiteral(resourceName: "rocketMedDarkBlue")
                                             ),
-                                            gradientColors: [.pastelBlue, .powderBlue]
+                                            gradientColors: [.pastelBlue, .powderBlue],
+                                            leadingTo: { ViewController(
+                                                    presentation: MyBadHabitsPresentation(
+                                                            badHabits: MyObservableDiseasesFromAPI(token: token),
+                                                            title: "Хронические заболевания",
+                                                            gradient: [.pastelBlue, .powderBlue],
+                                                            leadingTo: { return ViewController(
+                                                                    presentation: AllBadHabitsPresentation(
+                                                                            badHabits: AllObservableDiseasesFromAPI(token: token),
+                                                                            update: MyBadHabitsUpdate(token: token),
+                                                                            title: "Хронические заболевания",
+                                                                            gradient: [.pastelBlue, .powderBlue]
+                                                                    )
+                                                            )}
+                                                    )
+                                            )}
 
                                     ),
                                     MedCardOptionFrom(
@@ -95,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                 ViewController(presentation: DDNListPresentation(
                                                     items: SimpleMyConsultations(),
                                                     title: "Консультации",
-                                                    gradient: [.peach, .wheat],
+                                                    gradient: [.lightPeriwinkle, .softPink],
                                                     leadingTo: {
                                                         ViewController(presentation: SimpleViewWthButtonPresentation())
                                                 }))
@@ -113,5 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         return true
     }
+
+    //swiftlint:enable function_body_length
 
 }

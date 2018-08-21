@@ -14,31 +14,34 @@ class MyObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType {
     typealias E = [BadHabit]
 
     private let token: Token
-    private let request: Request
 
-    init(token: Token) throws {
+    init(token: Token) {
 
-        request = try AuthorizedRequest(
-                path: "/eco-emc/api/my/bad-habits",
-                method: .get,
-                token: token,
-                encoding: URLEncoding.default
-        )
         self.token = token
     }
 
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [BadHabit] {
-        return request.make()
-                .map { json in
 
-                    json.arrayValue.map { (json: JSON) in
-                        MyBadHabitFrom(
-                                name: json["name"].string  ?? "",
-                                id: json["code"].string ?? "",
-                                token: self.token
-                        )
-                    }
-                }.share(replay: 1).subscribe(observer)
+        if let request = try? AuthorizedRequest(
+                path: "/eco-emc/api/my/bad-habits",
+                method: .get,
+                token: token,
+                encoding: URLEncoding.default
+        ) {
+            return request.make()
+                    .map { json in
+
+                        json.arrayValue.map { (json: JSON) in
+                            MyBadHabitFrom(
+                                    name: json["name"].string ?? "",
+                                    id: json["code"].string ?? "",
+                                    token: self.token
+                            )
+                        }
+                    }.share(replay: 1).subscribe(observer)
+        } else {
+            return Observable.error(RequestError()).subscribe(observer)
+        }
     }
 }
 
