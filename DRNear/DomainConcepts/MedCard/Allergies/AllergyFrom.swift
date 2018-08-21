@@ -11,18 +11,45 @@ import RxSwift
 import Alamofire
 import SwiftyJSON
 
+struct AllergyIntoleranceStatus {
+    
+    var code: String
+    var name: String
+}
+
+struct AllergyCategory {
+    
+    var code: String
+    var name: String
+}
+
 class AllergyFrom: Allergy {
     
-    init(name: String, id: String, selected: Bool = false, token: Token) {
-        self.name = name
+    init(clarification: String,
+         id: String,
+         digitalMedicalRecordId: Int,
+         category: AllergyCategory?,
+         status: AllergyIntoleranceStatus?,
+         selected: Bool = false,
+         token: Token) {
+        
+        self.name = clarification
         self.identification = id
+        self.digitalMedicalRecordId = digitalMedicalRecordId
+        self.category = category
+        self.status = status
         self.isSelected.value = selected
         self.token = token
     }
     
+    var category: AllergyCategory?
+    var status: AllergyIntoleranceStatus?
+    var digitalMedicalRecordId = 0
+    
     var name: String = ""
     var identification: String = ""
     var isSelected: Variable<Bool> = Variable(false)
+    
     private var token: Token
     
     func select() {

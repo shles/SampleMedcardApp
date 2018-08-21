@@ -34,12 +34,12 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
         return request.make()
             .map { json in
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy"
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 return json.arrayValue.map { (json: JSON) in
                     MyConsultationFrom(name: json["name"].string ?? "",
-                                       id: json["code"].string ?? "",
+                                       id: json["id"].string ?? "",
                                        date: dateFormatter.date(from: json["date"].string ?? "") ?? Date(),
-                                       description: json["description"].string ?? "",
+                                       description: json["recommendations"].string ?? "",
                                        token: self.token)
                 }
             }.share(replay: 1).subscribe(observer)

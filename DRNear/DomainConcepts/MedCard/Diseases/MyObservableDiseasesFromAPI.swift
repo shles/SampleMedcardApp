@@ -22,7 +22,7 @@ class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
     init(token: Token) throws {
         
         request = try AuthorizedRequest(
-            path: "/eco-emc/api/my/diseases",
+            path: "/eco-emc/api/my/diagnoses",
             method: .get,
             token: token,
             encoding: URLEncoding.default
@@ -35,9 +35,10 @@ class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
             .map { json in
                 
                 json.arrayValue.map { (json: JSON) in
-                    MyDiseaseFrom(
-                        name: json["name"].string  ?? "",
-                        id: json["code"].string ?? "",
+                    DiseaseFrom(
+                        name: json["name"]["name"].string ?? "",
+                        id: json["id"].string ?? "",
+                        code: json["name"]["code"].string ?? "",
                         token: self.token
                     )
                 }
@@ -48,6 +49,7 @@ class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
 class MyDiseaseFrom: Disease, Deletable {
     
     private(set) var name: String = ""
+    private(set) var code: String = ""
     private(set) var identification: String = ""
     private(set) var isSelected: Variable<Bool> = Variable(true)
     
@@ -57,8 +59,9 @@ class MyDiseaseFrom: Disease, Deletable {
     
     private let disposeBag = DisposeBag()
     
-    init(name: String, id: String, token: Token) {
+    init(name: String, id: String, code: String, token: Token) {
         self.name = name
+        self.code = code
         self.identification = id
         self.token = token
     }
@@ -74,7 +77,7 @@ class MyDiseaseFrom: Disease, Deletable {
                     title: "Вы точно хотите удалить заболевание \"\(self.name)\"?",
                     onAccept: { [unowned self] in
                         if let request = try? AuthorizedRequest(
-                            path: "/eco-emc/api/my/diseases",
+                            path: "/eco-emc/api/my/diagnoses",
                             method: .delete,
                             token: self.token,
                             parameters: [self.identification].asParameters(),
@@ -99,9 +102,9 @@ class MyDiseaseFrom: Disease, Deletable {
 class ObservableSimpleMyDiseases: ObservableDiseases {
     
     private let array = [
-        MyDiseaseFrom(name: "aaa", id: "a", token: TokenFromString(string: "")),
-        MyDiseaseFrom(name: "bbb", id: "b", token: TokenFromString(string: "")),
-        MyDiseaseFrom(name: "ccc", id: "c", token: TokenFromString(string: ""))
+        MyDiseaseFrom(name: "aaa", id: "a", code: "", token: TokenFromString(string: "")),
+        MyDiseaseFrom(name: "bbb", id: "b", code: "", token: TokenFromString(string: "")),
+        MyDiseaseFrom(name: "ccc", id: "c", code: "", token: TokenFromString(string: ""))
     ]
     
     func asObservable() -> Observable<[Disease]> {

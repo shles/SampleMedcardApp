@@ -33,11 +33,14 @@ class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Vaccination] {
         return request.make()
             .map { json in
-                
-                json.arrayValue.map { (json: JSON) in
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                return json.arrayValue.map { (json: JSON) in
                     MyVaccinationFrom(
-                        name: json["name"].string  ?? "",
-                        id: json["code"].string ?? "",
+                        name: json["name"]["name"].string ?? "",
+                        id: json["id"].string ?? "",
+                        code: json["name"]["code"].string ?? "",
+                        date: formatter.date(from: json["date"].string ?? "") ?? Date(),
                         token: self.token
                     )
                 }
@@ -47,7 +50,9 @@ class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
 
 class MyVaccinationFrom: Vaccination, Deletable {
     
+    private(set) var date = Date()
     private(set) var name: String = ""
+    private(set) var code: String = ""
     private(set) var identification: String = ""
     private(set) var isSelected: Variable<Bool> = Variable(true)
     
@@ -57,8 +62,10 @@ class MyVaccinationFrom: Vaccination, Deletable {
     
     private let disposeBag = DisposeBag()
     
-    init(name: String, id: String, token: Token) {
+    init(name: String, id: String, code: String, date: Date, token: Token) {
         self.name = name
+        self.code = code
+        self.date = date
         self.identification = id
         self.token = token
     }
@@ -99,9 +106,9 @@ class MyVaccinationFrom: Vaccination, Deletable {
 class ObservableSimpleMyVaccinations: ObservableVaccinations {
     
     private let array = [
-        MyVaccinationFrom(name: "aaa", id: "a", token: TokenFromString(string: "")),
-        MyVaccinationFrom(name: "bbb", id: "b", token: TokenFromString(string: "")),
-        MyVaccinationFrom(name: "ccc", id: "c", token: TokenFromString(string: ""))
+        MyVaccinationFrom(name: "aaa", id: "a", code: "", date: Date(), token: TokenFromString(string: "")),
+        MyVaccinationFrom(name: "bbb", id: "b", code: "", date: Date(), token: TokenFromString(string: "")),
+        MyVaccinationFrom(name: "ccc", id: "c", code: "", date: Date(), token: TokenFromString(string: ""))
     ]
     
     func asObservable() -> Observable<[Vaccination]> {

@@ -11,6 +11,7 @@ import RxSwift
 
 class SimpleVaccination: Vaccination {
     
+    var date: Date = Date()
     var name: String = "Прививка от хитрости"
     var identification: String = "123"
     

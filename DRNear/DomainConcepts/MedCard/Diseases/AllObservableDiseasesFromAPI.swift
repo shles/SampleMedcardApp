@@ -28,7 +28,7 @@ class AllObservableDiseasesFromAPI: ObservableDiseases, ObservableType, Searchab
         return searchSubject.startWith("").debug().map { [unowned self] name in
             
             try AuthorizedRequest(
-                path: "/eco-emc/api/my/diseases",
+                path: "/eco-emc/api/my/diagnoses",
                 method: .get,
                 token: self.token,
                 parameters: [
@@ -43,8 +43,9 @@ class AllObservableDiseasesFromAPI: ObservableDiseases, ObservableType, Searchab
                 
                 json.arrayValue.map { (json: JSON) in
                     DiseaseFrom(
-                        name: json["name"].string ?? "",
-                        id: json["code"].string ?? "",
+                        name: json["name"]["name"].string ?? "",
+                        id: json["id"].string ?? "",
+                        code: json["name"]["code"].string ?? "",
                         token: self.token
                     )
                 }

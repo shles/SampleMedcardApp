@@ -25,7 +25,7 @@ class DiseasesUpdate: Update {
     
     func apply() {
         if let request = try? AuthorizedRequest(
-            path: "/eco-emc/api/my/diseases",
+            path: "/eco-emc/api/my/diagnoses",
             method: .post,
             token: token,
             parameters: itemsToCommit.map { $0.identification }.asParameters(),

@@ -22,7 +22,7 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
     init(token: Token) throws {
         
         request = try AuthorizedRequest(
-            path: "/eco-emc/api/my/medical-tests",
+            path: "/eco-emc/api/my/analyzes",
             method: .get,
             token: token,
             encoding: URLEncoding.default
@@ -34,12 +34,12 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
         return request.make()
             .map { json in
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy"
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 return json.arrayValue.map { (json: JSON) in
                     MyMedicalTestFrom(name: json["name"].string ?? "",
-                                      id: json["code"].string ?? "",
-                                      date: dateFormatter.date(from: json["date"].string ?? "") ?? Date(),
-                                      description: json["description"].string ?? "",
+                                      id: json["id"].string ?? "",
+                                      date: dateFormatter.date(from: json["executed"].string ?? "") ?? Date(),
+                                      description: json["report"].string ?? "",
                                       token: self.token)
                 }
             }.share(replay: 1).subscribe(observer)
@@ -73,7 +73,7 @@ class MyMedicalTestFrom: MedicalTest {
                     title: "Вы точно хотите удалить анализ \"\(self.name)\"?",
                     onAccept: { [unowned self] in
                         if let request = try? AuthorizedRequest(
-                            path: "/eco-emc/api/my/medical-tests",
+                            path: "/eco-emc/api/my/analyzes",
                             method: .delete,
                             token: self.token,
                             parameters: [self.identification].asParameters(),

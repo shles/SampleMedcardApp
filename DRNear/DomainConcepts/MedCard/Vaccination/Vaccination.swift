@@ -8,5 +8,5 @@
 
 import Foundation
 
-protocol Vaccination: Named, Identified, Selectable {
+protocol Vaccination: Named, Identified, Selectable, Dated {
 }

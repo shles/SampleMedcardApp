@@ -13,14 +13,18 @@ import SwiftyJSON
 
 class VaccinationFrom: Vaccination {
     
-    init(name: String, id: String, selected: Bool = false, token: Token) {
+    init(name: String, id: String, code: String, date: Date, selected: Bool = false, token: Token) {
         self.name = name
+        self.code = code
+        self.date = date
         self.identification = id
         self.isSelected.value = selected
         self.token = token
     }
     
+    var date = Date()
     var name: String = ""
+    var code: String = ""
     var identification: String = ""
     var isSelected: Variable<Bool> = Variable(false)
     private var token: Token

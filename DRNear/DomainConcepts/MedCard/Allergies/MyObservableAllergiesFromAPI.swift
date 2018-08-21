@@ -35,9 +35,24 @@ class MyObservableAllergiesFromAPI: ObservableAllergies, ObservableType {
             .map { json in
                 
                 json.arrayValue.map { (json: JSON) in
-                    MyAllergyFrom(
-                        name: json["name"].string  ?? "",
-                        id: json["code"].string ?? "",
+                    
+                    var category: AllergyCategory?
+                    var status: AllergyIntoleranceStatus?
+                    
+                    if json["category"].exists() {
+                        category = AllergyCategory(code: json["category"]["code"].string ?? "", name: json["category"]["name"].string ?? "")
+                    }
+                    
+                    if json["status"].exists() {
+                        status = AllergyIntoleranceStatus(code: json["status"]["code"].string ?? "", name: json["status"]["name"].string ?? "")
+                    }
+                    
+                    return MyAllergyFrom(
+                        clarification: json["clarification"].string ?? "",
+                        id: json["id"].string ?? "",
+                        digitalMedicalRecordId: json["digitalMedicalRecordId"].int ?? 0,
+                        category: category,
+                        status: status,
                         token: self.token
                     )
                 }
@@ -50,16 +65,26 @@ class MyAllergyFrom: Allergy, Deletable {
     private(set) var name: String = ""
     private(set) var identification: String = ""
     private(set) var isSelected: Variable<Bool> = Variable(true)
+    private(set) var category: AllergyCategory?
+    private(set) var status: AllergyIntoleranceStatus?
+    private(set) var digitalMedicalRecordId = 0
     
     private let deletionSubject = PublishSubject<Transition>()
-    
     private let token: Token
-    
     private let disposeBag = DisposeBag()
     
-    init(name: String, id: String, token: Token) {
-        self.name = name
+    init(clarification: String,
+         id: String,
+         digitalMedicalRecordId: Int,
+         category: AllergyCategory?,
+         status: AllergyIntoleranceStatus?,
+         token: Token) {
+        
+        self.name = clarification
         self.identification = id
+        self.digitalMedicalRecordId = digitalMedicalRecordId
+        self.category = category
+        self.status = status
         self.token = token
     }
     
@@ -99,9 +124,9 @@ class MyAllergyFrom: Allergy, Deletable {
 class ObservableSimpleMyAllergies: ObservableAllergies {
     
     private let array = [
-        MyAllergyFrom(name: "aaa", id: "a", token: TokenFromString(string: "")),
-        MyAllergyFrom(name: "bbb", id: "b", token: TokenFromString(string: "")),
-        MyAllergyFrom(name: "ccc", id: "c", token: TokenFromString(string: ""))
+        MyAllergyFrom(clarification: "aaa", id: "a", digitalMedicalRecordId: 0, category: nil, status: nil, token: TokenFromString(string: "")),
+        MyAllergyFrom(clarification: "aaa", id: "a", digitalMedicalRecordId: 0, category: nil, status: nil, token: TokenFromString(string: "")),
+        MyAllergyFrom(clarification: "aaa", id: "a", digitalMedicalRecordId: 0, category: nil, status: nil, token: TokenFromString(string: ""))
     ]
     
     func asObservable() -> Observable<[Allergy]> {

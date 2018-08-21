@@ -42,9 +42,24 @@ class AllObservableAllergiesFromAPI: ObservableAllergies, ObservableType, Search
             }.map { json in
                 
                 json.arrayValue.map { (json: JSON) in
-                    AllergyFrom(
-                        name: json["name"].string ?? "",
-                        id: json["code"].string ?? "",
+                    
+                    var category: AllergyCategory?
+                    var status: AllergyIntoleranceStatus?
+  
+                    if json["category"].exists() {
+                        category = AllergyCategory(code: json["category"]["code"].string ?? "", name: json["category"]["name"].string ?? "")
+                    }
+                    
+                    if json["status"].exists() {
+                        status = AllergyIntoleranceStatus(code: json["status"]["code"].string ?? "", name: json["status"]["name"].string ?? "")
+                    }
+                    
+                    return AllergyFrom(
+                        clarification: json["clarification"].string ?? "",
+                        id: json["id"].string ?? "",
+                        digitalMedicalRecordId: json["digitalMedicalRecordId"].int ?? 0,
+                        category: category,
+                        status: status,
                         token: self.token
                     )
                 }

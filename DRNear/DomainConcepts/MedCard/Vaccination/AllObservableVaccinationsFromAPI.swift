@@ -40,11 +40,14 @@ class AllObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType, 
             }.flatMap {
                 $0.make()
             }.map { json in
-                
-                json.arrayValue.map { (json: JSON) in
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                return json.arrayValue.map { (json: JSON) in
                     VaccinationFrom(
-                        name: json["name"].string ?? "",
-                        id: json["code"].string ?? "",
+                        name: json["name"]["name"].string ?? "",
+                        id: json["id"].string ?? "",
+                        code: json["name"]["code"].string ?? "",
+                        date: formatter.date(from: json["date"].string ?? "") ?? Date(),
                         token: self.token
                     )
                 }
