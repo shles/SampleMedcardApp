@@ -31,8 +31,7 @@ class AllBadHabitsPresentation: Presentation {
                 .with(gradient: gradient)
         addButton = GradientButton(colors: gradient)
                 .with(title: "Добавить")
-                .with(backgroundColor: .rosa)
-                //            .with(gradient: [.wheatTwo, .rosa])
+                .with(gradient: [.wheatTwo, .rosa])
                 .with(roundedEdges: 24)
 
         view.addSubviews([badHabtsPresentation.view, navBar, addButton])

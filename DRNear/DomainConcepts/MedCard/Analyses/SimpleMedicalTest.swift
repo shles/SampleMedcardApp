@@ -1,33 +1,19 @@
 //
-// Created by Артмеий Шлесберг on 16/08/2018.
-// Copyright (c) 2018 Shlesberg. All rights reserved.
+//  SimpleMedicalTest.swift
+//  DRNear
+//
+//  Created by Igor Shmakov on 18/08/2018.
+//  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
 import Foundation
 import RxSwift
-import SnapKit
-
-protocol MedicalTest: Named, Dated, Described, SystemRelated, Editable, Deletable, Identified, Interactive {
-
-}
-
-protocol ObservableMedicalTests: DatedListRepresentable {
-
-  func asObservable() -> Observable<[MedicalTest]>
-
-}
-
-extension ObservableMedicalTests {
-    func toListRepresentable() -> Observable<[DatedListApplicable]> {
-        return asObservable().map { $0.map { $0 as DatedListApplicable } }
-    }
-}
 
 class SimpleMedicalTest: MedicalTest, ContainFiles {
     private(set) var name: String = "Анализ крови"
     private(set) var date: Date = Date()
     var description: String = "Лаборатория NKL №122 Лабораторные исследования"
-
+    
     private var deletionSubject = PublishSubject<Void>()
     private var interactionSubject = PublishSubject<Void>()
     private var editionSubject = PublishSubject<Void>()
@@ -35,7 +21,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
     func delete() {
         deletionSubject.onNext(())
     }
-
+    
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([
             deletionSubject.map { [unowned self] _ in
@@ -61,13 +47,13 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
             }
             ])
     }
-
+    
     private(set) var isRelatedToSystem: Bool = false
-
+    
     func edit() {
         editionSubject.onNext(())
     }
-
+    
     private(set) var identification: String = ""
 
     func interact() {
@@ -78,11 +64,11 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
 }
 
 class SimpleMyMedicalTests: ObservableMedicalTests {
-
-    private let tests = [
-        SimpleMedicalTest(),
-        SimpleMedicalTest()]
-
+    
+    private let tests = [SimpleMedicalTest(),
+                         SimpleMedicalTest(),
+                         SimpleMedicalTest()]
+    
     func asObservable() -> Observable<[MedicalTest]> {
         return Observable.just(tests)
     }
