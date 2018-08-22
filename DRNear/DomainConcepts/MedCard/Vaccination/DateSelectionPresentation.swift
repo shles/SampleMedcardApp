@@ -1,28 +1,14 @@
 //
-// Created by Артмеий Шлесберг on 14/08/2018.
+// Created by Артмеий Шлесберг on 22/08/2018.
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
 import Foundation
+import UIKit
 import RxSwift
-import Alamofire
-import SnapKit
 
-protocol Update: TransitionSource {
+class DateSelectionPresentation: Presentation {
 
-    func addItem(item: Identified)
-
-    func apply()
-
-}
-
-protocol AdditionalInfoPresentation: Presentation {
-
-    func info() -> String
-
-}
-
-class CommentPresentation: AdditionalInfoPresentation {
     func info() -> String {
         return ""
     }
@@ -36,8 +22,9 @@ class CommentPresentation: AdditionalInfoPresentation {
 
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
-    private var commentField = UITextField()
-        .with(placeholder: "Комментарий")
+
+    private let datePicker = UIDatePicker()
+
 
     init(title: String, gradient: [UIColor], onAccept: @escaping (String) -> ()) {
 
@@ -57,16 +44,14 @@ class CommentPresentation: AdditionalInfoPresentation {
                 .with(backgroundColor: .mainText)
                 .with(roundedEdges: 24)
 
-        commentField.borderStyle = .roundedRect
-
         view.backgroundColor = .black
 
         view.addSubview(containerView)
-        containerView.addSubviews([titleLabel, addButton, commentField])
+        containerView.addSubviews([titleLabel, addButton, datePicker])
 
         containerView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.height.equalTo(236)
+            $0.height.equalTo(387)
             $0.width.equalToSuperview().inset(8)
         }
 
@@ -78,16 +63,16 @@ class CommentPresentation: AdditionalInfoPresentation {
         }
 
         titleLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(176)
+            $0.bottom.equalToSuperview().inset(321)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalToSuperview().inset(24)
         }
 
-        commentField.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(120)
+        datePicker.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(99)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(40)
+            $0.height.equalTo(216)
         }
 
         cancelButton.rx.tap
@@ -95,10 +80,11 @@ class CommentPresentation: AdditionalInfoPresentation {
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)
 
+
         //TODO: make field verification
         addButton.rx.tap
 
-                .do(onNext: { [unowned self] _ in  onAccept(self.commentField.text ?? "") })
+                .do(onNext: { [unowned self] _ in  onAccept(self.datePicker.date.description ?? "") })
                 .map { DismissTransition() }
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)

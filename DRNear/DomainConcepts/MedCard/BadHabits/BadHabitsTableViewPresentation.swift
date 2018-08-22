@@ -61,6 +61,8 @@ class BadHabitsTableViewPresentation: Presentation {
             .bind(to: wantsToPushSubject)
             .disposed(by: disposeBag)
 
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 64, right: 0)
+
     }
 
     func willAppear() {

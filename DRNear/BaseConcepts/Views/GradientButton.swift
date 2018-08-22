@@ -22,6 +22,10 @@ class GradientButton: UIButton {
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         self.colors = colors.map { $0.cgColor }
+        
+        //TODO: fix gradient
+        
+        self.backgroundColor = colors.first ?? .peach
     }
 
     override func layoutSubviews() {

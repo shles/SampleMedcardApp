@@ -14,6 +14,7 @@ class SimpleNavigationBar: UIView {
     .with(font: .navigatoinLarge)
     .with(textColor: .mainText)
 
+
     init(title: String) {
         titleLabel.text = title
         super.init(frame: .zero)
@@ -44,6 +45,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
     private var titleLabel = UILabel()
             .with(font: .navigatoinLarge)
             .with(textColor: .white)
+            .with(numberOfLines: 2)
 
     private var backButton = UIButton()
             .with(image: #imageLiteral(resourceName: "backIcon"))
@@ -56,6 +58,7 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
         titleLabel.snp.makeConstraints {
             $0.leading.equalTo(backButton.snp.trailing).offset(12)
             $0.top.equalToSuperview().offset(48)
+            $0.trailing.equalToSuperview().inset(68)
         }
         backButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
@@ -89,6 +92,7 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
     private var titleLabel = UILabel()
             .with(font: .navigatoinLarge)
             .with(textColor: .white)
+            .with(numberOfLines: 2)
 
     private var backButton = UIButton()
             .with(image: #imageLiteral(resourceName: "backIcon"))
@@ -111,6 +115,7 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         titleLabel.snp.makeConstraints {
             $0.leading.equalTo(backButton.snp.trailing).offset(12)
             $0.top.equalToSuperview().offset(48)
+            $0.trailing.equalTo(searchButton.snp.leading)
         }
         backButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)

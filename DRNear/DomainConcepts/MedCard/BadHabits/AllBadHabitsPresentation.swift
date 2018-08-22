@@ -31,7 +31,6 @@ class AllBadHabitsPresentation: Presentation {
                 .with(gradient: gradient)
         addButton = GradientButton(colors: gradient)
                 .with(title: "Добавить")
-                .with(gradient: [.wheatTwo, .rosa])
                 .with(roundedEdges: 24)
 
         view.addSubviews([badHabtsPresentation.view, navBar, addButton])
@@ -48,14 +47,14 @@ class AllBadHabitsPresentation: Presentation {
 
         addButton.snp.makeConstraints {
             $0.height.equalTo(48)
-            $0.bottom.equalToSuperview().inset(8)
+            $0.bottom.equalToSuperview().inset(16)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalToSuperview().inset(24)
         }
 
-        badHabtsPresentation.selection.subscribe(onNext: {
+        badHabtsPresentation.selection.subscribe(onNext: {  [unowned self] in
             $0.select()
-            update.addItem(item: $0)
+            self.update.addItem(item: $0)
         }).disposed(by: disposeBag)
 
         addButton.rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in
@@ -75,6 +74,8 @@ class AllBadHabitsPresentation: Presentation {
         navBar.searchString().subscribe(onNext: {
             badHabits.search(string: $0)
         }).disposed(by: disposeBag)
+
+
     }
 
     func willAppear() {
@@ -85,7 +86,6 @@ class AllBadHabitsPresentation: Presentation {
         return Observable.merge([navBar.wantsToPerform(),
                                  badHabtsPresentation.wantsToPerform(),
                                  update.wantsToPerform()
-//                                 addButton.rx.tap.asObservable().map { PopTransition() }
         ])
     }
 }

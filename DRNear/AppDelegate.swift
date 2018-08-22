@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: AllObservableBadHabitsFromAPI(token: token),
                                                                             update: MyBadHabitsUpdate(token: token),
-                                                                            title: "Вредные привычки",
+                                                                            title: "Список привычек",
                                                                             gradient: [.wheatTwo, .rosa]
                                                                     )
                                                             )}
@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                             leadingTo: { return ViewController(
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: AllObservableAllergiesFromAPI(token: token),
-                                                                            update: MyBadHabitsUpdate(token: token),
-                                                                            title: "Аллергии",
+                                                                            update: AllergiesUpdate(token: token),
+                                                                            title: "Список аллергии",
                                                                             gradient: [.peach, .wheat]
                                                                     )
                                                             )}
@@ -82,8 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                             leadingTo: { return ViewController(
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: AllObservableVaccinationsFromAPI(token: token),
-                                                                            update: MyBadHabitsUpdate(token: token),
-                                                                            title: "Прививки",
+                                                                            update: VaccinationUpdate(token: token),
+                                                                            title: "Список прививок",
                                                                             gradient: [.paleOliveGreen, .beige]
                                                                     )
                                                             )}
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                             leadingTo: { return ViewController(
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: AllObservableDiseasesFromAPI(token: token),
-                                                                            update: MyBadHabitsUpdate(token: token),
+                                                                            update: DiseasesUpdate(token: token),
                                                                             title: "Хронические заболевания",
                                                                             gradient: [.pastelBlue, .powderBlue]
                                                                     )
@@ -153,7 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }))
 
         )
-//        navContgroller.setNavigationBarHidden(true, animated: false)
         window?.rootViewController = navContgroller
         window?.makeKeyAndVisible()
         return true
