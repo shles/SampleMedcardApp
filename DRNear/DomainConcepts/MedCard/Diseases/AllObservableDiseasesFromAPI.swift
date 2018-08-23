@@ -44,7 +44,7 @@ class AllObservableDiseasesFromAPI: ObservableDiseases, ObservableType, Searchab
                 json.arrayValue.map { (json: JSON) in
                     DiseaseFrom(
                         name: json["name"]["name"].string ?? "",
-                        id: json["id"].string ?? "",
+                        id: json["name"]["code"].string ?? "",
                         code: json["name"]["code"].string ?? "",
                         token: self.token
                     )

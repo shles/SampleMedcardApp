@@ -34,9 +34,9 @@ class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
                     .map { json in
 
                         json.arrayValue.map { (json: JSON) in
-                            DiseaseFrom(
+                            MyDiseaseFrom(
                                     name: json["name"]["name"].string ?? "",
-                                    id: json["id"].string ?? "",
+                                    id: json["name"]["code"].string ?? "",
                                     code: json["name"]["code"].string ?? "",
                                     token: self.token
                             )
@@ -80,7 +80,7 @@ class MyDiseaseFrom: Disease, Deletable {
                     onAccept: { [unowned self] in
                         if let request = try? AuthorizedRequest(
                             path: "/eco-emc/api/my/diagnoses",
-                            method: .delete,
+                            method: .put,
                             token: self.token,
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()

@@ -68,8 +68,8 @@ class AllergiesUpdate: Update {
             ) {
             request.make().subscribe(onNext: { [unowned self] _ in
                 self.transitionSubject.onNext(PopTransition())
-            }, onError: { [unowned self] _ in
-                self.transitionSubject.onNext(PopTransition())
+            }, onError: { [unowned self] in
+                self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
             }).disposed(by: disposeBag)
         }
         

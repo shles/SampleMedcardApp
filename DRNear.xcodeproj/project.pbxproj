@@ -25,6 +25,7 @@
 		4C2872B100CCAD489A8D78C4 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870B29FB3BB9F08D020EC /* Refreshable.swift */; };
 		4C287318C1F477AA26AA996E /* MedCardCollectionViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28762B2D003CE53EB1A608 /* MedCardCollectionViewPresentation.swift */; };
 		4C28735EC4176DD038EC3A94 /* SystemRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876BF5C0C6E0566719693 /* SystemRelated.swift */; };
+		4C2873CE20C8FBD8162EA957 /* CommentedDisease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287A5C5C3695CA067EA9C5 /* CommentedDisease.swift */; };
 		4C2873D4711236CA4F0211E0 /* SimpleCodeConfirmationPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2877E043128053C64AE44F /* SimpleCodeConfirmationPresentation.swift */; };
 		4C28741C98B966BDDD78F4D4 /* BadHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878061A01A7E7455A0A85 /* BadHabitTableViewCell.swift */; };
 		4C28746DABEC469CB1BE357B /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28767089E441C4DEDD7E54 /* Authority.swift */; };
@@ -180,6 +181,7 @@
 		4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationTests.swift; sourceTree = "<group>"; };
 		4C2879CBC781343E41611DD3 /* AppicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppicationTests.swift; sourceTree = "<group>"; };
 		4C287A2719A189CA537EEE81 /* DatedDescribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatedDescribedCell.swift; sourceTree = "<group>"; };
+		4C287A5C5C3695CA067EA9C5 /* CommentedDisease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentedDisease.swift; sourceTree = "<group>"; };
 		4C287ACABF51F6EF366EA62B /* AllBadHabitsPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBadHabitsPresentation.swift; sourceTree = "<group>"; };
 		4C287B724BCC7BDE47FFFB94 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		4C287BDEB8E587A7E4922049 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				F8B447272126AF1200DC10E4 /* AllObservableDiseasesFromAPI.swift */,
 				F8B447292126AF2200DC10E4 /* MyObservableDiseasesFromAPI.swift */,
 				F8ADD09321281C0900065080 /* DiseasesUpdate.swift */,
+				4C287A5C5C3695CA067EA9C5 /* CommentedDisease.swift */,
 			);
 			path = Diseases;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				4C2879CBD7F45821203AC4A8 /* ClarifiedAllergy.swift in Sources */,
 				4C28793FD5D54A4EB520AE96 /* DatedVaccination.swift in Sources */,
 				4C287E438C49F052A7D80F35 /* DateSelectionPresentation.swift in Sources */,
+				4C2873CE20C8FBD8162EA957 /* CommentedDisease.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
