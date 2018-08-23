@@ -36,7 +36,7 @@ class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
                         return json.arrayValue.map { (json: JSON) in
                             MyVaccinationFrom(
                                     name: json["name"]["name"].string ?? "",
-                                    id: json["id"].string ?? "",
+                                    id: json["name"]["code"].string ?? "",
                                     code: json["name"]["code"].string ?? "",
                                     date: formatter.date(from: json["date"].string ?? "") ?? Date(),
                                     token: self.token

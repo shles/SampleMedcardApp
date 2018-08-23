@@ -49,7 +49,7 @@ class MyObservableAllergiesFromAPI: ObservableAllergies, ObservableType {
 
                             return MyAllergyFrom(
                                     clarification: json["clarification"].string ?? "",
-                                    id: json["id"].string ?? "",
+                                    id: json["category"]["code"].string ?? "",
                                     digitalMedicalRecordId: json["digitalMedicalRecordId"].int ?? 0,
                                     category: category,
                                     status: status,
@@ -83,7 +83,7 @@ class MyAllergyFrom: Allergy, Deletable {
          status: AllergyIntoleranceStatus?,
          token: Token) {
         
-        self.name = clarification
+        self.name = category?.name ?? ""
         self.identification = id
         self.digitalMedicalRecordId = digitalMedicalRecordId
         self.category = category
@@ -103,7 +103,7 @@ class MyAllergyFrom: Allergy, Deletable {
                     onAccept: { [unowned self] in
                         if let request = try? AuthorizedRequest(
                             path: "/eco-emc/api/my/allergies",
-                            method: .delete,
+                            method: .put,
                             token: self.token,
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()

@@ -20,7 +20,7 @@ class AllObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType, 
     init(token: Token)  {
         self.token = token
     }
-    
+    //TODO: refactor mapping and model. get rid of optioanals
     //TODO: somewhere here is a cause of disposing when error occures. Needed to be recoverable or not emitting error
     
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Vaccination] {
@@ -45,7 +45,7 @@ class AllObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType, 
                 return json.arrayValue.map { (json: JSON) in
                     VaccinationFrom(
                         name: json["name"]["name"].string ?? "",
-                        id: json["id"].string ?? "",
+                        id: json["name"]["code"].string ?? "",
                         code: json["name"]["code"].string ?? "",
                         date: formatter.date(from: json["date"].string ?? "") ?? Date(),
                         token: self.token

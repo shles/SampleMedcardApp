@@ -26,7 +26,7 @@ class DateSelectionPresentation: Presentation {
     private let datePicker = UIDatePicker()
 
 
-    init(title: String, gradient: [UIColor], onAccept: @escaping (String) -> ()) {
+    init(title: String, gradient: [UIColor], onAccept: @escaping (Date) -> ()) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)
@@ -83,8 +83,7 @@ class DateSelectionPresentation: Presentation {
 
         //TODO: make field verification
         addButton.rx.tap
-
-                .do(onNext: { [unowned self] _ in  onAccept(self.datePicker.date.description ?? "") })
+                .do(onNext: { [unowned self] _ in  onAccept(self.datePicker.date) })
                 .map { DismissTransition() }
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)

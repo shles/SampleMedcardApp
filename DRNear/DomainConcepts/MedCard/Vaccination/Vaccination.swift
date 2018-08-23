@@ -9,4 +9,5 @@
 import Foundation
 
 protocol Vaccination: Named, Identified, Selectable, Dated {
+
 }

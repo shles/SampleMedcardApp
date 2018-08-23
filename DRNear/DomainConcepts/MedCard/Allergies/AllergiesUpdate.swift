@@ -56,16 +56,12 @@ class AllergiesUpdate: Update {
             parameters: itemsToCommit.map {
                 [
                     "allergyIntoleranceStatus": [
-                        "code": $0.status?.code ?? "",
-                        "name": $0.status?.name ?? ""
+                        "code": $0.status?.code ?? "01"
                     ],
                     "category": [
-                        "code": $0.category?.code ?? "",
-                        "name": $0.category?.name ?? ""
+                        "code": $0.category?.code ?? ""
                     ],
-                    "clarification": $0.clarification,
-                    "digitalMedicalRecordId": 0,
-                    "id": 0
+                    "clarification": $0.clarification
                 ]
             }.asParameters(),
             encoding: ArrayEncoding()

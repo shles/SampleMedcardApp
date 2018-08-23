@@ -24,26 +24,32 @@ class VaccinationUpdate: Update {
         if let item = item as? Vaccination {
             transitionSubject.onNext(PresentTransition(leadingTo: {
                 ViewController(presentation: DateSelectionPresentation(title: "Дата прививки", gradient: [.peach, .wheat], onAccept: { [unowned self] in
-                    print($0)
+                    self.itemsToCommit += [MyVaccinationFrom(name: item.name, id: item.identification, code: item.identification, date: $0, token: self.token)]
                 }))
             }))
         }
     }
     
     func apply() {
+
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
         if let request = try? AuthorizedRequest(
+
             path: "/eco-emc/api/my/vaccinations",
             method: .post,
             token: token,
-            parameters: itemsToCommit.map { _ in "" }.asParameters(),
+            parameters: itemsToCommit.map {  ["name": ["code": $0.identification], "date": formatter.string(from: $0.date)] }.asParameters(),
             encoding: ArrayEncoding()
             ) {
-            request.make().subscribe(onNext: { _ in
-
+            request.make().subscribe(onNext: { [unowned self] _ in
+                self.transitionSubject.onNext(PopTransition())
+            }, onError: {
+                self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
             }).disposed(by: disposeBag)
         }
-        transitionSubject.onNext(PopTransition())
-        
     }
     
     func wantsToPerform() -> Observable<Transition> {
