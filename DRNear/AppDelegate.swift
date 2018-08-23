@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         )
 //        navContgroller.setNavigationBarHidden(true, animated: false)
-        window?.rootViewController = navContgroller
+        window?.rootViewController = ViewController(presentation: PinCodePresentation())
         window?.makeKeyAndVisible()
         return true
     }

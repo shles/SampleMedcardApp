@@ -14,4 +14,8 @@ class InAppAuthorization: Authorization {
     func auth(code: String) {
         
     }
+
+    func wantsToPerform() -> Observable<Transition> {
+        fatalError("wantsToPerform() has not been implemented")
+    }
 }

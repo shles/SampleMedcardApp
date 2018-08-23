@@ -34,4 +34,8 @@ class ApplicationSetup: LoginMethodsApplication {
     func proceedToAccount() {
         
     }
+
+    func wantsToPerform() -> Observable<Transition> {
+        fatalError("wantsToPerform() has not been implemented")
+    }
 }
