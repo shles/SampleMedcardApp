@@ -115,7 +115,7 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         titleLabel.snp.makeConstraints {
             $0.leading.equalTo(backButton.snp.trailing).offset(12)
             $0.top.equalToSuperview().offset(48)
-            $0.trailing.equalTo(searchButton.snp.leading)
+            $0.trailing.equalToSuperview().inset(68)
         }
         backButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)

@@ -37,6 +37,8 @@ class ViewController: UIViewController {
         presentation.wantsToPerform().subscribe(onNext: {
             $0.perform(on: self)
         }).disposed(by: disposeBag)
+
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,5 +53,12 @@ class ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 //        disposeBag = DisposeBag()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if presentation is MedCardCollectionViewPresentation {
+            return .default
+        }
+        return .lightContent
     }
 }

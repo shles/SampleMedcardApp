@@ -37,7 +37,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
             },
          interactionSubject.debug("interacted with \(self.description)").map { [unowned self] _ in
                 PushTransition(leadingTo: {
-                    ViewController(presentation: DatedDescribedFileContainedPresentation(item: self))
+                    ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.darkSkyBlue, .tiffanyBlue]))
                 })
             },
             editionSubject.map { [unowned self] _ in

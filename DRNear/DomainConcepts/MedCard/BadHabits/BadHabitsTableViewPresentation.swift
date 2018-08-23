@@ -23,7 +23,7 @@ class BadHabitsTableViewPresentation: Presentation {
 
     var selection = PublishSubject<ListApplicable>()
 
-    init(observableHabits: Observable<[ListApplicable]>) {
+    init(observableHabits: Observable<[ListApplicable]>, tintColor: UIColor) {
 
         self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject.skip(1))
 
@@ -41,7 +41,7 @@ class BadHabitsTableViewPresentation: Presentation {
 
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<ListApplicable>>(
                 configureCell: { _, tv, ip, habit in
-                    return tv.dequeueReusableCellOfType(SimpleTickedCell.self, for: ip).configured(item: habit)
+                    return tv.dequeueReusableCellOfType(SimpleTickedCell.self, for: ip).configured(item: habit, tickColor: tintColor)
                 })
 
         habitsSubject.asObservable()

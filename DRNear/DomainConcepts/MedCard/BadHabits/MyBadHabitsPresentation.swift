@@ -20,7 +20,7 @@ class MyBadHabitsPresentation: Presentation {
     
     init(badHabits: ListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController) ) {
 
-        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable())
+        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable(), tintColor: gradient.last ?? .mainText)
         self.leadingTo = leadingTo
         navBar = NavigationBarWithBackButton(title: title)
                 .with(gradient: gradient)

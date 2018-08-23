@@ -13,7 +13,7 @@ class SimpleTickedCell: UITableViewCell {
         .with(font: .regular)
         .with(textColor: .mainText)
     private var tick = UIImageView()
-        .with(image: #imageLiteral(resourceName: "invalidName"))
+        .with(image: #imageLiteral(resourceName: "tick"))
         .with(contentMode: .scaleAspectFit)
 
     private var disposeBag = DisposeBag()
@@ -49,8 +49,9 @@ class SimpleTickedCell: UITableViewCell {
         fatalError("Storyboards are deprecated!")
     }
 
-    func configured(item: Named & Selectable) -> Self {
+    func configured(item: Named & Selectable, tickColor: UIColor) -> Self {
         title.text = item.name
+        tick.tintColor = tickColor
         item.isSelected.asObservable().subscribe(onNext: { [unowned self] in
             self.tick.isHidden = !$0
         }).disposed(by: disposeBag)

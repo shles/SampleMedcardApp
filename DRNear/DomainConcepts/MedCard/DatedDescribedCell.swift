@@ -71,8 +71,9 @@ class DatedDescribedCell: UITableViewCell {
         nameLabel.text = item.name
 
         //TODO: make something attributed
-        dateLabel.attributedText = NSAttributedString(string: "1 января 1998")
 
+        dateLabel.attributedText = NSAttributedString(string: "01 января 1998")
+        
         systemEventIndicator.configure(activated: item.isRelatedToSystem)
 
         descriptionLabel.text = item.description

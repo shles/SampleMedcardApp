@@ -129,12 +129,12 @@ class DatedDescribedFileContainedPresentation: Presentation {
     private let tableView = StandardTableView()
     private let navBar: NavigationBarWithBackButton
 
-    init(item: Named & Dated & Described & ContainFiles) {
+    init(item: Named & Dated & Described & ContainFiles, gradient: [UIColor]) {
 
         tableView.tableHeaderView = HeaderView(item: item)
 
         navBar = NavigationBarWithBackButton(title: item.name)
-                .with(gradient: [.darkSkyBlue, .tiffanyBlue])
+                .with(gradient: gradient)
 
         view.addSubviews([tableView, navBar])
 

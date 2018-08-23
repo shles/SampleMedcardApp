@@ -9,42 +9,60 @@
 import Foundation
 import RxSwift
 
-class SimpleConsultation: Consultation {
+class SimpleConsultation: Consultation, ContainFiles {
     
     private(set) var name: String = "Врач-педиатр"
     private(set) var date: Date = Date()
     var description: String = "Первичная консультация"
-    
+
     private var deletionSubject = PublishSubject<Void>()
-    
+    private var interactionSubject = PublishSubject<Void>()
+    private var editionSubject = PublishSubject<Void>()
+
     func delete() {
         deletionSubject.onNext(())
     }
     
     func wantsToPerform() -> Observable<Transition> {
-        return deletionSubject.map { [unowned self] _ in
-            PresentTransition(
-                leadingTo: { ViewController(
-                    presentation: DeletionPresentation(
-                        title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
-                        onAccept: { }
+        return Observable.merge([
+            deletionSubject.map { [unowned self] _ in
+                PresentTransition(leadingTo: {
+                    ViewController(
+                            presentation: DeletionPresentation(
+                                    title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
+                                    onAccept: {}
+                            )
                     )
-                    )}
-            )
-        }
+                }
+                )
+            },
+            interactionSubject.debug("interacted with \(self.description)").map { [unowned self] _ in
+                PushTransition(leadingTo: {
+                    ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.lightPeriwinkle, .softPink]))
+                })
+            },
+//            editionSubject.map { [unowned self] _ in
+//                PushTransition(leadingTo: {
+//                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self))
+//                })
+//            }
+        ])
     }
     
     private(set) var isRelatedToSystem: Bool = false
     
     func edit() {
-        
+        editionSubject.onNext(())
     }
-    
+
     private(set) var identification: String = ""
 
     func interact() {
-
+        interactionSubject.onNext(())
     }
+
+    private(set) var files: [File] = []
+
 }
 
 class SimpleMyConsultations: ObservableConsultations {

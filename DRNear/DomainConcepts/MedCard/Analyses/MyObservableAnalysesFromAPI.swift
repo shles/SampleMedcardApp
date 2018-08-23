@@ -48,7 +48,7 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
     }
 }
 
-class MyMedicalTestFrom: MedicalTest {
+class MyMedicalTestFrom: MedicalTest, ContainFiles {
     
     private(set) var name: String = ""
     private(set) var date: Date = Date()
@@ -56,8 +56,11 @@ class MyMedicalTestFrom: MedicalTest {
     private(set) var identification: String = ""
     var description: String = ""
     private let token: Token
-    
-    private var deletionSubject = PublishSubject<Transition>()
+
+    private var deletionSubject = PublishSubject<Void>()
+    private var interactionSubject = PublishSubject<Void>()
+    private var editionSubject = PublishSubject<Void>()
+
     private let disposeBag = DisposeBag()
     
     init(name: String, id: String, date: Date, description: String, token: Token) {
@@ -69,49 +72,78 @@ class MyMedicalTestFrom: MedicalTest {
     }
     
     func delete() {
-        deletionSubject.onNext(PresentTransition {
-            ViewController(
-                presentation: DeletionPresentation(
-                    title: "Вы точно хотите удалить анализ \"\(self.name)\"?",
-                    onAccept: { [unowned self] in
-                        if let request = try? AuthorizedRequest(
-                            path: "/eco-emc/api/my/analyzes",
-                            method: .delete,
-                            token: self.token,
-                            parameters: [self.identification].asParameters(),
-                            encoding: ArrayEncoding()
-                            ) {
-        
-                            request.make().subscribe(onNext: {_ in
-        
-                            }).disposed(by: self.disposeBag)
-                        }
-                    }
-                )
-            )
-        })
+        deletionSubject.onNext(())
+//        (PresentTransition {
+//            ViewController(
+//                presentation: DeletionPresentation(
+//                    title: "Вы точно хотите удалить анализ \"\(self.name)\"?",
+//                    onAccept: { [unowned self] in
+//                        if let request = try? AuthorizedRequest(
+//                            path: "/eco-emc/api/my/analyzes",
+//                            method: .delete,
+//                            token: self.token,
+//                            parameters: [self.identification].asParameters(),
+//                            encoding: ArrayEncoding()
+//                            ) {
+//
+//                            request.make().subscribe(onNext: {_ in
+//
+//                            }).disposed(by: self.disposeBag)
+//                        }
+//                    }
+//                )
+//            )
+//        })
     }
     
     func wantsToPerform() -> Observable<Transition> {
-        return deletionSubject.map { [unowned self] _ in
-            PresentTransition(
-                leadingTo: { ViewController(
-                    presentation: DeletionPresentation(
-                        title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
-                        onAccept: { }
+        return Observable.merge([
+            deletionSubject.map { [unowned self] _ in
+                PresentTransition(leadingTo: {
+                    ViewController(
+                            presentation: DeletionPresentation(
+                                    title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
+                                    onAccept: { [unowned self] in
+                                        if let request = try? AuthorizedRequest(
+                                                path: "/eco-emc/api/my/analyzes",
+                                                method: .delete,
+                                                token: self.token,
+                                                parameters: [self.identification].asParameters(),
+                                                encoding: ArrayEncoding()
+                                        ) {
+
+                                            request.make().subscribe(onNext: {_ in
+
+                                            }).disposed(by: self.disposeBag)
+                                        }
+                                    }
+                            )
                     )
-                    )}
-            )
-        }
+                }
+                )
+            },
+            interactionSubject.debug("interacted with \(self.description)").map { [unowned self] _ in
+                PushTransition(leadingTo: {
+                    ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.darkSkyBlue, .tiffanyBlue]))
+                })
+            },
+            editionSubject.map { [unowned self] _ in
+                PushTransition(leadingTo: {
+                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self))
+                })
+            }
+        ])
     }
-    
+
     func edit() {
-        
+        editionSubject.onNext(())
     }
 
     func interact() {
-
+        interactionSubject.onNext(())
     }
+
+    private(set) var files: [File] = []
 }
 
 class ObservableSimpleMyMedicalTests: ObservableMedicalTests {

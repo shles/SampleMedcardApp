@@ -9,7 +9,7 @@ import RxSwift
 class DeletionPresentation: Presentation {
 
     private(set) var view: UIView = UIView()
-            .with(backgroundColor: .black)
+            .with(backgroundColor: UIColor.mainText.withAlphaComponent(0.5))
     private var deleteButton = UIButton()
             .with(title: "Удалить")
             .with(backgroundColor: .mainText)

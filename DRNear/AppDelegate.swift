@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: AllObservableAllergiesFromAPI(token: token),
                                                                             update: AllergiesUpdate(token: token),
-                                                                            title: "Список аллергии",
+                                                                            title: "Список аллергий",
                                                                             gradient: [.peach, .wheat]
                                                                     )
                                                             )}
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             leadingTo: {
                                                 ViewController(presentation: DDNListPresentation(
                                                     items: MyObservableMedicalTestsFromAPI(token: token),
-                                                    title: "Анализы и исследования",
+                                                    title: "Исследования и анализы",
                                                     gradient: [.darkSkyBlue, .tiffanyBlue],
                                                     leadingTo: {
                                                         ViewController(presentation: MedicalTestEditingPresentation())
@@ -122,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                     presentation: AllBadHabitsPresentation(
                                                                             badHabits: AllObservableDiseasesFromAPI(token: token),
                                                                             update: DiseasesUpdate(token: token),
-                                                                            title: "Хронические заболевания",
+                                                                            title: "Список заболеваний",
                                                                             gradient: [.pastelBlue, .powderBlue]
                                                                     )
                                                             )}
