@@ -10,13 +10,17 @@ import Foundation
 import RxSwift
 
 class ApplicationSetup: LoginMethodsApplication {
-    
+
+    private let transitionSubject = PublishSubject<Transition>()
+
     init() {
         
     }
     
     func createPincode(code: String) {
-        
+        transitionSubject.onNext(PushTransition {
+            ViewController(presentation: PincodeConfirmationPresentation(loginApplication: self))
+        })
     }
     
     func confirmPincode(code: String) {
@@ -36,6 +40,6 @@ class ApplicationSetup: LoginMethodsApplication {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        fatalError("wantsToPerform() has not been implemented")
+        return transitionSubject
     }
 }

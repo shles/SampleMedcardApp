@@ -12,18 +12,21 @@ import RxSwift
 class NumberConfirmationFromAPI: NumberConfirmation {
     
     private let disposeBag = DisposeBag()
-    private var number = ""
-    
+    private var number: String
+
+    private let transitionSubject = PublishSubject<Transition>()
+
+
     init(number: String) {
         self.number = number
     }
     
     func confirmNumber(code: String) {
-        guard let request = try? UnauthorizedRequest(path: "???",
-                                                     method: .post,
-                                                     parameters: ["number": self.number,
-                                                                  "code": code]) else { return }
-        request.make().subscribe({ _ in
+//        guard let request = try? UnauthorizedRequest(path: "???",
+//                                                     method: .post,
+//                                                     parameters: ["number": self.number,
+//                                                                  "code": code]) else { return }
+//        request.make().subscribe({ _ in
            
             /*
             if alreadyRegisterd {
@@ -33,13 +36,19 @@ class NumberConfirmationFromAPI: NumberConfirmation {
             }
             */
             
-            let commitmentStep = AccountCommitmentFromAPI()
-           
-        } ).disposed(by: disposeBag)
+//            let commitmentStep = AccountCommitmentFromAPI()
+//
+//        } ).disposed(by: disposeBag)
+
+        let commitmentStep = AccountCommitmentFromAPI()
+        transitionSubject.onNext(PushTransition(leadingTo: {
+            ViewController(presentation: AccountCreationPresentation(
+                    commitment: AccountCommitmentFromAPI()))
+        }))
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
-        fatalError("wantsToPerform() has not been implemented")
+        return transitionSubject
     }
     
 }

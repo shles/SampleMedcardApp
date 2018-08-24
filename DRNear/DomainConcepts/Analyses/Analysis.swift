@@ -195,7 +195,7 @@ class FieldContainer: UIView {
         self.content = view
 
         let separator = UIView()
-            .with(backgroundColor: .blueyGrey)
+            .with(backgroundColor: .shadow)
 
         super.init(frame: .zero)
 

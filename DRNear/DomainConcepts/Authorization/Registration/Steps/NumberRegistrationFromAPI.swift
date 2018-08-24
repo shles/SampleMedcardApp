@@ -12,20 +12,27 @@ import RxSwift
 class NumberRegistrationFromAPI: NumberRegistration {
     
     private let disposeBag = DisposeBag()
+    private let transitionSubject = PublishSubject<Transition>()
 
     func register(number: String) {
-        guard let request = try? UnauthorizedRequest(path: "???",
-                                                     method: .post,
-                                                     parameters: ["number": number]) else { return }
-        request.make().subscribe({ _ in
-            
-            let numberConfirmation = NumberConfirmationFromAPI(number: number)
-            
-        }).disposed(by: disposeBag)
+
+//        guard let request = try? UnauthorizedRequest(path: "???",
+//                                                     method: .post,
+//                                                     parameters: ["number": number]) else { return }
+//        request.make().subscribe({ _ in
+//
+//            let numberConfirmation = NumberConfirmationFromAPI(number: number)
+//
+//        }).disposed(by: disposeBag)
+
+        transitionSubject.onNext(PushTransition(leadingTo: {
+            ViewController(presentation: ConfirmNumberPresentation(
+                    confirmation: NumberConfirmationFromAPI(number: number)))
+        }))
     }
     
     func wantsToPerform() -> Observable<Transition> {
-        fatalError("wantsToPerform() has not been implemented")
+        return transitionSubject
     }
     
 }

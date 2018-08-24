@@ -8,6 +8,8 @@ import RxSwift
 
 enum Gender {
 
+    case male, female
+
 }
 
 protocol AccountInformation {
@@ -22,6 +24,13 @@ protocol AccountInformation {
 //    var secondName: String?
 //    var photo: UIImage?
 
+}
+
+struct AccountInformationFrom: AccountInformation {
+    private(set) var name: String = ""
+    private(set) var lastName: String = ""
+    private(set) var birthDate: Date = Date()
+    private(set) var gender: Gender = .male
 }
 
 protocol NumberRegistration: TransitionSource {

@@ -8,26 +8,6 @@ import RxSwift
 import SnapKit
 import RxCocoa
 
-class PinCodePresentation: Presentation {
-    private(set) var view: UIView
-
-    private let transitionsSubject = PublishSubject<Transition>()
-
-    init() {
-        view = EnterCodeView(
-                title: "Введите пинкод",
-                image: #imageLiteral(resourceName: "page1Copy"),
-                symbolsNumber: 6)
-    }
-
-    func willAppear() {
-    }
-
-    func wantsToPerform() -> Observable<Transition> {
-        return transitionsSubject
-    }
-}
-
 class EnterCodeView: UIView {
 
     private let numberPadView = NumberPadView()
@@ -48,6 +28,7 @@ class EnterCodeView: UIView {
                 .with(text: title)
                 .with(font: .regular16)
                 .with(textColor: .mainText)
+                .aligned(by: .center)
         let imageView = UIImageView(image: image)
                 .with(contentMode: .scaleAspectFit)
 
