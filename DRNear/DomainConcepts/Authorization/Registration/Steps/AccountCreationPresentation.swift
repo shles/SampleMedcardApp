@@ -53,6 +53,7 @@ class AccountCreationPresentation: Presentation {
     private let navBar: SimpleNavigationBar
 
     private var commitment: AccountCommitment
+    private let scrollView = TPKeyboardAvoidingScrollView()
 
     init(commitment: AccountCommitment) {
 
@@ -68,9 +69,9 @@ class AccountCreationPresentation: Presentation {
 
         stack.axis = .vertical
 
-        let scrollView = TPKeyboardAvoidingScrollView()
-
-//        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
+        scrollView.bounces = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
 
         scrollView.addSubviews([photo, stack])
         view.addSubviews([navBar, scrollView, confirmButton])
