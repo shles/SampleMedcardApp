@@ -33,7 +33,7 @@ class PincodeConfirmationPresentation: Presentation {
 
 }
 
-class PincСdeCreationPresentation: Presentation {
+class PinCodeCreationPresentation: Presentation {
     private(set) var view: UIView
 
     private let transitionsSubject = PublishSubject<Transition>()

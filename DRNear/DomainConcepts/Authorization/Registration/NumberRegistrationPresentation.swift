@@ -25,7 +25,6 @@ class EnterNumberView: UIView {
 
         confirmButton = GradientButton(colors: [.mainText])
                 .with(title: "Продолжить")
-                .with(backgroundColor: .mainText)
                 .with(roundedEdges: 24)
 
         super.init(frame: .zero)

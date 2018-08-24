@@ -12,6 +12,26 @@ protocol Request {
     func make() -> Observable<JSON>
 }
 
+struct ServerError: Error {
+    
+    var title: String
+    var detail: String
+    var status: Int
+    
+    static func from(json: JSON) -> ServerError? {
+        
+        guard let status = json["status"].int,
+            let title = json["title"].string,
+            let detail = json["detail"].string else { return nil }
+        
+        return ServerError(title: title, detail: detail, status: status)
+    }
+    
+    var localizedDescription: String {
+        return detail
+    }
+}
+
 class AuthorizedRequest: Request {
 
     private var request: URLRequest
@@ -81,7 +101,13 @@ class AuthorizedRequest: Request {
 
                         case .failure(let error):
 
-                            observer.onError(error)
+                            if let data = response.data,
+                                let json = try? JSON(data: data),
+                                let serverError = ResponseError.from(json: json) {
+                                observer.onError(serverError)
+                            } else {
+                                observer.onError(error)
+                            }
                         }
                     }
             return Disposables.create()
@@ -156,7 +182,13 @@ class UnauthorizedRequest: Request {
 
                         case .failure(let error):
 
-                            observer.onError(error)
+                            if let data = response.data,
+                                let json = try? JSON(data: data),
+                                let serverError = ResponseError.from(json: json) {
+                                observer.onError(serverError)
+                            } else {
+                                observer.onError(error)
+                            }
                         }
                     }
             return Disposables.create()
@@ -172,6 +204,13 @@ class ResponseError: LocalizedError {
         return description?.joined(separator: " ") ?? message
     }
 
+    class func from(json: JSON) -> ResponseError? {
+        
+        guard let detail = json["detail"].string else { return nil }
+        
+        return ResponseError(message: detail)
+    }
+    
     init() {
 
     }
@@ -179,7 +218,6 @@ class ResponseError: LocalizedError {
     init(message: String) {
         self.message = message
     }
-
 }
 
 class RequestError: LocalizedError {
@@ -189,7 +227,7 @@ class RequestError: LocalizedError {
     var errorDescription: String? {
         return description?.joined(separator: " ") ?? message
     }
-
+    
     init() {
 
     }
