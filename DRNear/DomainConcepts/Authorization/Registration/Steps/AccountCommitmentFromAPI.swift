@@ -29,7 +29,7 @@ class AccountCommitmentFromAPI: AccountCommitment {
 //        } ).disposed(by: disposeBag)
 
         transitionSubject.onNext(PushTransition(leadingTo: {
-            ViewController(presentation: PincСdeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
+            ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
         }))
     }
 

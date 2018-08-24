@@ -22,18 +22,12 @@ class NumberRegistrationFromAPI: NumberRegistration {
 
     func register(number: String) {
 
-        //создаешь запрос
+        let number = number.hasPrefix("+7") ? String(number.dropFirst(2)) : number
 
-        guard let request = try? UnauthorizedRequest(path: "???",
-                                                     method: .post,
-                                                     parameters: ["number": number]) else { return }
+        guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/code/send",
+                                                     method: .get,
+                                                     parameters: ["phone": number]) else { return }
 
-        //Вызываешь запрос.
-        //Метод возвращает Observable. На него подписываешь .subscribe(onNext: {}, onError: {} ).
-        //onNext {} параметр - реакция на удачный резултат выполнения запросв
-        //onError {} параметр - реакция на ошибку
-        //transitionSubject - это Observer. В него можно посылать события.
-        //.onNext(Transition) вызовет в нем событие с этим транзишн.
         request.make().subscribe(onNext:{ _ in
 
             let numberConfirmation = NumberConfirmationFromAPI(number: number, leadingTo: self.leadingTo)
@@ -46,12 +40,9 @@ class NumberRegistrationFromAPI: NumberRegistration {
         }, onError: {
             self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
         }).disposed(by: disposeBag)
-
-
     }
 
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }
-
 }

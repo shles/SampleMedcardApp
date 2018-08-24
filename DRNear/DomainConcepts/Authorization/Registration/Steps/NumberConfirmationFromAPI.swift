@@ -9,6 +9,13 @@
 import Foundation
 import RxSwift
 
+enum UserStatus: String {
+    
+    case new = "NEW"
+    case inactive = "INACTIVE"
+    case active = "ACTIVE"
+}
+
 class NumberConfirmationFromAPI: NumberConfirmation {
 
     private let disposeBag = DisposeBag()
@@ -24,29 +31,39 @@ class NumberConfirmationFromAPI: NumberConfirmation {
     }
 
     func confirmNumber(code: String) {
-//        guard let request = try? UnauthorizedRequest(path: "???",
-//                                                     method: .post,
-//                                                     parameters: ["number": self.number,
-//                                                                  "code": code]) else { return }
-//        request.make().subscribe({ _ in
-
-            /*
-            if alreadyRegisterd {
-                let appSetup = ApplicationSetup()
-            } else {
-                let commitmentStep = AccountCommitmentFromAPI()
+        
+        let number = self.number.hasPrefix("+7") ? String(self.number.dropFirst(2)) : self.number
+        
+        guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/code/check",
+                                                     method: .get,
+                                                     parameters: [
+                                                        "phone": number,
+                                                        "code": code]) else { return }
+        
+        request.make().subscribe(onNext:{ response in
+            
+            if let status = UserStatus(rawValue: response["status"].string ?? ""),
+                let key = response["key"].string {
+                
+                switch status {
+                case .active:
+                    // Where to???
+                    break
+                case .inactive:
+                    self.transitionSubject.onNext(PushTransition(leadingTo: {
+                        ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
+                    }))
+                case .new:
+                    self.transitionSubject.onNext(PushTransition(leadingTo: {
+                        ViewController(presentation: AccountCreationPresentation(
+                            commitment: commitmentStep))
+                    }))
+                }
             }
-            */
-
-//            let commitmentStep = AccountCommitmentFromAPI()
-//
-//        } ).disposed(by: disposeBag)
-
-        let commitmentStep = AccountCommitmentFromAPI(leadingTo: leadingTo)
-        transitionSubject.onNext(PushTransition(leadingTo: {
-            ViewController(presentation: AccountCreationPresentation(
-                    commitment: commitmentStep))
-        }))
+            
+        }, onError: {
+            self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
+        }).disposed(by: disposeBag)
     }
 
     func wantsToPerform() -> Observable<Transition> {

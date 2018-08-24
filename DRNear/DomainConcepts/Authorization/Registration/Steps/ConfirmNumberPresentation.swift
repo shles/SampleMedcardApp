@@ -17,7 +17,7 @@ class ConfirmNumberPresentation: Presentation {
         enterCodeView = EnterCodeView(
                 title: "Для проверки номера телефона, введите код из СМС",
                 image: #imageLiteral(resourceName: "page1Copy"),
-                symbolsNumber: 6)
+                symbolsNumber: 4)
         self.numberConfirmation = confirmation
 
         view.addSubview(enterCodeView)
