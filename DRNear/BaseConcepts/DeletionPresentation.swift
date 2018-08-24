@@ -5,12 +5,42 @@
 
 import RxSwift
 import UIKit
+import SnapKit
+
+class LoadingButton: UIButton {
+
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+
+    init() {
+        super.init(frame: .zero)
+        self.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+
+    func startAnimation() {
+        activityIndicator.startAnimating()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.titleLabel?.alpha = 0
+            self.activityIndicator.alpha = 1
+        })
+    }
+
+    func stopAnimation() {
+        activityIndicator.stopAnimating()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.titleLabel?.alpha = 1
+            self.activityIndicator.alpha = 0
+        })
+    }
+}
 
 class DeletionPresentation: Presentation {
 
     private(set) var view: UIView = UIView()
             .with(backgroundColor: UIColor.mainText.withAlphaComponent(0.5))
-    private var deleteButton = UIButton()
+    private var deleteButton = LoadingButton()
             .with(title: "Удалить")
             .with(backgroundColor: .mainText)
             .with(roundedEdges: 24)
@@ -78,9 +108,11 @@ class DeletionPresentation: Presentation {
                 .disposed(by: disposeBag)
 
         deleteButton.rx.tap
+                .do(onNext: {[unowned self] in self.deleteButton.startAnimation() })
                 .flatMap { _ in  onAccept() }
                 .catchErrorJustReturn(())
                 .map { DismissTransition() }
+                .do(onNext: {[unowned self] in self.deleteButton.stopAnimation() })
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)
     }
