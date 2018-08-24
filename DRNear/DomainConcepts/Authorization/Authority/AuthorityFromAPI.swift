@@ -145,6 +145,7 @@ class AuthorityFromAPI: Authority {
                           encoding: JSONEncoding.default,
                           headers: headers)
             .responseData(completionHandler: { response in
+
                 guard let data = response.data, response.error == nil else {
                     print(response.error)
                     return

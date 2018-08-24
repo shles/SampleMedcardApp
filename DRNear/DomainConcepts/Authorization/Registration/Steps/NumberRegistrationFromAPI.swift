@@ -22,19 +22,32 @@ class NumberRegistrationFromAPI: NumberRegistration {
 
     func register(number: String) {
 
-//        guard let request = try? UnauthorizedRequest(path: "???",
-//                                                     method: .post,
-//                                                     parameters: ["number": number]) else { return }
-//        request.make().subscribe({ _ in
-//
-//            let numberConfirmation = NumberConfirmationFromAPI(number: number)
-//
-//        }).disposed(by: disposeBag)
+        //создаешь запрос
 
-        transitionSubject.onNext(PushTransition(leadingTo: { [unowned self] in
-            ViewController(presentation: ConfirmNumberPresentation(
-                    confirmation: NumberConfirmationFromAPI(number: number, leadingTo: self.leadingTo)))
-        }))
+        guard let request = try? UnauthorizedRequest(path: "???",
+                                                     method: .post,
+                                                     parameters: ["number": number]) else { return }
+
+        //Вызываешь запрос.
+        //Метод возвращает Observable. На него подписываешь .subscribe(onNext: {}, onError: {} ).
+        //onNext {} параметр - реакция на удачный резултат выполнения запросв
+        //onError {} параметр - реакция на ошибку
+        //transitionSubject - это Observer. В него можно посылать события.
+        //.onNext(Transition) вызовет в нем событие с этим транзишн.
+        request.make().subscribe(onNext:{ _ in
+
+            let numberConfirmation = NumberConfirmationFromAPI(number: number, leadingTo: self.leadingTo)
+
+            self.transitionSubject.onNext(PushTransition(leadingTo: { [unowned self] in
+                ViewController(presentation: ConfirmNumberPresentation(
+                        confirmation: numberConfirmation))
+            }))
+
+        }, onError: {
+            self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
+        }).disposed(by: disposeBag)
+
+
     }
 
     func wantsToPerform() -> Observable<Transition> {
