@@ -69,9 +69,19 @@ class DatedDescribedCell: UITableViewCell {
 
         nameLabel.text = item.name
 
-        //TODO: make something attributed
+        let formatter = DateFormatter()
 
-        dateLabel.attributedText = NSAttributedString(string: "01 января 1998")
+        formatter.dateFormat = "dd MMMM yyyy"
+
+        let attrString = NSMutableAttributedString(
+                string: formatter.string(from: item.date),
+                attributes: [NSAttributedStringKey.font: UIFont.navigatoinLarge])
+
+        attrString.addAttribute(NSAttributedStringKey.font,
+                value: UIFont.subtitleText13,
+                range: NSRange(location: 2, length: attrString.string.count - 6))
+
+        dateLabel.attributedText = attrString
 
         systemEventIndicator.configure(activated: item.isRelatedToSystem)
 
