@@ -12,21 +12,21 @@ import RxSwift
 import SwiftyJSON
 
 class AllObservableDiseasesFromAPI: ObservableDiseases, ObservableType, Searchable {
-    
+
     typealias E = [Disease]
     private let token: Token
     private let searchSubject = PublishSubject<String>()
-    
-    init(token: Token)  {
+
+    init(token: Token) {
         self.token = token
     }
-    
+
     //TODO: somewhere here is a cause of disposing when error occures. Needed to be recoverable or not emitting error
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Disease] {
-        
+
         return searchSubject.startWith("").debug().map { [unowned self] name in
-            
+
             try AuthorizedRequest(
                 path: "/eco-emc/api/my/diagnoses",
                 method: .get,
@@ -40,7 +40,7 @@ class AllObservableDiseasesFromAPI: ObservableDiseases, ObservableType, Searchab
             }.flatMap {
                 $0.make()
             }.map { json in
-                
+
                 json.arrayValue.map { (json: JSON) in
                     DiseaseFrom(
                         name: json["name"]["name"].string ?? "",
@@ -52,7 +52,7 @@ class AllObservableDiseasesFromAPI: ObservableDiseases, ObservableType, Searchab
             }.catchErrorJustReturn([])
             .subscribe(observer)
     }
-    
+
     func search(string: String) {
         searchSubject.onNext(string)
     }

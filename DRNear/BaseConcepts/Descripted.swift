@@ -6,7 +6,5 @@
 import Foundation
 
 protocol Described {
-    var description: String {get}
+    var description: String { get }
 }
-
-

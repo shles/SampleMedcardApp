@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import RxSwift
 import SnapKit
+import UIKit
 
 class EnterNumberView: UIView {
 
@@ -18,7 +18,6 @@ class EnterNumberView: UIView {
     private let disposeBag = DisposeBag()
 
     private let confirmButton: GradientButton
-
 
     let numberEntered = PublishSubject<String>()
 
@@ -86,7 +85,6 @@ class EnterNumberView: UIView {
                 .map { [unowned self] in self.numberField.text ?? "" }
                 .bind(to: numberEntered)
                 .disposed(by: disposeBag)
-
 
     }
 

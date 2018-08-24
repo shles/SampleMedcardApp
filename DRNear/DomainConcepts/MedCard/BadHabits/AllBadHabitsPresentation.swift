@@ -75,7 +75,6 @@ class AllBadHabitsPresentation: Presentation {
             badHabits.search(string: $0)
         }).disposed(by: disposeBag)
 
-
     }
 
     func willAppear() {

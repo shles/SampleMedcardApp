@@ -9,19 +9,19 @@
 import Alamofire
 import Foundation
 import RxSwift
-import SwiftyJSON
 import SnapKit
+import SwiftyJSON
 
 class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
-    
+
     typealias E = [Disease]
-    
+
     private let token: Token
 
-    init(token: Token)  {
+    init(token: Token) {
         self.token = token
     }
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Disease] {
 
         if let request = try? AuthorizedRequest(
@@ -49,29 +49,29 @@ class MyObservableDiseasesFromAPI: ObservableDiseases, ObservableType {
 }
 
 class MyDiseaseFrom: Disease, Deletable {
-    
+
     private(set) var name: String = ""
     private(set) var code: String = ""
     private(set) var identification: String = ""
     private(set) var isSelected: Variable<Bool> = Variable(true)
-    
+
     private let deletionSubject = PublishSubject<Transition>()
-    
+
     private let token: Token
-    
+
     private let disposeBag = DisposeBag()
-    
+
     init(name: String, id: String, code: String, token: Token) {
         self.name = name
         self.code = code
         self.identification = id
         self.token = token
     }
-    
+
     func select() {
-        
+
     }
-    
+
     func delete() {
         deletionSubject.onNext(PresentTransition {
             ViewController(
@@ -85,9 +85,9 @@ class MyDiseaseFrom: Disease, Deletable {
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()
                             ) {
-                            
+
                             request.make().subscribe(onNext: {_ in
-                                
+
                             }).disposed(by: self.disposeBag)
                         }
                     }
@@ -95,23 +95,22 @@ class MyDiseaseFrom: Disease, Deletable {
             )
         })
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.asObservable().debug()
     }
 }
 
 class ObservableSimpleMyDiseases: ObservableDiseases {
-    
+
     private let array = [
         MyDiseaseFrom(name: "aaa", id: "a", code: "", token: TokenFromString(string: "")),
         MyDiseaseFrom(name: "bbb", id: "b", code: "", token: TokenFromString(string: "")),
         MyDiseaseFrom(name: "ccc", id: "c", code: "", token: TokenFromString(string: ""))
     ]
-    
+
     func asObservable() -> Observable<[Disease]> {
         return Observable.just(array)
     }
-    
-}
 
+}

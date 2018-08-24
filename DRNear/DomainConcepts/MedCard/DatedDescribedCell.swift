@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class DatedDescribedCell: UITableViewCell {
 
@@ -63,7 +63,6 @@ class DatedDescribedCell: UITableViewCell {
             $0.width.height.equalTo(10)
         }
 
-
     }
 
     func configured(item: Named & Dated & Described & SystemRelated) -> DatedDescribedCell {
@@ -73,7 +72,7 @@ class DatedDescribedCell: UITableViewCell {
         //TODO: make something attributed
 
         dateLabel.attributedText = NSAttributedString(string: "01 января 1998")
-        
+
         systemEventIndicator.configure(activated: item.isRelatedToSystem)
 
         descriptionLabel.text = item.description

@@ -14,10 +14,10 @@ enum Gender {
 
 protocol AccountInformation {
 
-    var name: String {get}
-    var lastName: String {get}
-    var birthDate: Date {get}
-    var gender: Gender {get}
+    var name: String { get }
+    var lastName: String { get }
+    var birthDate: Date { get }
+    var gender: Gender { get }
 
     //TODO: create another process for optional info
 //    var email: String?
@@ -40,7 +40,6 @@ protocol NumberRegistration: TransitionSource {
 protocol NumberConfirmation: TransitionSource {
     func confirmNumber(code: String)
 }
-
 
 protocol AccountCommitment: TransitionSource {
     func commitAccountInformation(information: AccountInformation)

@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import RxSwift
-import Alamofire
 import SwiftyJSON
 
 class BadHabitFrom: BadHabit {

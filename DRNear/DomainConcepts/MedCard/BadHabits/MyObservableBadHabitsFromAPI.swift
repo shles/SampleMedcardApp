@@ -6,8 +6,8 @@
 import Alamofire
 import Foundation
 import RxSwift
-import SwiftyJSON
 import SnapKit
+import SwiftyJSON
 
 class MyObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType {
 

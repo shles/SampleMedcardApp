@@ -20,14 +20,14 @@ class ApplicationSetup: LoginMethodsApplication {
     init(leadingTo: @escaping (Token) -> (UIViewController)) {
         self.leadingTo = leadingTo
     }
-    
+
     func createPincode(code: String) {
         self.code = code
         transitionSubject.onNext(PushTransition { [unowned self] in
             return ViewController(presentation: PincodeConfirmationPresentation(loginApplication: self))
         })
     }
-    
+
     func confirmPincode(code: String) {
         if self.code == code {
             transitionSubject.onNext( PresentTransition {
@@ -42,15 +42,15 @@ class ApplicationSetup: LoginMethodsApplication {
             transitionSubject.onNext(ErrorAlertTransition(error: RequestError(message: "Pin-код не совпадает, повторите попытку")))
         }
     }
-    
+
     func activateTouchID() {
-        
+
     }
-    
+
     func activateFaceID() {
-        
+
     }
-    
+
     func proceedToAccount() {
         let authority = AuthorityFromAPI()
 
@@ -84,7 +84,7 @@ class TouchIDPresentation: Presentation {
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
 
-    init(title: String, onAccept: @escaping () -> ()) {
+    init(title: String, onAccept: @escaping () -> Void) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)

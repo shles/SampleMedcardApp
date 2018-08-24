@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class NumberRegistrationFromAPI: NumberRegistration {
-    
+
     private let disposeBag = DisposeBag()
     private let transitionSubject = PublishSubject<Transition>()
 
@@ -33,12 +33,12 @@ class NumberRegistrationFromAPI: NumberRegistration {
 
         transitionSubject.onNext(PushTransition(leadingTo: { [unowned self] in
             ViewController(presentation: ConfirmNumberPresentation(
-                    confirmation: NumberConfirmationFromAPI(number: number,leadingTo: self.leadingTo)))
+                    confirmation: NumberConfirmationFromAPI(number: number, leadingTo: self.leadingTo)))
         }))
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }
-    
+
 }

@@ -60,7 +60,7 @@ class ApplicationTests: QuickSpec {
                         .flatMap { $0 as? UITextField }
                     tfs![0].text = "user"
                     tfs![1].text = "SiblionBest!!"
-                    
+
                     loginVC.view.subviews[0].subviews
                         .first(where: { $0 is UIStackView })
                         .flatMap { $0 as? UIStackView }?
@@ -68,12 +68,12 @@ class ApplicationTests: QuickSpec {
                         .flatMap { $0 as? UIButton }?
                         .sendActions(for: .touchUpInside)
                     }
-                
+
                     let vc = try? (loginVC as? ViewController)?.presentation.wantsToPush().toBlocking(timeout:5).first()
                     vc??.preloadView()
-                
+
                     XCTAssertNil(vc)
-                
+
             }
 
         }

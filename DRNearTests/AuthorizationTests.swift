@@ -83,12 +83,12 @@ class APIAuthorizationTests: QuickSpec {
             }
             context("with other login") {
                 it("asks to confirm code") {
-                    
+
                     authority.authWith(credentials: cred)
                     XCTAssertNil(try? authority.wantsTFAuth().toBlocking(timeout: 5).first())
                 }
                 it("auth's after confirmation") {
-                    
+
                     authority.confirm(code: "0114")
                     XCTAssertNil(try? authority.authenticate().toBlocking(timeout: 5).first())
 

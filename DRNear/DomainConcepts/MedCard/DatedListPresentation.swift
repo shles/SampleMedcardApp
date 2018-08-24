@@ -4,11 +4,11 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
-import SnapKit
 import RxCocoa
 import RxDataSources
+import RxSwift
+import SnapKit
+import UIKit
 
 typealias DatedListApplicable = Identified & Dated & Named & Described & SystemRelated & Deletable & Editable & Interactive
 
@@ -82,7 +82,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
                 self.transitionSubject.onNext($0)
             }).disposed(by: self.itemsTransitionsDisposeBag)
         }).disposed(by: disposeBag)
-        
+
     }
 
     func willAppear() {
@@ -117,7 +117,6 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [action])
     }
 }
-
 
 protocol ContainFiles {
     var files: [File] { get }

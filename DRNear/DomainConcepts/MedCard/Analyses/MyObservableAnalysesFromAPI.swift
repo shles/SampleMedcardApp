@@ -9,19 +9,19 @@
 import Alamofire
 import Foundation
 import RxSwift
-import SwiftyJSON
 import SnapKit
+import SwiftyJSON
 
 class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
-    
+
     typealias E = [MedicalTest]
-    
+
     private let token: Token
 
-    init(token: Token)  {
+    init(token: Token) {
         self.token = token
     }
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [MedicalTest] {
         if let request = try?AuthorizedRequest(
                 path: "/eco-emc/api/my/analyzes",
@@ -49,7 +49,7 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
 }
 
 class MyMedicalTestFrom: MedicalTest, ContainFiles {
-    
+
     private(set) var name: String = ""
     private(set) var date: Date = Date()
     private(set) var isRelatedToSystem: Bool = false
@@ -62,7 +62,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
     private var editionSubject = PublishSubject<Void>()
 
     private let disposeBag = DisposeBag()
-    
+
     init(name: String, id: String, date: Date, description: String, token: Token) {
         self.name = name
         self.identification = id
@@ -70,7 +70,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
         self.description = description
         self.token = token
     }
-    
+
     func delete() {
         deletionSubject.onNext(())
 //        (PresentTransition {
@@ -95,7 +95,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
 //            )
 //        })
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([
             deletionSubject.map { [unowned self] _ in
@@ -159,4 +159,3 @@ class ObservableSimpleMyMedicalTests: ObservableMedicalTests {
     }
 
 }
-

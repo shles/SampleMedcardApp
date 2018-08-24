@@ -11,7 +11,7 @@ import RxSwift
 import SwiftyJSON
 
 class AllergiesUpdate: Update {
-    
+
     private var itemsToCommit = [ClarifiedAllergy]()
     private let token: Token
     private let disposeBag = DisposeBag()
@@ -20,7 +20,7 @@ class AllergiesUpdate: Update {
     init(token: Token) {
         self.token = token
     }
-    
+
     func addItem(item: Identified) {
         //TODO: this makes this solution worse, possible all of them should be Generic
         if let item = item as? Allergy {
@@ -31,7 +31,7 @@ class AllergiesUpdate: Update {
             }))
         }
     }
-    
+
     func apply() {
         /*
           {
@@ -72,9 +72,9 @@ class AllergiesUpdate: Update {
                 self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
             }).disposed(by: disposeBag)
         }
-        
+
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }

@@ -10,13 +10,13 @@ import Foundation
 import RxSwift
 
 protocol Consultation: Named, Dated, Described, SystemRelated, Editable, Deletable, Identified, Interactive {
-    
+
 }
 
 protocol ObservableConsultations: DatedListRepresentable {
-    
+
     func asObservable() -> Observable<[Consultation]>
-    
+
 }
 
 extension ObservableConsultations {

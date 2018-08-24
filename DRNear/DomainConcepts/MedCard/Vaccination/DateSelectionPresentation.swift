@@ -4,8 +4,8 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
 class DateSelectionPresentation: Presentation {
 
@@ -25,8 +25,7 @@ class DateSelectionPresentation: Presentation {
 
     private let datePicker = UIDatePicker()
 
-
-    init(title: String, gradient: [UIColor], onAccept: @escaping (Date) -> ()) {
+    init(title: String, gradient: [UIColor], onAccept: @escaping (Date) -> Void) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)
@@ -79,7 +78,6 @@ class DateSelectionPresentation: Presentation {
                 .map { DismissTransition() }
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)
-
 
         //TODO: make field verification
         addButton.rx.tap

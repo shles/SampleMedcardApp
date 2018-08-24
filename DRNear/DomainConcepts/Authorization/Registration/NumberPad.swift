@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
+import RxCocoa
 import RxSwift
 import SnapKit
-import RxCocoa
+import UIKit
 
 class EnterCodeView: UIView {
 
@@ -78,7 +78,6 @@ class EnterCodeView: UIView {
 
 }
 
-
 class CodeView: UIView {
 
     private let disposeBag = DisposeBag()
@@ -139,7 +138,7 @@ class CodeView: UIView {
         codeSubject.debug().do(onNext: { code in
             self.codeSymbols.dropFirst(code.count).forEach { $0.setEntered(false) }
             self.codeSymbols.dropLast(symbolsNumber - code.count).forEach { $0.setEntered(true) }
-        }).filter { $0.count == symbolsNumber}
+        }).filter { $0.count == symbolsNumber }
         .bind(to: codeEntered)
         .disposed(by: disposeBag)
     }
@@ -264,7 +263,7 @@ class NumberPadView: UIView {
                         DeleteButton(deleteSubject: wantsToDelete.asObserver())
                     ])
         ])
-        
+
         rowsStack.axis = .vertical
         rowsStack.spacing = 21
 

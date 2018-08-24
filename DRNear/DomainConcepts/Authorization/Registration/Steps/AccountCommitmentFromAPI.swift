@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class AccountCommitmentFromAPI: AccountCommitment {
-    
+
     private let disposeBag = DisposeBag()
     private let transitionSubject = PublishSubject<Transition>()
     private let leadingTo: (Token) -> (UIViewController)
@@ -18,7 +18,7 @@ class AccountCommitmentFromAPI: AccountCommitment {
     init(leadingTo: @escaping (Token) -> (UIViewController)) {
         self.leadingTo = leadingTo
     }
-    
+
     func commitAccountInformation(information: AccountInformation) {
 //        guard let request = try? UnauthorizedRequest(path: "???",
 //                                                     method: .post) else { return }
@@ -32,9 +32,9 @@ class AccountCommitmentFromAPI: AccountCommitment {
             ViewController(presentation: PincСdeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
         }))
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }
-    
+
 }

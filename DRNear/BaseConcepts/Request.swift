@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import Foundation
-import SwiftyJSON
 import Alamofire
+import Foundation
 import RxSwift
+import SwiftyJSON
 
 protocol Request {
     func make() -> Observable<JSON>

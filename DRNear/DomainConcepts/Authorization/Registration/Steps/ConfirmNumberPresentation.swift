@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import RxSwift
 import SnapKit
+import UIKit
 
 class ConfirmNumberPresentation: Presentation {
 

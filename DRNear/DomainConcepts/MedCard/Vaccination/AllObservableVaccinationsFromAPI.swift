@@ -12,21 +12,21 @@ import RxSwift
 import SwiftyJSON
 
 class AllObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType, Searchable {
-    
+
     typealias E = [Vaccination]
     private let token: Token
     private let searchSubject = PublishSubject<String>()
-    
-    init(token: Token)  {
+
+    init(token: Token) {
         self.token = token
     }
     //TODO: refactor mapping and model. get rid of optioanals
     //TODO: somewhere here is a cause of disposing when error occures. Needed to be recoverable or not emitting error
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Vaccination] {
-        
+
         return searchSubject.startWith("").debug().map { [unowned self] name in
-            
+
             try AuthorizedRequest(
                 path: "/eco-emc/api/my/vaccinations",
                 method: .get,
@@ -54,7 +54,7 @@ class AllObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType, 
             }.catchErrorJustReturn([])
             .subscribe(observer)
     }
-    
+
     func search(string: String) {
         searchSubject.onNext(string)
     }

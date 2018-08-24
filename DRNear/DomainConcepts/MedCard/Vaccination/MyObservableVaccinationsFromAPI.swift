@@ -9,19 +9,19 @@
 import Alamofire
 import Foundation
 import RxSwift
-import SwiftyJSON
 import SnapKit
+import SwiftyJSON
 
 class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
-    
+
     typealias E = [Vaccination]
-    
+
     private let token: Token
 
-    init(token: Token)  {
+    init(token: Token) {
         self.token = token
     }
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Vaccination] {
         if let request = try? AuthorizedRequest(
                 path: "/eco-emc/api/my/vaccinations",
@@ -50,19 +50,19 @@ class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
 }
 
 class MyVaccinationFrom: Vaccination, Deletable {
-    
+
     private(set) var date = Date()
     private(set) var name: String = ""
     private(set) var code: String = ""
     private(set) var identification: String = ""
     private(set) var isSelected: Variable<Bool> = Variable(true)
-    
+
     private let deletionSubject = PublishSubject<Transition>()
-    
+
     private let token: Token
-    
+
     private let disposeBag = DisposeBag()
-    
+
     init(name: String, id: String, code: String, date: Date, token: Token) {
         self.name = name
         self.code = code
@@ -70,11 +70,11 @@ class MyVaccinationFrom: Vaccination, Deletable {
         self.identification = id
         self.token = token
     }
-    
+
     func select() {
-        
+
     }
-    
+
     func delete() {
         deletionSubject.onNext(PresentTransition {
             ViewController(
@@ -88,9 +88,9 @@ class MyVaccinationFrom: Vaccination, Deletable {
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()
                             ) {
-                            
+
                             request.make().subscribe(onNext: {_ in
-                                
+
                             }).disposed(by: self.disposeBag)
                         }
                     }
@@ -98,22 +98,22 @@ class MyVaccinationFrom: Vaccination, Deletable {
             )
         })
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.asObservable().debug()
     }
 }
 
 class ObservableSimpleMyVaccinations: ObservableVaccinations {
-    
+
     private let array = [
         MyVaccinationFrom(name: "aaa", id: "a", code: "", date: Date(), token: TokenFromString(string: "")),
         MyVaccinationFrom(name: "bbb", id: "b", code: "", date: Date(), token: TokenFromString(string: "")),
         MyVaccinationFrom(name: "ccc", id: "c", code: "", date: Date(), token: TokenFromString(string: ""))
     ]
-    
+
     func asObservable() -> Observable<[Vaccination]> {
         return Observable.just(array)
     }
-    
+
 }

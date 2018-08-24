@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol Vaccinations: ListApplicable {
-    
+
 }
 
 protocol ObservableVaccinations: ListRepresentable {
@@ -24,9 +24,9 @@ extension ObservableVaccinations {
 }
 
 class SimpleObservableVaccinations: ObservableVaccinations, ObservableType, Searchable {
-    
+
     typealias E = [Vaccination]
-    
+
     private let vaccinations = [
         SimpleVaccination(),
         SimpleVaccination(),
@@ -35,12 +35,12 @@ class SimpleObservableVaccinations: ObservableVaccinations, ObservableType, Sear
         SimpleVaccination(),
         SimpleVaccination()
     ]
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Vaccination] {
         return Observable.just(vaccinations).subscribe(observer)
     }
-    
+
     func search(string: String) {
-        
+
     }
 }

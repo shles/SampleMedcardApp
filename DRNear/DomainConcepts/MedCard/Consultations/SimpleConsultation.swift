@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class SimpleConsultation: Consultation, ContainFiles {
-    
+
     private(set) var name: String = "Врач-педиатр"
     private(set) var date: Date = Date()
     var description: String = "Первичная консультация"
@@ -22,7 +22,7 @@ class SimpleConsultation: Consultation, ContainFiles {
     func delete() {
         deletionSubject.onNext(())
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([
             deletionSubject.map { [unowned self] _ in
@@ -40,7 +40,7 @@ class SimpleConsultation: Consultation, ContainFiles {
                 PushTransition(leadingTo: {
                     ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.lightPeriwinkle, .softPink]))
                 })
-            },
+            }
 //            editionSubject.map { [unowned self] _ in
 //                PushTransition(leadingTo: {
 //                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self))
@@ -48,9 +48,9 @@ class SimpleConsultation: Consultation, ContainFiles {
 //            }
         ])
     }
-    
+
     private(set) var isRelatedToSystem: Bool = false
-    
+
     func edit() {
         editionSubject.onNext(())
     }
@@ -66,11 +66,11 @@ class SimpleConsultation: Consultation, ContainFiles {
 }
 
 class SimpleMyConsultations: ObservableConsultations {
-    
+
     private let tests = [SimpleConsultation(),
                          SimpleConsultation(),
                          SimpleConsultation()]
-    
+
     func asObservable() -> Observable<[Consultation]> {
         return Observable.just(tests)
     }

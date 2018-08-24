@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class MyBadHabitsPresentation: Presentation {
 
@@ -17,7 +17,7 @@ class MyBadHabitsPresentation: Presentation {
     private let leadingTo: () -> (UIViewController)
     private let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
     private let disposeBag = DisposeBag()
-    
+
     init(badHabits: ListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController) ) {
 
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable(), tintColor: gradient.last ?? .mainText)
@@ -39,7 +39,7 @@ class MyBadHabitsPresentation: Presentation {
         }
 
         badHabtsPresentation.selection.do(onNext: { ($0 as? Deletable)?.delete() })
-            .flatMap { ($0 as? Deletable)?.wantsToPerform() ?? Observable.just(ErrorAlertTransition(error: RequestError()))}
+            .flatMap { ($0 as? Deletable)?.wantsToPerform() ?? Observable.just(ErrorAlertTransition(error: RequestError())) }
             .bind(to: transitionSubject).disposed(by: disposeBag)
     }
 

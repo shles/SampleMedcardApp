@@ -21,4 +21,3 @@ extension ObservableMedicalTests {
         return asObservable().map { $0.map { $0 as DatedListApplicable } }
     }
 }
-

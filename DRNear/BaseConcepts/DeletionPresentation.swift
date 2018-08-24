@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class DeletionPresentation: Presentation {
 
@@ -23,7 +23,7 @@ class DeletionPresentation: Presentation {
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
 
-    init(title: String, onAccept: @escaping () -> ()) {
+    init(title: String, onAccept: @escaping () -> Void) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)

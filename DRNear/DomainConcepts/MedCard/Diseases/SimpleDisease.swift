@@ -10,14 +10,14 @@ import Foundation
 import RxSwift
 
 class SimpleDisease: Disease {
-    
+
     var name: String = "Желтуха"
     var identification: String = "123"
-    
+
     var isSelected = Variable<Bool>(true)
-    
+
     func select() {
         isSelected.value = !isSelected.value
     }
-    
+
 }

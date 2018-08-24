@@ -3,17 +3,16 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
+import RxCocoa
 import RxSwift
 import SnapKit
 import UIKit
-import RxCocoa
 
 class SimpleNavigationBar: UIView {
 
     private var titleLabel = UILabel()
     .with(font: .navigatoinLarge)
     .with(textColor: .mainText)
-
 
     init(title: String) {
         titleLabel.text = title
@@ -153,6 +152,6 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
     }
 
     func searchString() -> Observable<String> {
-        return searchField.rx.text.map{ $0 ?? "" }.asObservable()
+        return searchField.rx.text.map { $0 ?? "" }.asObservable()
     }
 }

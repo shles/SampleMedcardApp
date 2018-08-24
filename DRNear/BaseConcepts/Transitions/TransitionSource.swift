@@ -7,8 +7,6 @@ import Foundation
 import RxSwift
 import UIKit
 
-
-
 protocol TransitionSource {
 
     func wantsToPerform() -> Observable<Transition>

@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import RxSwift
-import Alamofire
 import SnapKit
 
 protocol Update: TransitionSource {
@@ -39,7 +39,7 @@ class CommentPresentation: AdditionalInfoPresentation {
     private var commentField = UITextField()
         .with(placeholder: "Комментарий")
 
-    init(title: String, gradient: [UIColor], onAccept: @escaping (String) -> ()) {
+    init(title: String, gradient: [UIColor], onAccept: @escaping (String) -> Void) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)

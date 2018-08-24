@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class VaccinationUpdate: Update {
-    
+
     private var itemsToCommit = [Vaccination]()
     private let token: Token
     private let disposeBag = DisposeBag()
@@ -19,7 +19,7 @@ class VaccinationUpdate: Update {
     init(token: Token) {
         self.token = token
     }
-    
+
     func addItem(item: Identified) {
         if let item = item as? Vaccination {
             transitionSubject.onNext(PresentTransition(leadingTo: {
@@ -29,7 +29,7 @@ class VaccinationUpdate: Update {
             }))
         }
     }
-    
+
     func apply() {
 
         let formatter = DateFormatter()
@@ -41,7 +41,7 @@ class VaccinationUpdate: Update {
             path: "/eco-emc/api/my/vaccinations",
             method: .post,
             token: token,
-            parameters: itemsToCommit.map {  ["name": ["code": $0.identification], "date": formatter.string(from: $0.date)] }.asParameters(),
+            parameters: itemsToCommit.map { ["name": ["code": $0.identification], "date": formatter.string(from: $0.date)] }.asParameters(),
             encoding: ArrayEncoding()
             ) {
             request.make().subscribe(onNext: { [unowned self] _ in
@@ -51,7 +51,7 @@ class VaccinationUpdate: Update {
             }).disposed(by: disposeBag)
         }
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }

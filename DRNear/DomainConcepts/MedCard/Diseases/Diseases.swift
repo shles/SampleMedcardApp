@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol Diseases: ListApplicable {
-    
+
 }
 
 protocol ObservableDiseases: ListRepresentable {
@@ -24,9 +24,9 @@ extension ObservableDiseases {
 }
 
 class SimpleObservableDiseases: ObservableDiseases, ObservableType, Searchable {
-    
+
     typealias E = [Disease]
-    
+
     private let diseases = [
         SimpleDisease(),
         SimpleDisease(),
@@ -35,12 +35,12 @@ class SimpleObservableDiseases: ObservableDiseases, ObservableType, Searchable {
         SimpleDisease(),
         SimpleDisease()
     ]
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Disease] {
         return Observable.just(diseases).subscribe(observer)
     }
-    
+
     func search(string: String) {
-        
+
     }
 }

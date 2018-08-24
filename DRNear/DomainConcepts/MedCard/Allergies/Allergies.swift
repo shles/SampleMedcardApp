@@ -19,4 +19,3 @@ extension ObservableAllergies {
         return asObservable().map { $0.map { $0 as ListApplicable } }
     }
 }
-

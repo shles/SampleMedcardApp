@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 private let arrayParametersKey = "arrayParametersKey"
 
@@ -16,14 +16,12 @@ extension Array {
     }
 }
 
-
 /// Convert the parameters into a json array, and it is added as the request body.
 /// The array must be sent as parameters using its `asParameters` method.
 public struct ArrayEncoding: ParameterEncoding {
 
     /// The options for writing the parameters as JSON data.
     public let options: JSONSerialization.WritingOptions
-
 
     /// Creates a new instance of the encoding using the given options
     ///

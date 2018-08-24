@@ -9,18 +9,18 @@
 import Alamofire
 import Foundation
 import RxSwift
-import SwiftyJSON
 import SnapKit
+import SwiftyJSON
 
 class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType {
-    
+
     typealias E = [Consultation]
-    
+
     private let token: Token
     private let request: Request
-    
+
     init(token: Token) throws {
-        
+
         request = try AuthorizedRequest(
             path: "/eco-emc/api/my/consultations",
             method: .get,
@@ -29,7 +29,7 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
         )
         self.token = token
     }
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Consultation] {
         return request.make()
             .map { json in
@@ -47,17 +47,17 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
 }
 
 class MyConsultationFrom: Consultation {
-    
+
     private(set) var name: String = ""
     private(set) var date: Date = Date()
     private(set) var isRelatedToSystem: Bool = false
     private(set) var identification: String = ""
     var description: String = ""
     private let token: Token
-    
+
     private var deletionSubject = PublishSubject<Transition>()
     private let disposeBag = DisposeBag()
-    
+
     init(name: String, id: String, date: Date, description: String, token: Token) {
         self.name = name
         self.identification = id
@@ -65,7 +65,7 @@ class MyConsultationFrom: Consultation {
         self.description = description
         self.token = token
     }
-    
+
     func delete() {
         deletionSubject.onNext(PresentTransition {
             ViewController(
@@ -79,9 +79,9 @@ class MyConsultationFrom: Consultation {
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()
                             ) {
-                            
+
                             request.make().subscribe(onNext: {_ in
-                                
+
                             }).disposed(by: self.disposeBag)
                         }
                     }
@@ -89,7 +89,7 @@ class MyConsultationFrom: Consultation {
             )
         })
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.map { [unowned self] _ in
             PresentTransition(
@@ -102,9 +102,9 @@ class MyConsultationFrom: Consultation {
             )
         }
     }
-    
+
     func edit() {
-        
+
     }
 
     func interact() {
@@ -113,15 +113,15 @@ class MyConsultationFrom: Consultation {
 }
 
 class ObservableSimpleMyConsultations: ObservableConsultations {
-    
+
     private let array = [
         MyConsultationFrom(name: "aaa", id: "a", date: Date(), description: "Вы больны", token: TokenFromString(string: "")),
         MyConsultationFrom(name: "bbb", id: "b", date: Date(), description: "Вы больны", token: TokenFromString(string: "")),
         MyConsultationFrom(name: "ccc", id: "c", date: Date(), description: "Вы больны", token: TokenFromString(string: ""))
     ]
-    
+
     func asObservable() -> Observable<[Consultation]> {
         return Observable.just(array)
     }
-    
+
 }

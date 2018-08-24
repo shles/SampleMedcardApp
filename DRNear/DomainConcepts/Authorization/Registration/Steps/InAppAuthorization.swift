@@ -10,9 +10,9 @@ import Foundation
 import RxSwift
 
 class InAppAuthorization: Authorization {
-    
+
     func auth(code: String) {
-        
+
     }
 
     func wantsToPerform() -> Observable<Transition> {

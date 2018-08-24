@@ -10,12 +10,11 @@ import Foundation
 import RxSwift
 
 class NumberConfirmationFromAPI: NumberConfirmation {
-    
+
     private let disposeBag = DisposeBag()
     private var number: String
 
     private let transitionSubject = PublishSubject<Transition>()
-
 
     private let leadingTo: (Token) -> (UIViewController)
 
@@ -23,14 +22,14 @@ class NumberConfirmationFromAPI: NumberConfirmation {
         self.leadingTo = leadingTo
         self.number = number
     }
-    
+
     func confirmNumber(code: String) {
 //        guard let request = try? UnauthorizedRequest(path: "???",
 //                                                     method: .post,
 //                                                     parameters: ["number": self.number,
 //                                                                  "code": code]) else { return }
 //        request.make().subscribe({ _ in
-           
+
             /*
             if alreadyRegisterd {
                 let appSetup = ApplicationSetup()
@@ -38,7 +37,7 @@ class NumberConfirmationFromAPI: NumberConfirmation {
                 let commitmentStep = AccountCommitmentFromAPI()
             }
             */
-            
+
 //            let commitmentStep = AccountCommitmentFromAPI()
 //
 //        } ).disposed(by: disposeBag)
@@ -53,5 +52,5 @@ class NumberConfirmationFromAPI: NumberConfirmation {
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }
-    
+
 }

@@ -14,7 +14,7 @@ class AllObservableBadHabitsFromAPI: ObservableBadHabits, ObservableType, Search
     private let token: Token
     private let searchSubject = PublishSubject<String>()
 
-    init(token: Token)  {
+    init(token: Token) {
         self.token = token
     }
 

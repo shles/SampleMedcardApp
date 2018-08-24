@@ -9,20 +9,20 @@
 import Alamofire
 import Foundation
 import RxSwift
-import SwiftyJSON
 import SnapKit
+import SwiftyJSON
 
 class MyObservableAllergiesFromAPI: ObservableAllergies, ObservableType {
-    
+
     typealias E = [Allergy]
-    
+
     private let token: Token
 
-    init(token: Token)  {
+    init(token: Token) {
 
         self.token = token
     }
-    
+
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Allergy] {
 
         if let request = try? AuthorizedRequest(
@@ -64,25 +64,25 @@ class MyObservableAllergiesFromAPI: ObservableAllergies, ObservableType {
 }
 
 class MyAllergyFrom: Allergy, Deletable {
-    
+
     private(set) var name: String = ""
     private(set) var identification: String = ""
     private(set) var isSelected: Variable<Bool> = Variable(true)
     private(set) var category: AllergyCategory?
     private(set) var status: AllergyIntoleranceStatus?
     private(set) var digitalMedicalRecordId = 0
-    
+
     private let deletionSubject = PublishSubject<Transition>()
     private let token: Token
     private let disposeBag = DisposeBag()
-    
+
     init(clarification: String,
          id: String,
          digitalMedicalRecordId: Int,
          category: AllergyCategory?,
          status: AllergyIntoleranceStatus?,
          token: Token) {
-        
+
         self.name = category?.name ?? ""
         self.identification = id
         self.digitalMedicalRecordId = digitalMedicalRecordId
@@ -90,11 +90,11 @@ class MyAllergyFrom: Allergy, Deletable {
         self.status = status
         self.token = token
     }
-    
+
     func select() {
-        
+
     }
-    
+
     func delete() {
         deletionSubject.onNext(PresentTransition {
             ViewController(
@@ -108,9 +108,9 @@ class MyAllergyFrom: Allergy, Deletable {
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()
                             ) {
-                            
+
                             request.make().subscribe(onNext: {_ in
-                                
+
                             }).disposed(by: self.disposeBag)
                         }
                     }
@@ -118,22 +118,22 @@ class MyAllergyFrom: Allergy, Deletable {
             )
         })
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.asObservable().debug()
     }
 }
 
 class ObservableSimpleMyAllergies: ObservableAllergies {
-    
+
     private let array = [
         MyAllergyFrom(clarification: "aaa", id: "a", digitalMedicalRecordId: 0, category: nil, status: nil, token: TokenFromString(string: "")),
         MyAllergyFrom(clarification: "aaa", id: "a", digitalMedicalRecordId: 0, category: nil, status: nil, token: TokenFromString(string: "")),
         MyAllergyFrom(clarification: "aaa", id: "a", digitalMedicalRecordId: 0, category: nil, status: nil, token: TokenFromString(string: ""))
     ]
-    
+
     func asObservable() -> Observable<[Allergy]> {
         return Observable.just(array)
     }
-    
+
 }

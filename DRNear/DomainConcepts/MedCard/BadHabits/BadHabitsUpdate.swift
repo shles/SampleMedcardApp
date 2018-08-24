@@ -11,9 +11,9 @@ class MyBadHabitsUpdate: Update {
     private var itemsToCommit = [Identified]()
     private let token: Token
     private let disposeBag = DisposeBag()
-    
+
     private let transitionSubject = PublishSubject<Transition>()
-    
+
     init(token: Token) {
         self.token = token
     }
@@ -31,7 +31,7 @@ class MyBadHabitsUpdate: Update {
                 encoding: ArrayEncoding()
         ) {
             request.make().subscribe(onNext: { response in
-                
+
                 if let error = response.error {
                     self.transitionSubject.onNext(ErrorAlertTransition(error: error))
                 } else {

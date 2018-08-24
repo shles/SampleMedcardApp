@@ -28,7 +28,7 @@ class MedCardOptionFrom: MedCardOption {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return pushingSubject.asObservable().map { vc in PushTransition(leadingTo: { vc })}
+        return pushingSubject.asObservable().map { vc in PushTransition(leadingTo: { vc }) }
     }
 }
 class InactiveMedCardOptionFrom: MedCardOption {

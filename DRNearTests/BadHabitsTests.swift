@@ -42,21 +42,21 @@ class BadHabitsTests: QuickSpec {
             }
             context("with remote objects") {
                 it("should do the same") {
-                    
+
                     habits = MyObservableBadHabitsFromAPI(token: TokenFromString(string: ""))
-                    
+
                     var vc = UIViewController()
                     var navVC = UINavigationController(rootViewController: vc)
                     navVC.pushViewController(ViewController(presentation: badHabitsPresentation), animated: false)
-                    
+
                     UIApplication.shared.keyWindow!.rootViewController = navVC
                     navVC.preloadView()
                     vc.preloadView()
-                    
+
                     (badHabitsPresentation as! BadHabitsTableViewPresentation).simulateBackTap()
-                    
+
                     expect(vc) == navVC.viewControllers.first!
-                
+
                 }
             }
         }

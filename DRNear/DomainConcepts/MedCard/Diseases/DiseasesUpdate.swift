@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class DiseasesUpdate: Update {
-    
+
     private var itemsToCommit = [CommentedDisease]()
     private let token: Token
     private let disposeBag = DisposeBag()
@@ -19,7 +19,7 @@ class DiseasesUpdate: Update {
     init(token: Token) {
         self.token = token
     }
-    
+
     func addItem(item: Identified) {
 
         if let item = item as? Disease {
@@ -31,7 +31,7 @@ class DiseasesUpdate: Update {
             }))
         }
     }
-    
+
     func apply() {
         if let request = try? AuthorizedRequest(
             path: "/eco-emc/api/my/diagnoses",
@@ -51,9 +51,9 @@ class DiseasesUpdate: Update {
                 self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
             }).disposed(by: disposeBag)
         }
-        
+
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }

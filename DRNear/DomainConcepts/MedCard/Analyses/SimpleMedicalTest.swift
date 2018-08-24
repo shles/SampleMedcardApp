@@ -13,7 +13,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
     private(set) var name: String = "Анализ крови"
     private(set) var date: Date = Date()
     var description: String = "Лаборатория NKL №122 Лабораторные исследования"
-    
+
     private var deletionSubject = PublishSubject<Void>()
     private var interactionSubject = PublishSubject<Void>()
     private var editionSubject = PublishSubject<Void>()
@@ -21,7 +21,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
     func delete() {
         deletionSubject.onNext(())
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([
             deletionSubject.map { [unowned self] _ in
@@ -47,13 +47,13 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
             }
             ])
     }
-    
+
     private(set) var isRelatedToSystem: Bool = false
-    
+
     func edit() {
         editionSubject.onNext(())
     }
-    
+
     private(set) var identification: String = ""
 
     func interact() {
@@ -64,11 +64,11 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
 }
 
 class SimpleMyMedicalTests: ObservableMedicalTests {
-    
+
     private let tests = [SimpleMedicalTest(),
                          SimpleMedicalTest(),
                          SimpleMedicalTest()]
-    
+
     func asObservable() -> Observable<[MedicalTest]> {
         return Observable.just(tests)
     }
@@ -306,7 +306,6 @@ class AddFilePresentation: Presentation {
             $0.trailing.equalToSuperview().inset(24)
         }
 
-
     }
 
     func willAppear() {
@@ -350,7 +349,7 @@ class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerController
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            picker.dismiss(animated: true, completion:  { [unowned self] in
+            picker.dismiss(animated: true, completion: { [unowned self] in
                 self.transitionsSubject.onNext(PresentTransition {
                     ViewController(presentation: AddFilePresentation(image: pickedImage))
                 })
@@ -384,4 +383,3 @@ class ImageUploadToAPI: FileUpload {
         transitionsSubject.onNext(DismissTransition())
     }
 }
-

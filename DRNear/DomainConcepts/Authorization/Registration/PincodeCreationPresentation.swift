@@ -3,13 +3,12 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class PincodeConfirmationPresentation: Presentation {
 
     private(set) var view: UIView
-
 
     private let loginApplication: LoginMethodsApplication
 
@@ -39,7 +38,6 @@ class PincСdeCreationPresentation: Presentation {
 
     private let transitionsSubject = PublishSubject<Transition>()
     private let loginApplication: LoginMethodsApplication
-
 
     init(loginApplication: LoginMethodsApplication) {
         self.loginApplication = loginApplication
