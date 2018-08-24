@@ -12,6 +12,8 @@ protocol Update: TransitionSource {
 
     func addItem(item: Identified)
 
+    func removeItem(item: Identified)
+
     func apply()
 
 }
@@ -65,9 +67,10 @@ class CommentPresentation: AdditionalInfoPresentation {
         containerView.addSubviews([titleLabel, addButton, commentField])
 
         containerView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.center.equalToSuperview().priority(.medium)
             $0.height.equalTo(236)
             $0.width.equalToSuperview().inset(8)
+            $0.bottom.greaterThanOrEqualToSuperview().inset(400).priority(.high)
         }
 
         addButton.snp.makeConstraints {

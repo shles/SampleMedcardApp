@@ -34,6 +34,10 @@ class LoadingButton: UIButton {
             self.activityIndicator.alpha = 0
         })
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("storyboard are deprecated")
+    }
 }
 
 class DeletionPresentation: Presentation {
@@ -112,7 +116,7 @@ class DeletionPresentation: Presentation {
                 .flatMap { _ in  onAccept() }
                 .catchErrorJustReturn(())
                 .map { DismissTransition() }
-                .do(onNext: {[unowned self] in self.deleteButton.stopAnimation() })
+                .do(onNext: {[unowned self] _ in self.deleteButton.stopAnimation() })
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)
     }

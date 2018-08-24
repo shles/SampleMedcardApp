@@ -135,6 +135,7 @@
 		FD4C540421300120008D5008 /* Identificated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53872130011F008D5008 /* Identificated.swift */; };
 		FD4C540521300120008D5008 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53882130011F008D5008 /* Named.swift */; };
 		FD4C540621300120008D5008 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C538A21300120008D5008 /* AppDelegate.swift */; };
+		FD4C540821309BA0008D5008 /* KeyboardAdjustingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +289,7 @@
 		FD4C53882130011F008D5008 /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
 		FD4C538921300120008D5008 /* DRNear-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DRNear-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD4C538A21300120008D5008 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdjustingScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -663,6 +665,7 @@
 		FD4C53802130011F008D5008 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */,
 				FD4C53812130011F008D5008 /* SimpleNavigationBar.swift */,
 				FD4C53822130011F008D5008 /* StandardSectionModel.swift */,
 				FD4C53832130011F008D5008 /* GradientButton.swift */,
@@ -922,6 +925,7 @@
 				FD4C53D121300120008D5008 /* Token.swift in Sources */,
 				FD4C53B621300120008D5008 /* SimleBadHabit.swift in Sources */,
 				FD4C53AE21300120008D5008 /* Allergy.swift in Sources */,
+				FD4C540821309BA0008D5008 /* KeyboardAdjustingScrollView.swift in Sources */,
 				FD4C53EF21300120008D5008 /* Refreshable.swift in Sources */,
 				FD4C53F321300120008D5008 /* Editable.swift in Sources */,
 				FD4C53AA21300120008D5008 /* AllergiesUpdate.swift in Sources */,

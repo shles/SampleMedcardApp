@@ -19,6 +19,11 @@ class MyBadHabitsUpdate: Update {
     }
 
     func addItem(item: Identified) {
+
+        if itemsToCommit.contains(where: { $0.isEqual(to: item) }) {
+            return
+        }
+
         itemsToCommit += [item]
     }
 
@@ -40,6 +45,10 @@ class MyBadHabitsUpdate: Update {
             }).disposed(by: disposeBag)
         }
 
+    }
+
+    func removeItem(item: Identified) {
+        itemsToCommit = itemsToCommit.filter({ !$0.isEqual(to: item)})
     }
 
     func wantsToPerform() -> Observable<Transition> {

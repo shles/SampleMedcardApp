@@ -54,7 +54,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
             $0.top.equalTo(navBar.snp.bottom)
         }
 
-        self.items.asObservable().bind(to: itemsSubject).disposed(by: disposeBag)
+        self.items.asObservable().catchErrorJustReturn([]).bind(to: itemsSubject).disposed(by: disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<DatedListApplicable>>(
                 configureCell: { _, tv, ip, habit in
@@ -73,9 +73,10 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
             $0.interact()
         }).disposed(by: disposeBag)
 
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
         //TODO: maybe develop new object6 that subscribes transitionsubject inside
         itemsSubject.asObservable()
-                .catchErrorJustReturn([])
         .subscribe(onNext: { [unowned self] in
             self.itemsTransitionsDisposeBag = DisposeBag()
             Observable.merge($0.map { $0.wantsToPerform() }).subscribe(onNext: {
@@ -130,7 +131,7 @@ class DatedDescribedFileContainedPresentation: Presentation {
 
     init(item: Named & Dated & Described & ContainFiles, gradient: [UIColor]) {
 
-        tableView.tableHeaderView = HeaderView(item: item)
+        tableView.tableHeaderView = HeaderView(item: item, hasFiles: !item.files.isEmpty)
 
         navBar = NavigationBarWithBackButton(title: item.name)
                 .with(gradient: gradient)
@@ -170,7 +171,7 @@ class DatedDescribedFileContainedPresentation: Presentation {
     }
 
     class HeaderView: UIView {
-        init(item: Dated & Described ) {
+        init(item: Dated & Described, hasFiles: Bool ) {
 
             super.init(frame: .zero)
 
@@ -193,6 +194,10 @@ class DatedDescribedFileContainedPresentation: Presentation {
             .with(font: .medium13)
             .with(text: "Файлы")
             .with(textColor: .mainText)
+
+            if !hasFiles {
+                filesLaabel.isHidden = true
+            }
 
             addSubviews([dateLabel, descriptionLabel, filesLaabel])
 

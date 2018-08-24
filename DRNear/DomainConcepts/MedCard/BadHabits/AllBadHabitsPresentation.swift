@@ -53,8 +53,12 @@ class AllBadHabitsPresentation: Presentation {
         }
 
         badHabtsPresentation.selection.subscribe(onNext: {  [unowned self] in
+            if $0.isSelected.value {
+                self.update.removeItem(item: $0)
+            } else {
+                self.update.addItem(item: $0)
+            }
             $0.select()
-            self.update.addItem(item: $0)
         }).disposed(by: disposeBag)
 
         addButton.rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in

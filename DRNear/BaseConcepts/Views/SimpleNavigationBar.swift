@@ -77,7 +77,9 @@ class NavigationBarWithBackButton: UIView, TransitionSource {
         button.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalTo(titleLabel)
+            $0.height.width.equalTo(48)
         }
+        button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return self
     }
 
@@ -104,6 +106,7 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         .with(font: .navigatoinLarge)
         .with(placeholder: "Поиск")
         .with(texColor: .white)
+        .with(placeholderColor: .shadow)
 
     private let disposeBag = DisposeBag()
 
@@ -136,11 +139,25 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         searchField.isHidden = true
 
         searchButton.rx.tap.subscribe(onNext: {
-            self.titleLabel.isHidden = true
-            self.searchField.isHidden = false
-            self.searchField.becomeFirstResponder()
+            if self.searchField.isFirstResponder {
+                self.titleLabel.isHidden = true
+                self.searchField.isHidden = false
+                self.searchField.becomeFirstResponder()
+                self.searchButton.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
+            } else {
+                self.titleLabel.isHidden = false
+                self.searchField.isHidden = true
+                self.searchField.resignFirstResponder()
+                self.searchButton.setImage(#imageLiteral(resourceName: "searchIcon"), for: .normal)
+            }
         }).disposed(by: disposeBag)
 
+        searchField.rx.controlEvent(.editingDidEnd).subscribe(onNext: {
+            self.titleLabel.isHidden = false
+            self.searchField.isHidden = true
+            self.searchField.resignFirstResponder()
+            self.searchButton.setImage(#imageLiteral(resourceName: "searchIcon"), for: .normal)
+        }).disposed(by: disposeBag)
     }
 
     required init?(coder aDecoder: NSCoder) {

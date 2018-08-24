@@ -15,13 +15,18 @@ class AllergiesUpdate: Update {
     private var itemsToCommit = [ClarifiedAllergy]()
     private let token: Token
     private let disposeBag = DisposeBag()
-
     private let transitionSubject = PublishSubject<Transition>()
+
     init(token: Token) {
         self.token = token
     }
 
     func addItem(item: Identified) {
+
+        if itemsToCommit.contains(where: { $0.isEqual(to: item) }) {
+            return
+        }
+
         //TODO: this makes this solution worse, possible all of them should be Generic
         if let item = item as? Allergy {
             transitionSubject.onNext(PresentTransition(leadingTo: {
@@ -73,6 +78,10 @@ class AllergiesUpdate: Update {
             }).disposed(by: disposeBag)
         }
 
+    }
+
+    func removeItem(item: Identified) {
+        itemsToCommit = itemsToCommit.filter({ !$0.isEqual(to: item)})
     }
 
     func wantsToPerform() -> Observable<Transition> {

@@ -39,6 +39,18 @@ class ViewController: UIViewController {
         }).disposed(by: disposeBag)
 
         setNeedsStatusBarAppearanceUpdate()
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        //FIXME: awfult, but set here views that shouldn't hide keyboard
+//        guard !(self is PhoneAuthorizationRequestViewController) && !(self is PhoneAuthorizationCodeViewController) else {
+//            return
+//        }
+        view.endEditing(true)
     }
 
     override func viewWillAppear(_ animated: Bool) {

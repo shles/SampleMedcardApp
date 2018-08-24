@@ -21,6 +21,11 @@ class VaccinationUpdate: Update {
     }
 
     func addItem(item: Identified) {
+
+        if itemsToCommit.contains(where: { $0.isEqual(to: item) }) {
+            return
+        }
+
         if let item = item as? Vaccination {
             transitionSubject.onNext(PresentTransition(leadingTo: {
                 ViewController(presentation: DateSelectionPresentation(title: "Дата прививки", gradient: [.peach, .wheat], onAccept: { [unowned self] in
@@ -50,6 +55,10 @@ class VaccinationUpdate: Update {
                 self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
             }).disposed(by: disposeBag)
         }
+    }
+
+    func removeItem(item: Identified) {
+        itemsToCommit = itemsToCommit.filter({ !$0.isEqual(to: item)})
     }
 
     func wantsToPerform() -> Observable<Transition> {

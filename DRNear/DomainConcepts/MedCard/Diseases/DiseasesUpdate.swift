@@ -1,5 +1,5 @@
 //
-//  DiseasesUpdate.swift
+//  DiseasesUpda?te.swift
 //  DRNear
 //
 //  Created by Igor Shmakov on 18/08/2018.
@@ -21,6 +21,10 @@ class DiseasesUpdate: Update {
     }
 
     func addItem(item: Identified) {
+
+        if itemsToCommit.contains(where: { $0.isEqual(to: item) }) {
+            return
+        }
 
         if let item = item as? Disease {
 
@@ -56,5 +60,9 @@ class DiseasesUpdate: Update {
 
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
+    }
+
+    func removeItem(item: Identified) {
+        itemsToCommit = itemsToCommit.filter({ !$0.isEqual(to: item)})
     }
 }
