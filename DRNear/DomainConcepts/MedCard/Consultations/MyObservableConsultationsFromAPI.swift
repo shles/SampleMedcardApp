@@ -55,7 +55,7 @@ class MyConsultationFrom: Consultation {
     var description: String = ""
     private let token: Token
 
-    private var deletionSubject = PublishSubject<Transition>()
+    private var deletionSubject = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
 
     init(name: String, id: String, date: Date, description: String, token: Token) {
@@ -67,39 +67,30 @@ class MyConsultationFrom: Consultation {
     }
 
     func delete() {
-        deletionSubject.onNext(PresentTransition {
-            ViewController(
-                presentation: DeletionPresentation(
-                    title: "Вы точно хотите удалить консультацию \"\(self.name)\"?",
-                    onAccept: { [unowned self] in
-                        if let request = try? AuthorizedRequest(
-                            path: "/eco-emc/api/my/consultations",
-                            method: .delete,
-                            token: self.token,
-                            parameters: [self.identification].asParameters(),
-                            encoding: ArrayEncoding()
-                            ) {
-
-                            request.make().subscribe(onNext: {_ in
-
-                            }).disposed(by: self.disposeBag)
-                        }
-                    }
-                )
-            )
-        })
+        deletionSubject.onNext(())
     }
 
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.map { [unowned self] _ in
-            PresentTransition(
-                leadingTo: { ViewController(
-                    presentation: DeletionPresentation(
-                        title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
-                        onAccept: { }
-                    )
-                    )}
-            )
+            PresentTransition {
+                ViewController(
+                        presentation: DeletionPresentation(
+                                title: "Вы точно хотите удалить консультацию \"\(self.name)\"?",
+                                onAccept: { [unowned self] in
+                                    if let request = try? AuthorizedRequest(
+                                            path: "/eco-emc/api/my/consultations",
+                                            method: .delete,
+                                            token: self.token,
+                                            parameters: [self.identification].asParameters(),
+                                            encoding: ArrayEncoding()
+                                    ) {
+                                        return request.make().map { _ in }
+                                    }
+                                    return Observable.just(())
+                                }
+                        )
+                )
+            }
         }
     }
 

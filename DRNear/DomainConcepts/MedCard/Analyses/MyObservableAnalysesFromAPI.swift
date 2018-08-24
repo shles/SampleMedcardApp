@@ -112,10 +112,10 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                                                 encoding: ArrayEncoding()
                                         ) {
 
-                                            request.make().subscribe(onNext: {_ in
-
-                                            }).disposed(by: self.disposeBag)
+                                            return request.make().map {_ in }
                                         }
+
+                                        return Observable.just(())
                                     }
                             )
                     )

@@ -23,7 +23,7 @@ class DeletionPresentation: Presentation {
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
 
-    init(title: String, onAccept: @escaping () -> Void) {
+    init(title: String, onAccept: @escaping () -> Observable<Void>) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)
@@ -76,8 +76,10 @@ class DeletionPresentation: Presentation {
                 .map { DismissTransition() }
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)
+
         deleteButton.rx.tap
-                .do(onNext: { _ in  onAccept() })
+                .flatMap { _ in  onAccept() }
+                .catchErrorJustReturn(())
                 .map { DismissTransition() }
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)

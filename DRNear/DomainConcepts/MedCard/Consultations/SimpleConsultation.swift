@@ -30,7 +30,7 @@ class SimpleConsultation: Consultation, ContainFiles {
                     ViewController(
                             presentation: DeletionPresentation(
                                     title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
-                                    onAccept: {}
+                                    onAccept: {Observable.just(())}
                             )
                     )
                 }
