@@ -36,7 +36,12 @@ class PresentTransition: Transition {
     }
 
     func perform(on viewController: UIViewController) {
-        viewController.present(leadingTo(), animated: true)
+        //TODO: temporal solution. Needs injection of theese parameters
+        let vc = leadingTo()
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        viewController.present(vc, animated: true)
     }
 
 }

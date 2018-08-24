@@ -13,9 +13,10 @@ class AccountCommitmentFromAPI: AccountCommitment {
     
     private let disposeBag = DisposeBag()
     private let transitionSubject = PublishSubject<Transition>()
+    private let leadingTo: (Token) -> (UIViewController)
 
-    init() {
-    
+    init(leadingTo: @escaping (Token) -> (UIViewController)) {
+        self.leadingTo = leadingTo
     }
     
     func commitAccountInformation(information: AccountInformation) {
@@ -27,9 +28,8 @@ class AccountCommitmentFromAPI: AccountCommitment {
 //
 //        } ).disposed(by: disposeBag)
 
-        let appSetup = ApplicationSetup()
         transitionSubject.onNext(PushTransition(leadingTo: {
-            ViewController(presentation: PincСdeCreationPresentation(loginApplication: ApplicationSetup()))
+            ViewController(presentation: PincСdeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
         }))
     }
     

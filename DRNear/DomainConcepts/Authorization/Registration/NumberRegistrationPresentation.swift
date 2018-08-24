@@ -75,6 +75,12 @@ class EnterNumberView: UIView {
                 }
                 .bind(to: self.numberField.rx.text)
                 .disposed(by: disposeBag)
+        numberPadView.wantsToDelete
+                .map { [unowned self] symbol in
+                    return String(self.numberField.text?.dropLast() ?? "")
+                }
+                .bind(to: self.numberField.rx.text)
+                .disposed(by: disposeBag)
 
         confirmButton.rx.tap
                 .map { [unowned self] in self.numberField.text ?? "" }

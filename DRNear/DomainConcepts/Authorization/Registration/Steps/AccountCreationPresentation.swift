@@ -10,7 +10,7 @@ import SnapKit
 class AccountCreationPresentation: Presentation {
 
     private var photo = UIImageView()
-    .with(image: #imageLiteral(resourceName: "chatIcon"))
+    .with(image: #imageLiteral(resourceName: "defaultPhoto"))
     .with(roundedEdges: 50)
 
     private var surnameLabel = UITextField()

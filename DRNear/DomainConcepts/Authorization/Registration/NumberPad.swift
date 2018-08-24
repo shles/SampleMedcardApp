@@ -49,16 +49,27 @@ class EnterCodeView: UIView {
         imageView.snp.makeConstraints {
             $0.height.equalTo(40)
         }
+
         numberPadView.enteredNumber
             .map { [unowned self] symbol in
-                self.code += symbol
-                return self.code
+                 self.codeSubject.value + symbol
+            }
+            .bind(to: codeSubject)
+            .disposed(by: disposeBag)
+
+        numberPadView.wantsToDelete
+            .map { [unowned self] symbol in
+                String(self.codeSubject.value.dropLast())
             }
             .bind(to: codeSubject)
             .disposed(by: disposeBag)
 
         codeView.codeEntered.bind(to: codeEntered).disposed(by: disposeBag)
 
+    }
+
+    func clearCode() {
+        codeSubject.accept("")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -155,7 +166,6 @@ class NumberPadView: UIView {
                 $0.height.width.equalTo(66)
             }
 
-            number.characters
             self.rx.tap.map { _ in  number }.bind(to: subjectForNumber).disposed(by: disposeBag)
 
             self.rx.controlEvent([.touchDown, .touchDragInside]).subscribe(onNext: { [unowned self] in
@@ -192,12 +202,38 @@ class NumberPadView: UIView {
 
     class DeleteButton: UIButton {
 
-    }
-    class EmptySpace: UIButton {
+        private let disposeBag = DisposeBag()
 
+        init(deleteSubject: AnyObserver<Void>) {
+            super.init(frame: .zero)
+            self.layer.cornerRadius = 33
+            self.clipsToBounds = true
+            self.snp.makeConstraints {
+                $0.height.width.equalTo(66)
+            }
+            setImage(#imageLiteral(resourceName: "backspace"), for: .normal)
+            self.rx.tap.bind(to: deleteSubject).disposed(by: disposeBag)
+        }
+
+        required init(coder: NSCoder) {
+            fatalError("storyboards are deprecated")
+        }
+    }
+
+    class EmptyButton: UIButton {
+        init() {
+            super.init(frame: .zero)
+            self.snp.makeConstraints {
+                $0.height.width.equalTo(66)
+            }
+        }
+        required init(coder: NSCoder) {
+            fatalError("storyboards are deprecated")
+        }
     }
 
     let enteredNumber = PublishSubject<String>()
+    let wantsToDelete = PublishSubject<Void>()
 
     init() {
         super.init(frame: .zero)
@@ -223,9 +259,9 @@ class NumberPadView: UIView {
                     ]),
             ButtonsRowStack(
                     views: [
-                        EmptySpace(),
+                        EmptyButton(),
                         NumberButton(number: "0", subjectForNumber: enteredNumber.asObserver()),
-                        DeleteButton()
+                        DeleteButton(deleteSubject: wantsToDelete.asObserver())
                     ])
         ])
         

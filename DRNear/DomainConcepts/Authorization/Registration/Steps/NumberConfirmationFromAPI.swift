@@ -17,7 +17,10 @@ class NumberConfirmationFromAPI: NumberConfirmation {
     private let transitionSubject = PublishSubject<Transition>()
 
 
-    init(number: String) {
+    private let leadingTo: (Token) -> (UIViewController)
+
+    init(number: String, leadingTo: @escaping (Token) -> (UIViewController)) {
+        self.leadingTo = leadingTo
         self.number = number
     }
     
@@ -40,10 +43,10 @@ class NumberConfirmationFromAPI: NumberConfirmation {
 //
 //        } ).disposed(by: disposeBag)
 
-        let commitmentStep = AccountCommitmentFromAPI()
+        let commitmentStep = AccountCommitmentFromAPI(leadingTo: leadingTo)
         transitionSubject.onNext(PushTransition(leadingTo: {
             ViewController(presentation: AccountCreationPresentation(
-                    commitment: AccountCommitmentFromAPI()))
+                    commitment: commitmentStep))
         }))
     }
 

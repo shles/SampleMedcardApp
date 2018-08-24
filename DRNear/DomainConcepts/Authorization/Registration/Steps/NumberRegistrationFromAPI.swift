@@ -14,6 +14,12 @@ class NumberRegistrationFromAPI: NumberRegistration {
     private let disposeBag = DisposeBag()
     private let transitionSubject = PublishSubject<Transition>()
 
+    private let leadingTo: (Token) -> (UIViewController)
+
+    init(leadingTo: @escaping (Token) -> (UIViewController)) {
+        self.leadingTo = leadingTo
+    }
+
     func register(number: String) {
 
 //        guard let request = try? UnauthorizedRequest(path: "???",
@@ -25,9 +31,9 @@ class NumberRegistrationFromAPI: NumberRegistration {
 //
 //        }).disposed(by: disposeBag)
 
-        transitionSubject.onNext(PushTransition(leadingTo: {
+        transitionSubject.onNext(PushTransition(leadingTo: { [unowned self] in
             ViewController(presentation: ConfirmNumberPresentation(
-                    confirmation: NumberConfirmationFromAPI(number: number)))
+                    confirmation: NumberConfirmationFromAPI(number: number,leadingTo: self.leadingTo)))
         }))
     }
     

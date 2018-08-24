@@ -21,7 +21,7 @@ class PincodeConfirmationPresentation: Presentation {
                 symbolsNumber: 6)
 
         (view as? EnterCodeView)?.codeEntered.subscribe(onNext: { [unowned self] in
-            self.loginApplication.createPincode(code: $0)
+            self.loginApplication.confirmPincode(code: $0)
         })
     }
     func willAppear() {
