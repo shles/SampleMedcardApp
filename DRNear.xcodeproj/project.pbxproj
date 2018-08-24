@@ -58,7 +58,6 @@
 		FD4C53B421300120008D5008 /* MyObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53252130011E008D5008 /* MyObservableBadHabitsFromAPI.swift */; };
 		FD4C53B521300120008D5008 /* BadHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53262130011E008D5008 /* BadHabitTableViewCell.swift */; };
 		FD4C53B621300120008D5008 /* SimleBadHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53272130011E008D5008 /* SimleBadHabit.swift */; };
-		FD4C53B721300120008D5008 /* AllBadHabitsPresentation.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = FD4C53282130011E008D5008 /* AllBadHabitsPresentation.swift.orig */; };
 		FD4C53B821300120008D5008 /* AllObservableBadHabitsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53292130011E008D5008 /* AllObservableBadHabitsFromAPI.swift */; };
 		FD4C53B921300120008D5008 /* BadHabitsUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C532A2130011E008D5008 /* BadHabitsUpdate.swift */; };
 		FD4C53BA21300120008D5008 /* BadHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C532B2130011E008D5008 /* BadHabit.swift */; };
@@ -209,7 +208,6 @@
 		FD4C53252130011E008D5008 /* MyObservableBadHabitsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyObservableBadHabitsFromAPI.swift; sourceTree = "<group>"; };
 		FD4C53262130011E008D5008 /* BadHabitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitTableViewCell.swift; sourceTree = "<group>"; };
 		FD4C53272130011E008D5008 /* SimleBadHabit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimleBadHabit.swift; sourceTree = "<group>"; };
-		FD4C53282130011E008D5008 /* AllBadHabitsPresentation.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AllBadHabitsPresentation.swift.orig; sourceTree = "<group>"; };
 		FD4C53292130011E008D5008 /* AllObservableBadHabitsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllObservableBadHabitsFromAPI.swift; sourceTree = "<group>"; };
 		FD4C532A2130011E008D5008 /* BadHabitsUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabitsUpdate.swift; sourceTree = "<group>"; };
 		FD4C532B2130011E008D5008 /* BadHabit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadHabit.swift; sourceTree = "<group>"; };
@@ -489,7 +487,6 @@
 				FD4C53252130011E008D5008 /* MyObservableBadHabitsFromAPI.swift */,
 				FD4C53262130011E008D5008 /* BadHabitTableViewCell.swift */,
 				FD4C53272130011E008D5008 /* SimleBadHabit.swift */,
-				FD4C53282130011E008D5008 /* AllBadHabitsPresentation.swift.orig */,
 				FD4C53292130011E008D5008 /* AllObservableBadHabitsFromAPI.swift */,
 				FD4C532A2130011E008D5008 /* BadHabitsUpdate.swift */,
 				FD4C532B2130011E008D5008 /* BadHabit.swift */,
@@ -767,7 +764,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4C53B721300120008D5008 /* AllBadHabitsPresentation.swift.orig in Resources */,
 				FD4C53EA21300120008D5008 /* Info.plist in Resources */,
 				FD4C53E721300120008D5008 /* FiraSans-Medium.ttf in Resources */,
 				FD4C53E821300120008D5008 /* FiraSans-Bold.ttf in Resources */,
