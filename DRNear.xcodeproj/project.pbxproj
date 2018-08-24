@@ -41,7 +41,6 @@
 		FD4C53A321300120008D5008 /* MyObservableConsultationsFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53112130011E008D5008 /* MyObservableConsultationsFromAPI.swift */; };
 		FD4C53A421300120008D5008 /* DatedDescribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53122130011E008D5008 /* DatedDescribedCell.swift */; };
 		FD4C53A521300120008D5008 /* MyObservableAnalysesFromAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53142130011E008D5008 /* MyObservableAnalysesFromAPI.swift */; };
-		FD4C53A621300120008D5008 /* SimpleMedicalTest.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = FD4C53152130011E008D5008 /* SimpleMedicalTest.swift.orig */; };
 		FD4C53A721300120008D5008 /* SimpleMedicalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53162130011E008D5008 /* SimpleMedicalTest.swift */; };
 		FD4C53A821300120008D5008 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53172130011E008D5008 /* File.swift */; };
 		FD4C53A921300120008D5008 /* MedicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53182130011E008D5008 /* MedicalTests.swift */; };
@@ -119,7 +118,6 @@
 		FD4C53F221300120008D5008 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53732130011F008D5008 /* Presentation.swift */; };
 		FD4C53F321300120008D5008 /* Editable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53742130011F008D5008 /* Editable.swift */; };
 		FD4C53F421300120008D5008 /* DeletionPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53752130011F008D5008 /* DeletionPresentation.swift */; };
-		FD4C53F521300120008D5008 /* Update.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = FD4C53762130011F008D5008 /* Update.swift.orig */; };
 		FD4C53F621300120008D5008 /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53772130011F008D5008 /* Interactive.swift */; };
 		FD4C53F721300120008D5008 /* Descripted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53782130011F008D5008 /* Descripted.swift */; };
 		FD4C53F821300120008D5008 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53792130011F008D5008 /* Request.swift */; };
@@ -191,7 +189,6 @@
 		FD4C53112130011E008D5008 /* MyObservableConsultationsFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyObservableConsultationsFromAPI.swift; sourceTree = "<group>"; };
 		FD4C53122130011E008D5008 /* DatedDescribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatedDescribedCell.swift; sourceTree = "<group>"; };
 		FD4C53142130011E008D5008 /* MyObservableAnalysesFromAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyObservableAnalysesFromAPI.swift; sourceTree = "<group>"; };
-		FD4C53152130011E008D5008 /* SimpleMedicalTest.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleMedicalTest.swift.orig; sourceTree = "<group>"; };
 		FD4C53162130011E008D5008 /* SimpleMedicalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMedicalTest.swift; sourceTree = "<group>"; };
 		FD4C53172130011E008D5008 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		FD4C53182130011E008D5008 /* MedicalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalTests.swift; sourceTree = "<group>"; };
@@ -273,7 +270,6 @@
 		FD4C53732130011F008D5008 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		FD4C53742130011F008D5008 /* Editable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editable.swift; sourceTree = "<group>"; };
 		FD4C53752130011F008D5008 /* DeletionPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletionPresentation.swift; sourceTree = "<group>"; };
-		FD4C53762130011F008D5008 /* Update.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Update.swift.orig; sourceTree = "<group>"; };
 		FD4C53772130011F008D5008 /* Interactive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		FD4C53782130011F008D5008 /* Descripted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Descripted.swift; sourceTree = "<group>"; };
 		FD4C53792130011F008D5008 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -456,7 +452,6 @@
 			isa = PBXGroup;
 			children = (
 				FD4C53142130011E008D5008 /* MyObservableAnalysesFromAPI.swift */,
-				FD4C53152130011E008D5008 /* SimpleMedicalTest.swift.orig */,
 				FD4C53162130011E008D5008 /* SimpleMedicalTest.swift */,
 				FD4C53172130011E008D5008 /* File.swift */,
 				FD4C53182130011E008D5008 /* MedicalTests.swift */,
@@ -641,7 +636,6 @@
 				FD4C53732130011F008D5008 /* Presentation.swift */,
 				FD4C53742130011F008D5008 /* Editable.swift */,
 				FD4C53752130011F008D5008 /* DeletionPresentation.swift */,
-				FD4C53762130011F008D5008 /* Update.swift.orig */,
 				FD4C53772130011F008D5008 /* Interactive.swift */,
 				FD4C53782130011F008D5008 /* Descripted.swift */,
 				FD4C53792130011F008D5008 /* Request.swift */,
@@ -767,8 +761,6 @@
 				FD4C53EA21300120008D5008 /* Info.plist in Resources */,
 				FD4C53E721300120008D5008 /* FiraSans-Medium.ttf in Resources */,
 				FD4C53E821300120008D5008 /* FiraSans-Bold.ttf in Resources */,
-				FD4C53F521300120008D5008 /* Update.swift.orig in Resources */,
-				FD4C53A621300120008D5008 /* SimpleMedicalTest.swift.orig in Resources */,
 				FD4C53E921300120008D5008 /* FiraSans-Regular.ttf in Resources */,
 				FD4C53E421300120008D5008 /* Assets.xcassets in Resources */,
 			);
