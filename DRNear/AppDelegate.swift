@@ -104,9 +104,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
 //        navContgroller.setNavigationBarHidden(true, animated: false)
     //TODO: inject leading to
-        window?.rootViewController = UINavigationController(
+        /*window?.rootViewController = UINavigationController(
                 rootViewController: ViewController(presentation: NumberRegistrationPresentation(numberRegistration: NumberRegistrationFromAPI()))
-        ).withoutNavigationBar()
+        ).withoutNavigationBar()*/
+        window?.rootViewController = navContgroller
         window?.makeKeyAndVisible()
         return true
     }
