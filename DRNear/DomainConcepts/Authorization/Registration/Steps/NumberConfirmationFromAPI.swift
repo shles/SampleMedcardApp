@@ -56,7 +56,7 @@ class NumberConfirmationFromAPI: NumberConfirmation {
                 case .new:
                     self.transitionSubject.onNext(PushTransition(leadingTo: {
                         ViewController(presentation: AccountCreationPresentation(
-                            commitment: AccountCommitmentFromAPI(leadingTo: self.leadingTo)))
+                            commitment: AccountCommitmentFromAPI(key: key, leadingTo: self.leadingTo)))
                     }))
                 }
             }

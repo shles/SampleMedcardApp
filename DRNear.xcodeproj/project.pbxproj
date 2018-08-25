@@ -15,6 +15,8 @@
 		4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */; };
 		4C287DEBCF054934DD89DFB8 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
+		F86AFD13213186D8008F3A1A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86AFD12213186D8008F3A1A /* Date.swift */; };
+		F86AFD1521319317008F3A1A /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86AFD1421319317008F3A1A /* Serializable.swift */; };
 		FD060C9E2119F2F400EF3C2B /* BadHabitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */; };
 		FD4C538D21300120008D5008 /* SystemRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C52F72130011E008D5008 /* SystemRelated.swift */; };
 		FD4C538E21300120008D5008 /* DatedListPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C52F92130011E008D5008 /* DatedListPresentation.swift */; };
@@ -161,6 +163,8 @@
 		BAD8ACF095812B2FA99920AC /* Pods-DRNearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA6D72D8ADEA9DE6E9C918B3 /* Pods-DRNear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.release.xcconfig"; sourceTree = "<group>"; };
 		E7514FDD637C6A7E54622E10 /* Pods-DRNear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRNear/Pods-DRNear.debug.xcconfig"; sourceTree = "<group>"; };
+		F86AFD12213186D8008F3A1A /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		F86AFD1421319317008F3A1A /* Serializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadHabitsTests.swift; sourceTree = "<group>"; };
 		FD395E852110DB8F00A0FBBF /* DRNear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRNear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD395E992110DB9200A0FBBF /* DRNearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DRNearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,11 +404,11 @@
 				FD4C52FB2130011E008D5008 /* Diseases */,
 				FD4C53042130011E008D5008 /* Vaccination */,
 				FD4C530E2130011E008D5008 /* Consultations */,
-				FD4C53122130011E008D5008 /* DatedDescribedCell.swift */,
 				FD4C53132130011E008D5008 /* Analyses */,
 				FD4C53192130011E008D5008 /* Allergies */,
 				FD4C53212130011E008D5008 /* BadHabits */,
 				FD4C532E2130011E008D5008 /* MedCardOption */,
+				FD4C53122130011E008D5008 /* DatedDescribedCell.swift */,
 			);
 			path = MedCard;
 			sourceTree = "<group>";
@@ -453,10 +457,10 @@
 		FD4C53132130011E008D5008 /* Analyses */ = {
 			isa = PBXGroup;
 			children = (
-				FD4C53142130011E008D5008 /* MyObservableAnalysesFromAPI.swift */,
 				FD4C53162130011E008D5008 /* SimpleMedicalTest.swift */,
 				FD4C53172130011E008D5008 /* File.swift */,
 				FD4C53182130011E008D5008 /* MedicalTests.swift */,
+				FD4C53142130011E008D5008 /* MyObservableAnalysesFromAPI.swift */,
 			);
 			path = Analyses;
 			sourceTree = "<group>";
@@ -531,12 +535,12 @@
 		FD4C533A2130011E008D5008 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				FD4C53402130011E008D5008 /* NumberRegistrationFromAPI.swift */,
 				FD4C533B2130011E008D5008 /* NumberConfirmationFromAPI.swift */,
+				FD4C533E2130011E008D5008 /* AccountCommitmentFromAPI.swift */,
 				FD4C533C2130011E008D5008 /* AccountCreationPresentation.swift */,
 				FD4C533D2130011E008D5008 /* InAppAuthorization.swift */,
-				FD4C533E2130011E008D5008 /* AccountCommitmentFromAPI.swift */,
 				FD4C533F2130011E008D5008 /* ApplicationSetup.swift */,
-				FD4C53402130011E008D5008 /* NumberRegistrationFromAPI.swift */,
 				FD4C53412130011E008D5008 /* ConfirmNumberPresentation.swift */,
 			);
 			path = Steps;
@@ -586,6 +590,7 @@
 				FD4C535F2130011E008D5008 /* UIImageView.swift */,
 				FD4C53602130011E008D5008 /* UILabel.swift */,
 				FD4C53612130011E008D5008 /* UINavigationController.swift */,
+				F86AFD12213186D8008F3A1A /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 				FD4C53862130011F008D5008 /* Deletable.swift */,
 				FD4C53872130011F008D5008 /* Identificated.swift */,
 				FD4C53882130011F008D5008 /* Named.swift */,
+				F86AFD1421319317008F3A1A /* Serializable.swift */,
 			);
 			path = BaseConcepts;
 			sourceTree = "<group>";
@@ -903,6 +909,7 @@
 				FD4C53FE21300120008D5008 /* SimpleNavigationBar.swift in Sources */,
 				FD4C53D021300120008D5008 /* TokenFromString.swift in Sources */,
 				FD4C53D821300120008D5008 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				F86AFD1521319317008F3A1A /* Serializable.swift in Sources */,
 				FD4C53D721300120008D5008 /* UIView.swift in Sources */,
 				FD4C539021300120008D5008 /* AllObservableDiseasesFromAPI.swift in Sources */,
 				FD4C540321300120008D5008 /* Deletable.swift in Sources */,
@@ -1008,6 +1015,7 @@
 				FD4C53DD21300120008D5008 /* UITableView.swift in Sources */,
 				FD4C53DB21300120008D5008 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				FD4C53F021300120008D5008 /* Dated.swift in Sources */,
+				F86AFD13213186D8008F3A1A /* Date.swift in Sources */,
 				FD4C53CA21300120008D5008 /* ApplicationSetup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

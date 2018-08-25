@@ -6,7 +6,7 @@
 import Foundation
 import RxSwift
 
-protocol MedicalTest: Named, Dated, Described, SystemRelated, Editable, Deletable, Identified, Interactive {
+protocol MedicalTest: Named, Dated, Described, SystemRelated, Editable, Deletable, Identified, Interactive, Serializable {
 
 }
 

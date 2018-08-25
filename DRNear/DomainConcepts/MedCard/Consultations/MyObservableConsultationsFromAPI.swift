@@ -33,12 +33,10 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
     func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == [Consultation] {
         return request.make()
             .map { json in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 return json.arrayValue.map { (json: JSON) in
                     MyConsultationFrom(name: json["name"].string ?? "",
                                        id: json["id"].string ?? "",
-                                       date: dateFormatter.date(from: json["date"].string ?? "") ?? Date(),
+                                       date: Date.from(string: json["date"].string ?? "") ?? Date(),
                                        description: json["recommendations"].string ?? "",
                                        token: self.token)
                 }
@@ -46,16 +44,20 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
     }
 }
 
-class MyConsultationFrom: Consultation {
+class MyConsultationFrom: Consultation, ContainFiles {
 
     private(set) var name: String = ""
     private(set) var date: Date = Date()
     private(set) var isRelatedToSystem: Bool = false
     private(set) var identification: String = ""
+    private(set) var files: [File] = []
+    
     var description: String = ""
     private let token: Token
 
     private var deletionSubject = PublishSubject<Void>()
+    private var interactionSubject = PublishSubject<Void>()
+    private var editionSubject = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
 
     init(name: String, id: String, date: Date, description: String, token: Token) {
@@ -66,40 +68,84 @@ class MyConsultationFrom: Consultation {
         self.token = token
     }
 
+    func create() {
+        
+        if let request = try? AuthorizedRequest(
+            path: "/api/my/consultations",
+            method: .post,
+            token: self.token,
+            parameters: self.json,
+            encoding: JSONEncoding.default
+        ) {
+            
+            request.make()
+        }
+    }
+    
     func delete() {
         deletionSubject.onNext(())
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return deletionSubject.map { [unowned self] _ in
-            PresentTransition {
-                ViewController(
+        return Observable.merge([
+            deletionSubject.map { [unowned self] _ in
+                PresentTransition(leadingTo: {
+                    ViewController(
                         presentation: DeletionPresentation(
-                                title: "Вы точно хотите удалить консультацию \"\(self.name)\"?",
-                                onAccept: { [unowned self] in
-                                    if let request = try? AuthorizedRequest(
-                                            path: "/eco-emc/api/my/consultations",
-                                            method: .delete,
-                                            token: self.token,
-                                            parameters: [self.identification].asParameters(),
-                                            encoding: ArrayEncoding()
+                            title: "Вы уверены, что хотите консультацию \"\(self.name)\"?",
+                            onAccept: { [unowned self] in
+                                if let request = try? AuthorizedRequest(
+                                    path: "/api/consultations/\(self.identification)",
+                                    method: .delete,
+                                    token: self.token
                                     ) {
-                                        return request.make().map { _ in }
-                                    }
-                                    return Observable.just(())
+                                    
+                                    return request.make().map {_ in }
                                 }
+                                
+                                return Observable.just(())
+                            }
                         )
+                    )
+                }
                 )
+            },
+            interactionSubject.debug("interacted with \(self.description)").map { [unowned self] _ in
+                PushTransition(leadingTo: {
+                    ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.darkSkyBlue, .tiffanyBlue]))
+                })
             }
-        }
+            /* Need presentation
+            editionSubject.map { [unowned self] _ in
+                PushTransition(leadingTo: {
+                    ViewController(presentation: MedicalTestEditingPresentation(
+                        medTest: self,
+                        onSave: { [unowned self] in
+                            if let request = try? AuthorizedRequest(
+                                path: "/api/consultations/\(self.identification)",
+                                method: .put,
+                                token: self.token,
+                                parameters: self.json,
+                                encoding: JSONEncoding.default
+                                ) {
+
+                                return request.make().map {_ in }
+                            }
+
+                            return Observable.just(())
+                    }))
+                })
+            }
+            */
+        ])
     }
 
     func edit() {
-
+        editionSubject.onNext(())
     }
 
     func interact() {
-
+        interactionSubject.onNext(())
     }
 }
 
