@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol Consultation: Named, Dated, Described, SystemRelated, Editable, Deletable, Identified, Interactive {
+protocol Consultation: Named, Dated, Described, SystemRelated, Editable, Deletable, Identified, Interactive, Serializable {
 
 }
 

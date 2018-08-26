@@ -6,16 +6,16 @@
 import Foundation
 import RxSwift
 
-enum Gender {
+enum Gender: String {
 
     case male, female
-
 }
 
-protocol AccountInformation {
+protocol AccountInformation: Serializable {
 
     var name: String { get }
     var lastName: String { get }
+    var middleName: String { get }
     var birthDate: Date { get }
     var gender: Gender { get }
 
@@ -27,10 +27,22 @@ protocol AccountInformation {
 }
 
 struct AccountInformationFrom: AccountInformation {
-    private(set) var name: String = ""
-    private(set) var lastName: String = ""
+    private(set) var name: String = "Вася"
+    private(set) var lastName: String = "Пупкин"
+    private(set) var middleName: String = "Михайлович"
     private(set) var birthDate: Date = Date()
     private(set) var gender: Gender = .male
+    
+    var json: [String : Any] {
+        var parameters = [String : Any]()
+        parameters["firstName"] = name
+        parameters["lastName"] = lastName
+        parameters["middleName"] = middleName
+        parameters["birthDate"] = birthDate.string
+        parameters["gender"] = gender.rawValue
+        return parameters
+    }
+    
 }
 
 protocol NumberRegistration: TransitionSource {

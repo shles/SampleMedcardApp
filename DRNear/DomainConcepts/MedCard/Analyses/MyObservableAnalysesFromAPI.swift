@@ -31,13 +31,10 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
         ) {
             return request.make()
                     .map { json in
-
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                         return json.arrayValue.map { (json: JSON) in
                             MyMedicalTestFrom(name: json["name"].string ?? "",
                                     id: json["id"].string ?? "",
-                                    date: dateFormatter.date(from: json["executed"].string ?? "") ?? Date(),
+                                    date: Date.from(string: json["date"].string ?? "") ?? Date(),
                                     description: json["report"].string ?? "",
                                     token: self.token)
                         }
@@ -71,29 +68,22 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
         self.token = token
     }
 
+    func create() {
+        
+        if let request = try? AuthorizedRequest(
+            path: "/api/my/analyzes",
+            method: .post,
+            token: self.token,
+            parameters: self.json,
+            encoding: JSONEncoding.default
+        ) {
+            
+            request.make()
+        }
+    }
+    
     func delete() {
         deletionSubject.onNext(())
-//        (PresentTransition {
-//            ViewController(
-//                presentation: DeletionPresentation(
-//                    title: "Вы точно хотите удалить анализ \"\(self.name)\"?",
-//                    onAccept: { [unowned self] in
-//                        if let request = try? AuthorizedRequest(
-//                            path: "/eco-emc/api/my/analyzes",
-//                            method: .delete,
-//                            token: self.token,
-//                            parameters: [self.identification].asParameters(),
-//                            encoding: ArrayEncoding()
-//                            ) {
-//
-//                            request.make().subscribe(onNext: {_ in
-//
-//                            }).disposed(by: self.disposeBag)
-//                        }
-//                    }
-//                )
-//            )
-//        })
     }
 
     func wantsToPerform() -> Observable<Transition> {
@@ -105,11 +95,9 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                                     title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
                                     onAccept: { [unowned self] in
                                         if let request = try? AuthorizedRequest(
-                                                path: "/eco-emc/api/my/analyzes",
+                                                path: "/api/analyzes/\(self.identification)",
                                                 method: .delete,
-                                                token: self.token,
-                                                parameters: [self.identification].asParameters(),
-                                                encoding: ArrayEncoding()
+                                                token: self.token
                                         ) {
 
                                             return request.make().map {_ in }
@@ -129,7 +117,22 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
             },
             editionSubject.map { [unowned self] _ in
                 PushTransition(leadingTo: {
-                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self))
+                    ViewController(presentation: MedicalTestEditingPresentation(
+                        medTest: self,
+                        onSave: { [unowned self] in
+                            if let request = try? AuthorizedRequest(
+                                path: "/api/analyzes/\(self.identification)",
+                                method: .put,
+                                token: self.token,
+                                parameters: self.json,
+                                encoding: JSONEncoding.default
+                            ) {
+                                
+                                return request.make().map {_ in }
+                            }
+                            
+                            return Observable.just(())
+                    }))
                 })
             }
         ])

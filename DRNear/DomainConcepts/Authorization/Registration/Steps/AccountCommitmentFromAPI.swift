@@ -14,23 +14,31 @@ class AccountCommitmentFromAPI: AccountCommitment {
     private let disposeBag = DisposeBag()
     private let transitionSubject = PublishSubject<Transition>()
     private let leadingTo: (Token) -> (UIViewController)
-
-    init(leadingTo: @escaping (Token) -> (UIViewController)) {
+    private let key: String
+    
+    init(key: String, leadingTo: @escaping (Token) -> (UIViewController)) {
         self.leadingTo = leadingTo
+        self.key = key
     }
 
     func commitAccountInformation(information: AccountInformation) {
-//        guard let request = try? UnauthorizedRequest(path: "???",
-//                                                     method: .post) else { return }
-//        request.make().subscribe({ _ in
-//
-//            let appSetup = ApplicationSetup()
-//
-//        } ).disposed(by: disposeBag)
 
-        transitionSubject.onNext(PushTransition(leadingTo: {
-            ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
-        }))
+        var parameters = information.json
+        parameters["key"] = self.key
+        
+        guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/register",
+                                                     method: .post,
+                                                     parameters: parameters) else { return }
+        
+        request.make().subscribe(onNext:{ _ in
+            
+            self.transitionSubject.onNext(PushTransition(leadingTo: {
+                ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
+            }))
+            
+        }, onError: {
+            self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
+        }).disposed(by: disposeBag)
     }
 
     func wantsToPerform() -> Observable<Transition> {

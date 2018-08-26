@@ -42,10 +42,12 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
             },
             editionSubject.map { [unowned self] _ in
                 PushTransition(leadingTo: {
-                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self))
+                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self, onSave: {
+                        return Observable.just(())
+                    }))
                 })
             }
-            ])
+        ])
     }
 
     private(set) var isRelatedToSystem: Bool = false
@@ -115,7 +117,7 @@ class MedicalTestEditingPresentation: Presentation {
 
     private let fileAttachment: FilePicking
 
-    convenience init(medTest: MedicalTest) {
+    convenience init(medTest: MedicalTest, onSave: @escaping () -> Observable<Void>) {
 
         self.init()
 
