@@ -11,6 +11,7 @@
 		4C2871C006782E5311F7F780 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */; };
 		4C287234773E4E2458246776 /* SimpleObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */; };
 		4C28754E684C658153CD4A90 /* IdentificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */; };
+		4C2875C9EDC59EFA9FEA40ED /* FileFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876E18A1D40F891EB94AF /* FileFrom.swift */; };
 		4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879CBC781343E41611DD3 /* AppicationTests.swift */; };
 		4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */; };
 		4C287DEBCF054934DD89DFB8 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */; };
@@ -136,6 +137,7 @@
 		FD4C540521300120008D5008 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C53882130011F008D5008 /* Named.swift */; };
 		FD4C540621300120008D5008 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C538A21300120008D5008 /* AppDelegate.swift */; };
 		FD4C540821309BA0008D5008 /* KeyboardAdjustingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */; };
+		FD593A212131EC3A002910B1 /* FiraSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD593A202131EC3A002910B1 /* FiraSans-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +153,7 @@
 /* Begin PBXFileReference section */
 		4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
+		4C2876E18A1D40F891EB94AF /* FileFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileFrom.swift; sourceTree = "<group>"; };
 		4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCardTests.swift; sourceTree = "<group>"; };
 		4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleObjectsTests.swift; sourceTree = "<group>"; };
 		4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationTests.swift; sourceTree = "<group>"; };
@@ -290,6 +293,7 @@
 		FD4C538921300120008D5008 /* DRNear-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DRNear-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD4C538A21300120008D5008 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdjustingScrollView.swift; sourceTree = "<group>"; };
+		FD593A202131EC3A002910B1 /* FiraSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Light.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,6 +461,7 @@
 				FD4C53162130011E008D5008 /* SimpleMedicalTest.swift */,
 				FD4C53172130011E008D5008 /* File.swift */,
 				FD4C53182130011E008D5008 /* MedicalTests.swift */,
+				4C2876E18A1D40F891EB94AF /* FileFrom.swift */,
 			);
 			path = Analyses;
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 		FD4C53662130011F008D5008 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FD593A202131EC3A002910B1 /* FiraSans-Light.ttf */,
 				FD4C53672130011F008D5008 /* FiraSans-Medium.ttf */,
 				FD4C53682130011F008D5008 /* FiraSans-Bold.ttf */,
 				FD4C53692130011F008D5008 /* FiraSans-Regular.ttf */,
@@ -761,6 +767,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD593A212131EC3A002910B1 /* FiraSans-Light.ttf in Resources */,
 				FD4C53EA21300120008D5008 /* Info.plist in Resources */,
 				FD4C53E721300120008D5008 /* FiraSans-Medium.ttf in Resources */,
 				FD4C53E821300120008D5008 /* FiraSans-Bold.ttf in Resources */,
@@ -1009,6 +1016,7 @@
 				FD4C53DB21300120008D5008 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				FD4C53F021300120008D5008 /* Dated.swift in Sources */,
 				FD4C53CA21300120008D5008 /* ApplicationSetup.swift in Sources */,
+				4C2875C9EDC59EFA9FEA40ED /* FileFrom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

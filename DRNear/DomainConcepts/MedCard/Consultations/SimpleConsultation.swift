@@ -61,7 +61,7 @@ class SimpleConsultation: Consultation, ContainFiles {
         interactionSubject.onNext(())
     }
 
-    private(set) var files: [File] = []
+    private(set) var files: [File] = [FileFrom(name: "Записи с консультации", size: 11)]
 
 }
 

@@ -2,7 +2,7 @@
 //  UIFont+Additions.swift
 //  IOS DR
 //
-//  Generated on Zeplin. (8/24/2018).
+//  Generated on Zeplin. (8/25/2018).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -36,6 +36,10 @@ extension UIFont {
 
   class var regular24: UIFont {
     return UIFont(name: "FiraSans-Regular", size: 24.0)!
+  }
+
+  class var light12: UIFont {
+    return UIFont(name: "FiraSans-Light", size: 12.0)!
   }
 
 }

@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 //swiftlint:disable function_body_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let token = TokenFromString(string: "")
         window?.rootViewController = UINavigationController(

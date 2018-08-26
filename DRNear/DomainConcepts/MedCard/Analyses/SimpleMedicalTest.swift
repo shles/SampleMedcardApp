@@ -60,7 +60,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
         interactionSubject.onNext(())
     }
 
-    private(set) var files: [File] = []
+    private(set) var files: [File] = [FileFrom(name: "Исследование крови", size: 2048)]
 }
 
 class SimpleMyMedicalTests: ObservableMedicalTests {
@@ -82,28 +82,28 @@ class MedicalTestEditingPresentation: Presentation {
 
     private var nameField = UITextField()
             .with(placeholder: "Название исследования")
-            .with(placeholderColor: .blueyGrey)
+            .with(placeholderColor: .blueGrey)
             .with(placeholderFont: .subtitleText13)
             .with(font: .medium13)
             .with(texColor: .mainText)
 
     private var dateField = UITextField()
             .with(placeholder: "Дата")
-            .with(placeholderColor: .blueyGrey)
+            .with(placeholderColor: .blueGrey)
             .with(placeholderFont: .subtitleText13)
             .with(font: .medium13)
             .with(texColor: .mainText)
 
     private var laboratoryField = UITextField()
             .with(placeholder: "Лаборатория")
-            .with(placeholderColor: .blueyGrey)
+            .with(placeholderColor: .blueGrey)
             .with(placeholderFont: .subtitleText13)
             .with(font: .medium13)
             .with(texColor: .mainText)
 
     private var typeField = UITextField()
             .with(placeholder: "Тип исследования")
-            .with(placeholderColor: .blueyGrey)
+            .with(placeholderColor: .blueGrey)
             .with(placeholderFont: .subtitleText13)
             .with(font: .medium13)
             .with(texColor: .mainText)
@@ -111,7 +111,7 @@ class MedicalTestEditingPresentation: Presentation {
     private var addFileButton = UIButton()
             .with(title: "Прикрепить файл")
             .with(image: #imageLiteral(resourceName: "attachment"))
-            .with(titleColor: .blueyGrey)
+            .with(titleColor: .blueGrey)
 
     private let fileAttachment: FilePicking
 
@@ -224,7 +224,7 @@ class AddFilePresentation: Presentation {
 
     private var nameField = UITextField()
             .with(placeholder: "Название файла")
-            .with(placeholderColor: .blueyGrey)
+            .with(placeholderColor: .blueGrey)
             .with(placeholderFont: .subtitleText13)
             .with(font: .medium13)
             .with(texColor: .mainText)

@@ -128,10 +128,13 @@ class DatedDescribedFileContainedPresentation: Presentation {
     let view: UIView = UIView()
     private let tableView = StandardTableView()
     private let navBar: NavigationBarWithBackButton
+    private let filesSubject = PublishSubject<[File]>()
+    private let disposeBag = DisposeBag()
 
     init(item: Named & Dated & Described & ContainFiles, gradient: [UIColor]) {
 
         tableView.tableHeaderView = HeaderView(item: item, hasFiles: !item.files.isEmpty)
+        tableView.separatorStyle = .none
 
         navBar = NavigationBarWithBackButton(title: item.name)
                 .with(gradient: gradient)
@@ -148,7 +151,15 @@ class DatedDescribedFileContainedPresentation: Presentation {
             $0.top.equalTo(navBar.snp.bottom)
         }
 
-        item.files
+        let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<File>>(configureCell: {  ds, tv, ip, item in
+            return tv.dequeueReusableCellOfType(FileCell.self, for: ip).configured(item: item)
+        })
+        
+        Observable.from([item.files])
+                .map { [StandardSectionModel<File>(items: $0)] }
+                .bind(to: tableView.rx.items(dataSource: dataSource))
+                .disposed(by: disposeBag)
+
     }
 
     func willAppear() {
@@ -186,7 +197,7 @@ class DatedDescribedFileContainedPresentation: Presentation {
 
             let descriptionLabel = UILabel()
             .with(font: .subtitleText13)
-            .with(textColor: .blueyGrey)
+            .with(textColor: .blueGrey)
             .with(text: item.description)
             .with(numberOfLines: 0)
 
@@ -223,5 +234,65 @@ class DatedDescribedFileContainedPresentation: Presentation {
         required init?(coder aDecoder: NSCoder) {
             fatalError("Storyboards are deprecated!")
         }
+    }
+}
+
+
+class FileCell: UITableViewCell {
+
+    private var nameLabel = UILabel()
+    .with(font: .light12)
+    .with(textColor: .blueGrey)
+    private var sizeLabel = UILabel()
+    .with(font: .light12)
+    .with(textColor: .blueGrey)
+    private var icon = UIImageView(image: #imageLiteral(resourceName: "jpg1"))
+    .with(contentMode: .scaleAspectFit)
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        let containerView = UIView()
+        .with(borderWidth: 1, borderColor: .shadow)
+        .with(roundedEdges: 4)
+
+        containerView.addSubviews([icon, nameLabel, sizeLabel])
+
+        addSubview(containerView)
+
+        containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+            $0.height.equalTo(58)
+        }
+
+        icon.snp.makeConstraints {
+            $0.width.equalTo(22)
+            $0.height.equalTo(26)
+            $0.top.leading.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().inset(16)
+        }
+
+        nameLabel.snp.makeConstraints {
+            $0.leading.equalTo(icon.snp.trailing).offset(12)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(icon)
+        }
+
+        sizeLabel.snp.makeConstraints {
+            $0.leading.width.equalTo(nameLabel)
+            $0.lastBaseline.equalTo(icon.snp.bottom)
+        }
+
+    }
+
+    func configured(item: File) -> Self {
+        nameLabel.text = item.name
+        sizeLabel.text = item.size
+
+        return self
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("storyboards are deprecated")
     }
 }

@@ -51,8 +51,8 @@ class DeletionPresentation: Presentation {
     private var cancelButton = UIButton()
             .with(title: "Не сейчас")
             .with(roundedEdges: 24)
-            .with(titleColor: .blueyGrey)
-            .with(borderWidth: 1, borderColor: .blueyGrey)
+            .with(titleColor: .blueGrey)
+            .with(borderWidth: 1, borderColor: .blueGrey)
 
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()

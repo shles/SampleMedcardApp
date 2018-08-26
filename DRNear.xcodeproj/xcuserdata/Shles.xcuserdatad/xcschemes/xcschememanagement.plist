@@ -4,10 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>DRNear.xcscheme</key>
+		<key>ApplicationTests.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false />
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>10</integer>
 		</dict>
 		<key>AuthorizationTests.xcscheme</key>
 		<dict>
@@ -16,19 +18,31 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>MedCardTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
 		<key>BadHabitsTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+		<key>DRNear.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>DRNearTest.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+		<key>MedCardTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>SimpleObjectsTests.xcscheme</key>
 		<dict>
@@ -37,12 +51,13 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
-		<key>ApplicationTests.xcscheme</key>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>FD395E842110DB8F00A0FBBF</key>
 		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>10</integer>
+			<key>primary</key>
+			<true />
 		</dict>
 	</dict>
 </dict>

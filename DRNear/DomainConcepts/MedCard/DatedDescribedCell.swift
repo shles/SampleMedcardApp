@@ -21,7 +21,7 @@ class DatedDescribedCell: UITableViewCell {
     private var descriptionLabel = UILabel()
     .with(numberOfLines: 2)
     .with(font: .subtitleText13)
-    .with(textColor: .blueyGrey)
+    .with(textColor: .blueGrey)
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
