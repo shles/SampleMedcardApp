@@ -63,6 +63,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
     }
 
     private(set) var files: [File] = [FileFrom(name: "Исследование крови", size: 2048)]
+    private(set) var json: [String: Any] = [:]
 }
 
 class SimpleMyMedicalTests: ObservableMedicalTests {

@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let token = TokenFromString(string: "")
         window?.rootViewController = UINavigationController(
-//                rootViewController: ViewController(presentation: NumberRegistrationPresentation(numberRegistration: NumberRegistrationFromAPI(leadingTo: { token in
-//                    UINavigationController(
+                rootViewController: ViewController(presentation: NumberRegistrationPresentation(numberRegistration: NumberRegistrationFromAPI(leadingTo: { token in
+                    UINavigationController(
                             rootViewController: ViewController(
                                     presentation: MedCardCollectionViewPresentation(
                                             medCardOptions: MedCardFrom(
@@ -151,8 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             )
                                     ).withTabBarStub())
                     ).withoutNavigationBar()
-//                })))
-//        ).withoutNavigationBar()
+                })))
+        ).withoutNavigationBar()
         window?.makeKeyAndVisible()
         return true
     }

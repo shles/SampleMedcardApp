@@ -147,6 +147,10 @@ class MyConsultationFrom: Consultation, ContainFiles {
     func interact() {
         interactionSubject.onNext(())
     }
+
+    var json: [String: Any]  {
+        fatalError("JSON not implemented")
+    }
 }
 
 class ObservableSimpleMyConsultations: ObservableConsultations {

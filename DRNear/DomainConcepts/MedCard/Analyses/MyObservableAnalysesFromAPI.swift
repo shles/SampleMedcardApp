@@ -147,6 +147,9 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
     }
 
     private(set) var files: [File] = []
+    var json: [String: Any]  {
+        fatalError("JSON not implemented")
+    }
 }
 
 class ObservableSimpleMyMedicalTests: ObservableMedicalTests {

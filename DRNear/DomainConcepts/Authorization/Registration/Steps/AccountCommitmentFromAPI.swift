@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Alamofire
 
 class AccountCommitmentFromAPI: AccountCommitment {
 
@@ -28,7 +29,9 @@ class AccountCommitmentFromAPI: AccountCommitment {
         
         guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/register",
                                                      method: .post,
-                                                     parameters: parameters) else { return }
+
+                                                     parameters: parameters,
+                encoding: JSONEncoding.default) else { return }
         
         request.make().subscribe(onNext:{ _ in
             

@@ -38,7 +38,7 @@ struct AccountInformationFrom: AccountInformation {
         parameters["firstName"] = name
         parameters["lastName"] = lastName
         parameters["middleName"] = middleName
-        parameters["birthDate"] = birthDate.string
+//        parameters["birthDate"] = birthDate.string
         parameters["gender"] = gender.rawValue
         return parameters
     }

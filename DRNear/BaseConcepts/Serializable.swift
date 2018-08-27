@@ -14,9 +14,9 @@ protocol Serializable {
     
 }
 
-extension Serializable {
-    
-    var json: [String : Any] {
-        return [:]
-    }
-}
+//extension Serializable {
+//
+//    var json: [String : Any] {
+//        return [:]
+//    }
+//}

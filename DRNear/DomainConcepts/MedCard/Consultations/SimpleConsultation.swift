@@ -63,6 +63,7 @@ class SimpleConsultation: Consultation, ContainFiles {
 
     private(set) var files: [File] = [FileFrom(name: "Записи с консультации", size: 11)]
 
+    private(set) var json: [String: Any] = [:]
 }
 
 class SimpleMyConsultations: ObservableConsultations {
