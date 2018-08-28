@@ -130,14 +130,17 @@ class DatedDescribedFileContainedPresentation: Presentation {
     private let navBar: NavigationBarWithBackButton
     private let filesSubject = PublishSubject<[File]>()
     private let disposeBag = DisposeBag()
+    private let editButton = UIButton()
+    .with(image: #imageLiteral(resourceName: "editIcon"))
 
-    init(item: Named & Dated & Described & ContainFiles, gradient: [UIColor]) {
+    init(item: Named & Dated & Described & ContainFiles & Editable , gradient: [UIColor]) {
 
         tableView.tableHeaderView = HeaderView(item: item, hasFiles: !item.files.isEmpty)
         tableView.separatorStyle = .none
 
         navBar = NavigationBarWithBackButton(title: item.name)
                 .with(gradient: gradient)
+                .with(rightInactiveButton: editButton)
 
         view.addSubviews([tableView, navBar])
 
@@ -159,6 +162,10 @@ class DatedDescribedFileContainedPresentation: Presentation {
                 .map { [StandardSectionModel<File>(items: $0)] }
                 .bind(to: tableView.rx.items(dataSource: dataSource))
                 .disposed(by: disposeBag)
+
+        editButton.rx.tap.subscribe(onNext: {
+            item.edit()
+        }).disposed(by: disposeBag)
 
     }
 

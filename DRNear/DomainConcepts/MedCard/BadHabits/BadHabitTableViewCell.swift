@@ -15,6 +15,10 @@ class SimpleTickedCell: UITableViewCell {
     private var tick = UIImageView()
         .with(image: #imageLiteral(resourceName: "tick"))
         .with(contentMode: .scaleAspectFit)
+    private var subtitle = UILabel()
+        .with(font: .subtitleText13)
+        .with(textColor: .blueGrey)
+    private var subtitleBottomConstraint: Constraint!
 
     private var disposeBag = DisposeBag()
 
@@ -24,18 +28,22 @@ class SimpleTickedCell: UITableViewCell {
         addSubviews([title, tick])
 
         title.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().offset(16)
         }
 
         tick.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalTo(title)
             $0.trailing.equalToSuperview().inset(28)
             $0.leading.equalTo(title.snp.trailing)
             $0.width.equalTo(16)
             $0.height.equalTo(19)
-            $0.top.equalToSuperview().offset(18)
-            $0.bottom.equalToSuperview().inset(18)
+        }
+
+        subtitle.snp.makeConstraints {
+            $0.leading.trailing.equalTo(title)
+            $0.top.equalTo(title.snp.bottom).offset(4)
+            self.subtitleBottomConstraint = $0.bottom.equalToSuperview().inset(10).constraint
         }
 
     }
@@ -55,6 +63,13 @@ class SimpleTickedCell: UITableViewCell {
         item.isSelected.asObservable().subscribe(onNext: { [unowned self] in
             self.tick.isHidden = !$0
         }).disposed(by: disposeBag)
+
+        if let subtitle = (item as? Described)?.description, subtitle != "" {
+            self.subtitle.text = subtitle
+        } else {
+            self.subtitleBottomConstraint.update(inset: -10)
+            self.subtitle.text = ""
+        }
 
         return self
     }

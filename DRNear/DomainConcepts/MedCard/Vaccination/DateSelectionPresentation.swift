@@ -6,6 +6,7 @@
 import Foundation
 import RxSwift
 import UIKit
+import SnapKit
 
 class DateSelectionPresentation: Presentation {
 
@@ -19,6 +20,8 @@ class DateSelectionPresentation: Presentation {
     private var addButton: GradientButton
 
     private var cancelButton = UIButton()
+        .with(image: #imageLiteral(resourceName: "cancel"))
+        .with(tint: .blueGrey)
 
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
@@ -46,7 +49,7 @@ class DateSelectionPresentation: Presentation {
         view.backgroundColor = .black
 
         view.addSubview(containerView)
-        containerView.addSubviews([titleLabel, addButton, datePicker])
+        containerView.addSubviews([titleLabel, addButton, datePicker, cancelButton])
 
         containerView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -73,6 +76,13 @@ class DateSelectionPresentation: Presentation {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(216)
         }
+
+        cancelButton.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview()
+            $0.height.width.equalTo(48)
+        }
+
+        cancelButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
         cancelButton.rx.tap
                 .map { DismissTransition() }

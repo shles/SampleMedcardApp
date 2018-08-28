@@ -35,7 +35,8 @@ class CommentPresentation: AdditionalInfoPresentation {
     private var addButton: GradientButton
 
     private var cancelButton = UIButton()
-
+        .with(image: #imageLiteral(resourceName: "cancel"))
+        .with(tint: .blueGrey)
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
     private var commentField = UITextField()
@@ -64,7 +65,7 @@ class CommentPresentation: AdditionalInfoPresentation {
         view.backgroundColor = .black
 
         view.addSubview(containerView)
-        containerView.addSubviews([titleLabel, addButton, commentField])
+        containerView.addSubviews([titleLabel, addButton, commentField, cancelButton])
 
         containerView.snp.makeConstraints {
             $0.center.equalToSuperview().priority(.medium)
@@ -92,6 +93,14 @@ class CommentPresentation: AdditionalInfoPresentation {
             $0.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(40)
         }
+
+
+        cancelButton.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview()
+            $0.height.width.equalTo(48)
+        }
+
+        cancelButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
         cancelButton.rx.tap
                 .map { DismissTransition() }

@@ -29,6 +29,7 @@ class EnterCodeView: UIView {
                 .with(font: .regular16)
                 .with(textColor: .mainText)
                 .aligned(by: .center)
+                .with(numberOfLines: 2)
         let imageView = UIImageView(image: image)
                 .with(contentMode: .scaleAspectFit)
 
@@ -135,7 +136,9 @@ class CodeView: UIView {
             $0.top.bottom.equalToSuperview()
         }
 
-        codeSubject.debug().do(onNext: { code in
+        codeSubject.debug()
+        .filter {$0.count <= symbolsNumber}
+        .do(onNext: { code in
             self.codeSymbols.dropFirst(code.count).forEach { $0.setEntered(false) }
             self.codeSymbols.dropLast(symbolsNumber - code.count).forEach { $0.setEntered(true) }
         }).filter { $0.count == symbolsNumber }

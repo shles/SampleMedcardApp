@@ -47,8 +47,9 @@ class NumberConfirmationFromAPI: NumberConfirmation {
                 
                 switch status {
                 case .active:
-                    // Where to???
-                    break
+                    self.transitionSubject.onNext(PushTransition(leadingTo: {
+                        ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
+                    }))
                 case .inactive:
                     self.transitionSubject.onNext(PushTransition(leadingTo: {
                         ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
@@ -56,9 +57,11 @@ class NumberConfirmationFromAPI: NumberConfirmation {
                 case .new:
                     self.transitionSubject.onNext(PushTransition(leadingTo: {
                         ViewController(presentation: AccountCreationPresentation(
-                            commitment: AccountCommitmentFromAPI(key: key, leadingTo: self.leadingTo)))
+                            commitment: AccountCommitmentFromAPI(key: key, number: self.number, leadingTo: self.leadingTo)))
                     }))
                 }
+            } else {
+                self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError()))
             }
             
         }, onError: {

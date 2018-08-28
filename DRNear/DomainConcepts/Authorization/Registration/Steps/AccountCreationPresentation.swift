@@ -44,7 +44,7 @@ class AccountCreationPresentation: Presentation {
     .with(placeholderColor: .shadow)
     .with(placeholder: "E-Mail")
 
-    private var genderView = UIView()
+    private var genderView = GenderSelectionView()
     private var confirmButton = UIButton()
             .with(title: "Продолжить")
             .with(backgroundColor: .mainText)
@@ -73,8 +73,30 @@ class AccountCreationPresentation: Presentation {
         scrollView.alwaysBounceVertical = true
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
 
-        scrollView.addSubviews([photo, stack])
-        view.addSubviews([navBar, scrollView, confirmButton])
+        let containerView = UIView()
+
+        scrollView.addSubview(containerView)
+
+        containerView.addSubviews([photo, stack])
+
+        view.addSubviews([scrollView, navBar, confirmButton])
+
+        containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(view)
+        }
+
+//        scrollView.snp.makeConstraints {
+//            $0.bottom.leading.trailing.equalToSuperview()
+//            $0.top.equalTo(navBar.snp.bottom)
+//        }
+
+        scrollView.snp.makeConstraints {
+//            $0.top.equalTo(topLayoutGuide.snp.bottom)
+//            $0.bottom.equalTo(view.bottomLayoutGuide.snp.top)
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.top.equalTo(navBar.snp.bottom)
+        }
 
         photo.snp.makeConstraints {
             $0.centerX.equalTo(stack)
@@ -83,15 +105,11 @@ class AccountCreationPresentation: Presentation {
         }
 
         stack.snp.makeConstraints {
-            $0.top.equalTo(photo.snp.bottom).offset(64)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(photo.snp.bottom).offset(48)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(800)
             $0.width.equalTo(view)
 
-        }
-
-        scrollView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalToSuperview()
-            $0.top.equalTo(navBar.snp.bottom)
         }
 
         navBar.snp.makeConstraints {
@@ -119,5 +137,85 @@ class AccountCreationPresentation: Presentation {
 
     func wantsToPerform() -> Observable<Transition> {
         return  commitment.wantsToPerform()
+    }
+}
+
+class GenderSelectionView: UIView {
+
+    class RadioButton: UIButton {
+
+        private let nonSelectedImage = #imageLiteral(resourceName: "radioButtonEmpty")
+        private let selectedImage = #imageLiteral(resourceName: "radioButtonChoosed")
+
+        private var disposeBag = DisposeBag()
+
+        private var deselectOn: Observable<Void>
+
+        var isChosen: Bool = false {
+            didSet {
+                setImage(isChosen ? selectedImage : nonSelectedImage, for: .normal)
+            }
+        }
+
+        init<Value>(value: Value, selectionObserver observer: AnyObserver<Value>, deselectOn: Observable<Void>) {
+            self.deselectOn = deselectOn
+            super.init(frame: .zero)
+
+            self.rx.tap.subscribe(onNext: { [unowned self] in
+                self.isChosen = !self.isChosen
+                if self.isChosen {
+                    observer.onNext(value)
+                }
+            }).disposed(by: disposeBag)
+
+            self.deselectOn.subscribe(onNext: {
+                self.isChosen = false
+            }).disposed(by: disposeBag)
+
+            setImage(nonSelectedImage, for: .normal)
+            self.imageView?.contentMode = .scaleAspectFit
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("storyboards are deprecated")
+        }
+    }
+
+    let valueSubject = PublishSubject<Gender>()
+
+    init() {
+        super.init(frame: .zero)
+
+        let stack = UIStackView(arrangedSubviews: [
+            UILabel()
+                .with(font: .regular16)
+                .with(textColor: .mainText)
+                .with(text: "Пол"),
+            RadioButton(
+                    value: Gender.male,
+                    selectionObserver: valueSubject.asObserver(),
+                    deselectOn: valueSubject.filter{ $0 != .male}.map{_ in()}
+            )
+                .with(title: "Мужской")
+                .with(titleColor: .mainText),
+            RadioButton(
+                    value: Gender.female,
+                    selectionObserver: valueSubject.asObserver(),
+                    deselectOn: valueSubject.filter{ $0 != .female}.map{_ in()}
+            )
+                .with(title: "Женский")
+                .with(titleColor: .mainText)
+        ])
+
+        stack.axis = .horizontal
+        stack.spacing = 48
+        self.addSubview(stack)
+        stack.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("storyboards are deprecated")
     }
 }

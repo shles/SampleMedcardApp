@@ -63,14 +63,16 @@ class MyObservableAllergiesFromAPI: ObservableAllergies, ObservableType {
     }
 }
 
-class MyAllergyFrom: Allergy, Deletable {
+class MyAllergyFrom: Allergy, Deletable, Described {
 
-    private(set) var name: String = ""
-    private(set) var identification: String = ""
+    private(set) var name: String
+    private(set) var identification: String
     private(set) var isSelected: Variable<Bool> = Variable(true)
     private(set) var category: AllergyCategory?
     private(set) var status: AllergyIntoleranceStatus?
-    private(set) var digitalMedicalRecordId = 0
+    private(set) var digitalMedicalRecordId: Int
+    private(set) var description: String
+
 
     private let deletionSubject = PublishSubject<Transition>()
     private let token: Token
@@ -89,6 +91,7 @@ class MyAllergyFrom: Allergy, Deletable {
         self.category = category
         self.status = status
         self.token = token
+        self.description = clarification
     }
 
     func select() {
@@ -121,6 +124,7 @@ class MyAllergyFrom: Allergy, Deletable {
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.asObservable().debug()
     }
+
 }
 
 class ObservableSimpleMyAllergies: ObservableAllergies {

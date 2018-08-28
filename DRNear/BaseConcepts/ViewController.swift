@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         }).disposed(by: disposeBag)
 
         setNeedsStatusBarAppearanceUpdate()
+        automaticallyAdjustsScrollViewInsets = false
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false

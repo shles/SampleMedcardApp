@@ -34,7 +34,7 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
                         return json.arrayValue.map { (json: JSON) in
                             MyMedicalTestFrom(name: json["name"].string ?? "",
                                     id: json["id"].string ?? "",
-                                    date: Date.from(string: json["date"].string ?? "") ?? Date(),
+                                    date: Date.from(fullString: json["date"].string ?? "") ?? Date(),
                                     description: json["report"].string ?? "",
                                     token: self.token)
                         }

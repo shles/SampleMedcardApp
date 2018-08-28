@@ -206,9 +206,13 @@ class ResponseError: LocalizedError {
 
     class func from(json: JSON) -> ResponseError? {
         
-        guard let detail = json["detail"].string else { return nil }
-        
-        return ResponseError(message: detail)
+        if let detail = json["detail"].string {
+            return ResponseError(message: detail)
+        }
+        if let title = json["title"].string {
+            return ResponseError(message: title)
+        }
+        return nil
     }
     
     init() {

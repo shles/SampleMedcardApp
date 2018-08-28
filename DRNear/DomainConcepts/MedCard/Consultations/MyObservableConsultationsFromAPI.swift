@@ -36,7 +36,7 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
                 return json.arrayValue.map { (json: JSON) in
                     MyConsultationFrom(name: json["name"].string ?? "",
                                        id: json["id"].string ?? "",
-                                       date: Date.from(string: json["date"].string ?? "") ?? Date(),
+                                       date: Date.from(fullString: json["date"].string ?? "") ?? Date(),
                                        description: json["recommendations"].string ?? "",
                                        token: self.token)
                 }

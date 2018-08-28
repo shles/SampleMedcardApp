@@ -10,17 +10,17 @@ class PincodeConfirmationPresentation: Presentation {
 
     private(set) var view: UIView
 
-    private let loginApplication: LoginMethodsApplication
+    private let accountCommitment: AccountCommitment
 
-    init(loginApplication: LoginMethodsApplication) {
-        self.loginApplication = loginApplication
+    init(accountCommitment: AccountCommitment) {
+        self.accountCommitment = loginApplication
         view = EnterCodeView(
                 title: "Повторите пинкод",
                 image: #imageLiteral(resourceName: "page1Copy"),
                 symbolsNumber: 6)
 
         (view as? EnterCodeView)?.codeEntered.subscribe(onNext: { [unowned self] in
-            self.loginApplication.confirmPincode(code: $0)
+            self.accountCommitment.confirmPincode(code: $0)
         })
     }
     func willAppear() {
@@ -37,17 +37,18 @@ class PinCodeCreationPresentation: Presentation {
     private(set) var view: UIView
 
     private let transitionsSubject = PublishSubject<Transition>()
-    private let loginApplication: LoginMethodsApplication
+    private let accountCommitment: AccountCommitment
 
-    init(loginApplication: LoginMethodsApplication) {
-        self.loginApplication = loginApplication
+    init(accountCommitment: AccountCommitment) {
+        self.accountCommitment = accountCommitment
+
         view = EnterCodeView(
                 title: "Придумайте пинкод",
                 image: #imageLiteral(resourceName: "page1Copy"),
                 symbolsNumber: 6)
 
         (view as? EnterCodeView)?.codeEntered.subscribe(onNext: { [unowned self] in
-            self.loginApplication.createPincode(code: $0)
+            self.accountCommitment.createPincode(code: $0)
         })
     }
 
@@ -55,6 +56,6 @@ class PinCodeCreationPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return loginApplication.wantsToPerform()
+        return accountCommitment.wantsToPerform()
     }
 }

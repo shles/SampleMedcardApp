@@ -49,13 +49,13 @@ class MyObservableVaccinationsFromAPI: ObservableVaccinations, ObservableType {
     }
 }
 
-class MyVaccinationFrom: Vaccination, Deletable {
+class MyVaccinationFrom: Vaccination, Deletable, Described {
 
-    private(set) var date = Date()
-    private(set) var name: String = ""
-    private(set) var code: String = ""
-    private(set) var identification: String = ""
-    private(set) var isSelected: Variable<Bool> = Variable(true)
+    let date: Date
+    let name: String
+    let code: String
+    let identification: String
+    let isSelected: Variable<Bool> = Variable(true)
 
     private let deletionSubject = PublishSubject<Transition>()
 
@@ -100,6 +100,10 @@ class MyVaccinationFrom: Vaccination, Deletable {
 
     func wantsToPerform() -> Observable<Transition> {
         return deletionSubject.asObservable().debug()
+    }
+
+    var description: String {
+        return date.dateString
     }
 }
 

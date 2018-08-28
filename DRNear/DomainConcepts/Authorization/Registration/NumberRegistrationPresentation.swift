@@ -74,6 +74,7 @@ class EnterNumberView: UIView {
                 .bind(to: self.numberField.rx.text)
                 .disposed(by: disposeBag)
         numberPadView.wantsToDelete
+                .filter { (self.numberField.text?.count ?? 0 ) > 2 }
                 .map { [unowned self] symbol in
                     return String(self.numberField.text?.dropLast() ?? "")
                 }

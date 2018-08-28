@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                 leadingTo: { ViewController(
                                                                         presentation: MyBadHabitsPresentation(
                                                                                 badHabits: MyObservableBadHabitsFromAPI(token: token),
-                                                                                title: "Вредные привычки",
+                                                                                title: "Добавить привычку",
                                                                                 gradient: [.wheatTwo, .rosa],
                                                                                 leadingTo: { return ViewController(
                                                                                         presentation: AllBadHabitsPresentation(
@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                                         presentation: AllBadHabitsPresentation(
                                                                                                 badHabits: AllObservableAllergiesFromAPI(token: token),
                                                                                                 update: AllergiesUpdate(token: token),
-                                                                                                title: "Список аллергий",
+                                                                                                title: "Добавить аллергию",
                                                                                                 gradient: [.peach, .wheat]
                                                                                         )
                                                                                 )}
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                                         presentation: AllBadHabitsPresentation(
                                                                                                 badHabits: AllObservableVaccinationsFromAPI(token: token),
                                                                                                 update: VaccinationUpdate(token: token),
-                                                                                                title: "Список прививок",
+                                                                                                title: "Добавить прививку",
                                                                                                 gradient: [.paleOliveGreen, .beige]
                                                                                         )
                                                                                 )}
@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                                         presentation: AllBadHabitsPresentation(
                                                                                                 badHabits: AllObservableDiseasesFromAPI(token: token),
                                                                                                 update: DiseasesUpdate(token: token),
-                                                                                                title: "Список заболеваний",
+                                                                                                title: "Добавить заболевание",
                                                                                                 gradient: [.pastelBlue, .powderBlue]
                                                                                         )
                                                                                 )}

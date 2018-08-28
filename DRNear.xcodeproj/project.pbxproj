@@ -12,6 +12,7 @@
 		4C287234773E4E2458246776 /* SimpleObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */; };
 		4C28754E684C658153CD4A90 /* IdentificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */; };
 		4C2875C9EDC59EFA9FEA40ED /* FileFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876E18A1D40F891EB94AF /* FileFrom.swift */; };
+		4C28760ED1CB9511B2A2BFD2 /* AccountConfirmationPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287E3D01FB9CE24ACC1F27 /* AccountConfirmationPresentation.swift */; };
 		4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879CBC781343E41611DD3 /* AppicationTests.swift */; };
 		4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */; };
 		4C287DEBCF054934DD89DFB8 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */; };
@@ -160,6 +161,7 @@
 		4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleObjectsTests.swift; sourceTree = "<group>"; };
 		4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationTests.swift; sourceTree = "<group>"; };
 		4C2879CBC781343E41611DD3 /* AppicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppicationTests.swift; sourceTree = "<group>"; };
+		4C287E3D01FB9CE24ACC1F27 /* AccountConfirmationPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountConfirmationPresentation.swift; sourceTree = "<group>"; };
 		5791B611C4A7E0E4D26F24D0 /* Pods-DRNearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61520493534457F4BFE257 /* Pods_DRNear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -547,6 +549,7 @@
 				FD4C533D2130011E008D5008 /* InAppAuthorization.swift */,
 				FD4C533F2130011E008D5008 /* ApplicationSetup.swift */,
 				FD4C53412130011E008D5008 /* ConfirmNumberPresentation.swift */,
+				4C287E3D01FB9CE24ACC1F27 /* AccountConfirmationPresentation.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -1025,6 +1028,7 @@
 				F86AFD13213186D8008F3A1A /* Date.swift in Sources */,
 				FD4C53CA21300120008D5008 /* ApplicationSetup.swift in Sources */,
 				4C2875C9EDC59EFA9FEA40ED /* FileFrom.swift in Sources */,
+				4C28760ED1CB9511B2A2BFD2 /* AccountConfirmationPresentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
