@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import SnapKit
+import LocalAuthentication
 
 class ApplicationSetup: LoginMethodsApplication {
 
@@ -30,14 +31,36 @@ class ApplicationSetup: LoginMethodsApplication {
 
     func confirmPincode(code: String) {
         if self.code == code {
-            transitionSubject.onNext( PresentTransition {
-                ViewController(presentation: TouchIDPresentation(
-                        title: "Использовать Touch ID для приложения “Доктор Рядом Телемед”?",
-                        onAccept: { [unowned self] in
-                            self.activateTouchID()
-                            self.proceedToAccount()
+            // TODO: Save code
+            let context = LAContext()
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                switch context.biometryType {
+                case .touchID:
+                    transitionSubject.onNext( PresentTransition {
+                        ViewController(presentation: BiometricIDPresentation(
+                            title: "Использовать Touch ID для приложения “Доктор Рядом Телемед”?",
+                            type: .touchID,
+                            onAccept: { [unowned self] in
+                                self.activateTouchID()
+                                self.proceedToAccount()
                         }))
-            })
+                    })
+                case .faceID:
+                    transitionSubject.onNext( PresentTransition {
+                        ViewController(presentation: BiometricIDPresentation(
+                            title: "Использовать Face ID для приложения “Доктор Рядом Телемед”?",
+                            type: .faceID,
+                            onAccept: { [unowned self] in
+                                self.activateFaceID()
+                                self.proceedToAccount()
+                        }))
+                    })
+                case .none:
+                    proceedToAccount()
+                }
+            } else {
+                proceedToAccount()
+            }
         } else {
             transitionSubject.onNext(ErrorAlertTransition(error: RequestError(message: "Pin-код не совпадает, повторите попытку")))
         }
@@ -45,10 +68,12 @@ class ApplicationSetup: LoginMethodsApplication {
 
     func activateTouchID() {
 
+        // TODO: Save Touch ID flag somewhere
     }
 
     func activateFaceID() {
 
+        // TODO: Save Face ID flag somewhere
     }
 
     func proceedToAccount() {
@@ -67,7 +92,7 @@ class ApplicationSetup: LoginMethodsApplication {
     }
 }
 
-class TouchIDPresentation: Presentation {
+class BiometricIDPresentation: Presentation {
 
     private(set) var view: UIView = UIView()
             .with(backgroundColor: UIColor.mainText.withAlphaComponent(0.5))
@@ -84,7 +109,7 @@ class TouchIDPresentation: Presentation {
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
 
-    init(title: String, onAccept: @escaping () -> Void) {
+    init(title: String, type: LABiometryType, onAccept: @escaping () -> Void) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)
@@ -97,7 +122,8 @@ class TouchIDPresentation: Presentation {
                 .with(backgroundColor: .white)
                 .with(roundedEdges: 4)
 
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "touchIdIcon"))
+        // TODO: Face ID icon
+        let imageView = UIImageView(image: type == .touchID ? #imageLiteral(resourceName: "touchIdIcon") : #imageLiteral(resourceName: "touchIdIcon"))
         .with(contentMode: .scaleAspectFit)
 
         let horStack = UIStackView(arrangedSubviews: [cancelButton, deleteButton])
