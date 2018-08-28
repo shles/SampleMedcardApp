@@ -9,8 +9,11 @@
 import Foundation
 import RxSwift
 import Alamofire
+import LocalAuthentication
+import JWTDecode
+import SwiftyJSON
 
-//TODO: needed to be refactored. split into appropriate separate steps abjects
+//TODO: needed to be refactored. split into appropriate separate steps objects
 
 class AccountCommitmentFromAPI: AccountCommitment {
 
@@ -63,39 +66,150 @@ class AccountCommitmentFromAPI: AccountCommitment {
     }
 
     func confirmPincode(code: String) {
+
+        //TODO: have to be refactored. should be fork somewhere before, to split
         if self.code == code {
 
-            var parameters = information.json
+            if let information = information {
+                var parameters = information.json
 
-            parameters["key"] = self.key
-            parameters["phoneNumber"] = self.number
+                parameters["key"] = self.key
+                parameters["phoneNumber"] = self.number
+                parameters["pin"] = code
 
-            guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/register",
-                    method: .post,
+                guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/register",
+                        method: .post,
 
-                    parameters: parameters,
-                    encoding: JSONEncoding.default) else { return }
+                        parameters: parameters,
+                        encoding: JSONEncoding.default) else {
+                    return
+                }
 
-            request.make().subscribe(onNext:{ _ in
-                transitionSubject.onNext( PresentTransition {
-                    ViewController(presentation: TouchIDPresentation(
-                            title: "Использовать Touch ID для приложения “Доктор Рядом Телемед”?",
-                            onAccept: { [unowned self] in
-                                self.activateTouchID()
-                                self.proceedToAccount()
-                            }))
-                })
-            }, onError: {
-                self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
-            }).disposed(by: disposeBag)
+                request.make().subscribe(onNext: { [unowned self] json in
 
-        } else {
-            transitionSubject.onNext(ErrorAlertTransition(error: RequestError(message: "Pin-код не совпадает, повторите попытку")))
-        }
+                    if let token = json["access_token"].string {
+                        let jwt = try? decode(jwt: token)
+                        if let authorities = jwt?.body["authorities"] as? [String] {
+                            if let _ = authorities.first(where: { $0 == "ROLE_USER" }) {
+                                self.configureLoginMethods(token: TokenFromString(string: token))
+                            } else {
+                                //TODO: actually I don't know what to do here yet
+                                self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError()))
+                            }
+                        }
+                    } else {
+                        self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError.from(json: json) ?? ResponseError()))
+                    }
+                }, onError: {
+                    self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
+                }).disposed(by: disposeBag)
+            } else {
+
+                let parameters =  [
+                    "key": key,
+                    "newPin": code,
+                    "phoneNumber": number
+                ]
+
+                guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/account/reset-password",
+                        method: .put,
+
+                        parameters: parameters,
+                        encoding: JSONEncoding.default) else {
+                    return
+                }
+
+                request.make().subscribe(onNext: { [unowned self] json in
+
+                    if let token = json["access_token"].string {
+                        let jwt = try? decode(jwt: token)
+                        if let authorities = jwt?.body["authorities"] as? [String] {
+                            if let _ = authorities.first(where: { $0 == "ROLE_USER" }) {
+                                self.configureLoginMethods(token: TokenFromString(string: token))
+                            } else {
+                                //TODO: actually I don't know what to do here yet
+                                self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError()))
+                            }
+                        }
+                    } else {
+                        self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError.from(json: json) ?? ResponseError()))
+                    }
+                }, onError: {
+                    self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
+                }).disposed(by: disposeBag)
+
+
+            }
+
+            } else {
+                transitionSubject.onNext(ErrorAlertTransition(error: RequestError(message: "Pin-код не совпадает, повторите попытку")))
+            }
+
+    }
+
+    func proceedToAccount(token: Token) {
+//        let authority = AuthorityFromAPI()
+//        authority.authenticate().retry(10).map { [unowned self] token in
+//        }.bind(to: transitionSubject)
+//        authority.authWith(credentials: CredentialsFrom(login: "admin", password: "38Gjgeuftd!"))
+
+        transitionSubject.onNext(PushTransition(
+                leadingTo: { [unowned self] in
+                    ViewController(
+                        presentation: AccountConfirmationPresentation(
+                                name: self.information.name,
+                                leadingTo: { [unowned self] in
+            NewWindowRootControllerTransition(leadingTo: { self.leadingTo(token) })
+        }))}))
+
     }
 
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
+    }
+
+
+    func configureLoginMethods(token: Token) {
+        let context = LAContext()
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            switch context.biometryType {
+            case .touchID:
+                self.transitionSubject.onNext( PresentTransition {
+                    ViewController(presentation: BiometricIDPresentation(
+                            title: "Использовать Touch ID для приложения “Доктор Рядом Телемед”?",
+                            type: .touchID,
+                            onAccept: { [unowned self] in
+                                self.activateTouchID()
+                                self.proceedToAccount(token: token)
+                            }))
+                })
+            case .faceID:
+                self.transitionSubject.onNext( PresentTransition {
+                    ViewController(presentation: BiometricIDPresentation(
+                            title: "Использовать Face ID для приложения “Доктор Рядом Телемед”?",
+                            type: .faceID,
+                            onAccept: { [unowned self] in
+                                self.activateFaceID()
+                                self.proceedToAccount(token: token)
+                            }))
+                })
+            case .none:
+                proceedToAccount(token: token)
+            }
+        } else {
+            proceedToAccount(token: token)
+        }
+    }
+
+    func activateTouchID() {
+        //TODO: make injection
+        ApplicationConfiguration().activateTouchID(forCode: self.code)
+
+    }
+
+    func activateFaceID() {
+        ApplicationConfiguration().activateFaceID(forCode: self.code)
     }
 
 }

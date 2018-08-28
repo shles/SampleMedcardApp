@@ -16,11 +16,10 @@ class AccountConfirmationPresentation: Presentation {
     private let confirmButton = GradientButton(colors: [.mainText])
             .with(title: "Продолжить")
             .with(roundedEdges: 24)
-    private let accountCommintment: AccountCommitment
-    //TODO: change to accept full info (photo)
-    init(name: String, accountCommitment: AccountCommitment) {
+    private let transitionSubject = PublishSubject<Transition>()
 
-        self.accountCommintment = accountCommitment
+    //TODO: change to accept full info (photo)
+    init(name: String, leadingTo: @escaping () -> (Transition)) {
 
         let photo = UIImageView()
             .with(image: #imageLiteral(resourceName: "defaultPhoto"))
@@ -71,6 +70,9 @@ class AccountConfirmationPresentation: Presentation {
             $0.bottom.equalToSuperview().inset(8)
         }
 
+        confirmButton.rx.tap.subscribe(onNext: {
+            self.transitionSubject.onNext(leadingTo())
+        })
     }
 
     func willAppear() {
@@ -78,7 +80,7 @@ class AccountConfirmationPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return  accountCommintment.wantsToPerform()
+        return transitionSubject
     }
 
 }

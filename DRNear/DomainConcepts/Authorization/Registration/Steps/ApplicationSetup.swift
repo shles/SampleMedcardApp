@@ -24,15 +24,16 @@ class ApplicationSetup: LoginMethodsApplication {
 
     func createPincode(code: String) {
         self.code = code
-        transitionSubject.onNext(PushTransition { [unowned self] in
-            return ViewController(presentation: PincodeConfirmationPresentation(loginApplication: self))
-        })
+//        transitionSubject.onNext(PushTransition { [unowned self] in
+//            return ViewController(presentation: PincodeConfirmationPresentation(accountCommitment: self))
+//        })
     }
 
     func confirmPincode(code: String) {
         if self.code == code {
             // TODO: Save code
             let context = LAContext()
+
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
                 switch context.biometryType {
                 case .touchID:
@@ -67,13 +68,12 @@ class ApplicationSetup: LoginMethodsApplication {
     }
 
     func activateTouchID() {
+//        ApplicationConfiguration.activateTouchID(forCode: self.code)
 
-        // TODO: Save Touch ID flag somewhere
     }
 
     func activateFaceID() {
-
-        // TODO: Save Face ID flag somewhere
+//        ApplicationConfiguration.activateFaceID(forCode: self.code)
     }
 
     func proceedToAccount() {
@@ -122,8 +122,7 @@ class BiometricIDPresentation: Presentation {
                 .with(backgroundColor: .white)
                 .with(roundedEdges: 4)
 
-        // TODO: Face ID icon
-        let imageView = UIImageView(image: type == .touchID ? #imageLiteral(resourceName: "touchIdIcon") : #imageLiteral(resourceName: "touchIdIcon"))
+        let imageView = UIImageView(image: type == .touchID ? #imageLiteral(resourceName: "touchIdIcon") : #imageLiteral(resourceName: "faceId"))
         .with(contentMode: .scaleAspectFit)
 
         let horStack = UIStackView(arrangedSubviews: [cancelButton, deleteButton])

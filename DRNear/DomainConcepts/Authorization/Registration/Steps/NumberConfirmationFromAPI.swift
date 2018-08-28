@@ -47,13 +47,17 @@ class NumberConfirmationFromAPI: NumberConfirmation {
                 
                 switch status {
                 case .active:
-                    self.transitionSubject.onNext(PushTransition(leadingTo: {
-                        ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
-                    }))
+                    //todo: make different presentation for enter existing pin
+//                    self.transitionSubject.onNext(PushTransition(leadingTo: {
+//                        ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
+//                    }))
+                break
                 case .inactive:
-                    self.transitionSubject.onNext(PushTransition(leadingTo: {
-                        ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
-                    }))
+                    //TODO: make something to handle method of activation
+//                    self.transitionSubject.onNext(PushTransition(leadingTo: {
+//                        ViewController(presentation: PinCodeCreationPresentation(loginApplication: ApplicationSetup(leadingTo: self.leadingTo)))
+//                    }))
+                break
                 case .new:
                     self.transitionSubject.onNext(PushTransition(leadingTo: {
                         ViewController(presentation: AccountCreationPresentation(
