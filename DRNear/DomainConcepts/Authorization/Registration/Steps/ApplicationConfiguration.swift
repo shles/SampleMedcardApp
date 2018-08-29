@@ -224,11 +224,11 @@ class ApplicationConfiguration {
                                                     gradientColors: [.lightPeriwinkle, .softPink],
                                                     leadingTo: {
                                                         ViewController(presentation: DDNListPresentation(
-                                                                items: SimpleMyConsultations(),
+                                                                items: (try? MyObservableConsultationsFromAPI(token: token)) ?? ObservableSimpleMyConsultations(),
                                                                 title: "Консультации",
                                                                 gradient: [.lightPeriwinkle, .softPink],
                                                                 leadingTo: {
-                                                                    ViewController(presentation: SimpleViewWthButtonPresentation())
+                                                                    ViewController(presentation: ConsultationEditingPresentation(token: token))
                                                                 }))
                                                     }
                                             )

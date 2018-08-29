@@ -35,6 +35,15 @@ class SimpleNavigationBar: UIView {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalTo(titleLabel)
         }
+        button.rx.tap.subscribe(onNext: {
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(
+                    rootViewController: ViewController(
+                            presentation: NumberRegistrationPresentation(
+                                    numberRegistration: NumberRegistrationFromAPI(leadingTo: ApplicationConfiguration().mainAppSetup )
+                            )
+                    )
+            ).withoutNavigationBar()
+        })
         return self
     }
 }

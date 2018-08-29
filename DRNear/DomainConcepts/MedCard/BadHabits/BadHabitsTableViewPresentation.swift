@@ -20,7 +20,7 @@ class BadHabitsTableViewPresentation: Presentation {
     private let refreshSubject = PublishSubject<Void>()
     private let wantsToPushSubject = PublishSubject<Transition>()
     private let habitsSubject = ReplaySubject<[ListApplicable]>.create(bufferSize: 1)
-    
+
     private let emptyStateView = UILabel()
             .with(font: .regular16)
             .with(textColor: .mainText)
@@ -56,10 +56,12 @@ class BadHabitsTableViewPresentation: Presentation {
                 })
 
         habitsSubject.asObservable()
-                .startWith([])
+//                .startWith([])
                 .do(onNext: { [unowned self] in
-                    self.emptyStateView.isHidden = !$0.isEmpty
-                    self.tableView.isHidden = $0.isEmpty
+                    if $0 is [MyBadHabitFrom] {
+                        self.emptyStateView.isHidden = !$0.isEmpty
+                        self.tableView.isHidden = $0.isEmpty
+                    }
                 })
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))

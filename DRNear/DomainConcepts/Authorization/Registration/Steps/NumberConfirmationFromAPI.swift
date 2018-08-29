@@ -197,7 +197,9 @@ class AuthorizationFromAPI: Authorization {
                             onAccept: { [unowned self] in
                                 self.activateTouchID()
                                 self.proceedToAccount(token: token)
-                            }))
+                            }, onCancel: { [unowned self] in
+                        self.proceedToAccount(token: token)
+                    }))
                 })
             case .faceID:
                 self.transitionSubject.onNext( PresentTransition {
@@ -207,7 +209,9 @@ class AuthorizationFromAPI: Authorization {
                             onAccept: { [unowned self] in
                                 self.activateFaceID()
                                 self.proceedToAccount(token: token)
-                            }))
+                            }, onCancel: { [unowned self] in
+                        self.proceedToAccount(token: token)
+                    }))
                 })
             case .none:
                 proceedToAccount(token: token)

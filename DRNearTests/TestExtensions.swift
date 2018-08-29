@@ -34,4 +34,8 @@ extension UIViewController {
     func preloadView() {
         _ = self.view
     }
+
+    @objc func anotherWillAppear() {
+
+    }
 }

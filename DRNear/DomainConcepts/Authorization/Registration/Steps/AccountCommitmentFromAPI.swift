@@ -187,7 +187,9 @@ class AccountCommitmentFromAPI: AccountCommitment {
                             onAccept: { [unowned self] in
                                 self.activateTouchID()
                                 self.proceedToAccount(token: token)
-                            }))
+                            }, onCancel: { [unowned self] in
+                        self.proceedToAccount(token: token)
+                    }))
                 })
             case .faceID:
                 self.transitionSubject.onNext( PresentTransition {
@@ -196,6 +198,8 @@ class AccountCommitmentFromAPI: AccountCommitment {
                             type: .faceID,
                             onAccept: { [unowned self] in
                                 self.activateFaceID()
+                                self.proceedToAccount(token: token)
+                            }, onCancel: { [unowned self] in
                                 self.proceedToAccount(token: token)
                             }))
                 })

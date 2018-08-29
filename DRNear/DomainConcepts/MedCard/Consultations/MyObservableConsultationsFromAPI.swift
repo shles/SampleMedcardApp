@@ -59,26 +59,28 @@ class MyConsultationFrom: Consultation, ContainFiles {
     private var interactionSubject = PublishSubject<Void>()
     private var editionSubject = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
+    private var transitionSubject = PublishSubject<Transition>()
 
-    init(name: String, id: String, date: Date, description: String, token: Token) {
+    init(name: String, id: String, date: Date, description: String, token: Token, files: [File] = [] ) {
         self.name = name
         self.identification = id
         self.date = date
         self.description = description
         self.token = token
+        self.files = files
     }
 
     func create() {
         
         if let request = try? AuthorizedRequest(
-            path: "/api/my/consultations",
+            path: "/eco-emc/api/my/consultations",
             method: .post,
             token: self.token,
             parameters: self.json,
             encoding: JSONEncoding.default
         ) {
-            
-            request.make()
+
+            request.make().map { _ in PopTransition()}.bind(to: transitionSubject)
         }
     }
     
@@ -95,7 +97,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
                             title: "Вы уверены, что хотите консультацию \"\(self.name)\"?",
                             onAccept: { [unowned self] in
                                 if let request = try? AuthorizedRequest(
-                                    path: "/api/consultations/\(self.identification)",
+                                    path: "/eco-emc/api/consultations/\(self.identification)",
                                     method: .delete,
                                     token: self.token
                                     ) {
@@ -114,15 +116,15 @@ class MyConsultationFrom: Consultation, ContainFiles {
                 PushTransition(leadingTo: {
                     ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.darkSkyBlue, .tiffanyBlue]))
                 })
-            }
-            /* Need presentation
+            },
+//             Need presentation
             editionSubject.map { [unowned self] _ in
                 PushTransition(leadingTo: {
-                    ViewController(presentation: MedicalTestEditingPresentation(
-                        medTest: self,
+                    ViewController(presentation: ConsultationEditingPresentation(
+                        consultation: self,
                         onSave: { [unowned self] in
                             if let request = try? AuthorizedRequest(
-                                path: "/api/consultations/\(self.identification)",
+                                path: "/eco-emc/api/consultations/\(self.identification)",
                                 method: .put,
                                 token: self.token,
                                 parameters: self.json,
@@ -135,8 +137,8 @@ class MyConsultationFrom: Consultation, ContainFiles {
                             return Observable.just(())
                     }))
                 })
-            }
-            */
+            },
+        transitionSubject
         ])
     }
 
@@ -149,7 +151,42 @@ class MyConsultationFrom: Consultation, ContainFiles {
     }
 
     var json: [String: Any]  {
-        fatalError("JSON not implemented")
+//        "date": "2018-08-23T13:33:02.736Z",
+//        "diagnoses": [
+//            {
+//                "comments": "мой старый диагноз",
+//                "diagnoseStatus": {
+//                "code": "01"
+//            },
+//                "name": {
+//                "code": "01"
+//            },
+//                "files": [
+//                {
+//                    "fuid": "string",
+//                }
+//            ],
+//                "value": "каое то значение",
+//                "verificationStatus": {
+//                "code": "01"
+//            }
+//            }
+//        ],
+//        "name": "еженедельная консультация"
+//    }
+
+        return [
+            "date": date.fullString,
+            "diagnoses": [[
+                "comments": "мой старый диагноз",
+                "diagnoseStatus": ["code": "01"],
+                "name": ["code": "01"],
+                "files": files.map { ["fuid": $0.identification]},
+                "value": "каое то значение",
+                "verificationStatus": ["code": "01"]
+            ]],
+            "name": name
+        ]
     }
 }
 

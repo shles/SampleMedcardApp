@@ -44,6 +44,8 @@ class ApplicationSetup: LoginMethodsApplication {
                             onAccept: { [unowned self] in
                                 self.activateTouchID()
                                 self.proceedToAccount()
+                        }, onCancel: { [unowned self] in
+                            self.proceedToAccount()
                         }))
                     })
                 case .faceID:
@@ -54,6 +56,8 @@ class ApplicationSetup: LoginMethodsApplication {
                             onAccept: { [unowned self] in
                                 self.activateFaceID()
                                 self.proceedToAccount()
+                        }, onCancel: { [unowned self] in
+                            self.proceedToAccount()
                         }))
                     })
                 case .none:
@@ -109,7 +113,7 @@ class BiometricIDPresentation: Presentation {
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
 
-    init(title: String, type: LABiometryType, onAccept: @escaping () -> Void) {
+    init(title: String, type: LABiometryType, onAccept: @escaping () -> Void, onCancel: @escaping () -> Void) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)
@@ -168,6 +172,7 @@ class BiometricIDPresentation: Presentation {
         }
 
         cancelButton.rx.tap
+                .do(onNext: { _ in  onCancel() })
                 .map { DismissTransition() }
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)

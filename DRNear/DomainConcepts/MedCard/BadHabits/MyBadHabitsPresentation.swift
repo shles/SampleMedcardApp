@@ -18,6 +18,7 @@ class MyBadHabitsPresentation: Presentation {
     private let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
     private let disposeBag = DisposeBag()
 
+
     init(badHabits: ListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController) ) {
 
         badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable(), tintColor: gradient.last ?? .mainText)

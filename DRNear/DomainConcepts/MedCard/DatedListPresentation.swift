@@ -141,10 +141,14 @@ class DatedDescribedFileContainedPresentation: Presentation {
     private let editButton = UIButton()
     .with(image: #imageLiteral(resourceName: "editIcon"))
 
+
+    private let item: Named & Dated & Described & ContainFiles & Editable
+
     init(item: Named & Dated & Described & ContainFiles & Editable , gradient: [UIColor]) {
 
         tableView.tableHeaderView = HeaderView(item: item, hasFiles: !item.files.isEmpty)
         tableView.separatorStyle = .none
+        self.item = item
 
         navBar = NavigationBarWithBackButton(title: item.name)
                 .with(gradient: gradient)
@@ -193,7 +197,10 @@ class DatedDescribedFileContainedPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return Observable.never()
+        return Observable.merge([
+            navBar.wantsToPerform(),
+            item.wantsToPerform()
+        ])
     }
 
     class HeaderView: UIView {

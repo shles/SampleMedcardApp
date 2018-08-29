@@ -57,6 +57,7 @@ class PopTransition: Transition {
 class DismissTransition: Transition {
 
     func perform(on viewController: UIViewController) {
+        viewController.presentingViewController?.anotherWillAppear()
         viewController.dismiss(animated: true)
     }
 

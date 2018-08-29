@@ -68,10 +68,15 @@ class ViewController: UIViewController {
 //        disposeBag = DisposeBag()
     }
 
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if presentation is MedCardCollectionViewPresentation {
             return .default
         }
         return .lightContent
+    }
+
+    override func anotherWillAppear() {
+        presentation.willAppear()
     }
 }
