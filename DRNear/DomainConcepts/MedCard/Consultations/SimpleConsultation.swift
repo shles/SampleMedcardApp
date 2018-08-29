@@ -202,6 +202,13 @@ class ConsultationEditingPresentation: Presentation {
 
         })
 
+        dateField.rx.controlEvent(.touchDown).subscribe(onNext: {
+            self.dateField.resignFirstResponder()
+            self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
+                self.dateField.text = $0.dateString
+            }))}))
+        })
+
         confirmButton.rx.tap.subscribe(onNext: { [unowned self] in
             if self.consultation != nil, let onSave = self.onSave {
                 self.consultation.files = self.files

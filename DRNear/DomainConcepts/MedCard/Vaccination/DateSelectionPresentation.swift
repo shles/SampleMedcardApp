@@ -28,7 +28,7 @@ class DateSelectionPresentation: Presentation {
 
     private let datePicker = UIDatePicker()
 
-    init(title: String, gradient: [UIColor], onAccept: @escaping (Date) -> Void) {
+    init(title: String, gradient: [UIColor], onAccept: @escaping (Date) -> Void, mode: UIDatePickerMode = .dateAndTime) {
 
         let titleLabel = UILabel()
                 .with(font: .regular)
@@ -56,6 +56,8 @@ class DateSelectionPresentation: Presentation {
             $0.height.equalTo(387)
             $0.width.equalToSuperview().inset(8)
         }
+
+        datePicker.datePickerMode = mode
 
         addButton.snp.makeConstraints {
             $0.height.equalTo(48)

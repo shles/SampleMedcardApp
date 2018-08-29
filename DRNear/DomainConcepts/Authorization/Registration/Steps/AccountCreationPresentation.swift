@@ -6,6 +6,7 @@
 import RxSwift
 import SnapKit
 import UIKit
+import RxCocoa
 
 class AccountCreationPresentation: Presentation {
 
@@ -133,6 +134,14 @@ class AccountCreationPresentation: Presentation {
 
         genderView.valueSubject.subscribe(onNext: {
             self.gender = $0
+        })
+
+
+        birthDateLabel.rx.controlEvent(.touchDown).subscribe(onNext: {
+            self.birthDateLabel.resignFirstResponder()
+            self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
+                self.birthDateLabel.text = $0.dateString
+            }, mode: .date))}))
         })
 
         self.commitment.wantsToPerform().bind(to: transitionSubject)

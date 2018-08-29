@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class SimpleMedicalTest: MedicalTest, ContainFiles {
     private(set) var name: String = "Анализ крови"
@@ -205,6 +206,13 @@ class MedicalTestEditingPresentation: Presentation {
                 $0.centerX.equalTo(self.view)
             }
 
+        })
+
+        dateField.rx.controlEvent([.touchDown, .editingDidBegin]).subscribe(onNext: {
+            self.dateField.resignFirstResponder()
+            self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
+                self.dateField.text = $0.dateString
+            }))}))
         })
 
         confirmButton.rx.tap.subscribe(onNext: { [unowned self] in
