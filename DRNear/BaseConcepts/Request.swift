@@ -60,7 +60,8 @@ class AuthorizedRequest: Request {
     }
 
     func make() -> Observable<JSON> {
-        return Observable.create { [unowned self] observer in
+        //TODO: solve how to properly store requests
+        return Observable.create { /*[unowned self]*/ observer in
 
             Alamofire.request(self.request)
                     .responseData { response in
@@ -88,6 +89,16 @@ class AuthorizedRequest: Request {
                                 }
                                 print("name: \(cookie.name) value: \(cookie.value)")
                             }
+                        }
+
+                        if let code = response.response?.statusCode, code == 401 {
+                            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(
+                                    rootViewController: ViewController(
+                                            presentation: NumberRegistrationPresentation(
+                                                    numberRegistration: NumberRegistrationFromAPI(leadingTo: ApplicationConfiguration().mainAppSetup )
+                                            )
+                                    )
+                            ).withoutNavigationBar()
                         }
                     }
                     .validate()

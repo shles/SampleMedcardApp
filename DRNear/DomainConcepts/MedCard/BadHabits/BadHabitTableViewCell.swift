@@ -67,7 +67,7 @@ class SimpleTickedCell: UITableViewCell {
         if let subtitle = (item as? Described)?.description, subtitle != "" {
             self.subtitle.text = subtitle
         } else {
-            self.subtitleBottomConstraint.update(inset: -10)
+            self.subtitleBottomConstraint.update(inset: 5)
             self.subtitle.text = ""
         }
 

@@ -127,6 +127,7 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         }
         searchButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
+            $0.width.height.equalTo(32)
             $0.centerY.equalTo(titleLabel)
         }
         backgroundColor = .white
@@ -134,12 +135,16 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
         searchField.snp.makeConstraints {
             $0.firstBaseline.equalTo(titleLabel)
             $0.leading.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().inset(32)
         }
         searchField.isHidden = true
+        
+        searchField.resignFirstResponder()
+        
+        searchButton.tintColor = .white
 
-        searchButton.rx.tap.subscribe(onNext: {
-            if self.searchField.isFirstResponder {
+        searchButton.rx.tap.subscribe(onNext: { [unowned self] in
+            if !self.searchField.isFirstResponder {
                 self.titleLabel.isHidden = true
                 self.searchField.isHidden = false
                 self.searchField.becomeFirstResponder()
@@ -149,10 +154,13 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
                 self.searchField.isHidden = true
                 self.searchField.resignFirstResponder()
                 self.searchButton.setImage(#imageLiteral(resourceName: "searchIcon"), for: .normal)
+                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+                self.searchField.text = ""
             }
         }).disposed(by: disposeBag)
 
         searchField.rx.controlEvent(.editingDidEnd).subscribe(onNext: {
+
             self.titleLabel.isHidden = false
             self.searchField.isHidden = true
             self.searchField.resignFirstResponder()

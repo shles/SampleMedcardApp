@@ -88,7 +88,7 @@ class ApplicationConfiguration {
         }
     }
 
-    private let mainAppSetup: (Token) -> (UIViewController) = { token in
+    let mainAppSetup: (Token) -> (UIViewController) = { token in
         UINavigationController(
                 rootViewController: ViewController(
                         presentation: MedCardCollectionViewPresentation(
