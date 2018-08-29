@@ -77,6 +77,8 @@ class AccountCreationPresentation: Presentation {
         scrollView.alwaysBounceVertical = true
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
 
+//        self.view = scrollView
+
         let containerView = UIView()
 
         scrollView.addSubview(containerView)
@@ -104,14 +106,15 @@ class AccountCreationPresentation: Presentation {
 
         photo.snp.makeConstraints {
             $0.centerX.equalTo(stack)
-            $0.top.equalTo(navBar.snp.bottom).offset(16)
+            $0.top.equalToSuperview().offset(16)
+//            $0.top.equalTo(navBar.snp.bottom).offset(16)
             $0.width.height.equalTo(100)
         }
 
         stack.snp.makeConstraints {
             $0.top.equalTo(photo.snp.bottom).offset(48)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(800)
+            $0.bottom.equalToSuperview().inset(16)
             $0.width.equalTo(view)
 
         }
