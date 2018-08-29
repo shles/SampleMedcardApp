@@ -97,7 +97,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                                     title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
                                     onAccept: { [unowned self] in
                                         if let request = try? AuthorizedRequest(
-                                                path: "/api/analyzes/\(self.identification)",
+                                                path: "/eco-emc/api/analyzes/\(self.identification)",
                                                 method: .delete,
                                                 token: self.token
                                         ) {
@@ -123,7 +123,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                         medTest: self,
                         onSave: { [unowned self] in
                             if let request = try? AuthorizedRequest(
-                                path: "/api/analyzes/\(self.identification)",
+                                path: "/eco-emc/api/analyzes/\(self.identification)",
                                 method: .put,
                                 token: self.token,
                                 parameters: self.json,
