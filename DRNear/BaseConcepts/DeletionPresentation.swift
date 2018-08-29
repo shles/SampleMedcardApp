@@ -10,6 +10,7 @@ import SnapKit
 class LoadingButton: UIButton {
 
     private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    private let disposeBag = DisposeBag()
 
     init() {
         super.init(frame: .zero)
@@ -17,6 +18,16 @@ class LoadingButton: UIButton {
         activityIndicator.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+
+        rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in
+            self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.5)
+            self.titleLabel?.alpha = 0.8
+        }).disposed(by: disposeBag)
+
+        rx.controlEvent([.touchCancel, .touchUpOutside, .touchUpInside]).subscribe(onNext: { [unowned self] in
+            self.backgroundColor = self.backgroundColor?.withAlphaComponent(1)
+            self.titleLabel?.alpha = 1
+        }).disposed(by: disposeBag)
     }
 
     func startAnimation() {

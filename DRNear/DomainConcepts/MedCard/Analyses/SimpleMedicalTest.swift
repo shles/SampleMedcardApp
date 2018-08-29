@@ -62,7 +62,7 @@ class SimpleMedicalTest: MedicalTest, ContainFiles {
         interactionSubject.onNext(())
     }
 
-    private(set) var files: [File] = [FileFrom(name: "Исследование крови", size: 2048)]
+    var files: [File] = [FileFrom(name: "Исследование крови", size: 2048)]
     private(set) var json: [String: Any] = [:]
 }
 
@@ -112,15 +112,26 @@ class MedicalTestEditingPresentation: Presentation {
             .with(texColor: .mainText)
 
     private var addFileButton = UIButton()
-            .with(title: "Прикрепить файл")
+            .with(title: " Прикрепить файл")
             .with(image: #imageLiteral(resourceName: "attachment"))
             .with(titleColor: .blueGrey)
 
+    private var confirmButton = GradientButton(colors:  [.darkSkyBlue, .tiffanyBlue])
+            .with(title: "Сохранить")
+            .with(roundedEdges: 24)
+
     private let fileAttachment: FilePicking
+
+    private var medTest: MedicalTest!
+    private var onSave: (() -> Observable<Void>)?
 
     convenience init(medTest: MedicalTest, onSave: @escaping () -> Observable<Void>) {
 
-        self.init()
+        self.init(token: TokenFromString(string: ""))
+
+        self.medTest = medTest
+        self.onSave = onSave
+        self.files = medTest.files
 
         nameField.text = medTest.name
 
@@ -135,9 +146,13 @@ class MedicalTestEditingPresentation: Presentation {
 
     }
 
-    init() {
+    private var transitionSubject = PublishSubject<Transition>()
 
-        fileAttachment = ImageAttachmentFromLibrary()
+    private var files: [File] = []
+
+    init(token: Token) {
+
+        fileAttachment = ImageAttachmentFromLibrary(token: token)
         navBar = NavigationBarWithBackButton(title: "Добавить")
                 .with(gradient: [.darkSkyBlue, .tiffanyBlue])
 
@@ -152,7 +167,7 @@ class MedicalTestEditingPresentation: Presentation {
         let scrollView = UIScrollView()
 
         scrollView.addSubview(stack)
-        view.addSubviews([navBar, scrollView])
+        view.addSubviews([navBar, scrollView, confirmButton])
 
         stack.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -169,9 +184,46 @@ class MedicalTestEditingPresentation: Presentation {
             $0.height.equalTo(120)
         }
 
+        confirmButton.snp.makeConstraints {
+            $0.height.equalTo(48)
+            $0.bottom.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().inset(24)
+        }
+
         addFileButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.fileAttachment.pickFile()
         })
+
+        fileAttachment.file.subscribe(onNext: { [unowned self] in
+            self.files.append($0)
+            let cell = FileCell(style: .default, reuseIdentifier: "").configured(item: $0).contentView
+            scrollView.addSubview(cell)
+            cell.snp.makeConstraints {
+                $0.top.equalTo(stack.snp.bottom).offset(16)
+                $0.width.equalTo(self.view).inset(16)
+                $0.centerX.equalTo(self.view)
+            }
+
+        })
+
+        confirmButton.rx.tap.subscribe(onNext: { [unowned self] in
+            if  self.medTest != nil, let onSave = self.onSave {
+                self.medTest.files = self.files
+                onSave()
+            } else {
+                let test = MyMedicalTestFrom(
+                        name: self.nameField.text ?? "",
+                        id: "",
+                        date: Date(),
+                        description: self.laboratoryField.text ?? "",
+                        token: token,
+                        files: self.files)
+                test.create()
+                test.wantsToPerform().debug().bind(to: self.transitionSubject)
+            }
+        })
+
     }
 
     func willAppear() {
@@ -181,7 +233,8 @@ class MedicalTestEditingPresentation: Presentation {
     func wantsToPerform() -> Observable<Transition> {
         return Observable.merge([
             fileAttachment.wantsToPerform(),
-            navBar.wantsToPerform()
+            navBar.wantsToPerform(),
+            transitionSubject
         ])
     }
 }
@@ -224,6 +277,7 @@ class FieldContainer: UIView {
 
 class AddFilePresentation: Presentation {
     private(set) var view: UIView = UIView()
+    .with(backgroundColor: .white)
 
     private var nameField = UITextField()
             .with(placeholder: "Название файла")
@@ -243,7 +297,7 @@ class AddFilePresentation: Presentation {
     private let upload: FileUpload
     private let navBar: NavigationBarWithBackButton
 
-    init(image: UIImage) {
+    init(image: UIImage, token: Token) {
 
         /*
         TODO: make injection of completion action
@@ -252,7 +306,7 @@ class AddFilePresentation: Presentation {
         todo: inject token
         */
 
-        upload = ImageUploadToAPI(token: TokenFromString(string: ""), image: image)
+        upload = ImageUploadToAPI(token: token, image: image )
         filePreview.image = image
 
         addButton = GradientButton(colors: [.darkSkyBlue, .tiffanyBlue])
@@ -291,7 +345,6 @@ class AddFilePresentation: Presentation {
         filePreview.snp.makeConstraints {
             $0.width.equalToSuperview().inset(16)
             $0.height.equalTo(236)
-
         }
 
         nameField.snp.makeConstraints {
@@ -309,6 +362,14 @@ class AddFilePresentation: Presentation {
             $0.trailing.equalToSuperview().inset(24)
         }
 
+        addButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.upload.upload(name: self.nameField.text ?? "image_\(Date().fullString)")
+        })
+
+    }
+
+    var file: Observable<File> {
+        return upload.file
     }
 
     func willAppear() {
@@ -323,17 +384,22 @@ class AddFilePresentation: Presentation {
 protocol FilePicking: TransitionSource {
 
     func pickFile()
-
+    var file: Observable<File> {get}
 }
 
 protocol FileUpload: TransitionSource {
-    func upload()
+    func upload(name: String)
+    var file: Observable<File> {get}
 }
 
 class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     private var transitionsSubject = PublishSubject<Transition>()
     private let imagePicker = UIImagePickerController()
+
+    init(token: Token ) {
+        self.token = token
+    }
 
     func pickFile() {
 
@@ -350,16 +416,26 @@ class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerController
         return transitionsSubject
     }
 
+    private var fileSubject = PublishSubject<File>()
+    var file: Observable<File> {
+        return fileSubject
+    }
+    private var addFilePresentation: AddFilePresentation!
+    private var token: Token
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            addFilePresentation = AddFilePresentation(image: pickedImage, token: token)
             picker.dismiss(animated: true, completion: { [unowned self] in
                 self.transitionsSubject.onNext(PresentTransition {
-                    ViewController(presentation: AddFilePresentation(image: pickedImage))
+                    ViewController(presentation: self.addFilePresentation)
                 })
             })
         } else {
             picker.dismiss(animated: true)
         }
+
+        addFilePresentation.file.bind(to: fileSubject)
     }
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -367,22 +443,3 @@ class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerController
     }
 }
 
-class ImageUploadToAPI: FileUpload {
-
-    private var transitionsSubject = PublishSubject<Transition>()
-    private let token: Token
-    private let image: UIImage
-
-    init(token: Token, image: UIImage) {
-        self.token = token
-        self.image = image
-    }
-
-    func wantsToPerform() -> Observable<Transition> {
-        return transitionsSubject
-    }
-
-    func upload() {
-        transitionsSubject.onNext(DismissTransition())
-    }
-}

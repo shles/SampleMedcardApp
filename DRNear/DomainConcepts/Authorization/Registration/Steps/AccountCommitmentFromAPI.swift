@@ -100,6 +100,9 @@ class AccountCommitmentFromAPI: AccountCommitment {
                     } else {
                         self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError.from(json: json) ?? ResponseError()))
                     }
+                    if let refreshToken = json["access_token"].string {
+                        ApplicationConfiguration().saveRefreshToken(token: refreshToken)
+                    }
                 }, onError: {
                     self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
                 }).disposed(by: disposeBag)
@@ -134,6 +137,9 @@ class AccountCommitmentFromAPI: AccountCommitment {
                     } else {
                         self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError.from(json: json) ?? ResponseError()))
                     }
+                    if let refreshToken = json["access_token"].string {
+                        ApplicationConfiguration().saveRefreshToken(token: refreshToken)
+                    }
                 }, onError: {
                     self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
                 }).disposed(by: disposeBag)
@@ -152,7 +158,7 @@ class AccountCommitmentFromAPI: AccountCommitment {
 //        authority.authenticate().retry(10).map { [unowned self] token in
 //        }.bind(to: transitionSubject)
 //        authority.authWith(credentials: CredentialsFrom(login: "admin", password: "38Gjgeuftd!"))
-
+        ApplicationConfiguration().saveCode(code: code)
         transitionSubject.onNext(PushTransition(
                 leadingTo: { [unowned self] in
                     ViewController(
@@ -167,7 +173,6 @@ class AccountCommitmentFromAPI: AccountCommitment {
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }
-
 
     func configureLoginMethods(token: Token) {
         let context = LAContext()

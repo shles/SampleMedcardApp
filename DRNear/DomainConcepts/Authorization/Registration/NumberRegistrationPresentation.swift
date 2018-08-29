@@ -62,7 +62,7 @@ class EnterNumberView: UIView {
 
         confirmButton.snp.makeConstraints {
             $0.height.equalTo(48)
-            $0.bottom.equalToSuperview().inset(8)
+            $0.bottom.equalToSuperview().inset(16)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalToSuperview().inset(24)
         }

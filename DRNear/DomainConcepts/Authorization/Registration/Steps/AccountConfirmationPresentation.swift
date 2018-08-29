@@ -30,6 +30,7 @@ class AccountConfirmationPresentation: Presentation {
             .with(textColor: .mainText)
             .with(text: "Продолжить как\n\(name)")
             .with(numberOfLines: 2)
+            .aligned(by: .center)
 
         let supportButton = UIButton()
             .with(image: #imageLiteral(resourceName: "callIcon"))
@@ -39,9 +40,13 @@ class AccountConfirmationPresentation: Presentation {
             .with(text: "Если у вас возникли вопросы,\nобратитесь в службу поддержки.")
             .with(numberOfLines: 2)
             .with(textColor: .blueGrey)
+                .aligned(by: .center)
 
         let supportStack = UIStackView(arrangedSubviews: [supportTitle, supportButton])
+        supportTitle.setContentCompressionResistancePriority(.required, for: .horizontal)
+        supportButton.setContentHuggingPriority(.required, for: .horizontal)
 
+        supportStack.distribution = .fill
         supportStack.spacing = 11
         supportStack.axis = .horizontal
 
@@ -49,25 +54,27 @@ class AccountConfirmationPresentation: Presentation {
 
         photo.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().inset(24)
+            $0.bottom.equalTo(view.snp.centerY).inset(40)
             $0.width.height.equalTo(100)
         }
 
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(24)
+            $0.top.equalTo(view.snp.centerY).offset(40)
         }
 
         confirmButton.snp.makeConstraints {
             $0.height.equalTo(48)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().inset(24)
-            $0.bottom.equalTo(supportStack.snp.top).inset(29)
+            $0.bottom.equalToSuperview().inset(64)
         }
 
         supportStack.snp.makeConstraints {
             $0.centerX.equalToSuperview()
+//            $0.width.equalToSuperview().inset(24)
             $0.bottom.equalToSuperview().inset(8)
+            $0.height.equalTo(32)
         }
 
         confirmButton.rx.tap.subscribe(onNext: {

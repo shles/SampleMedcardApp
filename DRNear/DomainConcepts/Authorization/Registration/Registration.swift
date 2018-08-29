@@ -75,7 +75,5 @@ protocol Authorization: TransitionSource {
 
     func auth(code: String)
     
-    func authWithFaceId()
-    
-    func authWithTouchId()
+    func tryToAuthWithBiometry()
 }

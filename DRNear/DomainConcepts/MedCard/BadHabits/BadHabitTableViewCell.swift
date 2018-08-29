@@ -25,7 +25,7 @@ class SimpleTickedCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        addSubviews([title, tick])
+        addSubviews([title, tick, subtitle])
 
         title.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)

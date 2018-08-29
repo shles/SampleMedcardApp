@@ -55,6 +55,10 @@ class AccountCreationPresentation: Presentation {
     private var commitment: AccountCommitment
     private let scrollView = TPKeyboardAvoidingScrollView()
 
+    private var gender: Gender?
+
+    private let transitionSubject = PublishSubject<Transition>()
+
     init(commitment: AccountCommitment) {
 
         self.commitment = commitment
@@ -124,8 +128,28 @@ class AccountCreationPresentation: Presentation {
             $0.trailing.equalToSuperview().inset(24)
         }
 
+        genderView.valueSubject.subscribe(onNext: {
+            self.gender = $0
+        })
+
+        self.commitment.wantsToPerform().bind(to: transitionSubject)
+
         confirmButton.rx.tap.subscribe(onNext: {
-            commitment.commitAccountInformation(information: AccountInformationFrom())
+            guard let name = self.nameLabel.text,
+                    let surname = self.surnameLabel.text,
+//                    let date = Date(),
+                    let gender = self.gender else {
+                self.transitionSubject.onNext(ErrorAlertTransition(error: RequestError(message: "Заполните все обязательные поля")))
+                return
+            }
+
+
+            commitment.commitAccountInformation(information: AccountInformationFrom(
+                    name: name,
+                    lastName: surname,
+                    middleName: self.secondNameLabel.text ?? "",
+                    birthDate: Date(),
+                    gender: gender))
         })
     }
 
@@ -136,7 +160,7 @@ class AccountCreationPresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return  commitment.wantsToPerform()
+        return  transitionSubject
     }
 }
 

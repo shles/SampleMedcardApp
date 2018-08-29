@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class GradientButton: UIButton {
 
@@ -16,6 +17,8 @@ class GradientButton: UIButton {
         }
     }
 
+    private let disposeBag = DisposeBag()
+
     init(colors: [UIColor] = []) {
         super.init(frame: .zero)
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
@@ -23,6 +26,16 @@ class GradientButton: UIButton {
         gradientLayer.backgroundColor = colors.first?.cgColor
         gradientLayer.colors = colors.map { $0.cgColor }
         self.layer.insertSublayer(gradientLayer, at: 0)
+
+        rx.controlEvent(.touchDown).subscribe(onNext: { [unowned self] in
+            self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.5)
+            self.titleLabel?.alpha = 0.8
+        }).disposed(by: disposeBag)
+
+        rx.controlEvent([.touchCancel, .touchUpOutside, .touchUpInside]).subscribe(onNext: { [unowned self] in
+            self.backgroundColor = self.backgroundColor?.withAlphaComponent(1)
+            self.titleLabel?.alpha = 1
+        }).disposed(by: disposeBag)
     }
 
     override func layoutSubviews() {

@@ -26,6 +26,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     private let itemsSubject = ReplaySubject<[DatedListApplicable]>.create(bufferSize: 1)
     private let refreshSubject = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
+    private let addButton = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
 
     private let items: Refreshable<[DatedListApplicable]>
     private let leadingTo: () -> (UIViewController)
@@ -39,6 +40,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
 
         navBar = NavigationBarWithBackButton(title: title)
                 .with(gradient: gradient)
+                .with(rightInactiveButton: addButton)
 
         super.init()
 
@@ -84,6 +86,12 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
             }).disposed(by: self.itemsTransitionsDisposeBag)
         }).disposed(by: disposeBag)
 
+        addButton.rx.tap
+                .map { self.leadingTo() }
+                .map { vc in PushTransition(leadingTo: { vc }) }
+                .bind(to: transitionSubject)
+                .disposed(by: disposeBag)
+
     }
 
     func willAppear() {
@@ -120,7 +128,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
 }
 
 protocol ContainFiles {
-    var files: [File] { get }
+    var files: [File] { get set }
 }
 
 class DatedDescribedFileContainedPresentation: Presentation {

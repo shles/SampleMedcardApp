@@ -20,6 +20,13 @@ class BadHabitsTableViewPresentation: Presentation {
     private let refreshSubject = PublishSubject<Void>()
     private let wantsToPushSubject = PublishSubject<Transition>()
     private let habitsSubject = ReplaySubject<[ListApplicable]>.create(bufferSize: 1)
+    
+    private let emptyStateView = UILabel()
+            .with(font: .regular16)
+            .with(textColor: .mainText)
+            .with(text: "Пока здесь пусто. Для добавления записи нажмите на \"+\" в правом верхнем углу")
+            .with(numberOfLines: 0)
+            .aligned(by: .center)
 
     var selection = PublishSubject<ListApplicable>()
 
@@ -32,11 +39,15 @@ class BadHabitsTableViewPresentation: Presentation {
                 .bind(to: habitsSubject)
                 .disposed(by: disposeBag)
 
-        view.addSubviews([tableView])
+        view.addSubviews([emptyStateView, tableView])
 
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
 
+        }
+        emptyStateView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalToSuperview().inset(32)
         }
 
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<ListApplicable>>(
@@ -45,6 +56,11 @@ class BadHabitsTableViewPresentation: Presentation {
                 })
 
         habitsSubject.asObservable()
+                .startWith([])
+                .do(onNext: { [unowned self] in
+                    self.emptyStateView.isHidden = !$0.isEmpty
+                    self.tableView.isHidden = $0.isEmpty
+                })
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

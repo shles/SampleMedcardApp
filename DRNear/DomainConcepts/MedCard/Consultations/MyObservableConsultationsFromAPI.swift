@@ -50,7 +50,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
     private(set) var date: Date = Date()
     private(set) var isRelatedToSystem: Bool = false
     private(set) var identification: String = ""
-    private(set) var files: [File] = []
+    var files: [File] = []
     
     var description: String = ""
     private let token: Token

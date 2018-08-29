@@ -34,8 +34,8 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
                         return json.arrayValue.map { (json: JSON) in
                             MyMedicalTestFrom(name: json["name"].string ?? "",
                                     id: json["id"].string ?? "",
-                                    date: Date.from(fullString: json["date"].string ?? "") ?? Date(),
-                                    description: json["report"].string ?? "",
+                                    date: Date.from(fullString: json["executed"].string ?? "") ?? Date(),
+                                    description: json["laboratory"].string ?? "",
                                     token: self.token)
                         }
                     }.share(replay: 1).subscribe(observer)
@@ -57,28 +57,30 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
     private var deletionSubject = PublishSubject<Void>()
     private var interactionSubject = PublishSubject<Void>()
     private var editionSubject = PublishSubject<Void>()
+    private var transitionSubject = PublishSubject<Transition>()
 
     private let disposeBag = DisposeBag()
 
-    init(name: String, id: String, date: Date, description: String, token: Token) {
+    init(name: String, id: String, date: Date, description: String, token: Token, files: [File] = []) {
         self.name = name
         self.identification = id
         self.date = date
         self.description = description
         self.token = token
+        self.files = files
     }
 
     func create() {
         
         if let request = try? AuthorizedRequest(
-            path: "/api/my/analyzes",
+            path: "/eco-emc/api/my/analyzes",
             method: .post,
             token: self.token,
             parameters: self.json,
             encoding: JSONEncoding.default
         ) {
             
-            request.make()
+            request.make().map { _ in PopTransition()}.bind(to: transitionSubject)
         }
     }
     
@@ -134,7 +136,8 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                             return Observable.just(())
                     }))
                 })
-            }
+            },
+            transitionSubject
         ])
     }
 
@@ -146,9 +149,30 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
         interactionSubject.onNext(())
     }
 
-    private(set) var files: [File] = []
+    var files: [File] = []
     var json: [String: Any]  {
-        fatalError("JSON not implemented")
+//        {
+//            "date": "2018-08-23T13:33:02.473Z",
+//            "files": [
+//            {
+//                "fuid": "string",
+//            }
+//        ],
+//            "laboratory": "какая то лаборатория",
+//            "name": "анализ у ЛОРа",
+//            "type": {
+//            "code": "04"
+//        }
+//        }
+        return [
+            "date": self.date.fullString,
+            "files": files.map { ["fuid": $0.identification] },
+            "laboratory": self.description,
+            "type": [
+                "code": "04"
+                ],
+            "name": self.name
+        ]
     }
 }
 
