@@ -12,8 +12,8 @@ class Refreshable<T> {
     private var refreshOn: Observable<Void>
 
     init<O: Observable<T>>(origin: O, refreshOn: Observable<Void>) where O.E == T {
-        self.origin = origin
-        self.refreshOn = refreshOn
+        self.origin = origin.debug()
+        self.refreshOn = refreshOn.debug()
     }
 
     func asObservable() -> Observable<T> {

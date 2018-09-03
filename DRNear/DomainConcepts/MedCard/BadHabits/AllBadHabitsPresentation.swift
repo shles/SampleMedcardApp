@@ -26,7 +26,7 @@ class AllBadHabitsPresentation: Presentation {
 
     init(badHabits: ListRepresentable & Searchable, update: Update, title: String, gradient: [UIColor]) {
         self.update = update
-        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable(), tintColor: gradient.last ?? .mainText)
+        badHabtsPresentation = BadHabitsTableViewPresentation(observableHabits: badHabits.toListApplicable(), tintColor: gradient.last ?? .mainText, emptyStateView: UIView())
         navBar = NavigationBarWithBackButtonAndSearch(title: title)
                 .with(gradient: gradient)
         addButton = GradientButton(colors: gradient)

@@ -6,11 +6,12 @@
 import RxSwift
 import SnapKit
 import UIKit
+import PhoneNumberKit
 
 class EnterNumberView: UIView {
 
     private let numberPadView = NumberPadView()
-    private let numberField = UITextField()
+    private let numberField = PhoneNumberTextField()
             .with(texColor: .mainText)
             .with(font: .regular24)
             .with(textAlignment: .center)
@@ -29,8 +30,10 @@ class EnterNumberView: UIView {
 
         super.init(frame: .zero)
 
-        numberField.text = "+7"
         numberField.isUserInteractionEnabled = false
+        numberField.withPrefix = true
+        numberField.defaultRegion = "RU"
+        numberField.text = "+7"
 
         let titleLabel = UILabel()
                 .with(text: title)
@@ -68,13 +71,14 @@ class EnterNumberView: UIView {
         }
 
         numberPadView.enteredNumber
+                .filter { [unowned self] _ in (self.numberField.text?.count ?? 0 ) < 16 }
                 .map { [unowned self] symbol in
                     return (self.numberField.text ?? "") + symbol
                 }
                 .bind(to: self.numberField.rx.text)
                 .disposed(by: disposeBag)
         numberPadView.wantsToDelete
-                .filter { (self.numberField.text?.count ?? 0 ) > 2 }
+                .filter { [unowned self] in (self.numberField.text?.count ?? 0 ) > 2 }
                 .map { [unowned self] symbol in
                     return String(self.numberField.text?.dropLast() ?? "")
                 }
@@ -82,7 +86,7 @@ class EnterNumberView: UIView {
                 .disposed(by: disposeBag)
 
         confirmButton.rx.tap
-                .map { [unowned self] in self.numberField.text ?? "" }
+                .map { [unowned self] in self.numberField.nationalNumber ?? "" }
                 .bind(to: numberEntered)
                 .disposed(by: disposeBag)
 

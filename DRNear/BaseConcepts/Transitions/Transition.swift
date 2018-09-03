@@ -57,13 +57,15 @@ class PopTransition: Transition {
 class DismissTransition: Transition {
 
     func perform(on viewController: UIViewController) {
-        viewController.presentingViewController?.anotherWillAppear()
+        if let vc = viewController.presentingViewController as? ViewController {
+            vc.anotherWillAppear()
+        }
         viewController.dismiss(animated: true)
     }
 
 }
 
-class NewWindowRootControllerTransition: Transition {
+class  NewWindowRootControllerTransition: Transition {
     private let leadingTo: () -> (UIViewController)
 
     init(leadingTo: @escaping () -> (UIViewController)) {

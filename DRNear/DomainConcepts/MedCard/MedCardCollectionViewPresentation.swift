@@ -14,10 +14,10 @@ class MedCardCollectionViewPresentation: NSObject, Presentation, UICollectionVie
 
     var view: UIView = UIView()
 
-    private let collectionView: UICollectionView
+    fileprivate let collectionView: UICollectionView
     private let disposeBag = DisposeBag()
     private let wantsToPushSubject = PublishSubject<Transition>()
-    private let medCardOptions: MedCard
+    fileprivate let medCardOptions: MedCard
 
     private let navBar = SimpleNavigationBar(title: "Медицинская карта")
     .with(rightInactiveButton: UIButton().with(image: #imageLiteral(resourceName: "chatIcon")))
@@ -119,4 +119,13 @@ extension MedCardCollectionViewPresentation {
 
         return self
     }
+}
+
+
+class MedCardCollectionViewPresentationSpy: MedCardCollectionViewPresentation {
+
+    func selectOption(at ip: IndexPath) {
+        collectionView.selectItem(at: ip, animated: true, scrollPosition: .centeredVertically)
+    }
+
 }

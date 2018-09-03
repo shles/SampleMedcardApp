@@ -44,7 +44,8 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
         }
     }
 }
-
+//TODO: Make injection of all presentations to which this and similar object leads: Editing, Deletion(?), Opening
+//TODO: maybe creation should be part of another object
 class MyMedicalTestFrom: MedicalTest, ContainFiles {
 
     private(set) var name: String = ""

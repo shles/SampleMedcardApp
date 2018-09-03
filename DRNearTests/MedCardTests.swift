@@ -15,50 +15,35 @@ import XCTest
 class MedCardTests: QuickSpec {
 
     override func spec() {
-
-        var viewController: UIViewController!
-        var option: MedCardOption!
-        var medCard: MedCard!
-        var medCardPresentation: Presentation!
-        var disposeBag: DisposeBag!
-        var medCArdViewcontroller: UIViewController!
-
-        beforeEach {
-            viewController = UIViewController()
-            option = MedCardOptionFrom(
-                    name: "Test",
-                    image: EmptyObservableImage(),
-                    gradientColors: [],
-                    leadingTo: viewController
+        
+        let transition = PresentTransition(leadingTo: { ViewController(presentation: SimpleViewWthButtonPresentation()) } )
+        let medcardPresentationSpy = MedCardCollectionViewPresentationSpy(
+            medCardOptions: MedCardFrom(
+                    options: [MedCardOptionFrom(
+                        name: "test",
+                        image: SimpleObservableImage(),
+                        gradientColors: [.white],
+                        leadingTo: transition 
+                    )]
+                )
             )
-            medCard = MedCardFrom(options: [option])
-            medCardPresentation = MedCardCollectionViewPresentation(medCardOptions: medCard)
-            disposeBag = DisposeBag()
-            medCArdViewcontroller = ViewController(presentation: medCardPresentation)
+        let disposeBag = DisposeBag()
+        it("should lead to presentation") {
+            let replaySubject = ReplaySubject<Transition>.create(bufferSize: 1)
+            medcardPresentationSpy.wantsToPerform()
+                .subscribe(onNext: {
+                    replaySubject.onNext($0)
+                })
+                .disposed(by: disposeBag)
+            medcardPresentationSpy.selectOption(at: IndexPath(row: 0, section: 0))
+            
+            
+            XCTAssertNil(try! replaySubject.toBlocking(timeout: 5).first())
         }
-
-        describe("MedCard presentation") {
-            context("when one of it's options interacted") {
-                it("should want push view") {
-
-                    var vc: UIViewController!
-
-                    medCardPresentation.wantsToPush().subscribe(onNext: {
-                        vc = $0
-
-                        UIApplication.shared.keyWindow!.rootViewController = vc
-                        vc.preloadView()
-
-                    }).disposed(by: disposeBag)
-                    UIApplication.shared.keyWindow!.rootViewController = medCArdViewcontroller
-
-                    medCArdViewcontroller.preloadView()
-                    option.interact()
-                    expect(vc.view) == viewController.view
-                }
-            }
-        }
+        
     }
+    
 }
 
 //swiftlint:enable all
+

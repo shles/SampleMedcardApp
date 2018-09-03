@@ -8,6 +8,7 @@ target 'DRNear' do
     
     #UI
     pod 'SnapKit'
+    pod 'PhoneNumberKit', '~> 2.1'
     
     #Linter
     pod 'SwiftLint'

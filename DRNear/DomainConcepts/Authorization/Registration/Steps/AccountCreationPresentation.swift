@@ -137,13 +137,15 @@ class AccountCreationPresentation: Presentation {
         })
 
 
-        birthDateLabel.rx.controlEvent(.touchDown).subscribe(onNext: {
-            self.birthDateLabel.resignFirstResponder()
+        birthDateLabel.rx.controlEvent([.allTouchEvents, .editingDidBegin]).subscribe(onNext: {
+//            self.birthDateLabel.resignFirstResponder()
+//            self.view.view
             self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
                 self.birthDateLabel.text = $0.dateString
+                self.emailLabel.becomeFirstResponder()
             }, mode: .date))}))
         })
-
+//        birthDateLabel.isUserInteractionEnabled = false
         self.commitment.wantsToPerform().bind(to: transitionSubject)
 
         confirmButton.rx.tap.subscribe(onNext: {

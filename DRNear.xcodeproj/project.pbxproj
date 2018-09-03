@@ -18,6 +18,7 @@
 		4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2879CBC781343E41611DD3 /* AppicationTests.swift */; };
 		4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */; };
 		4C287DEBCF054934DD89DFB8 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */; };
+		4C287FB27B5018F6E7B9B731 /* AuthorizationPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C287CC1D0BDD4470901019A /* AuthorizationPresentation.swift */; };
 		6FA8E9FC14F632BDE7948806 /* Pods_DRNear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61520493534457F4BFE257 /* Pods_DRNear.framework */; };
 		F86AFD13213186D8008F3A1A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86AFD12213186D8008F3A1A /* Date.swift */; };
 		F86AFD1521319317008F3A1A /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86AFD1421319317008F3A1A /* Serializable.swift */; };
@@ -165,6 +166,7 @@
 		4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationTests.swift; sourceTree = "<group>"; };
 		4C2879CBC781343E41611DD3 /* AppicationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppicationTests.swift; sourceTree = "<group>"; };
 		4C287AD57213CB769B22D7F2 /* ImageUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUpload.swift; sourceTree = "<group>"; };
+		4C287CC1D0BDD4470901019A /* AuthorizationPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationPresentation.swift; sourceTree = "<group>"; };
 		4C287E3D01FB9CE24ACC1F27 /* AccountConfirmationPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountConfirmationPresentation.swift; sourceTree = "<group>"; };
 		5791B611C4A7E0E4D26F24D0 /* Pods-DRNearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRNearTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRNearTests/Pods-DRNearTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B2D3125280CCAAF198E21B9 /* Pods_DRNearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRNearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -528,6 +530,7 @@
 				FD4C53422130011E008D5008 /* SimpleCodeConfirmationPresentation.swift */,
 				FD4C53432130011E008D5008 /* SimpleLoginPresentation.swift */,
 				FD4C53442130011E008D5008 /* Authority */,
+				4C287CC1D0BDD4470901019A /* AuthorizationPresentation.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -873,6 +876,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework",
+				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -884,6 +888,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTDecode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -1037,6 +1042,7 @@
 				4C28760ED1CB9511B2A2BFD2 /* AccountConfirmationPresentation.swift in Sources */,
 				4C2873C483B1A79860F393E6 /* ApplicationConfiguration.swift in Sources */,
 				4C287CBA6CC420C70F0D2A29 /* ImageUpload.swift in Sources */,
+				4C287FB27B5018F6E7B9B731 /* AuthorizationPresentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

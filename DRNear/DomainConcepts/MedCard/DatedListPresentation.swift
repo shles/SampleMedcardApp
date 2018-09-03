@@ -36,7 +36,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     init(items: DatedListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController)) {
 
         self.leadingTo = leadingTo
-        self.items = Refreshable(origin: items.toListRepresentable(), refreshOn: refreshSubject.skip(1))
+        self.items = Refreshable(origin: items.toListRepresentable().catchErrorJustReturn([]), refreshOn: refreshSubject.skip(1))
 
         navBar = NavigationBarWithBackButton(title: title)
                 .with(gradient: gradient)

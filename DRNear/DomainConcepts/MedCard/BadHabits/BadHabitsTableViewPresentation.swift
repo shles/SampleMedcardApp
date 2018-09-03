@@ -21,18 +21,14 @@ class BadHabitsTableViewPresentation: Presentation {
     private let wantsToPushSubject = PublishSubject<Transition>()
     private let habitsSubject = ReplaySubject<[ListApplicable]>.create(bufferSize: 1)
 
-    private let emptyStateView = UILabel()
-            .with(font: .regular16)
-            .with(textColor: .mainText)
-            .with(text: "Пока здесь пусто. Для добавления записи нажмите на \"+\" в правом верхнем углу")
-            .with(numberOfLines: 0)
-            .aligned(by: .center)
+    private let emptyStateView: UIView
 
     var selection = PublishSubject<ListApplicable>()
 
-    init(observableHabits: Observable<[ListApplicable]>, tintColor: UIColor) {
+    init(observableHabits: Observable<[ListApplicable]>, tintColor: UIColor, emptyStateView: UIView) {
 
-        self.habits = Refreshable(origin: observableHabits.asObservable(), refreshOn: refreshSubject.skip(1))
+        self.habits = Refreshable(origin: observableHabits.asObservable().catchErrorJustReturn([]), refreshOn: refreshSubject.skip(1))
+        self.emptyStateView = emptyStateView
 
         habits.asObservable()
                 .catchErrorJustReturn([])
@@ -58,6 +54,7 @@ class BadHabitsTableViewPresentation: Presentation {
         habitsSubject.asObservable()
 //                .startWith([])
                 .do(onNext: { [unowned self] in
+
                     if $0 is [MyBadHabitFrom] {
                         self.emptyStateView.isHidden = !$0.isEmpty
                         self.tableView.isHidden = $0.isEmpty

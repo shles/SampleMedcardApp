@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-
+//TODO: split into separate files
 class SimpleMedicalTest: MedicalTest, ContainFiles {
     private(set) var name: String = "Анализ крови"
     private(set) var date: Date = Date()
@@ -311,7 +311,6 @@ class AddFilePresentation: Presentation {
         TODO: make injection of completion action
         TODO: make image rotration
         TODO: make image deletion
-        todo: inject token
         */
 
         upload = ImageUploadToAPI(token: token, image: image )

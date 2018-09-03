@@ -20,7 +20,7 @@ class BadHabitsTests: QuickSpec {
 
         beforeEach {
             habits = SimpleObservableBadHabits()
-            badHabitsPresentation = BadHabitsTableViewPresentation(observableHabits: habits)
+            badHabitsPresentation = BadHabitsTableViewPresentation(observableHabits: habits.toListApplicable(), tintColor: .white)
         }
 
         describe("Bad habit presentation") {
