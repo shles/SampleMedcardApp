@@ -54,11 +54,8 @@ class BadHabitsTableViewPresentation: Presentation {
         habitsSubject.asObservable()
 //                .startWith([])
                 .do(onNext: { [unowned self] in
-
-                    if $0 is [MyBadHabitFrom] {
-                        self.emptyStateView.isHidden = !$0.isEmpty
-                        self.tableView.isHidden = $0.isEmpty
-                    }
+                    self.emptyStateView.isHidden = !$0.isEmpty
+                    self.tableView.isHidden = $0.isEmpty
                 })
             .map { [StandardSectionModel(items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))

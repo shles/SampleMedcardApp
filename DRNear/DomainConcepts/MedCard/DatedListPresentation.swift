@@ -32,11 +32,14 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     private let leadingTo: () -> (UIViewController)
 
     private var itemsTransitionsDisposeBag = DisposeBag()
+    
+    private let emptyStateView: UIView
 
-    init(items: DatedListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController)) {
+    init(items: DatedListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController), emptyStateView: UIView) {
 
         self.leadingTo = leadingTo
         self.items = Refreshable(origin: items.toListRepresentable().catchErrorJustReturn([]), refreshOn: refreshSubject.skip(1))
+        self.emptyStateView = emptyStateView
 
         navBar = NavigationBarWithBackButton(title: title)
                 .with(gradient: gradient)
@@ -44,7 +47,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
 
         super.init()
 
-        view.addSubviews([tableView, navBar])
+        view.addSubviews([emptyStateView, tableView, navBar])
 
         navBar.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
@@ -55,6 +58,11 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(navBar.snp.bottom)
         }
+        
+        emptyStateView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalToSuperview().inset(32)
+        }
 
         self.items.asObservable().catchErrorJustReturn([]).bind(to: itemsSubject).disposed(by: disposeBag)
 
@@ -62,12 +70,23 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
                 configureCell: { _, tv, ip, habit in
                     return tv.dequeueReusableCellOfType(DatedDescribedCell.self, for: ip).configured(item: habit)
                 },
-                canEditRowAtIndexPath: { _, _ in true })
+                canEditRowAtIndexPath: { [unowned self] _, ip in
+                    if let item: DatedListApplicable = try? self.tableView.rx.model(at: ip), !item.isRelatedToSystem {
+                        return true
+                    }
+                    return false
+        })
 
         itemsSubject.asObservable()
+                .do(onNext: { [unowned self] in
+                    self.emptyStateView.isHidden = !$0.isEmpty
+                    self.tableView.isHidden = $0.isEmpty
+                })
                 .map { [StandardSectionModel(items: $0)] }
                 .bind(to: tableView.rx.items(dataSource: dataSource))
                 .disposed(by: disposeBag)
+        
+        
 
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
 
@@ -104,6 +123,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let action = UIContextualAction(style: .normal, title: "", handler: { _, _, _ in
             if let item: DatedListApplicable = try? tableView.rx.model(at: indexPath) {
                 item.delete()

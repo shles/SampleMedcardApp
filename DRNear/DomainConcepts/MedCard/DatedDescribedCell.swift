@@ -31,19 +31,17 @@ class DatedDescribedCell: UITableViewCell {
 
         addSubviews([dateLabel, separatorView, systemEventIndicator, nameLabel, descriptionLabel])
 
-        //TODO: confirm the layout
-
         separatorView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.height.equalTo(124)
             $0.width.equalTo(1)
-            $0.leading.equalToSuperview().offset(80)
+            $0.leading.equalToSuperview().offset(84)
         }
 
         dateLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(8)
-            $0.width.equalTo(64)
+            $0.width.equalTo(68)
         }
 
         nameLabel.snp.makeConstraints {

@@ -87,7 +87,7 @@ class ApplicationConfiguration {
                                             },
                                             emptyStateView: EmptyStateView(
                                                 image: #imageLiteral(resourceName: "emptyState"),
-                                                title: "Добавьте в этот раздел прививки, которые вам были поставленны.")
+                                                title: "Добавьте в этот раздел привычки, которыми вы обладаете.")
                                         )
                                     )
                                 })
@@ -113,7 +113,10 @@ class ApplicationConfiguration {
                                                         gradient: [.peach, .wheat]
                                                     )
                                                 )
-                                            }
+                                        },
+                                            emptyStateView: EmptyStateView(
+                                                image: #imageLiteral(resourceName: "emptyState"),
+                                                title: "Добавьте в этот раздел аллергии, которые у вас были диагностированы.")
                                         )
                                     )
                                 })
@@ -139,7 +142,10 @@ class ApplicationConfiguration {
                                                         gradient: [.paleOliveGreen, .beige]
                                                     )
                                                 )
-                                            }
+                                        },
+                                            emptyStateView: EmptyStateView(
+                                                image: #imageLiteral(resourceName: "emptyState"),
+                                                title: "Добавьте в этот раздел прививки, которые вам были поставленны.")
                                         )
                                     )
                                 })
@@ -158,7 +164,10 @@ class ApplicationConfiguration {
                                         gradient: [.darkSkyBlue, .tiffanyBlue],
                                         leadingTo: {
                                             ViewController(presentation: MedicalTestEditingPresentation(token: token))
-                                        }))
+                                    },
+                                        emptyStateView: EmptyStateView(
+                                            image: #imageLiteral(resourceName: "emptyState"),
+                                            title: "Добавьте в этот раздел анализы, которые вы проводили.")))
                                 })
                             ),
                             MedCardOptionFrom(
@@ -182,7 +191,10 @@ class ApplicationConfiguration {
                                                         gradient: [.pastelBlue, .powderBlue]
                                                     )
                                                 )
-                                            }
+                                        },
+                                            emptyStateView: EmptyStateView(
+                                                image: #imageLiteral(resourceName: "emptyState"),
+                                                title: "Добавьте в этот раздел заболевания, которые у вас были диагностированы.")
                                         )
                                     )
                                 })
@@ -201,7 +213,10 @@ class ApplicationConfiguration {
                                         gradient: [.lightPeriwinkle, .softPink],
                                         leadingTo: {
                                             ViewController(presentation: ConsultationEditingPresentation(token: token))
-                                        }))
+                                    },
+                                        emptyStateView: EmptyStateView(
+                                            image: #imageLiteral(resourceName: "emptyState"),
+                                            title: "Добавьте в этот раздел заболевания, которые вы посещали.")))
                                 })
                             )
                         ]
