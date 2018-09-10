@@ -53,7 +53,7 @@ class NumberConfirmationFromAPI: NumberConfirmation {
                 case .active:
                     //todo: make different presentation for enter existing pin
                     self.transitionSubject.onNext(PushTransition(leadingTo: { [unowned self] in
-                        ViewController(presentation: ExistingPinEnterPresentation(auth: AuthorizationFromAPI(number: self.number, key: key, leadingTo: self.leadingTo)))
+                        ViewController(presentation: ExistingPinEnterPresentation(auth: AuthorizationFromAPI(number: self.number, key: key, leadingTo: self.leadingTo, name: response["assumption"].string ?? "существующий пользователь")))
                     }))
 
                 case .inactive:
@@ -119,15 +119,16 @@ class AuthorizationFromAPI: Authorization {
     private let key: String
     private var code: String = ""
     private let disposeBag = DisposeBag()
-
+    private let name: String
     private let leadingTo: (Token) -> (UIViewController)
 
     private var request: UnauthorizedRequest!
 
-    init(number: String, key: String, leadingTo: @escaping (Token) -> (UIViewController)) {
+    init(number: String, key: String, leadingTo: @escaping (Token) -> (UIViewController), name: String) {
         self.number = number
         self.key = key
         self.leadingTo = leadingTo
+        self.name = name
     }
 
     func auth(code: String) {
@@ -172,7 +173,7 @@ class AuthorizationFromAPI: Authorization {
             } else {
                 self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError.from(json: json) ?? ResponseError()))
             }
-            if let refreshToken = json["access_token"].string {
+            if let refreshToken = json["refresh_token"].string {
                 ApplicationConfiguration().saveRefreshToken(token: refreshToken)
             }
         }, onError: {
@@ -240,7 +241,7 @@ class AuthorizationFromAPI: Authorization {
                 leadingTo: { [unowned self] in
                     ViewController(
                             presentation: AccountConfirmationPresentation(
-                                    name: "Нужно добавить информацию в метод",
+                                    name: self.name,
                                     leadingTo: { [unowned self] in
                                         NewWindowRootControllerTransition(leadingTo: { self.leadingTo(token) })
                                     }))}))

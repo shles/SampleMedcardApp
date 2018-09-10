@@ -54,6 +54,7 @@ protocol NumberConfirmation: TransitionSource {
 }
 
 protocol AccountCommitment: TransitionSource {
+    func choosePhoto()
     func commitAccountInformation(information: AccountInformation)
 }
 

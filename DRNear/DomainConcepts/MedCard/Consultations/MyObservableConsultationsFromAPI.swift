@@ -113,9 +113,11 @@ class MyConsultationFrom: Consultation, ContainFiles {
                 )
             },
             interactionSubject.debug("interacted with \(self.description)").map { [unowned self] _ in
+
                 PushTransition(leadingTo: {
                     ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.darkSkyBlue, .tiffanyBlue]))
                 })
+
             },
 //             Need presentation
             editionSubject.map { [unowned self] _ in
@@ -151,29 +153,6 @@ class MyConsultationFrom: Consultation, ContainFiles {
     }
 
     var json: [String: Any]  {
-//        "date": "2018-08-23T13:33:02.736Z",
-//        "diagnoses": [
-//            {
-//                "comments": "мой старый диагноз",
-//                "diagnoseStatus": {
-//                "code": "01"
-//            },
-//                "name": {
-//                "code": "01"
-//            },
-//                "files": [
-//                {
-//                    "fuid": "string",
-//                }
-//            ],
-//                "value": "каое то значение",
-//                "verificationStatus": {
-//                "code": "01"
-//            }
-//            }
-//        ],
-//        "name": "еженедельная консультация"
-//    }
 
         return [
             "date": date.fullString,

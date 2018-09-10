@@ -19,6 +19,18 @@ protocol ObservableConsultations: DatedListRepresentable {
 
 }
 
+protocol SystemConsultation: Consultation {
+
+    var doctor: Doctor { get }
+    var diagnose: String { get }
+    var recommendation: String { get }
+
+    func like()
+    func startChat()
+    //FIXME: not shure
+    func showRecord()
+}
+
 extension ObservableConsultations {
     func toListRepresentable() -> Observable<[DatedListApplicable]> {
         return asObservable().map { $0.map { $0 as DatedListApplicable } }

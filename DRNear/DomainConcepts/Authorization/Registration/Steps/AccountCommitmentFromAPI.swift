@@ -221,4 +221,7 @@ class AccountCommitmentFromAPI: AccountCommitment {
         ApplicationConfiguration().activateFaceID(forCode: self.code)
     }
 
+    func choosePhoto() {
+        transitionSubject.onNext(PresentTransition(leadingTo: { ViewController(presentation: ChoosePhotoPresentation()) }))
+    }
 }

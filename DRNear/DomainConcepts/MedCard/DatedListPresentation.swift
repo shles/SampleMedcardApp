@@ -141,7 +141,6 @@ class DatedDescribedFileContainedPresentation: Presentation {
     private let editButton = UIButton()
     .with(image: #imageLiteral(resourceName: "editIcon"))
 
-
     private let item: Named & Dated & Described & ContainFiles & Editable
 
     init(item: Named & Dated & Described & ContainFiles & Editable , gradient: [UIColor]) {

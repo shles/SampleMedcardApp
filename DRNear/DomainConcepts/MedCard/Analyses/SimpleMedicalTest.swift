@@ -91,7 +91,7 @@ class MedicalTestEditingPresentation: Presentation {
             .with(font: .medium13)
             .with(texColor: .mainText)
 
-    private var dateField = UITextField()
+    private var dateField = DatePickerTextField()
             .with(placeholder: "Дата")
             .with(placeholderColor: .blueGrey)
             .with(placeholderFont: .subtitleText13)
@@ -208,13 +208,6 @@ class MedicalTestEditingPresentation: Presentation {
 
         })
 
-        dateField.rx.controlEvent([.touchDown, .editingDidBegin]).subscribe(onNext: {
-            self.dateField.resignFirstResponder()
-            self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
-                self.dateField.text = $0.dateString
-            }))}))
-        })
-
         confirmButton.rx.tap.subscribe(onNext: { [unowned self] in
             if  self.medTest != nil, let onSave = self.onSave {
                 self.medTest.files = self.files
@@ -223,7 +216,7 @@ class MedicalTestEditingPresentation: Presentation {
                 let test = MyMedicalTestFrom(
                         name: self.nameField.text ?? "",
                         id: "",
-                        date: Date(),
+                        date: self.dateField.datePicker.date,
                         description: self.laboratoryField.text ?? "",
                         token: token,
                         files: self.files)
@@ -251,7 +244,7 @@ class FieldContainer: UIView {
 
     var content: UIView
 
-    init(view: UIView) {
+    init(view: UIView, height: CGFloat? = 16) {
         self.content = view
 
         let separator = UIView()
@@ -266,8 +259,9 @@ class FieldContainer: UIView {
             $0.trailing.equalToSuperview().inset(16)
             $0.top.equalToSuperview().offset(28)
             $0.bottom.equalToSuperview().inset(16)
-
-            $0.height.equalTo(16)
+            if let height = height {
+                $0.height.equalTo(height)
+            }
         }
 
         separator.snp.makeConstraints {

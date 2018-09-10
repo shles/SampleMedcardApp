@@ -84,7 +84,10 @@ class ApplicationConfiguration {
                                                         gradient: [.wheatTwo, .rosa]
                                                     )
                                                 )
-                                            }
+                                            },
+                                            emptyStateView: EmptyStateView(
+                                                image: #imageLiteral(resourceName: "emptyState"),
+                                                title: "Добавьте в этот раздел прививки, которые вам были поставленны.")
                                         )
                                     )
                                 })
@@ -193,7 +196,7 @@ class ApplicationConfiguration {
                                 gradientColors: [.lightPeriwinkle, .softPink],
                                 leadingTo: PushTransition(leadingTo: {
                                     ViewController(presentation: DDNListPresentation(
-                                        items: (try? MyObservableConsultationsFromAPI(token: token)) ?? ObservableSimpleMyConsultations(),
+                                        items: SimpleObservableSystemConsultations(),//(try? MyObservableConsultationsFromAPI(token: token)) ?? ObservableSimpleMyConsultations(),
                                         title: "Консультации",
                                         gradient: [.lightPeriwinkle, .softPink],
                                         leadingTo: {

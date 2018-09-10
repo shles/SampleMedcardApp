@@ -32,7 +32,7 @@ class AccountCreationPresentation: Presentation {
     .with(texColor: .mainText)
     .with(placeholderColor: .shadow)
     .with(placeholder: "Отчество")
-    private var birthDateLabel = UITextField()
+    private var birthDateLabel = DatePickerTextField()
     .with(font: .medium13)
     .with(placeholderFont: .subtitleText13)
     .with(texColor: .mainText)
@@ -136,16 +136,6 @@ class AccountCreationPresentation: Presentation {
             self.gender = $0
         })
 
-
-        birthDateLabel.rx.controlEvent([.allTouchEvents, .editingDidBegin]).subscribe(onNext: {
-//            self.birthDateLabel.resignFirstResponder()
-//            self.view.view
-            self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
-                self.birthDateLabel.text = $0.dateString
-                self.emailLabel.becomeFirstResponder()
-            }, mode: .date))}))
-        })
-//        birthDateLabel.isUserInteractionEnabled = false
         self.commitment.wantsToPerform().bind(to: transitionSubject)
 
         confirmButton.rx.tap.subscribe(onNext: {
@@ -157,12 +147,11 @@ class AccountCreationPresentation: Presentation {
                 return
             }
 
-
             commitment.commitAccountInformation(information: AccountInformationFrom(
                     name: name,
                     lastName: surname,
                     middleName: self.secondNameLabel.text ?? "",
-                    birthDate: Date(),
+                    birthDate: self.birthDateLabel.datePicker.date,
                     gender: gender))
         })
     }

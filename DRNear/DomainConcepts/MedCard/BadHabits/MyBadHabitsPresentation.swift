@@ -18,18 +18,14 @@ class MyBadHabitsPresentation: Presentation {
     private let button = UIButton().with(image: #imageLiteral(resourceName: "addIcon"))
     private let disposeBag = DisposeBag()
 
-    init(badHabits: ListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController) ) {
+    init(badHabits: ListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController), emptyStateView: UIView = UIView()  ) {
 
         badHabtsPresentation = BadHabitsTableViewPresentation(
             observableHabits: badHabits.toListApplicable(),
             tintColor: gradient.last ?? .mainText,
-            emptyStateView: UILabel()
-                .with(font: .regular16)
-                .with(textColor: .mainText)
-                .with(text: "Пока здесь пусто. Для добавления записи нажмите на \"+\" в правом верхнем углу")
-                .with(numberOfLines: 0)
-                .aligned(by: .center)
+            emptyStateView: emptyStateView
         )
+
         self.leadingTo = leadingTo
         navBar = NavigationBarWithBackButton(title: title)
                 .with(gradient: gradient)
@@ -64,5 +60,52 @@ class MyBadHabitsPresentation: Presentation {
         ]).catchError { error in
             Observable.just(ErrorAlertTransition(error: error))
           }
+    }
+}
+
+class EmptyStateView: UIView {
+
+    init(image: UIImage, title: String, subtitle: String = "Это поможет нашим врачам и будет удобно для вас.") {
+
+        super.init(frame: .zero)
+
+        let imageView = UIImageView()
+            .with(image: image)
+            .with(contentMode: .scaleAspectFit)
+        let titleLabel = UILabel()
+            .with(font: .medCardCell)
+            .with(text: title)
+            .with(textColor: .mainText)
+            .with(numberOfLines: 0)
+            .aligned(by: .center)
+        let subtitleLabel = UILabel()
+            .with(font: .subtitleText13)
+            .with(text: subtitle)
+            .with(textColor: .mainText)
+            .with(numberOfLines: 0)
+            .aligned(by: .center)
+        let stackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
+
+        stackView.spacing = 4
+        stackView.axis = .vertical
+
+        addSubview(stackView)
+
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        imageView.snp.makeConstraints {
+            $0.height.equalTo(300)
+        }
+        titleLabel.snp.makeConstraints {
+            $0.height.equalTo(47)
+        }
+        subtitleLabel.snp.makeConstraints {
+            $0.height.equalTo(47)
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("storyboards are deprecated")
     }
 }
