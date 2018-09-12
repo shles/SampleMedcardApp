@@ -55,7 +55,7 @@ class DeletionPresentation: Presentation {
 
     private(set) var view: UIView = UIView()
             .with(backgroundColor: UIColor.mainText.withAlphaComponent(0.5))
-    private var deleteButton = LoadingButton()
+    fileprivate var deleteButton = LoadingButton()
             .with(title: "Удалить")
             .with(backgroundColor: .mainText)
             .with(roundedEdges: 24)
@@ -138,5 +138,11 @@ class DeletionPresentation: Presentation {
 
     func wantsToPerform() -> Observable<Transition> {
         return transitionsSubject.asObservable()
+    }
+}
+
+class DeletionPresentationSpy: DeletionPresentation {
+    func tapAccept() {
+        deleteButton.sendActions(for: .touchUpInside)
     }
 }

@@ -32,8 +32,12 @@ class MyObservableMedicalTestsFromAPI: ObservableMedicalTests, ObservableType {
             return request.make()
                     .map { json in
                         return json.arrayValue.map { (json: JSON) in
-                            MyMedicalTestFrom(name: json["name"].string ?? "",
-                                    id: json["id"].string ?? "",
+                            var id = "0"
+                            if let int = json["id"].int {
+                                id = String(int)
+                            }
+                            return MyMedicalTestFrom(name: json["name"].string ?? "",
+                                    id: id,
                                     date: Date.from(fullString: json["executed"].string ?? "") ?? Date(),
                                     description: json["laboratory"].string ?? "",
                                     token: self.token)
@@ -98,7 +102,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                                     title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
                                     onAccept: { [unowned self] in
                                         if let request = try? AuthorizedRequest(
-                                                path: "/eco-emc/api/analyzes/\(self.identification)",
+                                                path: "/eco-emc/api/my/analyzes/\(self.identification)",
                                                 method: .delete,
                                                 token: self.token
                                         ) {

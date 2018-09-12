@@ -66,6 +66,9 @@ class AccountCreationPresentation: Presentation {
 
     init(commitment: AccountCommitment) {
 
+        emailLabel.keyboardType = .emailAddress
+        emailLabel.autocorrectionType = .no
+
         self.commitment = commitment
 
         navBar = SimpleNavigationBar(title: "Регистрация")

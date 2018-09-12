@@ -73,14 +73,14 @@ class ApplicationConfiguration {
                                     ViewController(
                                         presentation: MyBadHabitsPresentation(
                                             badHabits: MyObservableBadHabitsFromAPI(token: token),
-                                            title: "Добавить привычку",
+                                            title: "Вредные привычки",
                                             gradient: [.wheatTwo, .rosa],
                                             leadingTo: {
                                                 return ViewController(
                                                     presentation: AllBadHabitsPresentation(
                                                         badHabits: AllObservableBadHabitsFromAPI(token: token),
                                                         update: MyBadHabitsUpdate(token: token),
-                                                        title: "Список привычек",
+                                                        title: "Добавить привычку",
                                                         gradient: [.wheatTwo, .rosa]
                                                     )
                                                 )
@@ -208,7 +208,7 @@ class ApplicationConfiguration {
                                 gradientColors: [.lightPeriwinkle, .softPink],
                                 leadingTo: PushTransition(leadingTo: {
                                     ViewController(presentation: DDNListPresentation(
-                                        items: SimpleObservableSystemConsultations(),//(try? MyObservableConsultationsFromAPI(token: token)) ?? ObservableSimpleMyConsultations(),
+                                        items: (try? MyObservableConsultationsFromAPI(token: token)) ?? ObservableSimpleMyConsultations(),
                                         title: "Консультации",
                                         gradient: [.lightPeriwinkle, .softPink],
                                         leadingTo: {

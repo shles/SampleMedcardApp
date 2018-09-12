@@ -10,73 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 //TODO: split into separate files
-class SimpleMedicalTest: MedicalTest, ContainFiles {
-    private(set) var name: String = "Анализ крови"
-    private(set) var date: Date = Date()
-    var description: String = "Лаборатория NKL №122 Лабораторные исследования"
 
-    private var deletionSubject = PublishSubject<Void>()
-    private var interactionSubject = PublishSubject<Void>()
-    private var editionSubject = PublishSubject<Void>()
-
-    func delete() {
-        deletionSubject.onNext(())
-    }
-
-    func wantsToPerform() -> Observable<Transition> {
-        return Observable.merge([
-            deletionSubject.map { [unowned self] _ in
-                PresentTransition(leadingTo: {
-                            ViewController(
-                                    presentation: DeletionPresentation(
-                                            title: "Вы уверены, что хотите удалить \"\(self.name)\"?",
-                                            onAccept: { Observable.just(()) }
-                                    )
-                            )
-                        }
-                )
-            },
-         interactionSubject.debug("interacted with \(self.description)").map { [unowned self] _ in
-                PushTransition(leadingTo: {
-                    ViewController(presentation: DatedDescribedFileContainedPresentation(item: self, gradient: [.darkSkyBlue, .tiffanyBlue]))
-                })
-            },
-            editionSubject.map { [unowned self] _ in
-                PushTransition(leadingTo: {
-                    ViewController(presentation: MedicalTestEditingPresentation(medTest: self, onSave: {
-                        return Observable.just(())
-                    }))
-                })
-            }
-        ])
-    }
-
-    private(set) var isRelatedToSystem: Bool = false
-
-    func edit() {
-        editionSubject.onNext(())
-    }
-
-    private(set) var identification: String = ""
-
-    func interact() {
-        interactionSubject.onNext(())
-    }
-
-    var files: [File] = [FileFrom(name: "Исследование крови", size: 2048)]
-    private(set) var json: [String: Any] = [:]
-}
-
-class SimpleMyMedicalTests: ObservableMedicalTests {
-
-    private let tests = [SimpleMedicalTest(),
-                         SimpleMedicalTest(),
-                         SimpleMedicalTest()]
-
-    func asObservable() -> Observable<[MedicalTest]> {
-        return Observable.just(tests)
-    }
-}
 
 class MedicalTestEditingPresentation: Presentation {
 
@@ -195,7 +129,9 @@ class MedicalTestEditingPresentation: Presentation {
         addFileButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.fileAttachment.pickFile()
         })
-
+        
+        addFileButton.contentHorizontalAlignment = .left
+        
         fileAttachment.file.subscribe(onNext: { [unowned self] in
             self.files.append($0)
             let cell = FileCell(style: .default, reuseIdentifier: "").configured(item: $0).contentView
@@ -244,7 +180,7 @@ class FieldContainer: UIView {
 
     var content: UIView
 
-    init(view: UIView, height: CGFloat? = 16) {
+    init(view: UIView, height: CGFloat? = 24) {
         self.content = view
 
         let separator = UIView()
@@ -257,8 +193,8 @@ class FieldContainer: UIView {
         content.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(16)
-            $0.top.equalToSuperview().offset(28)
-            $0.bottom.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().offset(24)
+            $0.bottom.equalToSuperview().inset(12)
             if let height = height {
                 $0.height.equalTo(height)
             }
@@ -298,6 +234,10 @@ class AddFilePresentation: Presentation {
     private let addButton: GradientButton
     private let upload: FileUpload
     private let navBar: NavigationBarWithBackButton
+
+    private let transitionSubject = PublishSubject<Transition>()
+
+    private let disposeBag = DisposeBag()
 
     init(image: UIImage, token: Token) {
 
@@ -345,7 +285,8 @@ class AddFilePresentation: Presentation {
 
         filePreview.snp.makeConstraints {
             $0.width.equalToSuperview().inset(16)
-            $0.height.equalTo(236)
+            $0.height.equalTo(stack.snp.width)
+//            $0.width.equalTo(236)
         }
 
         nameField.snp.makeConstraints {
@@ -365,7 +306,24 @@ class AddFilePresentation: Presentation {
 
         addButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.upload.upload(name: self.nameField.text ?? "image_\(Date().fullString)")
-        })
+        }).disposed(by: disposeBag)
+
+        rotateButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.filePreview.transform = self.filePreview.transform.rotated(by: .pi / 2)// CGAffineTransform(rotationAngle: .pi / 2)
+        }).disposed(by: disposeBag)
+
+        deleteButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.transitionSubject.onNext(DismissTransition())
+        }).disposed(by: disposeBag)
+        
+        upload.wantsToPerform().bind(to: transitionSubject).disposed(by: disposeBag)
+        navBar.wantsToPerform().map {
+            if $0 is PopTransition {
+                return DismissTransition()
+            } else {
+                return $0
+            }
+        }.bind(to: transitionSubject).disposed(by: disposeBag)
 
     }
 
@@ -378,7 +336,7 @@ class AddFilePresentation: Presentation {
     }
 
     func wantsToPerform() -> Observable<Transition> {
-        return upload.wantsToPerform()
+        return  transitionSubject
     }
 }
 

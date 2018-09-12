@@ -59,7 +59,10 @@ class DismissTransition: Transition {
     func perform(on viewController: UIViewController) {
         if let vc = viewController.presentingViewController as? ViewController {
             vc.anotherWillAppear()
+        } else if let vc = (viewController.presentingViewController as? UINavigationController)?.viewControllers.last as? ViewController{
+            vc.anotherWillAppear()
         }
+    
         viewController.dismiss(animated: true)
     }
 

@@ -11,7 +11,7 @@ import UIKit
 //swiftlint:disable all
 class SimpleObjectsTests: QuickSpec {
     override func spec() {
-    
+        
     }
     //swiftlint:enable all
 }

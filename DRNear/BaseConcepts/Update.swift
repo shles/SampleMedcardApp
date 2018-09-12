@@ -32,14 +32,14 @@ class CommentPresentation: AdditionalInfoPresentation {
     private(set) var view: UIView = UIView()
             .with(backgroundColor: .clear)
 
-    private var addButton: GradientButton
+    fileprivate var addButton: GradientButton
 
     private var cancelButton = UIButton()
         .with(image: #imageLiteral(resourceName: "cancel"))
         .with(tint: .blueGrey)
     private var transitionsSubject = PublishSubject<Transition>()
     private var disposeBag = DisposeBag()
-    private var commentField = UITextField()
+    fileprivate var commentField = UITextField()
         .with(placeholder: "Комментарий")
 
     init(title: String, gradient: [UIColor], onAccept: @escaping (String) -> Void) {
@@ -122,5 +122,12 @@ class CommentPresentation: AdditionalInfoPresentation {
 
     func wantsToPerform() -> Observable<Transition> {
         return transitionsSubject
+    }
+}
+
+class CommentPresentationSpy: CommentPresentation {
+    func addComment(string: String) {
+        commentField.text = string
+        addButton.sendActions(for: .touchUpInside)
     }
 }

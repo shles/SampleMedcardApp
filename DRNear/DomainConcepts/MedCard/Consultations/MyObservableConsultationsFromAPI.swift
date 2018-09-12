@@ -35,7 +35,7 @@ class MyObservableConsultationsFromAPI: ObservableConsultations, ObservableType 
             .map { json in
                 return json.arrayValue.map { (json: JSON) in
                     MyConsultationFrom(name: json["name"].string ?? "",
-                                       id: json["id"].string ?? "",
+                                       id: String(json["id"].int ?? 0),
                                        date: Date.from(fullString: json["date"].string ?? "") ?? Date(),
                                        description: json["recommendations"].string ?? "",
                                        token: self.token)
@@ -97,7 +97,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
                             title: "Вы уверены, что хотите консультацию \"\(self.name)\"?",
                             onAccept: { [unowned self] in
                                 if let request = try? AuthorizedRequest(
-                                    path: "/eco-emc/api/consultations/\(self.identification)",
+                                    path: "/eco-emc/api/my/consultations/\(self.identification)",
                                     method: .delete,
                                     token: self.token
                                     ) {

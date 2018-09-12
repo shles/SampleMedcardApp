@@ -106,7 +106,7 @@ class MyAllergyFrom: Allergy, Deletable, Described {
                     onAccept: { [unowned self] in
                         if let request = try? AuthorizedRequest(
                             path: "/eco-emc/api/my/allergies",
-                            method: .put,
+                            method: .delete,
                             token: self.token,
                             parameters: [self.identification].asParameters(),
                             encoding: ArrayEncoding()

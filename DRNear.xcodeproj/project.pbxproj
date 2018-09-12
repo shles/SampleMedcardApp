@@ -148,6 +148,13 @@
 		FD4C540621300120008D5008 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C538A21300120008D5008 /* AppDelegate.swift */; };
 		FD4C540821309BA0008D5008 /* KeyboardAdjustingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */; };
 		FD593A212131EC3A002910B1 /* FiraSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD593A202131EC3A002910B1 /* FiraSans-Light.ttf */; };
+		FD8F00002148035D004980A6 /* DesiasesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8FFFFF2148035D004980A6 /* DesiasesTest.swift */; };
+		FD8F000221480A14004980A6 /* DatedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8F000121480A14004980A6 /* DatedListTest.swift */; };
+		FD8F000421480D00004980A6 /* ConsultationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8F000321480D00004980A6 /* ConsultationTest.swift */; };
+		FD8F0006214951EB004980A6 /* MedicalTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8F0005214951EB004980A6 /* MedicalTestTests.swift */; };
+		FD8FFFFA21471E5A004980A6 /* DeletionPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8FFFF921471E5A004980A6 /* DeletionPresentationTests.swift */; };
+		FD8FFFFC21473AED004980A6 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8FFFFB21473AED004980A6 /* RequestTests.swift */; };
+		FD8FFFFE2147FA47004980A6 /* VaccinationTestas.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8FFFFD2147FA47004980A6 /* VaccinationTestas.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +321,13 @@
 		FD4C538A21300120008D5008 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD4C540721309BA0008D5008 /* KeyboardAdjustingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdjustingScrollView.swift; sourceTree = "<group>"; };
 		FD593A202131EC3A002910B1 /* FiraSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Light.ttf"; sourceTree = "<group>"; };
+		FD8F000121480A14004980A6 /* DatedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatedListTest.swift; sourceTree = "<group>"; };
+		FD8F000321480D00004980A6 /* ConsultationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultationTest.swift; sourceTree = "<group>"; };
+		FD8F0005214951EB004980A6 /* MedicalTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalTestTests.swift; sourceTree = "<group>"; };
+		FD8FFFF921471E5A004980A6 /* DeletionPresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionPresentationTests.swift; sourceTree = "<group>"; };
+		FD8FFFFB21473AED004980A6 /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
+		FD8FFFFD2147FA47004980A6 /* VaccinationTestas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationTestas.swift; sourceTree = "<group>"; };
+		FD8FFFFF2148035D004980A6 /* DesiasesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesiasesTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,14 +408,21 @@
 		FD395E9C2110DB9200A0FBBF /* DRNearTests */ = {
 			isa = PBXGroup;
 			children = (
+				FD8F000321480D00004980A6 /* ConsultationTest.swift */,
+				FD8FFFFF2148035D004980A6 /* DesiasesTest.swift */,
+				FD8FFFFB21473AED004980A6 /* RequestTests.swift */,
 				FD395E9F2110DB9200A0FBBF /* Info.plist */,
 				4C287484ADC3F373C2CF204A /* AuthorizationTests.swift */,
 				4C2876ED262F9EFB6E8ACD9C /* MedCardTests.swift */,
 				FD060C9D2119F2F400EF3C2B /* BadHabitsTests.swift */,
+				FD8FFFFD2147FA47004980A6 /* VaccinationTestas.swift */,
 				4C2870CE42C49DEA699E0DE1 /* TestExtensions.swift */,
 				4C28798DE7F12D0439A07B13 /* IdentificationTests.swift */,
 				4C2878D9A4D3FA203745DBD1 /* SimpleObjectsTests.swift */,
 				4C2879CBC781343E41611DD3 /* AppicationTests.swift */,
+				FD8FFFF921471E5A004980A6 /* DeletionPresentationTests.swift */,
+				FD8F000121480A14004980A6 /* DatedListTest.swift */,
+				FD8F0005214951EB004980A6 /* MedicalTestTests.swift */,
 			);
 			path = DRNearTests;
 			sourceTree = "<group>";
@@ -1067,10 +1088,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C2871C006782E5311F7F780 /* AuthorizationTests.swift in Sources */,
+				FD8FFFFC21473AED004980A6 /* RequestTests.swift in Sources */,
 				FD060C9E2119F2F400EF3C2B /* BadHabitsTests.swift in Sources */,
+				FD8FFFFA21471E5A004980A6 /* DeletionPresentationTests.swift in Sources */,
+				FD8F000421480D00004980A6 /* ConsultationTest.swift in Sources */,
+				FD8F0006214951EB004980A6 /* MedicalTestTests.swift in Sources */,
 				4C287DEB8A8FBA8973E56C2A /* MedCardTests.swift in Sources */,
 				4C28754E684C658153CD4A90 /* IdentificationTests.swift in Sources */,
+				FD8F00002148035D004980A6 /* DesiasesTest.swift in Sources */,
+				FD8F000221480A14004980A6 /* DatedListTest.swift in Sources */,
 				4C287234773E4E2458246776 /* SimpleObjectsTests.swift in Sources */,
+				FD8FFFFE2147FA47004980A6 /* VaccinationTestas.swift in Sources */,
 				4C287CE2462150329776CA93 /* AppicationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

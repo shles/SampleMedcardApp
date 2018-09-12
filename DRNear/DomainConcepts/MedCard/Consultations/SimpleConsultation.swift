@@ -97,12 +97,9 @@ class ConsultationEditingPresentation: Presentation {
             .with(font: .medium13)
             .with(texColor: .mainText)
 
-    private var diagnoseField = UITextField()
-            .with(placeholder: "Диагноз")
-            .with(placeholderColor: .blueGrey)
-            .with(placeholderFont: .subtitleText13)
-            .with(font: .medium13)
-            .with(texColor: .mainText)
+    private var diagnoseButton = UIButton()
+        .with(title: "Диагноз")
+        .with(titleColor: .mainText)
 
     private var addFileButton = UIButton()
             .with(title: " Прикрепить файл")
@@ -134,6 +131,9 @@ class ConsultationEditingPresentation: Presentation {
         dateField.text = formatter.string(from: consultation.date)
 
 //        diagnoseField.text = medTest.description
+        if consultation.description != "" {
+            diagnoseButton.setTitle(consultation.description, for: .normal)
+        }
 
         //TODO: possibly mistake in fields of medTest
 
@@ -143,19 +143,53 @@ class ConsultationEditingPresentation: Presentation {
 
     private var files: [File] = []
 
+    private var diagnoseUpdate = DiagnoseUpdate()
+
+    class DiagnoseUpdate: Update {
+
+        var itemToSelect: (Identified & Named)!
+        private var transitionSubject = PublishSubject<Transition>()
+        var itemSubject = PublishSubject<Identified & Named>()
+
+        func addItem(item: Identified) {
+            if let item = item as? Identified & Named {
+                itemToSelect = item
+                apply()
+            }
+        }
+
+        func removeItem(item: Identified) {
+
+        }
+
+        func apply() {
+            if itemToSelect != nil {
+                itemSubject.onNext(itemToSelect)
+                transitionSubject.onNext(PopTransition())
+            }
+        }
+
+        func wantsToPerform() -> Observable<Transition> {
+            return transitionSubject
+        }
+
+    }
+
     init(token: Token) {
 
         fileAttachment = ImageAttachmentFromLibrary(token: token)
-        navBar = NavigationBarWithBackButton(title: "Добавить")
+        navBar = NavigationBarWithBackButton(title: "Добавить консультацию")
                 .with(gradient: [.lightPeriwinkle, .softPink])
 
         let stack = UIStackView(
-                arrangedSubviews: [nameField, dateField, diagnoseField, addFileButton].map {
+                arrangedSubviews: [nameField, dateField, diagnoseButton, addFileButton].map {
                     FieldContainer(view: $0)
                 }
         )
 
-        diagnoseField.isEnabled = false
+//        diagnoseField.isEnabled
+        addFileButton.contentHorizontalAlignment = .left
+        diagnoseButton.contentHorizontalAlignment = .left
 
         stack.axis = .vertical
 
@@ -202,11 +236,18 @@ class ConsultationEditingPresentation: Presentation {
 
         })
 
-        dateField.rx.controlEvent(.touchDown).subscribe(onNext: {
-            self.dateField.resignFirstResponder()
-            self.transitionSubject.onNext( PresentTransition(leadingTo: { ViewController(presentation: DateSelectionPresentation(title: "Укажите дату рождения", gradient: [.mainText], onAccept: { [unowned self] in
-                self.dateField.text = $0.dateString
-            }))}))
+        diagnoseUpdate.itemSubject.subscribe(onNext: {
+            self.diagnoseButton.setTitle($0.name, for: .normal)
+        })
+
+        diagnoseButton.rx.tap.subscribe(onNext: {
+            self.transitionSubject.onNext(PushTransition(leadingTo: {
+                ViewController(presentation: AllBadHabitsPresentation(
+                    badHabits: AllObservableDiseasesFromAPI(token: token),
+                    update: self.diagnoseUpdate,
+                    title: "Выбрать диагноз",
+                    gradient: [.lightPeriwinkle, .softPink]))
+            }))
         })
 
         confirmButton.rx.tap.subscribe(onNext: { [unowned self] in
@@ -218,7 +259,7 @@ class ConsultationEditingPresentation: Presentation {
                         name: self.nameField.text ?? "",
                         id: "",
                         date: Date(),
-                        description: self.diagnoseField.text ?? "",
+                        description: "", //self.diagnoseButton.title(for: .normal),
                         token: token,
                         files: self.files)
                 cons.create()
