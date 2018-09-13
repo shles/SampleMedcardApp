@@ -30,4 +30,37 @@ class DatedListTest: QuickSpec {
     }
 }
 
+class DatedItemPresentationTest: QuickSpec {
+    override func spec() {
+        let test = MyMedicalTestFrom(name: "test", id: "test", date: Date(), description: "test", token: TokenFromString(string: "test"))
+        let presentation = DatedDescribedFileContainedPresentation(item: test, gradient: [] )
+        describe("item presentation") {
+            context("when presented", {
+                it("should exist") {
+                    UIApplication.shared.keyWindow?.rootViewController = ViewController(presentation: presentation)
+                    UIApplication.shared.keyWindow?.rootViewController?.preloadView()
+                    let view = UIApplication.shared.keyWindow?.rootViewController?.view
+                    
+                    expect(view).notTo(beNil())
+                }
+            })
+        }
+    }
+}
 
+class DatedCellTest: QuickSpec {
+    override func spec() {
+        let test = MyMedicalTestFrom(name: "test", id: "test", date: Date(), description: "test", token: TokenFromString(string: "test"))
+        let cell = DatedDescribedCell(style: .default, reuseIdentifier: "")
+        describe("item presentation") {
+            context("when presented", {
+                it("should exist") {
+                   
+                    let view = cell.configured(item: test).contentView
+        
+                    expect(view).notTo(beNil())
+                }
+            })
+        }
+    }
+}

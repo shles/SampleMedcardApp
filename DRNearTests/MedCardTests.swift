@@ -19,7 +19,7 @@ class MedCardTests: QuickSpec {
         let transition = PresentTransition(leadingTo: { ViewController(presentation: SimpleViewWthButtonPresentation()) } )
         let option = MedCardOptionFrom(
             name: "test",
-            image: SimpleObservableImage(),
+            image: ObservableImageFrom(UIImage()),
             gradientColors: [.white],
             leadingTo: transition
         )

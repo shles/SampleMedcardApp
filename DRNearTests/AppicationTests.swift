@@ -12,13 +12,11 @@ import XCTest
 //swiftlint:disable all
 
 class ApplicationTests: XCTestCase {
-    func testApplication() {
+    func testApplicationRoot() {
         let configuration = ApplicationConfiguration()
         let view = configuration.rootController().view
-        
         view?.layoutSubviews()
-        
-        XCTAssert(true)
+        XCTAssertNotNil(view)
     }
 }
 //swiftlint:enable all

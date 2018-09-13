@@ -367,7 +367,9 @@ class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerController
 
         imagePicker.delegate = self
 
-        transitionsSubject.onNext(PresentTransition { [unowned self] in self.imagePicker })
+//        imagePicker.navigationBar.topItem?.rightBarButtonItem?.tintColor = .blue
+
+        transitionsSubject.onNext(PresentTransition(leadingTo: { [unowned self] in self.imagePicker }))
 
     }
 
@@ -402,3 +404,17 @@ class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerController
     }
 }
 
+//extension UIImagePickerController {
+//    open override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        self.navigationBar.tintColor = .black
+//        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
+//        self.navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.black
+//        self.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
+//    }
+//
+//    @objc func cancel() {
+//        dismiss(animated: true, completion: nil)
+//    }
+//
+//}

@@ -30,18 +30,23 @@ class PushTransition: Transition {
 class PresentTransition: Transition {
 
     private let leadingTo: () -> (UIViewController)
+    private let completion: (() -> Void)?
 
-    init(leadingTo: @escaping () -> (UIViewController)) {
+    init(completion: (() -> Void)? = nil, leadingTo: @escaping () -> (UIViewController)) {
         self.leadingTo = leadingTo
+        self.completion = completion
     }
 
     func perform(on viewController: UIViewController) {
         //TODO: temporal solution. Needs injection of theese parameters
         let vc = leadingTo()
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        viewController.present(vc, animated: true)
+        
+        if !(vc is UINavigationController) {
+            vc.view.backgroundColor = .clear
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+        }
+        viewController.present(vc, animated: true, completion: completion)
     }
 
 }

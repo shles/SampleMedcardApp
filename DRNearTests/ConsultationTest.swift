@@ -15,7 +15,7 @@ import RxSwift
 class ConsultationTest: QuickSpec {
     override func spec() {
         describe("consultation") {
-            let consultation = SimpleConsultation()
+            let consultation = MyConsultationFrom(name: "test", id: "test", date: Date(), description: "aerta", token: TokenFromString(string: ""))
             context("when interacted") {
                 var testValue: Transition!
                 let disposeBag = DisposeBag()
@@ -54,6 +54,21 @@ class ConsultationTest: QuickSpec {
                     expect(testValue).notTo(beNil())
                 }
             }
+        }
+    }
+}
+
+class SystemConsultationTest: QuickSpec {
+    override func spec() {
+        describe("system consultation") {
+            let cons = SimpleSystemConsultation()
+            context("presentation", {
+                let presentation = SystemConsultationPresentation(item: cons, gradient: [])
+                it("should exist") {
+                    let view = presentation.view
+                    expect(view).notTo(beNil())
+                }
+            })
         }
     }
 }
