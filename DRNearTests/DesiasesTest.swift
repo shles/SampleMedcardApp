@@ -6,14 +6,14 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
+@testable import DRNear
 import Foundation
 import Nimble
 import Quick
 import RxSwift
-@testable import DRNear
 
 class DiseaseTest: QuickSpec {
-    
+
     override func spec() {
         var disease = DiseaseFrom(name: "test", id: "test", code: "test", selected: false, token: TokenFromString(string: ""))
         var disposeBag: DisposeBag = DisposeBag()
@@ -36,7 +36,7 @@ class DiseaseTest: QuickSpec {
 }
 
 class MyDiseaseTest: QuickSpec {
-    
+
     override func spec() {
         let disease = MyDiseaseFrom(name: "test", id: "test", code: "test", token: TokenFromString(string: ""))
         var disposeBag: DisposeBag = DisposeBag()

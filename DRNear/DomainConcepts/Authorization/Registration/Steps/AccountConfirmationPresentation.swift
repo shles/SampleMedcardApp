@@ -4,9 +4,9 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
 import SnapKit
+import UIKit
 
 class AccountConfirmationPresentation: Presentation {
     private(set) var view: UIView = UIView()

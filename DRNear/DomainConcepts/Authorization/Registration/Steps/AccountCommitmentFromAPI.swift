@@ -6,11 +6,11 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
-import Foundation
-import RxSwift
 import Alamofire
-import LocalAuthentication
+import Foundation
 import JWTDecode
+import LocalAuthentication
+import RxSwift
 import SwiftyJSON
 
 //TODO: needed to be refactored. split into appropriate separate steps objects
@@ -143,7 +143,6 @@ class AccountCommitmentFromAPI: AccountCommitment {
                 }, onError: {
                     self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
                 }).disposed(by: disposeBag)
-
 
             }
 

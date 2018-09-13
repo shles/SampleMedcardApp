@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
+import RxCocoa
 import RxSwift
 import SnapKit
 import UIKit
-import RxCocoa
 
 class AccountCreationPresentation: Presentation {
 
@@ -59,7 +59,7 @@ class AccountCreationPresentation: Presentation {
     private var gender: Gender?
 
     private let transitionSubject = PublishSubject<Transition>()
-    
+
     private let photoButton = UIButton()
 
     private let imageAttachement = ImageFromLibrary()
@@ -137,7 +137,7 @@ class AccountCreationPresentation: Presentation {
         photoButton.snp.makeConstraints {
             $0.edges.equalTo(photo)
         }
-        
+
         genderView.valueSubject.subscribe(onNext: {
             self.gender = $0
         }).disposed(by: disposeBag)
@@ -160,23 +160,23 @@ class AccountCreationPresentation: Presentation {
                     birthDate: self.birthDateLabel.datePicker.date,
                     gender: gender))
         }).disposed(by: disposeBag)
-        
+
         photoButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.imageAttachement.pickImage()
         }).disposed(by: disposeBag)
-        
+
         imageAttachement.image.subscribe(onNext: {
             self.photo.image = $0
         }).disposed(by: disposeBag)
-        
+
         imageAttachement.wantsToPerform().bind(to: transitionSubject).disposed(by: disposeBag)
-        
+
     }
-    
+
     let disposeBag = DisposeBag()
-    
+
     private(set) var view: UIView = UIView()
-    
+
     func willAppear() {
 
     }
@@ -240,14 +240,14 @@ class GenderSelectionView: UIView {
             RadioButton(
                     value: Gender.male,
                     selectionObserver: valueSubject.asObserver(),
-                    deselectOn: valueSubject.filter{ $0 != .male}.map{_ in()}
+                    deselectOn: valueSubject.filter { $0 != .male }.map { _ in() }
             )
                 .with(title: "Мужской")
                 .with(titleColor: .mainText),
             RadioButton(
                     value: Gender.female,
                     selectionObserver: valueSubject.asObserver(),
-                    deselectOn: valueSubject.filter{ $0 != .female}.map{_ in()}
+                    deselectOn: valueSubject.filter { $0 != .female }.map { _ in() }
             )
                 .with(title: "Женский")
                 .with(titleColor: .mainText)
@@ -266,33 +266,32 @@ class GenderSelectionView: UIView {
     }
 }
 
-
 class ImageFromLibrary: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     private var transitionsSubject = PublishSubject<Transition>()
     private let imagePicker = UIImagePickerController()
-    
+
     func pickImage() {
-        
+
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        
+
         imagePicker.delegate = self
-        
+
         transitionsSubject.onNext(PresentTransition { [unowned self] in self.imagePicker })
-        
+
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionsSubject
     }
-    
+
     private var fileSubject = PublishSubject<UIImage>()
     var image: Observable<UIImage> {
         return fileSubject
     }
     private var addFilePresentation: AddFilePresentation!
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             picker.dismiss(animated: true, completion: { [unowned self] in
@@ -301,9 +300,9 @@ class ImageFromLibrary: NSObject, UIImagePickerControllerDelegate, UINavigationC
         } else {
             picker.dismiss(animated: true)
         }
-        
+
     }
-    
+
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }

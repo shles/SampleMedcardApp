@@ -94,7 +94,6 @@ class CommentPresentation: AdditionalInfoPresentation {
             $0.height.equalTo(40)
         }
 
-
         cancelButton.snp.makeConstraints {
             $0.top.trailing.equalToSuperview()
             $0.height.width.equalTo(48)

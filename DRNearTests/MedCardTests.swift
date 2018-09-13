@@ -15,8 +15,8 @@ import XCTest
 class MedCardTests: QuickSpec {
 
     override func spec() {
-        
-        let transition = PresentTransition(leadingTo: { ViewController(presentation: SimpleViewWthButtonPresentation()) } )
+
+        let transition = PresentTransition(leadingTo: { ViewController(presentation: SimpleViewWthButtonPresentation()) })
         let option = MedCardOptionFrom(
             name: "test",
             image: ObservableImageFrom(UIImage()),
@@ -40,14 +40,13 @@ class MedCardTests: QuickSpec {
                 .disposed(by: disposeBag)
 //            medcardPresentationSpy.selectOption(at: IndexPath(row: 0, section: 0))
             option.interact()
-            
+
             XCTAssertNotNil(try! replaySubject.toBlocking(timeout: 5).first())
 
         }
-        
+
     }
-    
+
 }
 
 //swiftlint:enable all
-

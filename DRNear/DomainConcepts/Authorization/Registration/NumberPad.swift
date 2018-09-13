@@ -137,7 +137,7 @@ class CodeView: UIView {
         }
 
         codeSubject.debug()
-        .filter {$0.count <= symbolsNumber}
+        .filter { $0.count <= symbolsNumber }
         .do(onNext: { code in
             self.codeSymbols.dropFirst(code.count).forEach { $0.setEntered(false) }
             self.codeSymbols.dropLast(symbolsNumber - code.count).forEach { $0.setEntered(true) }

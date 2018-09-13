@@ -32,9 +32,9 @@ struct AccountInformationFrom: AccountInformation {
     private(set) var middleName: String = "Михайлович"
     private(set) var birthDate: Date = Date()
     private(set) var gender: Gender = .male
-    
-    var json: [String : Any] {
-        var parameters = [String : Any]()
+
+    var json: [String: Any] {
+        var parameters = [String: Any]()
         parameters["firstName"] = name
         parameters["lastName"] = lastName
         parameters["middleName"] = middleName
@@ -42,7 +42,7 @@ struct AccountInformationFrom: AccountInformation {
         parameters["gender"] = gender.rawValue
         return parameters
     }
-    
+
 }
 
 protocol NumberRegistration: TransitionSource {
@@ -75,6 +75,6 @@ protocol LoginMethodsApplication: TransitionSource {
 protocol Authorization: TransitionSource {
 
     func auth(code: String)
-    
+
     func tryToAuthWithBiometry()
 }

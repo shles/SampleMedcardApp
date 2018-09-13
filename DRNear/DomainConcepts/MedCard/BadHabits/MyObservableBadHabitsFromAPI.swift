@@ -81,7 +81,7 @@ class MyBadHabitFrom: BadHabit, Deletable {
                                         encoding: ArrayEncoding()
                                 ) {
 
-                                    return request.make().map { _ in}
+                                    return request.make().map { _ in }
                                 }
                                 return Observable.just(())
                             }

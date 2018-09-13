@@ -4,8 +4,8 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
 //TODO: Make injection o f all presentations. It will help testing.
 //Tests will inject 'Spy' presentations that will detect method invocations.

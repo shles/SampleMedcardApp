@@ -51,7 +51,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
     private(set) var isRelatedToSystem: Bool = false
     private(set) var identification: String = ""
     var files: [File] = []
-    
+
     var description: String = ""
     private let token: Token
 
@@ -71,7 +71,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
     }
 
     func create() {
-        
+
         if let request = try? AuthorizedRequest(
             path: "/eco-emc/api/my/consultations",
             method: .post,
@@ -80,10 +80,10 @@ class MyConsultationFrom: Consultation, ContainFiles {
             encoding: JSONEncoding.default
         ) {
 
-            request.make().map { _ in PopTransition()}.bind(to: transitionSubject)
+            request.make().map { _ in PopTransition() }.bind(to: transitionSubject)
         }
     }
-    
+
     func delete() {
         deletionSubject.onNext(())
     }
@@ -101,10 +101,10 @@ class MyConsultationFrom: Consultation, ContainFiles {
                                     method: .delete,
                                     token: self.token
                                     ) {
-                                    
-                                    return request.make().map {_ in }
+
+                                    return request.make().map { _ in }
                                 }
-                                
+
                                 return Observable.just(())
                             }
                         )
@@ -133,7 +133,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
                                 encoding: JSONEncoding.default
                                 ) {
 
-                                return request.make().map {_ in }
+                                return request.make().map { _ in }
                             }
 
                             return Observable.just(())
@@ -152,7 +152,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
         interactionSubject.onNext(())
     }
 
-    var json: [String: Any]  {
+    var json: [String: Any] {
 
         return [
             "date": date.fullString,
@@ -160,7 +160,7 @@ class MyConsultationFrom: Consultation, ContainFiles {
                 "comments": "мой старый диагноз",
                 "diagnoseStatus": ["code": "01"],
                 "name": ["code": "01"],
-                "files": files.map { ["fuid": $0.identification]},
+                "files": files.map { ["fuid": $0.identification] },
                 "value": "каое то значение",
                 "verificationStatus": ["code": "01"]
             ]],

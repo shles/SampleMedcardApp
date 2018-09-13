@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 //TODO: split into separate files
-
 
 class MedicalTestEditingPresentation: Presentation {
 
@@ -129,9 +128,9 @@ class MedicalTestEditingPresentation: Presentation {
         addFileButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.fileAttachment.pickFile()
         })
-        
+
         addFileButton.contentHorizontalAlignment = .left
-        
+
         fileAttachment.file.subscribe(onNext: { [unowned self] in
             self.files.append($0)
             let cell = FileCell(style: .default, reuseIdentifier: "").configured(item: $0).contentView
@@ -315,7 +314,7 @@ class AddFilePresentation: Presentation {
         deleteButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.transitionSubject.onNext(DismissTransition())
         }).disposed(by: disposeBag)
-        
+
         upload.wantsToPerform().bind(to: transitionSubject).disposed(by: disposeBag)
         navBar.wantsToPerform().map {
             if $0 is PopTransition {
@@ -343,12 +342,12 @@ class AddFilePresentation: Presentation {
 protocol FilePicking: TransitionSource {
 
     func pickFile()
-    var file: Observable<File> {get}
+    var file: Observable<File> { get }
 }
 
 protocol FileUpload: TransitionSource {
     func upload(name: String)
-    var file: Observable<File> {get}
+    var file: Observable<File> { get }
 }
 
 class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -403,18 +402,3 @@ class ImageAttachmentFromLibrary: NSObject, FilePicking, UIImagePickerController
         picker.dismiss(animated: true)
     }
 }
-
-//extension UIImagePickerController {
-//    open override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        self.navigationBar.tintColor = .black
-//        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
-//        self.navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.black
-//        self.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
-//    }
-//
-//    @objc func cancel() {
-//        dismiss(animated: true, completion: nil)
-//    }
-//
-//}

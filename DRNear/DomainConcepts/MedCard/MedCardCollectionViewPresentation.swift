@@ -121,7 +121,6 @@ extension MedCardCollectionViewPresentation {
     }
 }
 
-
 class MedCardCollectionViewPresentationSpy: MedCardCollectionViewPresentation {
 
     func selectOption(at ip: IndexPath) {

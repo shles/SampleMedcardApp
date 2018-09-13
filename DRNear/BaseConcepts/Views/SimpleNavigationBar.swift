@@ -147,9 +147,9 @@ class NavigationBarWithBackButtonAndSearch: UIView, TransitionSource {
             $0.trailing.equalToSuperview().inset(32)
         }
         searchField.isHidden = true
-        
+
         searchField.resignFirstResponder()
-        
+
         searchButton.tintColor = .white
 
         searchButton.rx.tap.subscribe(onNext: { [unowned self] in

@@ -10,10 +10,10 @@ class DatePickerTextField: UITextField {
 
     var datePicker: UIDatePicker!
 
-    var data : [String] = []
-    var pickerInput : UIPickerView!
-    var onSelectIndex: ((Int)->())?
-    
+    var data: [String] = []
+    var pickerInput: UIPickerView!
+    var onSelectIndex: ((Int) -> Void)?
+
     init() {
         super.init(frame: .zero)
         configureInputs()
@@ -44,7 +44,7 @@ class DatePickerTextField: UITextField {
         self.endEditing(true)
     }
 
-    func addToolBar(){
+    func addToolBar() {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true

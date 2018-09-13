@@ -76,7 +76,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
     }
 
     func create() {
-        
+
         if let request = try? AuthorizedRequest(
             path: "/eco-emc/api/my/analyzes",
             method: .post,
@@ -84,11 +84,11 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
             parameters: self.json,
             encoding: JSONEncoding.default
         ) {
-            
-            request.make().map { _ in PopTransition()}.bind(to: transitionSubject)
+
+            request.make().map { _ in PopTransition() }.bind(to: transitionSubject)
         }
     }
-    
+
     func delete() {
         deletionSubject.onNext(())
     }
@@ -107,7 +107,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                                                 token: self.token
                                         ) {
 
-                                            return request.make().map {_ in }
+                                            return request.make().map { _ in }
                                         }
 
                                         return Observable.just(())
@@ -134,10 +134,10 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
                                 parameters: self.json,
                                 encoding: JSONEncoding.default
                             ) {
-                                
-                                return request.make().map {_ in }
+
+                                return request.make().map { _ in }
                             }
-                            
+
                             return Observable.just(())
                     }))
                 })
@@ -155,7 +155,7 @@ class MyMedicalTestFrom: MedicalTest, ContainFiles {
     }
 
     var files: [File] = []
-    var json: [String: Any]  {
+    var json: [String: Any] {
 //        {
 //            "date": "2018-08-23T13:33:02.473Z",
 //            "files": [

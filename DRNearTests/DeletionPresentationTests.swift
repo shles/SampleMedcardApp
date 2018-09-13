@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import XCTest
 import RxSwift
+import XCTest
 
 @testable import DRNear
 class DeletionTest: XCTestCase {
@@ -21,7 +21,7 @@ class DeletionTest: XCTestCase {
         let view = deletionPresentation.view
         view.layoutSubviews()
         deletionPresentation.tapAccept()
-        
+
         XCTAssertEqual(testValue, 1)
     }
 }

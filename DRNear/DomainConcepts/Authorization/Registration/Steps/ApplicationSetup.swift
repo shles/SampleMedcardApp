@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import LocalAuthentication
 import RxSwift
 import SnapKit
-import LocalAuthentication
 
 class ApplicationSetup: LoginMethodsApplication {
 

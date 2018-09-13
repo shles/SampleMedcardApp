@@ -6,11 +6,11 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
+@testable import DRNear
 import Foundation
 import Nimble
 import Quick
 import RxSwift
-@testable import DRNear
 
 class ConsultationTest: QuickSpec {
     override func spec() {
@@ -22,9 +22,9 @@ class ConsultationTest: QuickSpec {
                 consultation.wantsToPerform().subscribe(onNext: {
                     testValue = $0
                 }).disposed(by: disposeBag)
-                
+
                 consultation.interact()
-                
+
                 it("should lead to self presentation") {
                     expect(testValue).notTo(beNil())
                 }
@@ -35,20 +35,20 @@ class ConsultationTest: QuickSpec {
                 consultation.wantsToPerform().subscribe(onNext: {
                     testValue = $0
                 }).disposed(by: disposeBag)
-                
+
                 consultation.delete()
                 it("should lead to presentation") {
                     expect(testValue).notTo(beNil())
                 }
             }
             context("when editing") {
-                
+
                 var testValue: Transition!
                 let disposeBag = DisposeBag()
                 consultation.wantsToPerform().subscribe(onNext: {
                     testValue = $0
                 }).disposed(by: disposeBag)
-                
+
                 consultation.edit()
                 it("should lead to presentation") {
                     expect(testValue).notTo(beNil())

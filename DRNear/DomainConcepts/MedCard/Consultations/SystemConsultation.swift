@@ -4,10 +4,10 @@
 //
 
 import Foundation
+import RxCocoa
+import RxDataSources
 import RxSwift
 import SnapKit
-import RxDataSources
-import RxCocoa
 
 class SimpleObservableSystemConsultations: ObservableConsultations {
     func asObservable() -> Observable<[Consultation]> {
@@ -137,9 +137,9 @@ class SystemConsultationPresentation: Presentation {
 
             recomendationStack.spacing = 4
             recomendationStack.axis = .vertical
-            
+
             let doctorContainer = UIView()
-            
+
             doctorContainer.addSubview(doctorStack)
 
             let resultsStack = UIStackView(arrangedSubviews: [FieldContainer(view: diagnoseStack, height: nil), FieldContainer(view: recomendationStack, height: nil)])
@@ -175,12 +175,11 @@ class SystemConsultationPresentation: Presentation {
             }
 
             finalStack.snp.makeConstraints {
-                $0.edges.equalToSuperview().inset(UIEdgeInsetsMake(16, 16, 16, 16))
+                $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
             }
-            
+
             finalStack.setContentCompressionResistancePriority(.required, for: .vertical)
 
-            
         }
 
         required init?(coder aDecoder: NSCoder) {
@@ -189,7 +188,7 @@ class SystemConsultationPresentation: Presentation {
     }
 
     class HeaderCell: UITableViewCell {
-        
+
         override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             let view = HeaderView(item: SimpleSystemConsultation())
@@ -198,12 +197,12 @@ class SystemConsultationPresentation: Presentation {
                 $0.edges.equalToSuperview()
             }
         }
-        
+
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
     }
-    
+
     private let tableView = StandardTableView()
     private let navBar: NavigationBarWithBackButton
     private let disposeBag = DisposeBag()
@@ -229,7 +228,6 @@ class SystemConsultationPresentation: Presentation {
             $0.top.equalTo(navBar.snp.bottom)
         }
 
-
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<Void>>(configureCell: {  ds, tv, ip, item in
             return tv.dequeueReusableCellOfType(HeaderCell.self, for: ip)
         })
@@ -243,7 +241,7 @@ class SystemConsultationPresentation: Presentation {
     private(set) var view: UIView = UIView()
 
     func willAppear() {
-       
+
     }
 
     func wantsToPerform() -> Observable<Transition> {

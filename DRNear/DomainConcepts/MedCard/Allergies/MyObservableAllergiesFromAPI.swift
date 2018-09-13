@@ -73,7 +73,6 @@ class MyAllergyFrom: Allergy, Deletable, Described {
     private(set) var digitalMedicalRecordId: Int
     private(set) var description: String
 
-
     private let deletionSubject = PublishSubject<Transition>()
     private let token: Token
     private let disposeBag = DisposeBag()

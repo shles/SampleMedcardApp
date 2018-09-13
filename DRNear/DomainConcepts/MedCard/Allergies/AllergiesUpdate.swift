@@ -81,7 +81,7 @@ class AllergiesUpdate: Update {
     }
 
     func removeItem(item: Identified) {
-        itemsToCommit = itemsToCommit.filter({ !$0.isEqual(to: item)})
+        itemsToCommit = itemsToCommit.filter({ !$0.isEqual(to: item) })
     }
 
     func wantsToPerform() -> Observable<Transition> {

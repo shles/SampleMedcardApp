@@ -40,7 +40,7 @@ class PresentTransition: Transition {
     func perform(on viewController: UIViewController) {
         //TODO: temporal solution. Needs injection of theese parameters
         let vc = leadingTo()
-        
+
         if !(vc is UINavigationController) {
             vc.view.backgroundColor = .clear
             vc.modalPresentationStyle = .overCurrentContext
@@ -64,10 +64,10 @@ class DismissTransition: Transition {
     func perform(on viewController: UIViewController) {
         if let vc = viewController.presentingViewController as? ViewController {
             vc.anotherWillAppear()
-        } else if let vc = (viewController.presentingViewController as? UINavigationController)?.viewControllers.last as? ViewController{
+        } else if let vc = (viewController.presentingViewController as? UINavigationController)?.viewControllers.last as? ViewController {
             vc.anotherWillAppear()
         }
-    
+
         viewController.dismiss(animated: true)
     }
 

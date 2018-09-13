@@ -4,8 +4,8 @@
 //
 
 import RxSwift
-import UIKit
 import SnapKit
+import UIKit
 
 class LoadingButton: UIButton {
 
@@ -123,11 +123,11 @@ class DeletionPresentation: Presentation {
                 .disposed(by: disposeBag)
 
         deleteButton.rx.tap
-                .do(onNext: {[unowned self] in self.deleteButton.startAnimation() })
+                .do(onNext: { [unowned self] in self.deleteButton.startAnimation() })
                 .flatMap { _ in  onAccept() }
                 .catchErrorJustReturn(())
                 .map { DismissTransition() }
-                .do(onNext: {[unowned self] _ in self.deleteButton.stopAnimation() })
+                .do(onNext: { [unowned self] _ in self.deleteButton.stopAnimation() })
                 .bind(to: transitionsSubject)
                 .disposed(by: disposeBag)
     }

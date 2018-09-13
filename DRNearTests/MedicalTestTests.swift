@@ -6,11 +6,11 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
+@testable import DRNear
 import Foundation
 import Nimble
 import Quick
 import RxSwift
-@testable import DRNear
 
 class MedicalTestTests: QuickSpec {
     override func spec() {
@@ -24,12 +24,10 @@ class MedicalTestTests: QuickSpec {
                     UIApplication.shared.keyWindow?.rootViewController = ViewController(presentation: presentation)
                     UIApplication.shared.keyWindow?.rootViewController?.preloadView()
                     let view = UIApplication.shared.keyWindow?.rootViewController?.view
-                    
+
                     expect(view).notTo(beNil())
                 }
             }
         }
     }
 }
-
-

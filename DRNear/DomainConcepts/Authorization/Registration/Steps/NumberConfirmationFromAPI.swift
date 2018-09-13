@@ -6,15 +6,15 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
-import Foundation
-import RxSwift
 import Alamofire
-import SwiftyJSON
-import LocalAuthentication
+import Foundation
 import JWTDecode
+import LocalAuthentication
+import RxSwift
+import SwiftyJSON
 
 enum UserStatus: String {
-    
+
     case new = "NEW"
     case inactive = "INACTIVE"
     case active = "ACTIVE"
@@ -35,20 +35,20 @@ class NumberConfirmationFromAPI: NumberConfirmation {
     }
 
     func confirmNumber(code: String) {
-        
+
         let number = self.number.hasPrefix("+7") ? String(self.number.dropFirst(2)) : self.number
-        
+
         guard let request = try? UnauthorizedRequest(path: "/eco-uaa/api/code/check",
                                                      method: .get,
                                                      parameters: [
                                                         "phone": number,
                                                         "code": code]) else { return }
-        
-        request.make().subscribe(onNext:{ response in
-            
+
+        request.make().subscribe(onNext: { response in
+
             if let status = UserStatus(rawValue: response["status"].string ?? ""),
                 let key = response["key"].string {
-                
+
                 switch status {
                 case .active:
                     //todo: make different presentation for enter existing pin
@@ -70,7 +70,7 @@ class NumberConfirmationFromAPI: NumberConfirmation {
             } else {
                 self.transitionSubject.onNext(ErrorAlertTransition(error: ResponseError()))
             }
-            
+
         }, onError: {
             self.transitionSubject.onNext(ErrorAlertTransition(error: $0))
         }).disposed(by: disposeBag)
@@ -109,7 +109,6 @@ class ExistingPinEnterPresentation: Presentation {
     }
 
 }
-
 
 class AuthorizationFromAPI: Authorization {
 
@@ -252,5 +251,3 @@ class AuthorizationFromAPI: Authorization {
 
     }
 }
-
-

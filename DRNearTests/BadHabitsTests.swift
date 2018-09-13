@@ -64,7 +64,7 @@ class BadHabitsTests: QuickSpec {
 }
 
 class BadHabitTest: QuickSpec {
-    
+
     override func spec() {
         var badHabit = BadHabitFrom(name: "test", id: "test", selected: false, token: TokenFromString(string: ""))
         var disposeBag: DisposeBag = DisposeBag()
@@ -87,7 +87,7 @@ class BadHabitTest: QuickSpec {
 }
 
 class MyBadHabitTest: QuickSpec {
-    
+
     override func spec() {
         var badHabit = MyBadHabitFrom(name: "test", id: "test", token: TokenFromString(string: ""))
         var disposeBag: DisposeBag = DisposeBag()
@@ -113,46 +113,46 @@ class VaccinationsTests: QuickSpec {
     override func spec() {
         var vaccinations: ObservableVaccinations!
         var vaccinationsPresentation: Presentation!
-        
+
         beforeEach {
             vaccinations = SimpleObservableVaccinations()
             vaccinationsPresentation = BadHabitsTableViewPresentation(observableHabits: vaccinations.toListApplicable(), tintColor: .white, emptyStateView: UIView())
         }
-        
+
         describe("Bad habit presentation") {
             context("when back button tapped") {
                 it("should want pop ") {
-                    
+
                     var vc = UIViewController()
                     var navVC = UINavigationController(rootViewController: vc)
                     navVC.pushViewController(ViewController(presentation: vaccinationsPresentation), animated: false)
-                    
+
                     UIApplication.shared.keyWindow!.rootViewController = navVC
                     navVC.preloadView()
                     vc.preloadView()
-                    
+
                     (vaccinationsPresentation as! BadHabitsTableViewPresentation).simulateBackTap()
-                    
+
                     expect(vc) == navVC.viewControllers.first!
                 }
             }
             context("with remote objects") {
                 it("should do the same") {
-                    
+
                     vaccinations = MyObservableVaccinationsFromAPI(token: TokenFromString(string: ""))
-                    
+
                     var vc = UIViewController()
                     var navVC = UINavigationController(rootViewController: vc)
                     navVC.pushViewController(ViewController(presentation: vaccinationsPresentation), animated: false)
-                    
+
                     UIApplication.shared.keyWindow!.rootViewController = navVC
                     navVC.preloadView()
                     vc.preloadView()
-                    
+
                     (vaccinationsPresentation as! BadHabitsTableViewPresentation).simulateBackTap()
-                    
+
                     expect(vc) == navVC.viewControllers.first!
-                    
+
                 }
             }
         }

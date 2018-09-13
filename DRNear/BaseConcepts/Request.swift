@@ -13,20 +13,20 @@ protocol Request {
 }
 
 struct ServerError: Error {
-    
+
     var title: String
     var detail: String
     var status: Int
-    
+
     static func from(json: JSON) -> ServerError? {
-        
+
         guard let status = json["status"].int,
             let title = json["title"].string,
             let detail = json["detail"].string else { return nil }
-        
+
         return ServerError(title: title, detail: detail, status: status)
     }
-    
+
     var localizedDescription: String {
         return detail
     }
@@ -216,7 +216,7 @@ class ResponseError: LocalizedError {
     }
 
     class func from(json: JSON) -> ResponseError? {
-        
+
         if let detail = json["detail"].string {
             return ResponseError(message: detail)
         }
@@ -225,7 +225,7 @@ class ResponseError: LocalizedError {
         }
         return nil
     }
-    
+
     init() {
 
     }
@@ -242,7 +242,7 @@ class RequestError: LocalizedError {
     var errorDescription: String? {
         return description?.joined(separator: " ") ?? message
     }
-    
+
     init() {
 
     }

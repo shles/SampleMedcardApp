@@ -7,20 +7,20 @@
 //
 
 import Foundation
-import RxSwift
 import LocalAuthentication
+import RxSwift
 
 class InAppAuthorization: Authorization {
 
     private let leadingTo: (Token) -> (UIViewController)
     private let transitionSubject = PublishSubject<Transition>()
-    
+
     init(leadingTo: @escaping (Token) -> (UIViewController)) {
         self.leadingTo = leadingTo
     }
 
     private let context = LAContext()
-    
+
     func auth(code: String) {
 
         if let savedCode = ApplicationConfiguration().code {
@@ -43,7 +43,7 @@ class InAppAuthorization: Authorization {
     private func canEvaluatePolicy() -> Bool {
         return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
-    
+
     private func proceedToAccount() {
         if let token = ApplicationConfiguration().token {
             transitionSubject.onNext(NewWindowRootControllerTransition(leadingTo: { self.leadingTo(TokenFromString(string: token)) }))
@@ -57,7 +57,7 @@ class InAppAuthorization: Authorization {
             ).withoutNavigationBar()}))
         }
     }
-    
+
     func wantsToPerform() -> Observable<Transition> {
         return transitionSubject
     }
@@ -71,9 +71,9 @@ class InAppAuthorization: Authorization {
 
         if UserDefaults.standard.bool(forKey: "touchIDKey") {
             type = .touchID
-        } else if UserDefaults.standard.bool(forKey: "faceIDKey"){
+        } else if UserDefaults.standard.bool(forKey: "faceIDKey") {
             type = .faceID
-        } else  {
+        } else {
             type = .none
         }
 

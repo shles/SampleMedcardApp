@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
+import PhoneNumberKit
 import RxSwift
 import SnapKit
 import UIKit
-import PhoneNumberKit
 
 class EnterNumberView: UIView {
 

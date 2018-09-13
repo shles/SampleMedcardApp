@@ -9,9 +9,9 @@
 import Foundation
 
 protocol Serializable {
-    
-    var json: [String : Any] { get }
-    
+
+    var json: [String: Any] { get }
+
 }
 
 //extension Serializable {

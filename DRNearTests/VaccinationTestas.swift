@@ -6,14 +6,14 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
+@testable import DRNear
 import Foundation
 import Nimble
 import Quick
 import RxSwift
-@testable import DRNear
 
 class VaccinationTest: QuickSpec {
-    
+
     override func spec() {
         var vaccination = VaccinationFrom(name: "test", id: "test", code: "test", date: Date(), selected: false, token: TokenFromString(string: ""))
         var disposeBag: DisposeBag = DisposeBag()
@@ -36,7 +36,7 @@ class VaccinationTest: QuickSpec {
 }
 
 class MyVaccinationTest: QuickSpec {
-    
+
     override func spec() {
         var vaccination = MyVaccinationFrom(name: "test", id: "test", code: "test", date: Date(), token: TokenFromString(string: ""))
         var disposeBag: DisposeBag = DisposeBag()

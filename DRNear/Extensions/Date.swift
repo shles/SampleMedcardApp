@@ -9,16 +9,16 @@
 import Foundation
 
 extension Date {
-    
+
     static func from(fullString: String) -> Date? {
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormatter.date(from: fullString)
     }
-    
+
     var fullString: String {
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormatter.string(from: self)

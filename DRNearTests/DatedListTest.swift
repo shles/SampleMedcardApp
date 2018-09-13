@@ -6,11 +6,11 @@
 //  Copyright © 2018 Shlesberg. All rights reserved.
 //
 
+@testable import DRNear
 import Foundation
 import Nimble
 import Quick
 import RxSwift
-@testable import DRNear
 
 class DatedListTest: QuickSpec {
     override func spec() {
@@ -22,7 +22,7 @@ class DatedListTest: QuickSpec {
                     UIApplication.shared.keyWindow?.rootViewController = ViewController(presentation: presentation)
                     UIApplication.shared.keyWindow?.rootViewController?.preloadView()
                     let view = UIApplication.shared.keyWindow?.rootViewController?.view
-                    
+
                     expect(view).notTo(beNil())
                 }
             }
@@ -40,7 +40,7 @@ class DatedItemPresentationTest: QuickSpec {
                     UIApplication.shared.keyWindow?.rootViewController = ViewController(presentation: presentation)
                     UIApplication.shared.keyWindow?.rootViewController?.preloadView()
                     let view = UIApplication.shared.keyWindow?.rootViewController?.view
-                    
+
                     expect(view).notTo(beNil())
                 }
             })
@@ -55,9 +55,9 @@ class DatedCellTest: QuickSpec {
         describe("item presentation") {
             context("when presented", {
                 it("should exist") {
-                   
+
                     let view = cell.configured(item: test).contentView
-        
+
                     expect(view).notTo(beNil())
                 }
             })

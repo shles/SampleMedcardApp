@@ -28,7 +28,7 @@ class NumberRegistrationFromAPI: NumberRegistration {
                                                      method: .get,
                                                      parameters: ["phone": number]) else { return }
 
-        request.make().subscribe(onNext:{ _ in
+        request.make().subscribe(onNext: { _ in
 
             let numberConfirmation = NumberConfirmationFromAPI(number: number, leadingTo: self.leadingTo)
 

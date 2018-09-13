@@ -32,7 +32,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     private let leadingTo: () -> (UIViewController)
 
     private var itemsTransitionsDisposeBag = DisposeBag()
-    
+
     private let emptyStateView: UIView
 
     init(items: DatedListRepresentable, title: String, gradient: [UIColor], leadingTo: @escaping () -> (UIViewController), emptyStateView: UIView) {
@@ -58,7 +58,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(navBar.snp.bottom)
         }
-        
+
         emptyStateView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalToSuperview().inset(32)
@@ -85,8 +85,6 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
                 .map { [StandardSectionModel(items: $0)] }
                 .bind(to: tableView.rx.items(dataSource: dataSource))
                 .disposed(by: disposeBag)
-        
-        
 
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
 
@@ -123,7 +121,7 @@ class DDNListPresentation: NSObject, Presentation, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+
         let action = UIContextualAction(style: .normal, title: "", handler: { _, _, _ in
             if let item: DatedListApplicable = try? tableView.rx.model(at: indexPath) {
                 item.delete()
@@ -163,7 +161,7 @@ class DatedDescribedFileContainedPresentation: Presentation {
 
     private let item: Named & Dated & Described & ContainFiles & Editable
 
-    init(item: Named & Dated & Described & ContainFiles & Editable , gradient: [UIColor]) {
+    init(item: Named & Dated & Described & ContainFiles & Editable, gradient: [UIColor]) {
 
         tableView.tableHeaderView = HeaderView(item: item, hasFiles: !item.files.isEmpty)
         tableView.separatorStyle = .none
@@ -188,7 +186,7 @@ class DatedDescribedFileContainedPresentation: Presentation {
         let dataSource = RxTableViewSectionedReloadDataSource<StandardSectionModel<File>>(configureCell: {  ds, tv, ip, item in
             return tv.dequeueReusableCellOfType(FileCell.self, for: ip).configured(item: item)
         })
-        
+
         Observable.from([item.files])
                 .map { [StandardSectionModel<File>(items: $0)] }
                 .bind(to: tableView.rx.items(dataSource: dataSource))
@@ -277,7 +275,6 @@ class DatedDescribedFileContainedPresentation: Presentation {
         }
     }
 }
-
 
 class FileCell: UITableViewCell {
 

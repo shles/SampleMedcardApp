@@ -3,9 +3,9 @@
 // Copyright (c) 2018 Shlesberg. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import RxSwift
-import Alamofire
 import SwiftyJSON
 
 class ImageUploadToAPI: FileUpload {
@@ -14,20 +14,16 @@ class ImageUploadToAPI: FileUpload {
     private let token: Token
     private let image: UIImage
 
-
-
     init(token: Token, image: UIImage) {
         self.token = token
         self.image = image
     }
-
 
     func wantsToPerform() -> Observable<Transition> {
         return transitionsSubject
     }
 
     func upload(name: String) {
-
 
         let parameters = [
             "name": name
@@ -38,14 +34,13 @@ class ImageUploadToAPI: FileUpload {
             headers["X-XSRF-TOKEN"] = xsrf
         }
 
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(UIImageJPEGRepresentation(self.image, 0.95)!, withName: "file", fileName: "\(name).jpeg", mimeType: "image/jpeg")
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
         }, to:"http://eco-dev.siblion.ru:8080/eco-documents/api/upload",
-                headers: headers)
-        { (result) in
+                headers: headers) { result in
             switch result {
             case .success(let upload, _, _):
 
@@ -111,11 +106,10 @@ class ImageUploadToAPI: FileUpload {
             }
         }
 
-
     }
 
     private let fuidSubject = PublishSubject<File>()
-    var file: Observable<File>  {
+    var file: Observable<File> {
         return fuidSubject
     }
 }
